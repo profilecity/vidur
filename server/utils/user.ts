@@ -59,6 +59,8 @@ export async function getOrCreateUser(
         Authorization: `${credentials.tokenType} ${credentials.token}`,
       },
     });
+
+    console.log(userBasicProfile);
   } catch (e: any) {
     console.error('Error fetching `basic-profile`', e);
   }
