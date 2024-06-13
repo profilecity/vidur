@@ -1,0 +1,41 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1715598248945,
+      "tag": "0000_adorable_annihilus",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1716047207372,
+      "tag": "0001_groovy_slapstick",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1716047417642,
+      "tag": "0002_shocking_daredevil",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1716047668431,
+      "tag": "0003_purple_cannonball",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1716885070928,
+      "tag": "0004_empty_molecule_man",
+      "breakpoints": true
+    }
+  ]
+}
