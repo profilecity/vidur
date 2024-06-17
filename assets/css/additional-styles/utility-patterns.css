@@ -28,15 +28,15 @@
 /* Buttons */
 .btn,
 .btn-sm {
-  @apply text-sm font-medium inline-flex items-center justify-center rounded-full leading-5 whitespace-nowrap transition duration-150 ease-in-out;
+  @apply text-sm font-medium inline-flex items-center justify-center rounded-xl leading-5 whitespace-nowrap transition duration-150 ease-in-out;
 }
 
 .btn {
-  @apply px-5 py-2.5;
+  @apply px-4 py-2;
 }
 
 .btn-sm {
-  @apply px-4 py-2;
+  @apply px-3 py-1.5;
 }
 
 /* Forms */
@@ -53,7 +53,7 @@ input[type="search"]::-webkit-search-results-decoration {
 .form-select,
 .form-checkbox,
 .form-radio {
-  @apply bg-white border border-gray-300 focus:border-indigo-500;
+  @apply bg-white border border-gray-300 focus:border-zinc-800;
 }
 
 .form-input,
@@ -82,7 +82,7 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .form-checkbox,
 .form-radio {
-  @apply text-indigo-500 border-2 rounded-sm;
+  @apply text-zinc-900 border-2 rounded-sm;
 }
 
 /* Chrome, Safari and Opera */
