@@ -6,11 +6,9 @@ export default defineEventHandler(async (_) => {
 
   const {
     contents,
-    updatedAt,
     owner,
     isPublished,
     totalApplicants,
-    createdAt,
     ...requiredColumns
   } = getTableColumns(jobPostingsTable);
 
