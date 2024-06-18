@@ -7,7 +7,9 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "migration:generate": "drizzle-kit generate:pg",
+    "migration:apply": "drizzle-kit migrate"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "6.11.4",
