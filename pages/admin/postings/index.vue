@@ -7,6 +7,7 @@ import type { JobPosting } from "~/server/db/schema";
 
 definePageMeta({
   layout: 'admin',
+  middleware: 'admin-auth',
 })
 
 useHead({

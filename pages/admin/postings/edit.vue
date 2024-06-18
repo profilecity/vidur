@@ -3,7 +3,8 @@ import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/postin
 import type { JobPosting } from '~/server/db/schema';
 
 definePageMeta({
-  layout: 'admin'
+  layout: 'admin',
+  middleware: 'admin-auth',
 })
 
 const route = useRoute();
