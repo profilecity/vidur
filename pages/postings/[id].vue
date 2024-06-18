@@ -30,6 +30,12 @@ const apply = async () => {
       await auth.signIn();
       return;
     }
+    if (auth.user.value.onboardingStatus.onboardingURL) {
+      const onboardingURL = new URL(auth.user.value.onboardingStatus.onboardingURL);
+      onboardingURL.searchParams.append("callback", window.location.href);
+      await navigateTo(onboardingURL.href, { external: true });
+      return;
+    }
     isApplying.value = true;
     await $fetch('/api/application', { method: 'POST', body: { postingId: id } });
     applicationStatus?.refresh();
@@ -37,6 +43,12 @@ const apply = async () => {
     console.error("Error occured while applying", e);
   } finally {
     isApplying.value = false;
+  }
+}
+
+if (route.query.fromOnboard) {
+  if (!(applicationStatus?.data.value?.userAlreadyApplied)) {
+    apply();
   }
 }
 </script>
