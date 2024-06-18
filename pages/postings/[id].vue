@@ -90,7 +90,7 @@ const apply = async () => {
 
           <hr class="my-6 border-t border-slate-200" />
 
-          <div class="w-full">{{ posting.data.value.contents }}</div>
+          <p class="w-full" style="white-space: pre-line;">{{ posting.data.value.contents }}</p>
 
         </div>
 
