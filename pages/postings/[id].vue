@@ -12,6 +12,11 @@ if (!id) {
 
 const posting = await useFetch('/api/public/posting', { query: { id } });
 
+useSeoMeta({
+  title: posting.data.value?.title + " | TheNirvanaLabs",
+  description: 'Apply for ' + posting.data.value?.title + ' at The Nirvana Labs!',
+})
+
 const tags = ref<string[]>([]);
 if (posting.data.value && posting.data.value.tagsCSV) {
   tags.value = posting.data.value.tagsCSV.split(",").map(t => t.trim());
@@ -85,12 +90,13 @@ if (route.query.fromOnboard) {
               <div class="text-lg font-bold text-slate-800 mb-1">The Nirvana Labs</div>
             </div>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-2">
-              <div class="flex w-full items-center justify-center text-green-500 space-x-2" v-if="applicationStatus?.data.value?.userAlreadyApplied">
-                <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4"/>
+              <div class="flex w-full items-center justify-center text-green-500 space-x-2"
+                v-if="applicationStatus?.data.value?.userAlreadyApplied">
+                <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <button class="btn w-full bg-zinc-900 hover:bg-zinc-800 text-white" @click="apply"
-                :disabled="isApplying" v-else>Apply Today
+              <button class="btn w-full bg-zinc-900 hover:bg-zinc-800 text-white" @click="apply" :disabled="isApplying"
+                v-else>Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </button>
               <div class="flex items-center w-full justify-center text-xs text-slate-500 italic mr-4">Powered by <img
@@ -127,18 +133,19 @@ if (route.query.fromOnboard) {
               <div class="text-lg font-bold text-slate-800 mb-1">The Nirvana Labs</div>
             </div>
             <div class="space-y-2">
-              <div class="flex w-full items-center justify-center text-green-500 space-x-2" v-if="applicationStatus?.data.value?.userAlreadyApplied">
-                <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4"/>
+              <div class="flex w-full items-center justify-center text-green-500 space-x-2"
+                v-if="applicationStatus?.data.value?.userAlreadyApplied">
+                <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              
+
               <button class="btn w-full bg-zinc-900 hover:bg-zinc-800 text-white" @click="apply" :disabled="isApplying"
                 v-else>Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </button>
-              
-              <div class="flex items-center w-full justify-center text-xs text-slate-500 italic mr-4 mt-2">Powered by <img
-                  src="/vidur-logo.svg" class="h-4 ml-2"></div>
+
+              <div class="flex items-center w-full justify-center text-xs text-slate-500 italic mr-4 mt-2">Powered by
+                <img src="/vidur-logo.svg" class="h-4 ml-2"></div>
             </div>
           </div>
 

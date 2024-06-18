@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useSeoMeta({
+  title: 'Careers @ TheNirvanaLabs',
+  description: 'Apply for job openings at The Nirvana Labs!',
+})
 const postings = useFetch('/api/public/postings');
 </script>
 
