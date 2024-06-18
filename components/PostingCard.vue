@@ -7,14 +7,14 @@ defineProps<{
 </script>
 
 <template>
-  <div class="rounded-sm border px-5 py-4 bg-white border-zinc-200 w-full">
+  <div class="rounded-xl border px-5 py-4 bg-white border-zinc-200 w-full">
     <NuxtLink class="flex justify-between items-center w-full"  :to="'/postings/' + posting.id">
       <!-- Left side -->
       <div class="w-1/2">
-        <div class="inline-flex font-semibold text-slate-800 dark:text-slate-100">
+        <div class="inline-flex font-semibold text-zinc-900 dark:text-zinc-100">
           {{ posting.title }}
         </div>
-        <div class="text-sm">{{ posting.tagsCSV?.split(',').map(s => s.trim()).join(' / ') || ' ' }}</div>
+        <div class="text-sm text-zinc-500 ">{{ posting.tagsCSV?.split(',').map(s => s.trim()).join(' / ') || ' ' }}</div>
       </div>
       <!-- Right side -->
       <div class="flex items-center space-x-4 w-1/2 justify-end">
