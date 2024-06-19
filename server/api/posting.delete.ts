@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
     )
     .returning({ id: jobPostingsTable.id });
 
-  if (!(Array.isArray(jobPostingsResult) && jobPostingsResult.length != 1)) {
+  if (!(Array.isArray(jobPostingsResult) && jobPostingsResult.length == 1)) {
     throw createError({
       statusCode: 400,
       message:

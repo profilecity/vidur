@@ -3,7 +3,8 @@ import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/postin
 import type { JobPosting } from '~/server/db/schema';
 
 definePageMeta({
-  layout: 'admin'
+  layout: 'admin',
+  middleware: 'admin-auth',
 })
 
 const route = useRoute();
@@ -48,15 +49,14 @@ if (isUpdating && posting) {
   contents.value = posting.contents || undefined;
   tagsCSV.value = posting.tagsCSV || undefined;
   isPublished.value = posting.isPublished;
+} else {
+  isPublished.value = false;
 }
 
 const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async values => {
   try {
-    if (errorBag.value) {
-      console.log(errorBag.value);
-    }
     isSubmitting.value = true;
     await $fetch('/api/posting', {
       method: isUpdating ? 'PUT' : 'POST',
