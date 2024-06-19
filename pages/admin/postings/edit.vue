@@ -115,7 +115,7 @@ const onDelete = async () => {
           <span class="text-sm">Publish?</span>
           <div class="form-switch">
             <input type="checkbox" id="toggle1" class="sr-only" v-model="isPublished" :disabled="isSubmitting">
-            <label class="bg-slate-400 dark:bg-slate-700" for="toggle1">
+            <label class="bg-zinc-400 dark:bg-zinc-700" for="toggle1">
               <span class="bg-white shadow-sm" aria-hidden="true"></span>
               <span class="sr-only">Publish/Draft</span>
             </label>
@@ -145,7 +145,7 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <textarea id="jobdescription" class="form-textarea w-full focus:border-slate-300" rows="6"
+            <textarea id="jobdescription" class="form-textarea w-full focus:border-zinc-300" rows="6"
               v-model="contents" placeholder="We want someone who…" :disabled="isSubmitting"></textarea>
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>

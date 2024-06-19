@@ -66,28 +66,28 @@ if (route.query.fromOnboard) {
         <!-- Content -->
         <div class="w-full">
           <div class="mb-6">
-            <NuxtLink class="btn-sm px-3 bg-white border-zinc-200 hover:border-zinc-300 text-slate-600 border" to="/">
+            <NuxtLink class="btn-sm px-3 bg-white border-zinc-200 hover:border-zinc-300 text-zinc-600 border" to="/">
               <Icon class="fill-current text-zinc-500 mr-2" name="mdi:arrow-left" />
               <span>Back To Jobs</span>
             </NuxtLink>
           </div>
-          <div class="text-sm text-slate-500 italic mb-2">
+          <div class="text-sm text-zinc-500 italic mb-2">
             Posted {{ formatDate(new Date(posting.data.value.updatedAt)) }}
           </div>
           <header class="mb-4">
             <!-- Title -->
-            <h1 class="text-2xl md:text-3xl text-slate-800 font-bold">
+            <h1 class="text-2xl md:text-3xl text-zinc-800 font-bold">
               {{ posting.data.value.title }}
             </h1>
           </header>
           <!-- Company information (mobile) -->
-          <div class="bg-white p-5 shadow-lg rounded-sm border border-slate-200 mb-6 lg:hidden">
+          <div class="bg-white p-5 rounded-2xl border border-zinc-200 mb-6 lg:hidden">
             <div class="text-center mb-6">
               <div class="inline-flex mb-3">
                 <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64"
-                  alt="The Nirvana Labs" />
+                  alt="Nirvana Labs" />
               </div>
-              <div class="text-lg font-bold text-slate-800 mb-1">The Nirvana Labs</div>
+              <div class="text-lg font-bold text-zinc-800 mb-1">Nirvana Labs</div>
             </div>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-2">
               <div class="flex w-full items-center justify-center text-green-500 space-x-2"
@@ -99,8 +99,6 @@ if (route.query.fromOnboard) {
                 v-else>Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </button>
-              <div class="flex items-center w-full justify-center text-xs text-slate-500 italic mr-4">Powered by <img
-                  src="/vidur-logo.svg" class="h-4 ml-2"></div>
             </div>
           </div>
 
@@ -109,13 +107,13 @@ if (route.query.fromOnboard) {
             <div class="flex flex-wrap items-center -m-1">
               <div class="m-1">
                 <span
-                  class="text-xs inline-flex font-medium bg-indigo-100/30 text-indigo-600 rounded-full text-center px-2.5 py-1 border border-indigo-600 mr-2"
+                  class="text-xs inline-flex font-medium bg-zinc-100/30 text-zinc-800 rounded-xl text-center px-2.5 py-1 border border-zinc-500 mr-2"
                   v-for="tag in tags">{{ tag }}</span>
               </div>
             </div>
           </div>
 
-          <hr class="my-6 border-t border-slate-200" />
+          <hr class="my-6 border-t border-zinc-100"/>
 
           <p class="w-full" style="white-space: pre-line;">{{ posting.data.value.contents }}</p>
 
@@ -125,12 +123,12 @@ if (route.query.fromOnboard) {
         <div class="hidden lg:block space-y-4">
 
           <!-- Company information (desktop) -->
-          <div class="bg-white p-5 shadow-lg rounded-sm border border-slate-200 lg:w-72 xl:w-80">
+          <div class="bg-white p-5 rounded-2xl border border-zinc-200 lg:w-72 xl:w-80">
             <div class="text-center mb-6">
               <div class="inline-flex mb-3">
                 <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Company 01" />
               </div>
-              <div class="text-lg font-bold text-slate-800 mb-1">The Nirvana Labs</div>
+              <div class="text-lg font-bold text-zinc-800 mb-1">Nirvana Labs</div>
             </div>
             <div class="space-y-2">
               <div class="flex w-full items-center justify-center text-green-500 space-x-2"
@@ -143,9 +141,6 @@ if (route.query.fromOnboard) {
                 v-else>Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </button>
-
-              <div class="flex items-center w-full justify-center text-xs text-slate-500 italic mr-4 mt-2">Powered by
-                <img src="/vidur-logo.svg" class="h-4 ml-2"></div>
             </div>
           </div>
 
@@ -155,4 +150,14 @@ if (route.query.fromOnboard) {
 
     </div>
   </main>
+  <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
+    <div class="relative z-50">
+      <a href="https://vidurjobs.xyz">
+      <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
+        <p class="mr-2">Powered By</p>
+        <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
+      </div>
+    </a>
+    </div>
+  </div>
 </template>

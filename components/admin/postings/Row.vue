@@ -5,13 +5,13 @@ const props = defineProps<{
   posting: JobPosting;
 }>();
 
-const statusColor = (props.posting.isPublished) ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-500";
+const statusColor = (props.posting.isPublished) ? "bg-emerald-100 text-emerald-600" : "bg-zinc-100 text-zinc-500";
 </script>
 
 <template>
   <tr>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap md:w-1/2">
-      <NuxtLink :to="'/admin/postings/edit?id=' + posting.id" class="font-medium text-slate-800 dark:text-slate-100">{{ posting.title }}</NuxtLink>
+      <NuxtLink :to="'/admin/postings/edit?id=' + posting.id" class="font-medium text-zinc-800 dark:text-zinc-100">{{ posting.title }}</NuxtLink>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
       <div class="text-left">{{ timeAgo(new Date(posting.createdAt)) }}</div>

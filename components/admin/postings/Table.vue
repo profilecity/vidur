@@ -11,7 +11,7 @@ defineProps<{
     <table class="table-auto w-full">
       <!-- Table header -->
       <thead
-        class="text-xs font-semibold uppercase text-slate-500 border-t border-b border-slate-200">
+        class="text-xs font-semibold uppercase text-zinc-500 border-t border-b border-zinc-200">
         <tr>
           <th class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
             <div class="font-semibold text-left">Title</div>
@@ -29,7 +29,7 @@ defineProps<{
       </thead>
       <!-- Table body -->
       <tbody
-        class="text-sm divide-y divide-slate-200 border-b border-slate-200">
+        class="text-sm divide-y divide-zinc-200 border-b border-zinc-200">
         <AdminPostingsRow v-for="posting in postings" :key="posting.id" :posting="posting" />
       </tbody>
     </table>
