@@ -39,7 +39,7 @@ const deletePosting = (params: z.infer<typeof deleteJobPostingSchema>) => {
     </div>
 
     <div class="mt-4">
-      <div class="max-w-2xl mx-auto mt-12" v-if="!postings.data.value">
+      <div class="max-w-2xl mx-auto mt-12" v-if="!postings.data.value?.length">
         <AdminPostingsEmptyState  />
       </div>
       <AdminPostingsTable :postings="postings.data.value" v-else/>
