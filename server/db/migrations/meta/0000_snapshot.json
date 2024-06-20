@@ -1,10 +1,8 @@
 {
-  "id": "ca834831-e699-4acf-b597-ecbefb0d8fee",
-  "prevId": "00000000-0000-0000-0000-000000000000",
-  "version": "5",
-  "dialect": "pg",
+  "version": "7",
+  "dialect": "postgresql",
   "tables": {
-    "admins": {
+    "public.admins": {
       "name": "admins",
       "schema": "",
       "columns": {
@@ -45,21 +43,21 @@
         "admins_user_id_users_id_fk": {
           "name": "admins_user_id_users_id_fk",
           "tableFrom": "admins",
-          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "set null"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "job_postings": {
+    "public.job_postings": {
       "name": "job_postings",
       "schema": "",
       "columns": {
@@ -121,21 +119,21 @@
         "job_postings_owner_id_admins_id_fk": {
           "name": "job_postings_owner_id_admins_id_fk",
           "tableFrom": "job_postings",
-          "tableTo": "admins",
           "columnsFrom": [
             "owner_id"
           ],
+          "tableTo": "admins",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "set null"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "user_handles": {
+    "public.user_handles": {
       "name": "user_handles",
       "schema": "",
       "columns": {
@@ -163,21 +161,21 @@
         "user_handles_user_id_users_id_fk": {
           "name": "user_handles_user_id_users_id_fk",
           "tableFrom": "user_handles",
-          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users": {
+    "public.users": {
       "name": "users",
       "schema": "",
       "columns": {
@@ -231,10 +229,10 @@
       "uniqueConstraints": {
         "users_email_unique": {
           "name": "users_email_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "email"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     }
@@ -242,8 +240,10 @@
   "enums": {},
   "schemas": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
-  }
+    "tables": {},
+    "columns": {}
+  },
+  "id": "ca834831-e699-4acf-b597-ecbefb0d8fee",
+  "prevId": "00000000-0000-0000-0000-000000000000"
 }

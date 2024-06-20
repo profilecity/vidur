@@ -1,10 +1,8 @@
 {
-  "id": "b705efcd-5081-4704-96f5-4ef08e956763",
-  "prevId": "1825d2bc-dbf4-4e6b-9b27-58f538c8c4b3",
-  "version": "5",
-  "dialect": "pg",
+  "version": "7",
+  "dialect": "postgresql",
   "tables": {
-    "job_postings": {
+    "public.job_postings": {
       "name": "job_postings",
       "schema": "",
       "columns": {
@@ -72,21 +70,21 @@
         "job_postings_owner_id_users_id_fk": {
           "name": "job_postings_owner_id_users_id_fk",
           "tableFrom": "job_postings",
-          "tableTo": "users",
           "columnsFrom": [
             "owner_id"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "set null"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "posting_applicants": {
+    "public.posting_applicants": {
       "name": "posting_applicants",
       "schema": "",
       "columns": {
@@ -121,34 +119,34 @@
         "posting_applicants_owner_id_users_id_fk": {
           "name": "posting_applicants_owner_id_users_id_fk",
           "tableFrom": "posting_applicants",
-          "tableTo": "users",
           "columnsFrom": [
             "owner_id"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "set null",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "set null"
         },
         "posting_applicants_job_id_job_postings_id_fk": {
           "name": "posting_applicants_job_id_job_postings_id_fk",
           "tableFrom": "posting_applicants",
-          "tableTo": "job_postings",
           "columnsFrom": [
             "job_id"
           ],
+          "tableTo": "job_postings",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "user_handles": {
+    "public.user_handles": {
       "name": "user_handles",
       "schema": "",
       "columns": {
@@ -176,21 +174,21 @@
         "user_handles_user_id_users_id_fk": {
           "name": "user_handles_user_id_users_id_fk",
           "tableFrom": "user_handles",
-          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
+          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
+          "onUpdate": "no action",
+          "onDelete": "cascade"
         }
       },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "users": {
+    "public.users": {
       "name": "users",
       "schema": "",
       "columns": {
@@ -251,10 +249,10 @@
       "uniqueConstraints": {
         "users_email_unique": {
           "name": "users_email_unique",
-          "nullsNotDistinct": false,
           "columns": [
             "email"
-          ]
+          ],
+          "nullsNotDistinct": false
         }
       }
     }
@@ -262,8 +260,10 @@
   "enums": {},
   "schemas": {},
   "_meta": {
-    "columns": {},
     "schemas": {},
-    "tables": {}
-  }
+    "tables": {},
+    "columns": {}
+  },
+  "id": "b705efcd-5081-4704-96f5-4ef08e956763",
+  "prevId": "1825d2bc-dbf4-4e6b-9b27-58f538c8c4b3"
 }
