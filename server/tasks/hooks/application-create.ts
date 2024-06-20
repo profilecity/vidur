@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq, inArray } from 'drizzle-orm';
 import { hooksTable, jobPostingsTable, usersTable } from '~/server/db/schema';
 
 export default defineTask<boolean>({
@@ -73,6 +73,8 @@ export default defineTask<boolean>({
 
     const posting = jobPostingsResult[0];
 
+    const hookIds = hooks.map(h => h.id);
+
     for (let index = 0; index < hooks.length; index++) {
       const hook = hooks[index];
       // TODO: respect preferences. to be implemented later.
@@ -110,6 +112,9 @@ export default defineTask<boolean>({
         );
       });
     }
+    
+    const lastExecutedAt = new Date();
+    await db.update(hooksTable).set({ lastExecutedAt }).where(inArray(hooksTable.id, hookIds));
 
     return { result: true };
   },
