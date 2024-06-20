@@ -3,7 +3,7 @@ import { hooksTable, jobPostingsTable, usersTable } from '~/server/db/schema';
 
 export default defineTask<boolean>({
   meta: {
-    name: 'hook:application-created',
+    name: 'hooks:application-created',
     description: 'Post processing for applications',
   },
   async run({ payload }) {
@@ -13,7 +13,7 @@ export default defineTask<boolean>({
 
     if (!bearerToken) {
       console.error(
-        'hook:application-create',
+        'hooks:application-create',
         'bearer token missing from payload. aborting as failure...',
       );
       return { result: false };
@@ -26,7 +26,7 @@ export default defineTask<boolean>({
     if (hooks.length == 0) {
       if (IS_DEV) {
         console.log(
-          'hook:application-create',
+          'hooks:application-create',
           'no-hooks-found. aborting as success...',
         );
       }
@@ -45,7 +45,7 @@ export default defineTask<boolean>({
 
     if (!(Array.isArray(applicantResult) && applicantResult.length == 1)) {
       console.error(
-        'hook:application-create',
+        'hooks:application-create',
         'no applicant found. applicant id',
         applicantId,
       );
@@ -64,7 +64,7 @@ export default defineTask<boolean>({
 
     if (!(Array.isArray(applicantResult) && applicantResult.length == 1)) {
       console.error(
-        'hook:application-create',
+        'hooks:application-create',
         'no posting found. posting id',
         postingId,
       );
@@ -79,7 +79,7 @@ export default defineTask<boolean>({
 
       if (IS_DEV) {
         console.log(
-          'calling hook:application-create hook',
+          'calling hooks:application-create hook',
           hook.url,
           'applicantId',
           applicantId,
@@ -100,7 +100,7 @@ export default defineTask<boolean>({
         },
       }).catch((e) => {
         console.error(
-          'failed calling hook:application-create hook',
+          'failed calling hooks:application-create hook',
           hook.url,
           'applicantId',
           applicantId,
