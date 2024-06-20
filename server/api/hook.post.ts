@@ -9,11 +9,11 @@ export default defineEventHandler(async (event) => {
 
   const body = await readValidatedBody(event, createHookSchema.parse);
 
-  const createdHook = await db.insert(hooksTable).values(body).returning();
+  const createdHookResult = await db.insert(hooksTable).values(body).returning();
 
   if (IS_DEV) {
-    console.log("hook created", createdHook);
+    console.log("hook created", createdHookResult[0]);
   }
   
-  return createdHook;
+  return createdHookResult[0];
 })
