@@ -76,3 +76,14 @@ export const postingApplicantsTable = pgTable("posting_applicants", {
 export type PostingApplication = typeof postingApplicantsTable.$inferSelect;
 
 //---------------**************----------------
+
+export const hooksTable = pgTable("hooks", {
+  id: defaultUuidPkField(),
+  url: varchar('url', { length: 255 }).notNull(),
+  prefs: integer("prefs").default(0).notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+})
+
+export type Hook = typeof hooksTable.$inferSelect;
+
+//---------------**************----------------
