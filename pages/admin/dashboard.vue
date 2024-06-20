@@ -4,6 +4,10 @@ definePageMeta({
   middleware: 'admin-auth',
 })
 
+useHead({
+  title: 'Dashboard | Admin Panel'
+})
+
 const stats = await useFetch('/api/analytics/stats');
 const activePostings = await useFetch('/api/analytics/job');
 </script>
