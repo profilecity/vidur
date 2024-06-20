@@ -4,16 +4,16 @@ import authenticateRequest from "./auth";
 export default async function authenticateAdminRequest(
   event: H3Event,
 ) {
-  const user = await authenticateRequest(event);
+  const session = await authenticateRequest(event);
 
-  if (!user.isAdmin) {
+  if (!session.user.isAdmin) {
     throw createError({
       statusCode: 401,
       message: "User is not an admin",
     })
   }
 
-  return user;
+  return session;
 }
 
 export function hasPermissions(acquiredPermissions: number, requiredPermissions: number) {

@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, applicationCreateSchema.parse);
 
   if (IS_DEV) {
-    console.log("user", session.id, "applying to", body.postingId);
+    console.log("user", session.user.id, "applying to", body.postingId);
   }
 
   const database = await useDatabase();
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
         .where(
           and(
             eq(postingApplicantsTable.postingId, body.postingId),
-            eq(postingApplicantsTable.candidateId, session.id)
+            eq(postingApplicantsTable.candidateId, session.user.id)
           )
         )
     )[0].count == 1;
@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
     if (IS_DEV) {
       console.log(
         "user already applied. userId",
-        session.id,
+        session.user.id,
         "applying to",
         body.postingId
       );
@@ -66,7 +66,7 @@ export default defineEventHandler(async (event) => {
 
   await database.transaction(async (tx) => {
     const p1 = tx.insert(postingApplicantsTable).values({
-      candidateId: session.id,
+      candidateId: session.user.id,
       postingId: body.postingId,
     });
 
@@ -81,7 +81,7 @@ export default defineEventHandler(async (event) => {
   if (IS_DEV) {
     console.log(
       "user",
-      session.id,
+      session.user.id,
       "'s application successful for",
       body.postingId
     );

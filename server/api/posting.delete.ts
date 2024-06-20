@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     .where(
       and(
         eq(jobPostingsTable.id, jobPostingId),
-        eq(jobPostingsTable.owner, session.id)
+        eq(jobPostingsTable.owner, session.user.id)
       )
     )
     .returning({ id: jobPostingsTable.id });

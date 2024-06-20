@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, applicationCreateSchema.parse);
 
   if (IS_DEV) {
-    console.log("checking user", session.id, "applied", query.postingId);
+    console.log("checking user", session.user.id, "applied", query.postingId);
   }
 
   const database = await useDatabase();
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
         .where(
           and(
             eq(postingApplicantsTable.postingId, query.postingId),
-            eq(postingApplicantsTable.candidateId, session.id)
+            eq(postingApplicantsTable.candidateId, session.user.id)
           )
         )
     )[0].count == 1;
