@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   nitro: {
     experimental: {
       tasks: true,
-    }
+    },
+    inlineDynamicImports: true,
   },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt'],
   css: [
