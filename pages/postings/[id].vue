@@ -25,23 +25,27 @@ if (posting.data.value && posting.data.value.tagsCSV) {
 // @ts-ignore
 let applicationStatus = null;
 if (auth.user.value) {
-  applicationStatus = await useFetch('/api/application-status', { query: { postingId: id } });
+  applicationStatus = useFetch('/api/application-status', { query: { postingId: id } });
 }
 
 const isApplying = ref(false);
 const apply = async () => {
   try {
     if (!auth.user.value) {
+      const nextURL = useCookie<string>('oauth_next_url');
+      nextURL.value = route.fullPath;
       await auth.signIn();
       return;
     }
-    if (auth.user.value.onboardingStatus.onboardingURL) {
-      const onboardingURL = new URL(auth.user.value.onboardingStatus.onboardingURL);
+    
+    isApplying.value = true;
+    const onboardingStatus = await $fetch('/api/onboardstatus');
+    if (onboardingStatus.onboardingURL) {
+      const onboardingURL = new URL(onboardingStatus.onboardingURL);
       onboardingURL.searchParams.append("callback", window.location.href);
       await navigateTo(onboardingURL.href, { external: true });
       return;
     }
-    isApplying.value = true;
     await $fetch('/api/application', { method: 'POST', body: { postingId: id } });
     applicationStatus?.refresh();
   } catch (e) {

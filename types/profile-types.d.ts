@@ -12,7 +12,6 @@ export type Profile =  {
 
 export type Session = {
   profile: Profile;
-  onboardingStatus: OnboardingStatus;
 }
 
 export type BasicProfile = {

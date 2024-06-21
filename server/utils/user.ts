@@ -15,7 +15,7 @@ export async function getUserOnboardStatus(
   event: H3Event,
 ): Promise<OnboardingStatus> {
   const config = useRuntimeConfig();
-  const accessToken = await getToken(event, { useTokenFromHeader: true });
+  const accessToken = await getToken(event);
 
   const res = await $fetch<OnboardingStatus>(
     config.public.serverBaseURL + '/user/onboard',
