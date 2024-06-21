@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   return (
     await database
       .insert(jobPostingsTable)
-      .values({ ...jobPostingRequest, owner: session.id })
+      .values({ ...jobPostingRequest, owner: session.user.id })
       .returning()
   )[0];
 });

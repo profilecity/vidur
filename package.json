@@ -8,8 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "migration:generate": "drizzle-kit generate:pg",
-    "migration:apply": "drizzle-kit migrate"
+    "migration:generate": "drizzle-kit generate",
+    "migration:apply": "drizzle-kit migrate",
+    "drizzle:update": "drizzle-kit up"
   },
   "dependencies": {
     "@nuxtjs/tailwindcss": "6.11.4",

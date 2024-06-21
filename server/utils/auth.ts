@@ -10,7 +10,7 @@ export type Credentials = {
 export default async function authenticateRequest(
   event: H3Event,
   options: { useTokenFromHeader?: boolean } = { useTokenFromHeader: false }
-): Promise<User> {
+): Promise<{user: User, accessToken: string}> {
   const config = useRuntimeConfig();
 
   if (!config.server.userInfo) {
@@ -55,5 +55,8 @@ export default async function authenticateRequest(
       message: "Bad Request: Invalid User",
     });
   }
-  return user;
+  return {
+    user,
+    accessToken,
+  };
 }

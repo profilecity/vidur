@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     .where(
       and(
         eq(jobPostingsTable.id, jobPostingId),
-        eq(jobPostingsTable.owner, session.id)
+        eq(jobPostingsTable.owner, session.user.id)
       )
     );
 
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
 
   const oldJobPosting = jobPostingsResult[0];
 
-  if (oldJobPosting.owner != session.id) {
+  if (oldJobPosting.owner != session.user.id) {
     throw createError({
       statusCode: 400,
       message: "Provided owner is not authorised to update this job posting",
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
 
   if (!oldJobPosting.isPublished && q.isPublished) {
     if (IS_DEV) {
-      console.log("posting " + q.id + " published by " + session.firstName);
+      console.log("posting " + q.id + " published by " + session.user.firstName);
     }
   }
 

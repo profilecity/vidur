@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
     conditions.push(
       or(
         eq(jobPostingsTable.isPublished, true),
-        eq(jobPostingsTable.owner, session.id)
+        eq(jobPostingsTable.owner, session.user.id)
       )
     );
   }

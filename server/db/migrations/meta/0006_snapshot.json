@@ -1,9 +1,11 @@
 {
+  "id": "3662bd88-5b68-4cea-88b7-7bc8ae8eb461",
+  "prevId": "35b40820-ea3c-4cc4-ab68-289c6cb405c8",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.admins": {
-      "name": "admins",
+    "public.hooks": {
+      "name": "hooks",
       "schema": "",
       "columns": {
         "id": {
@@ -12,48 +14,48 @@
           "primaryKey": true,
           "notNull": true
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(50)",
+        "title": {
+          "name": "title",
+          "type": "varchar(40)",
           "primaryKey": false,
           "notNull": true
         },
-        "password": {
-          "name": "password",
-          "type": "char(256)",
+        "url": {
+          "name": "url",
+          "type": "varchar(255)",
           "primaryKey": false,
           "notNull": true
         },
-        "permission": {
-          "name": "permission",
+        "prefs": {
+          "name": "prefs",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "default": 0
         },
-        "user_id": {
-          "name": "user_id",
-          "type": "uuid",
+        "last_executed_at": {
+          "name": "last_executed_at",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "admins_user_id_users_id_fk": {
-          "name": "admins_user_id_users_id_fk",
-          "tableFrom": "admins",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
-          "onUpdate": "no action",
-          "onDelete": "set null"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -122,18 +124,80 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "job_postings_owner_id_admins_id_fk": {
-          "name": "job_postings_owner_id_admins_id_fk",
+        "job_postings_owner_id_users_id_fk": {
+          "name": "job_postings_owner_id_users_id_fk",
           "tableFrom": "job_postings",
+          "tableTo": "users",
           "columnsFrom": [
             "owner_id"
           ],
-          "tableTo": "admins",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "set null"
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.posting_applicants": {
+      "name": "posting_applicants",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "job_id": {
+          "name": "job_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "posting_applicants_owner_id_users_id_fk": {
+          "name": "posting_applicants_owner_id_users_id_fk",
+          "tableFrom": "posting_applicants",
+          "tableTo": "users",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        },
+        "posting_applicants_job_id_job_postings_id_fk": {
+          "name": "posting_applicants_job_id_job_postings_id_fk",
+          "tableFrom": "posting_applicants",
+          "tableTo": "job_postings",
+          "columnsFrom": [
+            "job_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -167,15 +231,15 @@
         "user_handles_user_id_users_id_fk": {
           "name": "user_handles_user_id_users_id_fk",
           "tableFrom": "user_handles",
+          "tableTo": "users",
           "columnsFrom": [
             "user_id"
           ],
-          "tableTo": "users",
           "columnsTo": [
             "id"
           ],
-          "onUpdate": "no action",
-          "onDelete": "cascade"
+          "onDelete": "cascade",
+          "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
@@ -215,6 +279,13 @@
           "primaryKey": false,
           "notNull": true
         },
+        "permission": {
+          "name": "permission",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
         "top_5_skills_csv": {
           "name": "top_5_skills_csv",
           "type": "text",
@@ -235,10 +306,10 @@
       "uniqueConstraints": {
         "users_email_unique": {
           "name": "users_email_unique",
+          "nullsNotDistinct": false,
           "columns": [
             "email"
-          ],
-          "nullsNotDistinct": false
+          ]
         }
       }
     }
@@ -246,10 +317,8 @@
   "enums": {},
   "schemas": {},
   "_meta": {
+    "columns": {},
     "schemas": {},
-    "tables": {},
-    "columns": {}
-  },
-  "id": "7767cef5-43b3-4b6d-b2fe-048654cfd771",
-  "prevId": "ca834831-e699-4acf-b597-ecbefb0d8fee"
+    "tables": {}
+  }
 }

@@ -2,7 +2,7 @@ import authenticateRequest from '../utils/auth';
 import { getUserOnboardStatus } from '../utils/user';
 
 export default defineEventHandler(async (event) => {
-  const profile = await authenticateRequest(event, {
+  const { user: profile } = await authenticateRequest(event, {
     useTokenFromHeader: true,
   });
 

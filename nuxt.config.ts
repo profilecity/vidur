@@ -1,5 +1,10 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  nitro: {
+    experimental: {
+      tasks: true,
+    }
+  },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt'],
   css: [
     '~/assets/css/style.css',
