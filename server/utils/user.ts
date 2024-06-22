@@ -76,8 +76,8 @@ export async function getOrCreateUser(
   }
 
   const user = await db.transaction(async (tx) => {
-    const top5SkillsCSV = userBasicProfile.resume.top5Skills
-      .map((s) => s.trim())
+    const top5SkillsCSV = userBasicProfile.resume?.top5Skills
+      ?.map((s) => s.trim())
       .join(',');
 
     const user = (
