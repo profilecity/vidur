@@ -11,7 +11,12 @@ export async function useDatabase() {
 
   if (!config.db.host) throw new Error('Missing db.host in runtime config');
 
-  client = new pg.Client(config.db);
+  client = new pg.Client({
+    ...config.db,
+    ssl: IS_DEV ? false : {
+      rejectUnauthorized: false, // TODO: fix this.
+    }
+  });
   await client.connect();
 
   drizzleInstance = drizzle(client);
