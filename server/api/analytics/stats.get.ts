@@ -27,7 +27,9 @@ export default defineEventHandler(async (event) => {
     totalApplicants,
   } satisfies Stats;
 
-  console.log(stats);
+  if (IS_DEV) {
+    console.log(stats);
+  }
 
   return stats;
 })

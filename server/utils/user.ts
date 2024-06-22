@@ -60,7 +60,9 @@ export async function getOrCreateUser(
       },
     });
 
-    console.log(userBasicProfile);
+    if (IS_DEV) {
+      console.log(userBasicProfile);
+    }
   } catch (e: any) {
     console.error('Error fetching `basic-profile`', e);
   }
