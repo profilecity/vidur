@@ -100,8 +100,10 @@ export async function getOrCreateUser(
         };
       },
     );
-
-    await tx.insert(userHandlesTable).values(handles);
+    
+    if (handles.length > 0) {
+      await tx.insert(userHandlesTable).values(handles);
+    }
 
     return user;
   });
