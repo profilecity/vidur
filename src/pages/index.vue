@@ -8,12 +8,12 @@ const postings = useFetch('/api/public/postings');
 
 <template>
   <main class="grow">
-    <div class="h-56 bg-zinc-200 dark:bg-zinc-900">
+    <div class="h-56 bg-zinc-200">
       <img class="object-cover h-full w-full" src="/company-bg.png" width="2560" height="440"
         alt="Company background" />
     </div>
     <!-- Header -->
-    <header class="text-center bg-white dark:bg-zinc-800/20 pb-6 border-b border-zinc-100">
+    <header class="text-center bg-white pb-6 border-b border-zinc-100">
       <div class="px-4 sm:px-6 lg:px-8 w-full">
         <div class="max-w-3xl mx-auto">
 
@@ -26,14 +26,14 @@ const postings = useFetch('/api/public/postings');
 
           <!-- Company name and info -->
           <div class="mb-4">
-            <h2 class="text-2xl text-zinc-800 dark:text-zinc-100 font-bold mb-2">Nirvana Labs</h2>
+            <h2 class="text-2xl text-zinc-800 font-bold mb-2">Nirvana Labs</h2>
             <p>Join us. Make the People's Search. Better.</p>
           </div>
           <!-- Meta --> 
           <div class="inline-flex flex-wrap justify-center sm:justify-start space-x-4">
             <div class="flex items-center">
               <Icon class="w-4 h-4 fill-current shrink-0 text-zinc-400" name="grommet-icons:location" />
-              <span class="text-sm font-medium whitespace-nowrap text-zinc-400 dark:text-zinc-400 ml-1">
+              <span class="text-sm font-medium whitespace-nowrap text-zinc-400 ml-1">
                 San Francisco, CA
               </span>
             </div>
@@ -48,7 +48,7 @@ const postings = useFetch('/api/public/postings');
     </header>
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full">
       <div class="max-w-3xl mx-auto">
-        <h3 class="text-xl leading-snug text-zinc-800 dark:text-zinc-100 font-bold mb-6">
+        <h3 class="text-xl leading-snug text-zinc-800 font-bold mb-6">
           Open Positions at Nirvana Labs
         </h3>
         <div class="space-y-2" v-if="postings.data.value">

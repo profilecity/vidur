@@ -1,7 +1,3 @@
-import { configDotenv } from "dotenv";
-
-configDotenv();
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   nitro: {
@@ -10,6 +6,7 @@ export default defineNuxtConfig({
     },
     inlineDynamicImports: true,
   },
+  srcDir: 'src/',
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt'],
   css: [
     '~/assets/css/style.css',
