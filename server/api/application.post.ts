@@ -80,15 +80,16 @@ export default defineEventHandler(async (event) => {
 
   if (IS_DEV) {
     console.log('calling hook:application-create');
-    // Don't await for task.
-    runTask('hooks:application-create', {
-      payload: {
-        applicantId: session.user.id,
-        postingId: body.postingId,
-        bearerToken: session.accessToken,
-      },
-    });
   }
+
+  // Don't await for task.
+  runTask('hooks:application-create', {
+    payload: {
+      applicantId: session.user.id,
+      postingId: body.postingId,
+      bearerToken: session.accessToken,
+    },
+  });
 
   if (IS_DEV) {
     console.log(
