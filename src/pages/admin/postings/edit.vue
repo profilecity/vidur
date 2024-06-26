@@ -110,12 +110,14 @@ const onDelete = async () => {
       <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
         <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
-        <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="onDelete"><Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5"/></button>
+        <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="onDelete">
+          <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+        </button>
         <div class="flex space-x-1 items-center border bg-zinc-100 p-2 rounded-xl">
           <span class="text-sm">Publish?</span>
           <div class="form-switch">
             <input type="checkbox" id="toggle1" class="sr-only" v-model="isPublished" :disabled="isSubmitting">
-            <label class="bg-zinc-400 dark:bg-zinc-700" for="toggle1">
+            <label class="bg-zinc-400" for="toggle1">
               <span class="bg-white shadow-sm" aria-hidden="true"></span>
               <span class="sr-only">Publish/Draft</span>
             </label>
@@ -145,8 +147,8 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <textarea id="jobdescription" class="form-textarea w-full focus:border-zinc-300" rows="6"
-              v-model="contents" placeholder="We want someone who…" :disabled="isSubmitting"></textarea>
+            <textarea id="jobdescription" class="form-textarea w-full focus:border-zinc-300" rows="6" v-model="contents"
+              placeholder="We want someone who…" :disabled="isSubmitting"></textarea>
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>
