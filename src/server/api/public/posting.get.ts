@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
 
   if (!(Array.isArray(postings) && postings.length == 1)) {
     throw createError({
-      statusCode: 400,
+      statusCode: 404,
       statusMessage: "Posting not found",
     })
   }

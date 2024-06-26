@@ -1,51 +1,71 @@
 <script setup lang="ts">
+import type { JobPosting } from '~/server/db/schema';
+
 const route = useRoute();
 const auth = await useAuth();
+
+const { checkIfOnboardPending } = useLazyOnboarder();
+
 const id = route.params.id;
 
 if (!id) {
   throw createError({
-    statusCode: 400,
+    statusCode: 404,
     statusMessage: 'Posting ID required.'
   })
 }
 
-const posting = await useFetch('/api/public/posting', { query: { id } });
+const postingRequest = useFetch('/api/public/posting', { query: { id } });
+
+const posting: Ref<JobPosting | null> = ref(null);
+
+watchEffect(() => {
+  if (postingRequest.pending.value) {
+    return;
+  }
+  if (postingRequest.data.value) {
+    // @ts-expect-error
+    posting.value = postingRequest.data.value;
+  }
+  if (postingRequest.error.value) {
+    if (postingRequest.error.value.statusCode == 404) {
+      throw createError({
+        statusCode: 404,
+        statusMessage: 'Job posting not found. Make sure URL is correct.'
+      })
+    }
+    console.error(postingRequest.error.value);
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Error fetching job posting. Please check back later.'
+    })
+  }
+})
 
 useSeoMeta({
-  title: posting.data.value?.title + " | TheNirvanaLabs",
-  description: 'Apply for ' + posting.data.value?.title + ' at The Nirvana Labs!',
+  title: () => posting.value?.title + " | The Nirvana Labs",
+  description: () => 'Apply for ' + posting.value?.title + ' at The Nirvana Labs!',
 })
 
 const tags = ref<string[]>([]);
-if (posting.data.value && posting.data.value.tagsCSV) {
-  tags.value = posting.data.value.tagsCSV.split(",").map(t => t.trim());
+if (posting.value && posting.value.tagsCSV) {
+  tags.value = posting.value.tagsCSV.split(",").map(t => t.trim());
 }
 
 // @ts-ignore
 let applicationStatus = null;
-if (auth.user.value) {
+if (auth.isSignedIn) {
   applicationStatus = useFetch('/api/application-status', { query: { postingId: id } });
 }
 
 const isApplying = ref(false);
 const apply = async () => {
   try {
-    if (!auth.user.value) {
-      const nextURL = useCookie<string>('oauth_next_url');
-      nextURL.value = route.fullPath;
-      await auth.signIn();
-      return;
-    }
-    
     isApplying.value = true;
-    const onboardingStatus = await $fetch('/api/onboardstatus');
-    if (onboardingStatus.onboardingURL) {
-      const onboardingURL = new URL(onboardingStatus.onboardingURL);
-      onboardingURL.searchParams.append("callback", window.location.href);
-      await navigateTo(onboardingURL.href, { external: true });
-      return;
-    }
+
+    const isPending = await checkIfOnboardPending();
+    if (isPending) return;
+
     await $fetch('/api/application', { method: 'POST', body: { postingId: id } });
     applicationStatus?.refresh();
   } catch (e) {
@@ -63,7 +83,7 @@ if (route.query.fromOnboard) {
 </script>
 
 <template>
-  <main class="grow" v-if="posting.data.value">
+  <main class="grow" v-if="posting">
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full">
       <!-- Page content -->
       <div class="max-w-5xl mx-auto flex flex-col lg:flex-row lg:space-x-8 xl:space-x-16">
@@ -76,20 +96,19 @@ if (route.query.fromOnboard) {
             </NuxtLink>
           </div>
           <div class="text-sm text-zinc-500 italic mb-2">
-            Posted {{ formatDate(new Date(posting.data.value.updatedAt)) }}
+            Posted {{ formatDate(new Date(posting.updatedAt)) }}
           </div>
           <header class="mb-4">
             <!-- Title -->
             <h1 class="text-2xl md:text-3xl text-zinc-800 font-bold">
-              {{ posting.data.value.title }}
+              {{ posting.title }}
             </h1>
           </header>
           <!-- Company information (mobile) -->
           <div class="bg-white p-5 rounded-2xl border border-zinc-200 mb-6 lg:hidden">
             <div class="text-center mb-6">
               <div class="inline-flex mb-3">
-                <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64"
-                  alt="Nirvana Labs" />
+                <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Nirvana Labs" />
               </div>
               <div class="text-lg font-bold text-zinc-800 mb-1">Nirvana Labs</div>
             </div>
@@ -107,7 +126,7 @@ if (route.query.fromOnboard) {
           </div>
 
           <!-- Tags -->
-          <div class="mb-6" v-if="posting.data.value.tagsCSV">
+          <div class="mb-6" v-if="posting.tagsCSV">
             <div class="flex flex-wrap items-center -m-1">
               <div class="m-1">
                 <span
@@ -117,9 +136,9 @@ if (route.query.fromOnboard) {
             </div>
           </div>
 
-          <hr class="my-6 border-t border-zinc-100"/>
+          <hr class="my-6 border-t border-zinc-100" />
 
-          <p class="w-full" style="white-space: pre-line;">{{ posting.data.value.contents }}</p>
+          <p class="w-full" style="white-space: pre-line;">{{ posting.contents }}</p>
 
         </div>
 
@@ -157,11 +176,11 @@ if (route.query.fromOnboard) {
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
     <div class="relative z-50">
       <a href="https://vidurjobs.xyz">
-      <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
-        <p class="mr-2">Powered By</p>
-        <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
-      </div>
-    </a>
+        <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
+          <p class="mr-2">Powered By</p>
+          <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
+        </div>
+      </a>
     </div>
   </div>
 </template>
