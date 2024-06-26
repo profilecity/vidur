@@ -34,15 +34,7 @@ export async function getToken(
   } else {
     const cookie = getCookie(event, 'oauth_access_token');
     if (cookie) {
-      const credentials = JSON.parse(cookie) as Credentials;
-      if (!credentials.token) {
-        throw createError({
-          statusCode: 401,
-          message: 'Invalid Cookie',
-        });
-      }
-
-      accessToken = credentials.token;
+      accessToken = cookie;
     } else {
       throw createError({
         statusCode: 401,
@@ -59,7 +51,7 @@ export async function decodeAndValidate(jwToken: string): Promise<any> {
 
   if (!jwksClient) {
     jwksClient = new JwksClient({
-      jwksUri: config.jwksEndpoint,
+      jwksUri: `${config.services.atlas}/oauth2/jwks`,
     });
   }
   if (IS_DEV) {

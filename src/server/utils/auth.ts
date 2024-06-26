@@ -13,8 +13,8 @@ export default async function authenticateRequest(
 ): Promise<{user: User, accessToken: string}> {
   const config = useRuntimeConfig();
 
-  if (!config.server.userInfo) {
-    throw new Error("userInfo endpoint missing");
+  if (!config.services.profileCity) {
+    throw new Error("profileCity service URL is required to authenticate");
   }
 
   const accessToken = await getToken(event, options);
@@ -37,10 +37,7 @@ export default async function authenticateRequest(
     });
   }
   try {
-    user = await getOrCreateUser(verifiedDetails, {
-      token: accessToken,
-      tokenType: "Bearer",
-    });
+    user = await getOrCreateUser(verifiedDetails, accessToken);
   } catch (e: any) {
     console.error("Error while fetching session", e);
     throw createError({

@@ -24,29 +24,13 @@ export default defineNuxtConfig({
       password: 'postgrespw',
       database: 'findjedi-local',
     },
-    server: {
-      userInfo: 'https://api.thenirvanalabs.com/user/info',
+    services: {
+      profileCity: "https://api.thenirvanalabs.com",
+      atlas: "https://atlas.thenirvanalabs.com",
     },
-    public: {
-      oauth: {
-        endpoints: {
-          authorization: 'https://atlas.thenirvanalabs.com/oauth2/authorize',
-          token: 'https://atlas.thenirvanalabs.com/oauth2/token',
-          userInfo: 'https://api.thenirvanalabs.com/user/me',
-        },
-        redirect: {
-          home: '/',
-          callback: '/login',
-          logout: '/',
-          login: '/login',
-        },
-        clientId: 'base-client',
-        scope: ['openid'],
-        origin: 'http://localhost:3001',
-      },
-      serverBaseURL: 'https://api.thenirvanalabs.com',
-    },
-    basicInfoEndpoint: 'https://api.thenirvanalabs.com/user/basic-profile',
-    jwksEndpoint: 'https://atlas.thenirvanalabs.com/oauth2/jwks',
+    oauth: {
+      clientId: 'base-client',
+      origin: "http://localhost:3001",
+    }
   },
 });

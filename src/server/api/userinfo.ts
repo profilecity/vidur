@@ -1,13 +1,17 @@
 import authenticateRequest from '../utils/auth';
 
 export default defineEventHandler(async (event) => {
-  const { user: profile } = await authenticateRequest(event, {
-    useTokenFromHeader: true,
-  });
+  try {
+    const { user: profile } = await authenticateRequest(event);
+    const session = {
+      profile,
+    };
 
-  const session = {
-    profile,
-  };
-
-  return session;
+    return session;
+  } catch (e) {
+    if (IS_DEV) {
+      console.error(e);
+    }
+    throw e;
+  }
 });
