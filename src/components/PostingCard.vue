@@ -11,7 +11,7 @@ defineProps<{
     <NuxtLink class="flex justify-between items-center w-full"  :to="'/postings/' + posting.id">
       <!-- Left side -->
       <div class="w-1/2">
-        <div class="inline-flex font-semibold text-zinc-900 dark:text-zinc-100">
+        <div class="inline-flex font-semibold text-zinc-900">
           {{ posting.title }}
         </div>
         <div class="text-sm text-zinc-500 ">{{ posting.tagsCSV?.split(',').map(s => s.trim()).join(' / ') || ' ' }}</div>

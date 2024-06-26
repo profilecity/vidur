@@ -11,7 +11,7 @@ const statusColor = (props.posting.isPublished) ? "bg-emerald-100 text-emerald-6
 <template>
   <tr>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap md:w-1/2">
-      <NuxtLink :to="'/admin/postings/edit?id=' + posting.id" class="font-medium text-zinc-800 dark:text-zinc-100">{{ posting.title }}</NuxtLink>
+      <NuxtLink :to="'/admin/postings/edit?id=' + posting.id" class="font-medium text-zinc-800">{{ posting.title }}</NuxtLink>
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap">
       <div class="text-left">{{ timeAgo(new Date(posting.createdAt)) }}</div>

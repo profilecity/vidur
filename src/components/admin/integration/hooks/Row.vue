@@ -31,7 +31,7 @@ const descriptionOpen = ref(false)
     </td>
     <td class="px-2 first:pl-5 last:pr-5 py-3 whitespace-nowrap w-px">
       <div class="flex items-center">
-        <button class="text-slate-400 hover:text-slate-500 dark:text-slate-500 dark:hover:text-slate-400 transform"
+        <button class="text-slate-400 hover:text-slate-500 transform"
           :class="{ 'rotate-180': descriptionOpen }" @click.prevent="descriptionOpen = !descriptionOpen"
           :aria-expanded="descriptionOpen" :aria-controls="`description-${hook.id}`">
           <span class="sr-only">Menu</span>
@@ -44,7 +44,7 @@ const descriptionOpen = ref(false)
   </tr>
   <tr :id="`description-${hook.id}`" role="region" :class="!descriptionOpen && 'hidden'">
     <td colspan="10" class="px-2 first:pl-5 last:pr-5 py-3">
-      <div class="bg-slate-50 dark:bg-slate-900/30 dark:text-slate-400 p-3 -mt-3">
+      <div class="bg-slate-50 p-3 -mt-3">
         <AdminIntegrationHooksForm @updated="(h) => emit('updated', h)" @deleted="(id) => emit('deleted', id)"
           :hook="hook" />
       </div>
