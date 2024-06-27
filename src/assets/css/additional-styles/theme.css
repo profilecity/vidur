@@ -4,7 +4,7 @@
 .form-select:focus,
 .form-checkbox:focus,
 .form-radio:focus {
-  @apply focus:ring-2 focus:ring-indigo-200;
+  @apply focus:ring-2 focus:ring-zinc-200;
 }
 
 .form-checkbox:focus,
