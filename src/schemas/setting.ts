@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const seoConfig = z
+export const seoConfigSchema = z
   .object({
     title: z.string().max(60).nullable().optional(), // Std. recommended size.
     description: z.string().max(110).nullable().optional(), // Std. recommended size. (To no cutoff in mobile display)
@@ -8,9 +8,9 @@ export const seoConfig = z
     twitter: z.string().max(15).nullable().optional(), // Official twitter handle size.
   })
 
-export type SEOConfig = z.infer<typeof seoConfig>;
+export type SEOConfig = z.infer<typeof seoConfigSchema>;
 
-export const organizationConfig = z
+export const organizationConfigSchema = z
   .object({
     name: z.string().max(36).nullable().optional(),
     description: z.string().nullable().optional(),
@@ -26,14 +26,14 @@ export const organizationConfig = z
       .optional(),
   })
 
-export type OrganizationConfig = z.infer<typeof organizationConfig>;
+export type OrganizationConfig = z.infer<typeof organizationConfigSchema>;
 
-export const generalSettings = z.object({
-  organization: organizationConfig,
-  seo: seoConfig,
+export const generalSettingsSchema = z.object({
+  organization: organizationConfigSchema,
+  seo: seoConfigSchema,
 });
 
-export type GeneralSettings = z.infer<typeof generalSettings>;
+export type GeneralSettings = z.infer<typeof generalSettingsSchema>;
 
 export const inviteMember = z.object({
   email: z.string().email(),
