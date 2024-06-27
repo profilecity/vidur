@@ -90,3 +90,14 @@ export const hooksTable = pgTable("hooks", {
 export type Hook = typeof hooksTable.$inferSelect;
 
 //---------------**************----------------
+
+export const metaDataTable = pgTable("metadata_entries", {
+  key: varchar('key', { length: 48 }).primaryKey().notNull(),
+  value: text('value'),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+})
+
+export type MetadataEntry = typeof metaDataTable.$inferSelect;
+
+//---------------**************----------------
