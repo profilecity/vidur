@@ -7,8 +7,21 @@ definePageMeta({
 useHead({
   title: 'Settings | Admin Panel'
 })
+
+const route = useRoute();
+
+const activeTab = computed(() => (route.query.tab as string));
 </script>
 
 <template>
-  <div></div>
+  <AdminSettingsHeader/>
+  <section v-if="activeTab == 'general'">
+    <AdminSettingsGeneralUpdate class="mt-3"/>
+  </section>
+  <section v-else-if="activeTab == 'members'">
+    Members Tab
+  </section>
+  <section v-else>
+    Invalid Page.
+  </section>
 </template>
