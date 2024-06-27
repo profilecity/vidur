@@ -110,9 +110,13 @@ const onDelete = async () => {
       <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
         <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
-        <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="onDelete">
-          <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
-        </button>
+        <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete">
+          <template #input="{ open }">
+            <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
+              <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+            </button>
+          </template>
+        </AbstractConfirmationBox>
         <div class="flex space-x-1 items-center border bg-zinc-100 p-2 rounded-xl">
           <span class="text-sm">Publish?</span>
           <div class="form-switch">
