@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-nowrap overflow-x-scroll no-scrollbar md:block md:overflow-auto px-3 py-6 border-b md:border-b-0 md:border-r border-zinc-300 min-w-60 md:space-y-3">
+  <div class="flex flex-nowrap overflow-x-scroll no-scrollbar md:block md:overflow-auto p-2 md:px-3 md:py-6 border-b md:border-b-0 md:border-r border-zinc-300 min-w-60 md:space-y-3">
     <!-- Group 1 -->
     <div>
       <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
