@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import z from 'zod';
-
-import { deleteJobPostingSchema } from "~/schemas/posting";
-
 import type { JobPosting } from "~/server/db/schema";
 
 definePageMeta({
@@ -15,10 +11,6 @@ useHead({
 })
 
 const postings = await useFetch<JobPosting[]>('/api/posting');
-
-const deletePosting = (params: z.infer<typeof deleteJobPostingSchema>) => {
-  
-}
 </script>
 
 <template>
