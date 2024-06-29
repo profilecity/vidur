@@ -2,7 +2,7 @@
 import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/posting';
 import type { JobPosting } from '~/server/db/schema';
 import  useCustomToast  from '~/composables/useToast';
-
+import Messages from '~/composables/messages';
 definePageMeta({
   layout: 'admin',
 
@@ -67,7 +67,7 @@ const onSubmit = handleSubmit(async values => {
     })
     await navigateTo("/admin/postings");
   } catch (e) {
-    error("Error while saving the user");
+    error(Messages.ERROR_SAVING_PROFILE().message);
     console.error(e);
   } finally {
     isSubmitting.value = false;
