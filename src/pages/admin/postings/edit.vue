@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/posting';
 import type { JobPosting } from '~/server/db/schema';
+import  useCustomToast  from '~/composables/useToast';
 
 definePageMeta({
   layout: 'admin',
-  middleware: 'admin-auth',
+
 })
 
 const route = useRoute();
-
+const {error}=useCustomToast();
 const postingId = route.query.id as string | undefined;
 
 const isUpdating = !!postingId;
@@ -66,6 +67,7 @@ const onSubmit = handleSubmit(async values => {
     })
     await navigateTo("/admin/postings");
   } catch (e) {
+    error("Error while saving the user");
     console.error(e);
   } finally {
     isSubmitting.value = false;

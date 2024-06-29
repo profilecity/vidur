@@ -16,6 +16,11 @@ export default defineNuxtConfig({
     '~/assets/css/additional-styles/utility-patterns.css',
   ],
   devtools: { enabled: true },
+  plugins: ['~/plugins/toastification.client.ts'],
+  build:{
+    // vue-toastification - old commonjs module 
+    transpile: ['vue-toastification'],
+  },
   runtimeConfig: {
     db: {
       host: 'localhost',
