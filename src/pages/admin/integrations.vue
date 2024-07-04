@@ -10,9 +10,7 @@ useHead({
   title: 'Integrations | Admin Panel'
 })
 
-const route = useRoute();
-
-const activeTab = computed(() => (route.query.tab as string));
+const activeTab = useActiveTab(["hooks", "plugins"]);
 
 const showEmptyState = ref(false);
 
