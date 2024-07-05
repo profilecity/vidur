@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col px-4 py-6 border-b md:border-b-0 md:border-r border-zinc-200 max-w-60 h-screen">
+  <div class="flex fixed top-0 left-0 flex-col px-4 py-6 border-b md:border-b-0 md:border-r border-zinc-200 max-w-60 h-screen">
      <div class="flex flex-col">
         
         <!-- Company Profile -->
@@ -69,7 +69,7 @@
       <div class="p-2 border border-zinc-200 rounded-xl">
         <div class="flex items-center space-x-2">
           <img src="/vidur-logo.svg" class="w-14"/>
-          <div class="py-1 px-2 text-xs border border-purple-300 rounded-lg bg-purple-50 text-purple-500 font-medium">premium</div>
+          <div class="py-1 px-2 text-xs border border-amber-300 rounded-lg bg-amber-50 text-amber-500 font-medium">premium</div>
         </div>
         <div class="text-xs mt-2 text-zinc-500">Get access to AI powered profiles and People's Search.</div>
         <button class="text-xs py-2 px-4 rounded-xl bg-zinc-900 mt-2 text-zinc-50">Upgrade Now</button>
