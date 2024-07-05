@@ -14,7 +14,7 @@ const activeTab = useActiveTab(["general", "members"]);
 <template>
   <AdminSettingsHeader/>
   <section v-if="activeTab == 'general'">
-    <AdminSettingsGeneralUpdate class="mt-3"/>
+    <LazyAdminSettingsGeneralUpdate class="mt-3"/>
   </section>
   <section v-else-if="activeTab == 'members'">
     Members Tab
