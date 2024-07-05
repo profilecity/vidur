@@ -5,27 +5,21 @@ const tabs = [
   {
     id: "general",
     display: "General",
-    icon: "mingcute:settings-2-line",
+    icon: "codicon:settings",
+    url: '/admin/settings?tab=general',
   },
   {
     id: "members",
     display: "Members",
-    icon: "ph:users-bold",
+    icon: "fluent:people-20-regular",
+    url: '/admin/settings?tab=members',
   }
 ]
 </script>
 
 <template>
-  <ul class="flex flex-nowrap space-x-2 overflow-x-scroll no-scrollbar pb-2 border-b">
-    <NuxtLink :to="`/admin/settings?tab=${tab.id}`" v-for="tab in tabs" custom
-      v-slot="{ href, navigate }">
-      <li class="mr-0.5 md:mr-0 md:mb-0.5">
-        <a class="flex items-center px-2.5 py-2 rounded-xl whitespace-nowrap"
-          :class="activeTab == tab.id ? 'bg-zinc-950 text-white border' : 'hover:bg-zinc-200'" :href="href" @click="navigate">
-          <Icon class="w-4 h-4 shrink-0 fill-current mr-2" :name="tab.icon" />
-          <span class="text-sm font-medium">{{ tab.display }}</span>
-        </a>
-      </li>
-    </NuxtLink>
-  </ul>
+  <section class="sticky top-0 bg-white p-4">
+    <div class="flex text-xl font-bold text-zinc-900">Settings</div>
+    <TabbedPane :active-tab="activeTab" :tabs="tabs" class="border-b py-4 mt-2" />
+  </section>
 </template>
