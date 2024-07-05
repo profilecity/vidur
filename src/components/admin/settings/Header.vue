@@ -22,7 +22,7 @@ const tabs = [
 </script>
 
 <template>
-  <div class="flex text-lg font-bold text-zinc-900 px-4">Settings</div>
+  <div class="flex text-xl font-bold text-zinc-900 px-4">Settings</div>
   <ul class="flex space-x-2 border-b pb-4 items-center mt-2 mb-4 px-4">
     <div class="bg-zinc-100 flex p-1 space-x-1 rounded-xl border border-zinc-200">
       <NuxtLink :to="`/admin/settings?tab=${tab.id}`" v-for="tab in tabs" custom
