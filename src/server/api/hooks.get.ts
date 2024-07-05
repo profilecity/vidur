@@ -6,5 +6,11 @@ export default defineEventHandler(async (event) => {
   
   const db = await useDatabase();
 
-  return db.select().from(hooksTable);
+  const hooks = await db.select().from(hooksTable);
+
+  if (IS_DEV) {
+    console.log("Found", hooks.length, "Hooks");
+  }
+
+  return hooks;
 })

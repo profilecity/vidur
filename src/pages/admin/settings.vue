@@ -8,15 +8,13 @@ useHead({
   title: 'Settings | Admin Panel'
 })
 
-const route = useRoute();
-
-const activeTab = computed(() => (route.query.tab as string));
+const activeTab = useActiveTab(["general", "members"]);
 </script>
 
 <template>
   <AdminSettingsHeader/>
   <section v-if="activeTab == 'general'">
-    <AdminSettingsGeneralUpdate class="mt-3"/>
+    <LazyAdminSettingsGeneralUpdate class="mt-3"/>
   </section>
   <section v-else-if="activeTab == 'members'">
     Members Tab

@@ -1,11 +1,5 @@
 <script setup lang="ts">
-const route = useRoute();
-
-if (!route.query.tab) {
-  await navigateTo('/admin/settings?tab=general');
-}
-
-const activeTab = computed(() => (route.query.tab as string));
+const activeTab = useActiveTab(["general", "members"]);
 
 const tabs = [
   {
