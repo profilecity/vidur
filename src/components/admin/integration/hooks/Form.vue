@@ -69,6 +69,7 @@ defineExpose({
 <template>
   <div>
     <div class="text-sm mb-4 text-zinc-500" v-if="!isUpdating">
+    <div class="text-sm mb-4 text-zinc-500" v-if="!isUpdating">
       Create a hook to start receiving events immediatly. <br>
       Use
       <a class="underline text-blue-500" href="https://atlas.thenirvanalabs.com/oauth2/jwks" target="_blank">this</a>
@@ -80,7 +81,7 @@ defineExpose({
       <div class="flex flex-col justify-items-start w-4/5">
         <label class="block text-sm flex" for="title">Title <span class="text-rose-500">*</span></label>
         <div class="flex">
-          <input id="title" class="input-custom" placeholder="My External ATS Provider" type="text" v-model="title"
+          <input id="title" class="input-sp" placeholder="My External ATS Provider" type="text" v-model="title"
             :disabled="isSubmitting" />
           <div class="text-xs mt-1 text-rose-500">{{ errors.title }}</div>
         </div>
@@ -89,7 +90,7 @@ defineExpose({
       <div class="flex flex-col justify-items-start w-4/5 mt-4">
         <label class="flex block text-sm" for="url">URL <span class="text-rose-500">*</span></label>
         <div class="flex">
-          <input id="url" class="input-custom" placeholder="https://ats-provider.com/api/register-event" type="url"
+          <input id="url" class="input-sp" placeholder="https://ats-provider.com/api/register-event" type="url"
             v-model="url" :disabled="isSubmitting" />
           <div class="text-xs mt-1 text-rose-500">{{ errors.url }}</div>
         </div>
