@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
   const settings: GeneralSettings = {
     organization: {},
     seo: {},
-  };
+  } as GeneralSettings; // Ignore validation errors here.
 
   settingEntries.forEach(s => {
     if (s.key == 'seoConfig' && s.value) {
