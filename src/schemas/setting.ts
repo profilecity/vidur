@@ -35,10 +35,8 @@ export const generalSettingsSchema = z.object({
 
 export type GeneralSettings = z.infer<typeof generalSettingsSchema>;
 
-export const inviteMember = z.object({
-  email: z.string().email(),
-});
-
-export const removeMember = z.object({
+export const addMemberSchema = z.object({
   id: z.string().uuid(),
 });
+
+export const removeMemberSchema = addMemberSchema;

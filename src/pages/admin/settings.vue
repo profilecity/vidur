@@ -17,7 +17,7 @@ const activeTab = useActiveTab(["general", "members"]);
     <LazyAdminSettingsGeneralUpdate class="mt-3"/>
   </section>
   <section v-else-if="activeTab == 'members'">
-    Members Tab
+    <LazyAdminSettingsMembersSection class="mt-3"/>
   </section>
   <section v-else>
     Invalid Page.
