@@ -69,7 +69,6 @@ defineExpose({
 <template>
   <div>
     <div class="text-sm mb-4 text-zinc-500" v-if="!isUpdating">
-    <div class="text-sm mb-4 text-zinc-500" v-if="!isUpdating">
       Create a hook to start receiving events immediatly. <br>
       Use
       <a class="underline text-blue-500" href="https://atlas.thenirvanalabs.com/oauth2/jwks" target="_blank">this</a>
