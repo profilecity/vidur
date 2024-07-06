@@ -4,8 +4,8 @@ import type { Hook } from '~/server/db/schema';
 
 type SaveOrUpdateInput = z.infer<typeof updateHookSchema> | z.infer<typeof createHookSchema>;
 
-const useHooksState = () => useState<Hook[]>('integration-hooks', () => ref([]));
-const useHooksFetchedState = () => useState<boolean>('integration-hooks-first-fetch', () => ref(false));
+const useHooksState = () => useState<Hook[]>('integration-hooks', () => []);
+const useHooksFetchedState = () => useState<boolean>('integration-hooks-first-fetch', () => false);
 
 export async function useHooks() {
   const hooks = useHooksState();
@@ -24,9 +24,7 @@ export async function useHooks() {
     hooksFetched.value = true;
   }
 
-  const refreshHooks = () => {
-    hooksApiCall.refresh();
-  };
+  const refreshHooks = hooksApiCall.refresh;
 
   const isSubmitting = ref(false);
 
