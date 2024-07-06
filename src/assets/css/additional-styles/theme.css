@@ -12,7 +12,7 @@
   @apply focus:ring-0;
 }
 
-.input-sp {
+.input-custom {
   @apply w-full block py-2 px-4 border border-zinc-200 rounded-xl text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-inset focus:ring-zinc-300 sm:text-sm sm:leading-6 outline-0;
 }
 

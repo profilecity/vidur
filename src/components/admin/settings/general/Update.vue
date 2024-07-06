@@ -75,26 +75,26 @@ const onSubmit = handleSubmit(async values => {
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
             <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Organization Name <span class="text-xs ml-1 text-rose-500">({{ errors['organization.name'] }})</span></label>
-            <input class="input-sp" type="text" placeholder="Organization Name" v-model="organizationName">
+            <input class="input-custom" type="text" placeholder="Organization Name" v-model="organizationName">
           </div>
           <div class="w-full md:w-2/3">
             <label class="block text-sm font-medium mb-1 text-zinc-900" for="location">Location</label>
-            <input id="location" class="input-sp" type="text" placeholder="Boston, MA"
+            <input id="location" class="input-custom" type="text" placeholder="Boston, MA"
               v-model="organizationLocation" />
             <div class="text-xs mt-1 text-rose-500">{{ errors['organization.location'] }}</div>
           </div>
         </div>
         <div class="w-full mt-5">
           <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Bio</label>
-          <textarea class="input-sp" placeholder="Join us in building next generation space technology.."
+          <textarea class="input-custom" placeholder="Join us in building next generation space technology.."
             v-model="organizationDescription" />
           <div class="text-xs mt-1 text-rose-500">{{ errors['organization.description'] }}</div>
         </div>
         <div class="w-full mt-5">
           <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Featured Links</label>
           <div class="flex space-x-2">
-            <input class="input-sp" type="text" placeholder="Mars Mission Docs" />
-            <input class="input-sp" type="url" placeholder="https://big-space-tech.com/missions/mars" />
+            <input class="input-custom" type="text" placeholder="Mars Mission Docs" />
+            <input class="input-custom" type="url" placeholder="https://big-space-tech.com/missions/mars" />
           </div>
         </div>
       </section>
@@ -112,12 +112,12 @@ const onSubmit = handleSubmit(async values => {
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
             <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Website Title</label>
-            <input class="input-sp" type="text" placeholder="Organization Name" v-model="seoTitle">
+            <input class="input-custom" type="text" placeholder="Organization Name" v-model="seoTitle">
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.title'] }}</div>
           </div>
           <div class="w-full md:w-2/3">
             <label class="block text-sm font-medium mb-1 text-zinc-900">Website Description</label>
-            <input class="input-sp" type="text" placeholder="We build space tech" v-model="seoDescription" />
+            <input class="input-custom" type="text" placeholder="We build space tech" v-model="seoDescription" />
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.description'] }}</div>
           </div>
         </div>
@@ -125,12 +125,12 @@ const onSubmit = handleSubmit(async values => {
           <div class="w-full md:w-2/3">
             <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Twitter Handle (without
               @)</label>
-            <input class="input-sp" type="text" placeholder="the_nirvana_labs" v-model="seoTwitter">
+            <input class="input-custom" type="text" placeholder="the_nirvana_labs" v-model="seoTwitter">
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.twitter'] }}</div>
           </div>
           <div class="w-full md:w-2/3">
             <label class="block text-sm font-medium mb-1 text-zinc-900">Keywords</label>
-            <input class="input-sp" type="text" placeholder="careers, space, technology, jobs..."
+            <input class="input-custom" type="text" placeholder="careers, space, technology, jobs..."
               v-model="seoKeywords" />
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.keywords'] }}</div>
           </div>
