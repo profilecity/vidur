@@ -13,7 +13,11 @@ const activePostings = await useFetch('/api/analytics/job');
 </script>
 
 <template>
-  <AdminDashboardStats :stats="stats.data.value" v-if="stats.data.value"/>
-  <!-- TODO: fix type -->
-  <AdminDashboardRecentPostings class="mt-4" :postings="activePostings.data.value as any" />
+  <div class="px-4 py-4">
+    <div class=" pb-4 mb-4 border-b border-zinc-200">
+      <div class="text-xl font-bold text-zinc-900">👋🏽 Hello, Dev Shah.</div>
+      <div class="text-sm text-zinc-500 mt-2">Track your hiring activities. You are almost there!</div>
+    </div>
+    <AdminDashboardStats :stats="stats.data.value" v-if="stats.data.value"/>
+  </div>
 </template>
