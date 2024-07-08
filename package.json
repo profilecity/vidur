@@ -13,6 +13,7 @@
     "drizzle:update": "drizzle-kit up"
   },
   "dependencies": {
+    "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "6.11.4",
     "@tailwindcss/forms": "^0.5.7",
     "@vee-validate/nuxt": "^4.13.1",

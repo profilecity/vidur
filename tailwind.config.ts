@@ -1,10 +1,9 @@
 module.exports = {
-  darkMode: 'html',
   theme: {
     extend: {
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        nycd: ['Nothing You Could Do', 'cursive'],
+        noto: ['Noto Sans', 'sans-serif'],
+        lato: ['Lato', 'cursive'],
       },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1.5' }],

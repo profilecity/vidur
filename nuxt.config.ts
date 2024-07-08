@@ -7,7 +7,14 @@ export default defineNuxtConfig({
     inlineDynamicImports: true,
   },
   srcDir: 'src/',
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', "@nuxtjs/google-fonts"],
+  googleFonts: {
+    families: {
+      "Noto+Sans": [400, 500, 600, 700],
+      "Lato": [400, 500, 600, 700],
+    },
+    useStylesheet: true,
+  },
   css: [
     '~/assets/css/style.css',
     '~/assets/css/additional-styles/range-slider.css',
