@@ -175,7 +175,7 @@ if (route.query.fromOnboard) {
   </main>
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
     <div class="relative z-50">
-      <a href="https://vidurjobs.xyz">
+      <a href="https://www.vidurjobs.xyz">
         <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
           <p class="mr-2">Powered By</p>
           <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
