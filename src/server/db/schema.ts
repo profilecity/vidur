@@ -65,8 +65,8 @@ export type JobPosting = typeof jobPostingsTable.$inferSelect;
 export const postingApplicantsTable = pgTable("posting_applicants", {
   id: defaultUuidPkField(),
   candidateId: uuid("owner_id").references(() => usersTable.id, {
-    onDelete: "set null",
-  }),
+    onDelete: "cascade",
+  }).notNull(),
   postingId: uuid("job_id").references(() => jobPostingsTable.id, {
     onDelete: "cascade",
   }),
