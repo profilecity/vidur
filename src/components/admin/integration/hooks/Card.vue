@@ -24,7 +24,7 @@ const onDelete = () => {
           </div>
           <div class="flex-col">
             <h3 class="text-base text-zinc-900 font-semibold">{{ hook.title }}</h3>
-            <div class="text-sm text-blue-400 truncate">{{ hook.url }}</div>
+            <div class="text-sm text-blue-400">{{ hook.url.substring(0, 30) }}...</div>
           </div>
         </header>
       </div>
