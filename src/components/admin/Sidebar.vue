@@ -25,7 +25,7 @@
       <!-- Tools -->
       <div class="text-xs text-zinc-500 mb-2 mt-4">Tools</div>
       <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
-        <AdminSidebarLink to="/admin/integrations" icon="iconoir:ev-plug-charging" label="Integrations" />
+        <AdminSidebarLink to="/admin/integrations" icon="hugeicons:connect" label="Integrations" />
         <AdminSidebarLink to="/admin/settings" icon="iconoir:settings" label="Settings" />
       </ul>
     </div>

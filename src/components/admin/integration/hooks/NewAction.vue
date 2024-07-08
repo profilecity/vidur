@@ -9,9 +9,9 @@ withDefaults(defineProps<{
 <template>
   <Modal title="Create New hook">
     <template #input="{ open }">
-      <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="open">
-        <Icon name="ic:baseline-plus" class="w-5 h-5" />
-        <span class="ml-1">{{ inputLabel }}</span>
+      <button class="btn bg-zinc-900 border border-zinc-900 hover:bg-zinc-700 text-white" @click="open">
+        <span>{{ inputLabel }}</span>
+        <Icon name="ic:baseline-plus" class="ml-1 w-5 h-5" />
       </button>
     </template>
     <template #content="{ close }">

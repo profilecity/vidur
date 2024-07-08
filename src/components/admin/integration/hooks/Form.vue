@@ -68,30 +68,34 @@ defineExpose({
 
 <template>
   <div>
-    <div class="text-sm mb-4" v-if="!isUpdating">
+    <div class="text-sm mb-4 text-zinc-500" v-if="!isUpdating">
       Create a hook to start receiving events immediatly. <br>
       Use
       <a class="underline text-blue-500" href="https://atlas.thenirvanalabs.com/oauth2/jwks" target="_blank">this</a>
       JWKs RSA key to authorise requests.
     </div>
-    <form class="flex flex-col space-x-3 items-center" @submit="onSubmit">
-      <div class="flex flex-col items-center space-x-3">
-        <label class="block text-sm font-medium mb-1" for="title">Title <span class="text-rose-500">*</span></label>
-        <div>
-          <input id="title" class="form-input" placeholder="My External ATS Provider" type="text" v-model="title"
+
+    <form class="flex flex-col items-start" @submit="onSubmit">
+
+      <div class="flex flex-col justify-items-start w-4/5">
+        <label class="block text-sm flex" for="title">Title <span class="text-rose-500">*</span></label>
+        <div class="flex">
+          <input id="title" class="input-custom" placeholder="My External ATS Provider" type="text" v-model="title"
             :disabled="isSubmitting" />
           <div class="text-xs mt-1 text-rose-500">{{ errors.title }}</div>
         </div>
       </div>
-      <div class="flex flex-col items-center space-x-3">
-        <label class="block text-sm font-medium mb-1" for="url">URL <span class="text-rose-500">*</span></label>
-        <div>
-          <input id="url" class="form-input" placeholder="https://ats-provider.com/api/register-event" type="url"
+
+      <div class="flex flex-col justify-items-start w-4/5 mt-4">
+        <label class="flex block text-sm" for="url">URL <span class="text-rose-500">*</span></label>
+        <div class="flex">
+          <input id="url" class="input-custom" placeholder="https://ats-provider.com/api/register-event" type="url"
             v-model="url" :disabled="isSubmitting" />
           <div class="text-xs mt-1 text-rose-500">{{ errors.url }}</div>
         </div>
       </div>
-      <button class="btn btn-sm bg-zinc-900 hover:bg-zinc-800 text-white" :disabled="isSubmitting" type="submit">
+
+      <button class="flex btn btn-sm mt-4 bg-zinc-900 hover:bg-zinc-800 text-white" :disabled="isSubmitting" type="submit">
         {{ isUpdating ? "Save" : "Create" }}
       </button>
     </form>

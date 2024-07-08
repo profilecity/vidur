@@ -5,7 +5,7 @@ const tabs = [
   {
     id: "hooks",
     display: "Hooks",
-    icon: "tabler:fish-hook",
+    icon: "ph:link",
     url: "/admin/integrations?tab=hooks"
   },
   {

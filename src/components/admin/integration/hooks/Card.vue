@@ -13,36 +13,37 @@ const onDelete = () => {
 </script>
 
 <template>
-  <div class="col-span-full md:col-span-2 xl:col-span-4 bg-white shadow-md rounded-2xl border border-zinc-200">
+  <div class="col-span-full md:col-span-2 xl:col-span-3 rounded-xl border border-zinc-200">
     <!-- Card content -->
     <div class="flex flex-col h-full p-2">
       <div class="grow">
-        <header class="flex items-center mb-4">
+        <header class="flex mb-4 items-start">
           <div
-            class="w-10 h-10 rounded-full shrink-0 bg-gradient-to-tr from-indigo-500 to-indigo-300 mr-3 flex items-center justify-center">
-            <Icon name="tabler:fish-hook" class="w-5 h-5 fill-current text-white" />
+            class="w-10 h-10 rounded-xl shrink-0 bg-gradient-to-tr from-amber-500 to-pink-300 mr-3 flex items-center justify-center">
+            <Icon name="mingcute:plugin-2-line" class="w-5 h-5 fill-current text-white" />
           </div>
-          <h3 class="text-lg text-zinc-800 font-semibold">{{ hook.title }}</h3>
+          <div class="flex-col">
+            <h3 class="text-base text-zinc-900 font-semibold">{{ hook.title }}</h3>
+            <div class="text-sm text-blue-400 truncate">{{ hook.url }}</div>
+          </div>
         </header>
-        <div class="text-sm text-zinc-400">{{ hook.url }}</div>
       </div>
       <!-- Card footer -->
-      <footer class="mt-4">
+      <footer class="mt-2">
         <div class="flex flex-wrap justify-between items-center">
           <!-- Left side -->
-          <div class="flex items-center text-zinc-400">
-            <Icon name="formkit:time" class="w-4 h-4 shrink-0 fill-current mr-1" />
-            <div class="text-sm text-zinc-500">
+          <div class="flex items-center text-zinc-500">
+            <Icon name="formkit:time" class="w-5 h-5 shrink-0 fill-current mr-1" />
+            <div class="text-sm">
               {{ hook.lastExecutedAt ? timeAgo(new Date(hook.lastExecutedAt)) : 'Never executed' }}
             </div>
           </div>
           <!-- Right side -->
-          <div class="flex space-x-1">
+          <div class="flex space-x-1">  
             <AbstractConfirmationBox @confirm="onDelete" title="Delete Hook?" confirmLabel="Delete" content="Hook will stop receiving further events immediatly. You cannot undo this action.">
               <template #input="{ open }">
-                <button class="btn btn-sm border border-zinc-200 hover:border-zinc-300 flex space-x-1 items-center" @click="open">
-                  <Icon name="mdi:delete" class="w-4 h-4 text-red-500" />
-                  <span>Delete</span>
+                <button class="w-10 h-10 border rounded-xl border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300 flex justify-center items-center" @click="open">
+                  <Icon name="mdi:delete" class="w-5 h-5 text-rose-500" />
                 </button>
               </template>
             </AbstractConfirmationBox>

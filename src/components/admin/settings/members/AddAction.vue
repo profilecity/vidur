@@ -37,9 +37,9 @@ watchDebounced(userSearchQuery, async (q) => {
 <template>
   <Modal title="Add Member">
     <template #input="{ open }">
-      <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="open">
+      <button class="btn bg-zinc-800 hover:bg-zinc-800 text-white text-xs" @click="open">
+        <span class="mr-2">Add Member</span>
         <Icon name="ic:baseline-plus" class="w-5 h-5" />
-        <span class="ml-1">Add Member</span>
       </button>
     </template>
     <template #content="{ close }">

@@ -6,7 +6,7 @@ defineProps<{
 }>();
 </script>
 <template>
-  <div class="bg-white rounded-lg border border-zinc-300 w-full md:w-2/3 lg:w-1/2">
+  <div class="bg-white rounded-lg border border-zinc-200 w-full md:w-2/3 lg:w-1/2">
     <header class="px-5 py-4 border-b border-zinc-100">
       <h2 class="font-semibold text-zinc-800">Active Postings</h2>
     </header>
@@ -15,7 +15,7 @@ defineProps<{
       <div class="overflow-x-auto">
         <table class="table-auto w-full" v-if="postings.length > 0">
           <!-- Table header -->
-          <thead class="text-xs uppercase text-zinc-400 bg-zinc-50 rounded-sm">
+          <thead class="text-xs uppercase text-zinc-400 bg-zinc-50 rounded-xl">
             <tr>
               <th class="p-2">
                 <div class="font-semibold text-left">title</div>
