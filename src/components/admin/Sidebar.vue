@@ -8,7 +8,7 @@
         <div class="flex items-center">
           <img class="rounded-lg w-6 border border-zinc-200" src="https://careers.thenirvanalabs.com/company-logo.png"
             alt="avatar" />
-          <span class="text-xs ml-2 truncate">The Nirvana Labs</span>
+          <span class="text-xs ml-2 truncate font-noto">The Nirvana Labs</span>
         </div>
         <div class="flex items-center text-zinc-600">
           <Icon class="w-5 h-5 fill-current" name="icon-park-outline:down" />

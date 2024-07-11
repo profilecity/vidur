@@ -1,22 +1,14 @@
 <template>
-  <div class="text-center px-4">
-    <div
-      class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-t from-zinc-200 to-zinc-100 mb-4">
-      <svg class="w-5 h-6 fill-current" viewBox="0 0 20 24">
-        <path class="text-zinc-500" d="M10 10.562l9-5-8.514-4.73a1 1 0 00-.972 0L1 5.562l9 5z" />
-        <path class="text-zinc-300" d="M9 12.294l-9-5v10.412a1 1 0 00.514.874L9 23.294v-11z" />
-        <path class="text-zinc-400" d="M11 12.294v11l8.486-4.714a1 1 0 00.514-.874V7.295l-9 4.999z" />
-      </svg>
-    </div>
-    <h2 class="text-2xl text-zinc-800 font-bold mb-2">
+  <div class="px-4">
+    <h2 class="text-lg text-zinc-800 font-bold font-noto">
       Create your first hook in minutes!
     </h2>
-    <h4 class="text-lg text-zinc-700 mb-2">
+    <h4 class="text-md text-zinc-500 mb-2">
       Hooks are a way to send events to external systems via an API request.<br>
       Primary aim for this is to facilitate creation of custom plugins.
     </h4>
-    <div class="flex w-full justify-center">
-      <ul class="p-4 text-center mx-auto">
+    <div class="flex w-full">
+      <ul class="">
         <!-- List item -->
         <li class="relative py-2">
           <div class="flex items-center mb-1">
@@ -25,7 +17,7 @@
             <div class="absolute left-0 rounded-full bg-zinc-600" aria-hidden="true">
               <Icon name="mdi:number-1" class="w-5 h-5 fill-current text-white" />
             </div>
-            <h3 class="text-lg font-bold text-zinc-600 pl-9">Receive events via POST request.</h3>
+            <h3 class="text-base text-zinc-800 pl-6">Receive events via POST request.</h3>
           </div>
         </li>
         <!-- List item -->
@@ -36,7 +28,7 @@
             <div class="absolute left-0 rounded-full bg-zinc-600" aria-hidden="true">
               <Icon name="mdi:number-2" class="w-5 h-5 fill-current text-white" />
             </div>
-            <h3 class="text-lg font-bold text-zinc-600 pl-9">
+            <h3 class="text-base text-zinc-800 pl-6">
               Validate authority using
               <a class="underline text-blue-500" href="https://atlas.thenirvanalabs.com/oauth2/jwks" target="_blank">
                 this
@@ -48,10 +40,10 @@
         <!-- List item -->
         <li class="relative py-2">
           <div class="flex items-center mb-1">
-            <div class="absolute left-0 rounded-full bg-zinc-600" aria-hidden="true">
+            <div class="absolute left-0 w-7 h-7 rounded-full bg-zinc-800" aria-hidden="true">
               <Icon name="mdi:number-3" class="w-5 h-5 fill-current text-white" />
             </div>
-            <h3 class="text-lg font-bold text-zinc-600 pl-9">Create custom actions!</h3>
+            <h3 class="text-base text-zinc-600 pl-6">Create custom actions!</h3>
           </div>
         </li>
       </ul>

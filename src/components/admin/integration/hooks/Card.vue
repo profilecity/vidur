@@ -23,7 +23,7 @@ const onDelete = () => {
             <Icon name="mingcute:plugin-2-line" class="w-5 h-5 fill-current text-white" />
           </div>
           <div class="flex-col">
-            <h3 class="text-base text-zinc-900 font-semibold">{{ hook.title }}</h3>
+            <h3 class="text-base text-zinc-900 font-semibold font-noto">{{ hook.title }}</h3>
             <div class="text-sm text-blue-400">{{ hook.url.substring(0, 30) }}...</div>
           </div>
         </header>
@@ -32,8 +32,8 @@ const onDelete = () => {
       <footer class="mt-2">
         <div class="flex flex-wrap justify-between items-center">
           <!-- Left side -->
-          <div class="flex items-center text-zinc-500">
-            <Icon name="formkit:time" class="w-5 h-5 shrink-0 fill-current mr-1" />
+          <div class="flex items-center text-zinc-400">
+            <Icon name="formkit:time" class="w-4 h-4 shrink-0 fill-current mr-1" />
             <div class="text-sm">
               {{ hook.lastExecutedAt ? timeAgo(new Date(hook.lastExecutedAt)) : 'Never executed' }}
             </div>

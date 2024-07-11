@@ -19,7 +19,7 @@ const tabs = [
 
 <template>
   <section class="sticky top-0 bg-white p-4">
-    <div class="flex text-xl font-bold text-zinc-900">Integrations</div>
+    <div class="flex text-xl font-bold text-zinc-900 font-noto">Integrations</div>
     <TabbedPane :active-tab="activeTab" :tabs="tabs" class="border-b py-4 mt-2" />
   </section>
 </template>
