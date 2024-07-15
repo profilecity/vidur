@@ -1,5 +1,5 @@
-import { jobPostingsTable } from '../db/schema';
-import authenticateAdminRequest from '../utils/admin';
+import { jobPostingsTable } from '../../db/schema';
+import authenticateAdminRequest from '../../utils/admin';
 import { eq } from 'drizzle-orm';
 import { updateJobPostingSchema } from '~/schemas/posting';
 

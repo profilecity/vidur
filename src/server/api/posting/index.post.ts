@@ -1,6 +1,6 @@
-import authenticateAdminRequest from "../utils/admin";
+import authenticateAdminRequest from "../../utils/admin";
 import { createJobPostingSchema } from "~/schemas/posting";
-import { jobPostingsTable } from "../db/schema";
+import { jobPostingsTable } from "../../db/schema";
 
 export default defineEventHandler(async (event) => {
 
