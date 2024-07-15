@@ -5,7 +5,7 @@ definePageMeta({
 })
 
 useHead({
-  title: 'Applicants | Admin Panel'
+  title: 'Applications | Admin Panel'
 })
 </script>
 
