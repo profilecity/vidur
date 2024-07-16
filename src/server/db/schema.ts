@@ -69,7 +69,7 @@ export const postingApplicantsTable = pgTable("posting_applicants", {
   }).notNull(),
   postingId: uuid("job_id").references(() => jobPostingsTable.id, {
     onDelete: "cascade",
-  }),
+  }).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
