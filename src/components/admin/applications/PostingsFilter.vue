@@ -7,7 +7,7 @@ const emits = defineEmits<{
   postingsSelected: [string[]];
 }>();
 
-const { postings } = usePostingIds();
+const { data: postings } = useFetch<{ id: string; title: string }[]>('/api/postings');
 
 const onPostingsSelected = (ids: string[]) => {
   emits("postingsSelected", ids);
@@ -15,7 +15,8 @@ const onPostingsSelected = (ids: string[]) => {
 </script>
 
 <template>
-  <AbstractOptionsSelectorDropdown title="Select Postings" :options="postings" :selected-ids="postingIds" @options-selected="onPostingsSelected">
+  <AbstractOptionsSelectorDropdown title="Select Postings" :options="postings" :selected-ids="postingIds"
+    @options-selected="onPostingsSelected" v-if="Array.isArray(postings)">
     <template #input="{ open }">
       <div class="flex items-center">
         <div class="bg-zinc-100 p-2 space-x-1 rounded-xl border border-zinc-200">

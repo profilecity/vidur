@@ -32,7 +32,6 @@ const onPostingsSelected = (postingIds: string[]) => {
 }
 
 watch(selectedPostings, (selectedPostings) => {
-  console.log(selectedPostings);
   fetchApplicants(selectedPostings);
 })
 </script>
