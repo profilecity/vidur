@@ -27,21 +27,32 @@ export default defineEventHandler(async (event) => {
 
   const db = await useDatabase();
 
-  const applications = await db
+  const applicationRecords = await db
     .select()
     .from(postingApplicantsTable)
     .where(inArray(postingApplicantsTable.postingId, query.postingIds));
 
-  const applicantIdsMayContainDuplicate = applications.map((a) => a.candidateId);
+  const applications: Record<string, (typeof applicationRecords)[0][]> = {};
+  applicationRecords.forEach((r) => {
+    if (!applications[r.postingId]) {
+      applications[r.postingId] = [];
+    }
+    applications[r.postingId].push(r);
+  });
+
+  const applicantIdsMayContainDuplicate = applicationRecords.map((a) => a.candidateId);
   const applicantIds: string[] = [];
 
   new Set(applicantIdsMayContainDuplicate).forEach((e) => e && applicantIds.push(e));
 
-  const applicantRecords = await db
-    .select({ user: usersTable, handle: userHandlesTable })
-    .from(usersTable)
-    .leftJoin(userHandlesTable, eq(usersTable.id, userHandlesTable.userId))
-    .where(inArray(usersTable.id, applicantIds));
+  const applicantRecords =
+    applicantIds.length > 0
+      ? await db
+          .select({ user: usersTable, handle: userHandlesTable })
+          .from(usersTable)
+          .leftJoin(userHandlesTable, eq(usersTable.id, userHandlesTable.userId))
+          .where(inArray(usersTable.id, applicantIds))
+      : [];
 
   const applicants: Record<string, { user: User; handles: UserHandle[] }> = {};
 
@@ -59,14 +70,21 @@ export default defineEventHandler(async (event) => {
   });
 
   // Final validation: all candidates should be present;
-  applications.forEach(a => {
+  applicationRecords.forEach((a) => {
     if (!applicants[a.candidateId]) {
-      console.error("candidate id", a.candidateId, "is missing from database response");
+      console.error('candidate id', a.candidateId, 'is missing from database response');
       throw createError({
         statusCode: 500,
-      })
+      });
     }
-  })
+  });
+
+  // Fill up empty array for postings with no applicants.
+  query.postingIds.forEach((pid) => {
+    if (!Array.isArray(applications[pid])) {
+      applications[pid] = [];
+    }
+  });
 
   return {
     applications,
