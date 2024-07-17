@@ -52,7 +52,7 @@ if (props.closeOnEsc) {
       <div v-show="isDropdownOpen" class="origin-top-right z-10 absolute top-full left-0 right-auto min-w-56 bg-white border border-slate-200 pt-1.5 rounded shadow-lg overflow-hidden mt-1" :class="align === 'right' ? 'md:left-auto md:right-0' : 'md:left-0 md:right-auto'">
         <div ref="dropdownRef">
           <div class="flex w-full justify-between text-slate-400 pb-2 px-3 items-center">
-            <div class="text-xs font-semibold uppercase">{{ title }}</div>
+            <div class="text-xs uppercase">{{ title }}</div>
             <button class="hover:text-zinc-600" @click="close"><Icon name="ion:close" class="text"/></button>
           </div>
           <slot name="content" :close="close" />        
