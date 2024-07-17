@@ -9,29 +9,24 @@ type ApplicationsGetReponse = { applications: Applications; applicants: Applican
 
 export function useApplications() {
   const postingIds = ref<string[]>([]);
+  const fetching = computed(() => applicantsApiCall.status.value == 'pending');
+
+  const applicants = ref<Applicants>({});
+  const applications = ref<Applications>({});
 
   const applicantsApiCall = useFetch<ApplicationsGetReponse>('/api/applications', {
     query: computed(() => ({
       postingIds: postingIds.value.join(','),
     })),
-    immediate: false,
-  });
-
-  const fetching = computed(() => applicantsApiCall.status.value == 'pending');
-  const applicants = ref<Applicants>({});
-  const applications = ref<Applications>({});
-
-  watchEffect(() => {
-    switch (applicantsApiCall.status.value) {
-      case 'success':
-        const applicantsResponse = applicantsApiCall.data.value as ApplicationsGetReponse;
-        applications.value = applicantsResponse.applications;
-        applicants.value = applicantsResponse.applicants;
-        break;
-      case 'error':
+    onResponse: (ctx) => {
+      if (ctx.error) {
         console.error('Error fetching applications for postingIds', postingIds, applicantsApiCall.error.value);
-        break;
-    }
+      }
+      const applicantsResponse = ctx.response._data as ApplicationsGetReponse;
+      applications.value = applicantsResponse.applications;
+      applicants.value = applicantsResponse.applicants;
+    },
+    immediate: false,
   });
 
   const fetch = (ids: string[]) => {
@@ -48,6 +43,5 @@ export function useApplications() {
 
     applicants,
     applications,
-    postingIds,
   };
 }
