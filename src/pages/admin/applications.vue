@@ -15,6 +15,7 @@ const postingIdsQuery = route.query.postings as string | undefined;
 const selectedPostings = ref<string[]>([]);
 
 const { applicants, applications, fetch: fetchApplicants } = useApplications();
+const { data: postings } = useFetch<{ id: string; title: string }[]>('/api/postings');
 
 // TODO;
 // const showEmptyPage = computed(() => selectedPostings.value.length == 0);

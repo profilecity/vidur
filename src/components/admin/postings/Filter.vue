@@ -1,13 +1,12 @@
 <script setup lang="ts">
 defineProps<{
   postingIds: string[];
+  postings: { id: string; title: string }[] | null;
 }>();
 
 const emits = defineEmits<{
   postingsSelected: [string[]];
 }>();
-
-const { data: postings } = useFetch<{ id: string; title: string }[]>('/api/postings');
 
 const onPostingsSelected = (ids: string[]) => {
   emits("postingsSelected", ids);
