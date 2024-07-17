@@ -112,7 +112,7 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .form-switch input[type="checkbox"]:checked + label {
-  @apply bg-violet-500;
+  @apply bg-zinc-900;
 }
 
 .form-switch input[type="checkbox"]:checked + label > span:first-child {

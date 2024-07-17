@@ -1,4 +1,26 @@
+const whitlistedColorsForDynamicContent = [
+  'red',
+  'orange',
+  'amber',
+  'yellow',
+  'lime',
+  'green',
+  'emerald',
+  'teal',
+  'cyan',
+  'sky',
+  'blue',
+  'indigo',
+  'violet',
+  'purple',
+  'fuchsia',
+  'pink',
+  'rose',
+];
+const whitelistedBgClasses = whitlistedColorsForDynamicContent.map((c) => `bg-${c}-200`);
+
 module.exports = {
+  safelist: ['font-noto', 'font-lato', ...whitelistedBgClasses],
   theme: {
     extend: {
       fontFamily: {
