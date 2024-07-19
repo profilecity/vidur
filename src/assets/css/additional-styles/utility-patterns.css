@@ -30,7 +30,7 @@
 .btn-lg,
 .btn-sm,
 .btn-xs {
-  @apply font-medium text-sm inline-flex items-center justify-center border border-transparent rounded-lg leading-5 shadow-sm transition;
+  @apply font-medium text-sm inline-flex items-center justify-center border border-zinc-200 rounded-xl leading-5 transition;
 }
 
 .btn {
