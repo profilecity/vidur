@@ -99,11 +99,11 @@ const onDelete = async () => {
 <template>
   <div class="w-full max-w-9xl mx-auto">
     <!-- Page header -->
-    <div class="flex flex-col md:flex-row justify-between items-center mb-4">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white">
       <!-- Left: Title -->
       <div class="mb-4 sm:mb-0">
         <h2 class="text-md md:text-lg text-zinc-800 font-bold flex items-center">
-          <Icon class="w-6 h-6 md:w-8 md:h-8 shrink-0 fill-current mr-2" name="akar-icons:edit" />{{ isUpdating ?
+          <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />{{ isUpdating ?
             posting.title : 'New Posting' }}
         </h2>
       </div>
@@ -135,7 +135,7 @@ const onDelete = async () => {
     </div>
     <!-- Input Section -->
     <form @submit="onSubmit">
-      <div class="border-t border-zinc-300">
+      <div class="px-4">
         <div class="mx-auto mt-4">
           <div>
             <label class="block text-sm font-medium mb-1" for="title">Title <span class="text-rose-500">*</span></label>

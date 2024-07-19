@@ -35,9 +35,9 @@ if (props.posting && props.posting.tagsCSV) {
         <NuxtLink class="inline-flex text-gray-800 hover:text-gray-900 mb-1" :to="`/postings/${posting.id}`">
           <h2 class="text-xl leading-snug font-semibold font-noto">{{ posting.title }}</h2>
         </NuxtLink>
-        <div class="flex flex-wrap items-center mt-1" v-if="posting.tagsCSV">
+        <div class="flex flex-wrap items-center" v-if="posting.tagsCSV">
           <span
-              class="inline-flex text-sm text-zinc-800 rounded-lg text-center py-1 px-2 border border-zinc-200 mr-2"
+              class="mt-2 inline-flex text-sm text-zinc-800 rounded-lg text-center py-1 px-2 border border-zinc-200 mr-2"
               v-for="tag in tags">{{ tag }}</span>
         </div>
       </div>
