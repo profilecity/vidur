@@ -19,7 +19,7 @@
       <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
         <AdminSidebarLink to="/admin/dashboard" icon="iconoir:home-simple" label="Dashboard" />
         <AdminSidebarLink to="/admin/postings" icon="iconoir:add-circle" label="Postings" />
-        <AdminSidebarLink to="/admin/applicants" icon="iconoir:user-badge-check" label="Applicants" />
+        <AdminSidebarLink to="/admin/applications" icon="iconoir:user-badge-check" label="Applications" />
       </ul>
 
       <!-- Tools -->
