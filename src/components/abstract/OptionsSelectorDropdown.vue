@@ -40,7 +40,7 @@ const clearAction = () => {
           </label>
         </li>
       </ul>
-      <div class="py-2 px-3 border-t border-zinc-200 bg-zinc-50">
+      <div class="p-2 border-t border-zinc-200 bg-zinc-50">
         <ul class="flex items-center justify-between">
           <li>
             <button class="btn-xs bg-white border-zinc-200 hover:border-zinc-300 text-zinc-500 hover:text-zinc-600"
