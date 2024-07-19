@@ -23,7 +23,7 @@ const stats: { val: number, title: string, icon: string }[] = [
 ];
 </script>
 <template>
-  <div class="grid grid-cols-12 gap-6 mt-8">
+  <div class="grid grid-cols-12 gap-6">
     <div
       class="flex flex-col col-span-6 md:col-span-4 lg:col-span-2 bg-white border border-zinc-200 rounded-xl" v-for="stat in stats">
       <div class="p-2">

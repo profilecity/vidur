@@ -13,7 +13,7 @@ const onDelete = () => {
 </script>
 
 <template>
-  <div class="col-span-full md:col-span-2 xl:col-span-3 rounded-xl border border-zinc-200">
+  <div class="col-span-full md:col-span-2 xl:col-span-3 rounded-xl border border-zinc-200 bg-white shadow-sm">
     <!-- Card content -->
     <div class="flex flex-col h-full p-2">
       <div class="grow">
