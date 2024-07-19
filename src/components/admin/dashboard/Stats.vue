@@ -33,7 +33,7 @@ const stats: { val: number, title: string, icon: string }[] = [
           <h2 class="text-sm">{{ stat.title }}</h2>
         </header>
         <div class="flex items-start">
-          <div class="text-3xl font-bold text-zinc-800 mr-2">{{ stat.val }}</div>
+          <div class="text-3xl font-bold text-zinc-800 mr-2 font-noto">{{ stat.val }}</div>
         </div>
       </div>
     </div>

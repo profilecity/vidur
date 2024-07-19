@@ -60,7 +60,7 @@ const onSubmit = handleSubmit(async values => {
     <!-- Organization Settings -->
     <div class="px-4 space-y-6 w-full items-center mt-4">
       <section class="w-full md:w-1/3">
-        <h2 class="text-base font-bold text-zinc-900">Organization Settings</h2>
+        <h2 class="text-base font-bold text-zinc-900 font-noto">Organization Settings</h2>
         <h4 class="text-sm mb-5 text-zinc-400">Configure career site's home page.</h4>
       </section>
       <section class="w-full md:w-2/3">
@@ -74,26 +74,26 @@ const onSubmit = handleSubmit(async values => {
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">
               Organization Name <span class="text-xs ml-1 text-rose-500">({{ errors['organization.name'] }})</span>
             </label>
             <input class="input-custom" type="text" placeholder="Organization Name" v-model="organizationName">
           </div>
           <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900" for="location">Location</label>
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="location">Location</label>
             <input id="location" class="input-custom" type="text" placeholder="Boston, MA"
               v-model="organizationLocation" />
             <div class="text-xs mt-1 text-rose-500">{{ errors['organization.location'] }}</div>
           </div>
         </div>
         <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Bio</label>
+          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Bio</label>
           <textarea class="input-custom" placeholder="Join us in building next generation space technology.."
             v-model="organizationDescription" />
           <div class="text-xs mt-1 text-rose-500">{{ errors['organization.description'] }}</div>
         </div>
         <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Featured Links</label>
+          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Featured Links</label>
           <div class="flex space-x-2">
             <input class="input-custom" type="text" placeholder="Mars Mission Docs" />
             <input class="input-custom" type="url" placeholder="https://big-space-tech.com/missions/mars" />
@@ -105,7 +105,7 @@ const onSubmit = handleSubmit(async values => {
     <!-- Organization Settings -->
     <div class="px-4 space-y-6 w-full items-center mt-4">
       <section class="w-full md:w-1/3">
-        <h2 class="text-base font-bold text-zinc-900">SEO Settings</h2>
+        <h2 class="text-base font-bold text-zinc-900 font-noto">SEO Settings</h2>
         <h4 class="text-sm mb-5 text-zinc-400">
           These settings help your website rank better and enable better device previews.
         </h4>
@@ -113,25 +113,25 @@ const onSubmit = handleSubmit(async values => {
       <section class="w-full md:w-2/3">
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Website Title</label>
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Website Title</label>
             <input class="input-custom" type="text" placeholder="Organization Name" v-model="seoTitle">
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.title'] }}</div>
           </div>
           <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900">Website Description</label>
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto">Website Description</label>
             <input class="input-custom" type="text" placeholder="We build space tech" v-model="seoDescription" />
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.description'] }}</div>
           </div>
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900" for="name">Twitter Handle (without
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Twitter Handle (without
               @)</label>
             <input class="input-custom" type="text" placeholder="the_nirvana_labs" v-model="seoTwitter">
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.twitter'] }}</div>
           </div>
           <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900">Keywords</label>
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto">Keywords</label>
             <input class="input-custom" type="text" placeholder="careers, space, technology, jobs..."
               v-model="seoKeywords" />
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.keywords'] }}</div>
@@ -139,7 +139,7 @@ const onSubmit = handleSubmit(async values => {
         </div>
         <!-- Panel footer -->
         <footer>
-          <div class="flex w-full justify-start mb-3 mt-6">
+          <div class="flex w-full justify-start mb-10 mt-4">
             <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="onSubmit" :disabled="isSubmitting">
               Save
             </button>
