@@ -4,7 +4,6 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
-    inlineDynamicImports: true,
   },
   srcDir: 'src/',
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', "@nuxtjs/google-fonts"],
