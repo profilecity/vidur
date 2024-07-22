@@ -11,10 +11,9 @@ defineProps<{
       <!-- Table body -->
       <div
         class="text-sm">
-        <AdminApplicationsRow v-for="application in applications" :key="application.id"
+        <AdminApplicationsRow class="my-2"v-for="application in applications" :key="application.id"
           :applicant="applicants[application.candidateId]" :application="application" />
       </div>
     </section>
-
   </div>
 </template>
