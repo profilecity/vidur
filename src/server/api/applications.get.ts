@@ -57,16 +57,15 @@ export default defineEventHandler(async (event) => {
   const applicants: Record<string, { user: User; handles: UserHandle[] }> = {};
 
   applicantRecords.forEach((a) => {
-    if (!a.handle) return;
-
-    if (applicants[a.user.id]) {
-      applicants[a.user.id].handles.push(a.handle);
-    } else {
-      applicants[a.user.id] = {
-        user: a.user,
-        handles: [a.handle],
-      };
+    applicants[a.user.id] = {
+      user: a.user,
+      handles: [],
     }
+  })
+
+  applicantRecords.forEach((a) => {
+    if (!a.handle) return;
+    applicants[a.user.id].handles.push(a.handle);
   });
 
   // Final validation: all candidates should be present;
