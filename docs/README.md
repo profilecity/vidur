@@ -37,10 +37,12 @@ Vidur is an open-source, next-gen Recruiting OS. Its intuitive and modern interf
 
 ![Collage Image](asset/collage.png)
 
+## Contributing
+There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
 
-# Staying ahead
+## Staying ahead
 Star Vidur on GitHub and be instantly notified of new releases.
 ![Star Image](asset/star-repo.gif)
 
-# Security disclosure
+## Security disclosure
 To protect your privacy, please avoid posting security issues on GitHub. Instead, send your questions to team@vidurjobs.xyz and we will provide you with a more detailed answer.
