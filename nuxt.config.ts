@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     },
   },
   srcDir: 'src/',
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', "@nuxtjs/google-fonts"],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', "@nuxtjs/google-fonts", "nuxt-cropper"],
   googleFonts: {
     families: {
       "Noto+Sans": [400, 500, 600, 700],
