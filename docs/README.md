@@ -28,7 +28,7 @@
 <p align="center">
    <a href="https://x.com/thenirvanalabs"><img src="https://img.shields.io/twitter/follow/thenirvanalabs" alt="Follow Us on X"></a>
    <a href="https://discord.gg/7CZ9FDzs"><img src="https://img.shields.io/badge/Discord%20-%20Join%20the%20Community%20-%20%235865F2" alt="Join the Community"></a>
-   <a href="https://www.producthunt.com/products/vidur"><img src="https://img.shields.io/badge/LinkedIn%20-%20The%20Nirvana%20Labs%20-%20%230E92D5" alt="Follow Us on LinkedIn"></a>
+   <a href="https://www.linkedin.com/company/thenirvanalabs"><img src="https://img.shields.io/badge/LinkedIn%20-%20The%20Nirvana%20Labs%20-%20%230E92D5" alt="Follow Us on LinkedIn"></a>
    <a href="https://www.producthunt.com/products/vidur"><img src="https://img.shields.io/badge/Product%20Hunt%20-%20Vidur%20-%20%23DA552F" alt="Product Hunt"></a>
 </p>
 
@@ -36,6 +36,17 @@
 Vidur is an open-source, next-gen Recruiting OS. Its intuitive and modern interface combines advanced candidate profiles, team workspace, plugins,  one-click apply features, and a lot more enabling forward-thinking companies to efficiently manage their recruitment processes from start to finish.
 
 ![Collage Image](asset/collage.png)
+
+## Development Setup
+```sh
+# Requirements: A PostgreSQL instance up-and-running.
+# Clone the repo and cd into the folder.
+npm i -g yarn         # install yarn package manager, if you don't have already.
+yarn                  # install all the dependencies
+cp .env.example .env  # Create env file and fill the fields. (DO NOT CHANGE PORT)
+yarn migration:apply  # Create database schema.
+yarn dev              # Finally, start the dev server.
+```
 
 ## Contributing
 There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
