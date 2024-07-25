@@ -6,18 +6,15 @@ export default defineNuxtConfig({
     },
   },
   srcDir: 'src/',
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', "@nuxtjs/google-fonts", "nuxt-cropper"],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', '@nuxtjs/google-fonts', 'nuxt-cropper'],
   googleFonts: {
     families: {
-      "Noto+Sans": [400, 500, 600, 700],
-      "Lato": [400, 500, 600, 700],
+      'Noto+Sans': [400, 500, 600, 700],
+      Lato: [400, 500, 600, 700],
     },
     useStylesheet: true,
   },
-  css: [
-    '~/assets/css/style.css',
-    '~/assets/css/additional-styles/utility-patterns.css',
-  ],
+  css: ['~/assets/css/style.css', '~/assets/css/additional-styles/utility-patterns.css'],
   devtools: { enabled: true },
   runtimeConfig: {
     db: {
@@ -28,12 +25,12 @@ export default defineNuxtConfig({
       database: 'findjedi-local',
     },
     services: {
-      profileCity: "https://api.thenirvanalabs.com",
-      atlas: "https://atlas.thenirvanalabs.com",
+      profileCity: 'https://api.thenirvanalabs.com',
+      atlas: 'https://atlas.thenirvanalabs.com',
     },
     oauth: {
       clientId: 'base-client',
-      origin: "http://localhost:3001",
-    }
+      origin: 'http://localhost:3001',
+    },
   },
 });
