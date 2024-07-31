@@ -2,8 +2,8 @@
 import { generalSettingsSchema } from '~/schemas/setting';
 
 withDefaults(defineProps<{
-  forms: 'general' | 'seo' | 'all';
-  saveLabel: string;
+  forms?: 'general' | 'seo' | 'all';
+  saveLabel?: string;
 }>(), {
   forms: 'all',
   saveLabel: 'Save',
