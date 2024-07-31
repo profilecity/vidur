@@ -33,4 +33,5 @@ export default defineNuxtConfig({
       origin: 'http://localhost:3001',
     },
   },
+  compatibilityDate: '2024-07-31',
 });
