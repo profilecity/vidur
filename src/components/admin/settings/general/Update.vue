@@ -75,7 +75,7 @@ const onSubmit = handleSubmit(async values => {
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
             <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">
-              Organization Name <span class="text-xs ml-1 text-rose-500">({{ errors['organization.name'] }})</span>
+              Organization Name <span class="text-xs ml-1 text-rose-500">{{ errors['organization.name'] }}</span>
             </label>
             <input class="input-custom" type="text" placeholder="Organization Name" v-model="organizationName">
           </div>
