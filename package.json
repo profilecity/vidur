@@ -24,7 +24,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
     "nuxt": "^3.12.4",
-    "nuxt-cropper": "^0.0.3",
+    "nuxt-cropper": "^0.0.4",
     "nuxt-icon": "^0.6.10",
     "pg": "^8.12.0",
     "uncrypto": "^0.1.3",
