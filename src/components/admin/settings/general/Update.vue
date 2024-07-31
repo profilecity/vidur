@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import { generalSettingsSchema } from '~/schemas/setting';
 
+withDefaults(defineProps<{
+  forms: 'general' | 'seo' | 'all';
+  saveLabel: string;
+}>(), {
+  forms: 'all',
+  saveLabel: 'Save',
+});
+
+const emits = defineEmits<{
+  saved: [];
+}>();
+
 const generalSettings = useGeneralSettings();
 
 const formSchema = toTypedSchema(generalSettingsSchema);
@@ -48,6 +60,7 @@ const onSubmit = handleSubmit(async values => {
         ...values,
       }
     });
+    emits('saved');
   } catch (error) {
     console.error("error saving settings", error);
   } finally {
@@ -58,8 +71,8 @@ const onSubmit = handleSubmit(async values => {
 <template>
   <div class="">
     <!-- Organization Settings -->
-    <div class="px-4 space-y-6 w-full items-center mt-4">
-      <section class="w-full md:w-1/3">
+    <div class="px-4 space-y-6 w-full items-center mt-4"  v-if="forms == 'general' || forms == 'all'">
+      <section class="w-full md:w-1/3" v-if="forms == 'all'">
         <h2 class="text-base font-bold text-zinc-900 font-noto">Organization Settings</h2>
         <h4 class="text-sm mb-5 text-zinc-400">Configure career site's home page.</h4>
       </section>
@@ -70,7 +83,7 @@ const onSubmit = handleSubmit(async values => {
               width="80" height="80" alt="User upload" />
           </div>
           <button
-            class="px-4 py-2 bg-zinc-900 border border-zinc-900 text-sm rounded-xl hover:bg-zinc-700 text-white">Save</button>
+            class="px-2 py-1 bg-zinc-200 text-xs rounded hover:bg-zinc-300">Edit</button>
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
@@ -99,12 +112,20 @@ const onSubmit = handleSubmit(async values => {
             <input class="input-custom" type="url" placeholder="https://big-space-tech.com/missions/mars" />
           </div>
         </div>
+        <!-- Panel footer -->
+        <footer>
+          <div class="flex w-full justify-start mb-10 mt-4">
+            <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="onSubmit" :disabled="isSubmitting">
+              {{ saveLabel }}
+            </button>
+          </div>
+        </footer>
       </section>
     </div>
-    <div class="border-b my-8"></div>
-    <!-- Organization Settings -->
-    <div class="px-4 space-y-6 w-full items-center mt-4">
-      <section class="w-full md:w-1/3">
+    <div class="border-b my-8" v-if="forms == 'all'"></div>
+    <!-- SEO Settings -->
+    <div class="px-4 space-y-6 w-full items-center mt-4" v-if="forms == 'seo' || forms == 'all'">
+      <section class="w-full md:w-1/3" v-if="forms == 'all'">
         <h2 class="text-base font-bold text-zinc-900 font-noto">SEO Settings</h2>
         <h4 class="text-sm mb-5 text-zinc-400">
           These settings help your website rank better and enable better device previews.
@@ -141,7 +162,7 @@ const onSubmit = handleSubmit(async values => {
         <footer>
           <div class="flex w-full justify-start mb-10 mt-4">
             <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="onSubmit" :disabled="isSubmitting">
-              Save
+              {{ saveLabel }}
             </button>
           </div>
         </footer>
