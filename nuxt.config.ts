@@ -29,7 +29,7 @@ export default defineNuxtConfig({
       atlas: 'https://atlas.thenirvanalabs.com',
     },
     oauth: {
-      clientId: 'base-client',
+      clientId: 'profilecity-connect',
       origin: 'http://localhost:3001',
     },
   },
