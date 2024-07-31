@@ -1,11 +1,11 @@
 import { metaDataTable } from '../db/schema';
-import type { SeedContext, SeedFn } from '../tasks/seed-database';
+import type { SeedFn } from '../tasks/seed-database';
 
 /**
  * Seed 1
  * (Initialise settings)
  */
-export const seed1: SeedFn = async (ctx: SeedContext) => {
+const seed1: SeedFn = async (ctx, _) => {
   const db = ctx.db;
 
   await db.insert(metaDataTable).values([
@@ -19,3 +19,20 @@ export const seed1: SeedFn = async (ctx: SeedContext) => {
     },
   ]);
 };
+
+/**
+ * Seed 2
+ * (Initialise start key)
+ */
+const seed2: SeedFn = async (ctx, payload) => {
+  const db = ctx.db;
+
+  await db.insert(metaDataTable).values([
+    {
+      key: 'firstSetupAccessKey',
+      value: payload.startKey,
+    }
+  ]);
+}
+
+export const seeds = [seed1, seed2];
