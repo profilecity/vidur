@@ -1,3 +1,7 @@
+<script setup lang="ts">
+const { url } = useRemoteAsset("orgImage");
+</script>
+
 <template>
   <div
     class="flex fixed top-0 left-0 flex-col px-4 py-6 border-b md:border-b-0 md:border-r border-zinc-200 max-w-60 h-screen">
@@ -6,7 +10,7 @@
       <div
         class="flex px-2 py-2 justify-between rounded-xl text-zinc-600 border hover:bg-zinc-50 hover:border-zinc-200 space-x-2">
         <div class="flex items-center">
-          <img class="rounded-lg w-6 border border-zinc-200" src="https://careers.thenirvanalabs.com/company-logo.png"
+          <img class="rounded-lg w-6 border border-zinc-200" :src="url"
             alt="avatar" />
           <span class="text-xs ml-2 truncate font-noto">The Nirvana Labs</span>
         </div>
