@@ -16,13 +16,29 @@ export default defineNuxtConfig({
   },
   css: ['~/assets/css/style.css', '~/assets/css/additional-styles/utility-patterns.css'],
   devtools: { enabled: true },
+  /**
+   * Sensible defaults, overriden by env vars.
+   */
   runtimeConfig: {
     db: {
       host: 'localhost',
-      port: 55000,
+      port: 5432,
       user: 'postgres',
       password: 'postgrespw',
-      database: 'findjedi-local',
+      database: 'vidur',
+    },
+    storage: {
+      engine: 'local',
+      local: {
+        baseDir: './tmp',
+      },
+      s3: {
+        accessKeyId: '',
+        secretAccessKey: '',
+        partition: '',
+        endpoint: '',
+        region: '',
+      },
     },
     services: {
       profileCity: 'https://api.thenirvanalabs.com',
