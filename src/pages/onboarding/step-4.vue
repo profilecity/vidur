@@ -3,12 +3,12 @@
     <div class="min-h-[100dvh] h-full flex flex-col after:flex-1">
       <div class="flex-1">
         <!-- Header -->
-        <img src="/vidur-logo.svg" class="h-6 px-4 sm:px-6 lg:px-8 mt-8" />
+        <div class="justify-center flex"><img src="/vidur-logo.svg" class="h-5 px-4 sm:px-6 lg:px-8 mt-8" /></div>
         <!-- Progress bar -->
         <div class="px-4 mt-8">
           <div class="max-w-md mx-auto w-full">
             <div class="relative">
-              <div class="absolute left-0 top-1/2 -mt-px w-full h-0.5 bg-gray-200" aria-hidden="true"></div>
+              <div class="absolute left-0 top-1/2 -mt-px w-full h-0.5 bg-zinc-200" aria-hidden="true"></div>
               <ul class="relative flex justify-between w-full">
                 <li>
                   <div
@@ -42,9 +42,9 @@
             <path class="text-green-700"
               d="M37.22 26.375a1 1 0 1 1 1.56 1.25l-8 10a1 1 0 0 1-1.487.082l-4-4a1 1 0 0 1 1.414-1.414l3.21 3.21 7.302-9.128Z" />
           </svg>
-          <h1 class="text-3xl text-gray-800 font-bold mb-8">Nice to have you, Acme Inc. 🙌</h1>
+          <h1 class="text-2xl font-noto text-zinc-800 font-bold mb-8">Nice to have you, Acme Inc. 🙌</h1>
           <router-link
-            class="btn bg-gray-900 text-gray-100 hover:bg-gray-800"
+            class="btn bg-zinc-900 text-zinc-100 hover:bg-zinc-800"
             to="/admin">Go To Dashboard <Icon name="ep:right" class="w-4 h-4 ml-1"/></router-link>
         </div>
       </div>
