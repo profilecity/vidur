@@ -5,16 +5,18 @@ services:
     image: postgres:15.1-alpine
     container_name: vidur_db
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgrespw
-      POSTGRES_DB: vidur
+      NUXT_DB_USER: postgres
+      NUXT_DB_PASSWORD: postgrespw
+      NUXT_DB_DATABASE: vidur
     ports:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
 
   app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: vidur_app
     environment:
       NUXT_DB_HOST: db
@@ -26,7 +28,13 @@ services:
       - "3001:3001"
     depends_on:
       - db
-    command: sh -c "yarn migration:apply && yarn dev"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: sh -c "cp .env.example .env && yarn migration:apply && yarn dev"
 
 volumes:
   db_data:
+
+
+

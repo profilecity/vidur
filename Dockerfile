@@ -8,8 +8,7 @@ RUN yarn install
 
 COPY . .
 
-RUN cp .env.example .env
-
 EXPOSE 3001
 
 CMD ["sh", "-c", "yarn migration:apply && yarn dev"]
+
