@@ -31,10 +31,8 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - ./tmp:/app/tmp  # Mounting the ./tmp directory for blob storage
     command: sh -c "cp .env.example .env && yarn migration:apply && yarn dev"
 
 volumes:
   db_data:
-
-
-
