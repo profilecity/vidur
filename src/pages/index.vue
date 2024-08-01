@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import type { JobPosting } from "~/server/db/schema";
 useSeoMeta({
   title: 'Careers @ TheNirvanaLabs',
   description: 'Apply for job openings at The Nirvana Labs!',
 })
-const postings = useFetch('/api/public/postings');
+const postings = useFetch<JobPosting[]>('/api/public/postings');
 </script>
 
 <template>
