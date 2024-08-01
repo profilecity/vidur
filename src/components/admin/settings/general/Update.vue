@@ -79,11 +79,10 @@ const onSubmit = handleSubmit(async values => {
       <section class="w-full md:w-2/3">
         <div class="flex items-end">
           <div class="mr-4">
-            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" src="https://careers.thenirvanalabs.com/company-logo.png"
+            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" src="/tmp/orgImage"
               width="80" height="80" alt="User upload" />
           </div>
-          <button
-            class="px-2 py-1 bg-zinc-200 text-xs rounded hover:bg-zinc-300">Edit</button>
+          <AdminSettingsGeneralUpdateOrgLogo/>
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">
