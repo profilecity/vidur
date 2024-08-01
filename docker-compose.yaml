@@ -1,4 +1,5 @@
-## Need not run any db also since we are running it here itself.
+version: '3.8'
+
 services:
   db:
     image: postgres:15.1-alpine
