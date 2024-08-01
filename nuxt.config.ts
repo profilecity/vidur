@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     storage: {
       engine: 'local',
       local: {
-        baseDir: './tmp',
+        baseDir: './src/public/tmp',
       },
       s3: {
         accessKeyId: '',
