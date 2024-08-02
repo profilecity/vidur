@@ -25,3 +25,4 @@ logs
 
 # storage dev mode dir
 tmp
+./src/public/tmp

@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     storage: {
       engine: 'local',
       local: {
-        baseDir: './tmp',
+        baseDir: './src/public/tmp',
       },
       s3: {
         accessKeyId: '',
@@ -48,6 +48,9 @@ export default defineNuxtConfig({
       clientId: 'profilecity-connect',
       origin: 'http://localhost:3001',
     },
+    public: {
+      remoteAssetBase: '/tmp'
+    }
   },
   compatibilityDate: '2024-07-31',
 });
