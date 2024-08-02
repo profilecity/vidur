@@ -48,6 +48,11 @@ yarn migration:apply  # Create database schema.
 yarn dev              # Finally, start the dev server.
 ```
 
+Or simply by using Docker Compose.
+```sh
+docker compose up
+```
+
 ## Contributing
 There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
 
