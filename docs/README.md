@@ -48,7 +48,7 @@ yarn migration:apply  # Create database schema.
 yarn dev              # Finally, start the dev server.
 ```
 
-Or Simply by Using Docker and Navigate to vidur then you can do as follows:
+Or simply by using Docker Compose.
 ```sh
 docker compose up --build
 ```
