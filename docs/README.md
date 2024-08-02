@@ -50,7 +50,7 @@ yarn dev              # Finally, start the dev server.
 
 Or simply by using Docker Compose.
 ```sh
-docker compose up --build
+docker compose up
 ```
 
 ## Contributing
