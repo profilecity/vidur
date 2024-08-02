@@ -65,7 +65,7 @@ export default defineEventHandler(async (event) => {
     const formData = new FormData();
     formData.append('grant_type', 'authorization_code');
     formData.append('client_id', runtimeConfig.oauth.clientId);
-    formData.append('redirect_uri', runtimeConfig.oauth.origin + '/login');
+    formData.append('redirect_uri', runtimeConfig.public.origin + '/login');
     formData.append('code_verifier', codeVerifier);
     formData.append('code', code);
 
@@ -98,7 +98,7 @@ export default defineEventHandler(async (event) => {
 
     const oauthParams = new URLSearchParams({
       client_id: runtimeConfig.oauth.clientId,
-      redirect_uri: runtimeConfig.oauth.origin + "/login",
+      redirect_uri: runtimeConfig.public.origin + "/login",
       response_type: 'code',
       scope: "openid",
       state: oauthState,

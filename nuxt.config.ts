@@ -46,10 +46,10 @@ export default defineNuxtConfig({
     },
     oauth: {
       clientId: 'profilecity-connect',
-      origin: 'http://localhost:3001',
     },
     public: {
-      remoteAssetBase: '/tmp'
+      remoteAssetBase: '/tmp',
+      origin: 'http://localhost:3001',
     }
   },
   compatibilityDate: '2024-07-31',
