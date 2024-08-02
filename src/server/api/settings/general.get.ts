@@ -1,27 +1,42 @@
-import { inArray } from "drizzle-orm";
-import { GeneralSettings } from "~/schemas/setting";
-import { metaDataTable } from "~/server/db/schema";
-import authenticateAdminRequest from "~/server/utils/admin"
+import { z } from 'zod';
+import { GeneralSettings } from '~/schemas/setting';
+import authenticateAdminRequest from '~/server/utils/admin';
+import { settings_memoryStorage } from '~/server/utils/storage';
+
+const settingsLookupSchema = z.object({
+  config: z.enum(['seoConfig', 'organizationConfig']).optional(),
+});
 
 export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
-  const db = await useDatabase();
-
-  const settingEntries = await db.select().from(metaDataTable).where(inArray(metaDataTable.key, ['seoConfig', 'organizationConfig']));
+  const query = await getValidatedQuery(event, settingsLookupSchema.parse);
+  const queries = query.config ? [query.config] : ['seoConfig', 'organizationConfig'];
 
   const settings: GeneralSettings = {
     organization: {},
     seo: {},
   } as GeneralSettings; // Ignore validation errors here.
 
-  settingEntries.forEach(s => {
-    if (s.key == 'seoConfig' && s.value) {
-      settings.seo = JSON.parse(s.value);
-    } else if (s.key == 'organizationConfig' && s.value) {
-      settings.organization = JSON.parse(s.value);
+  for (let index = 0; index < queries.length; index++) {
+    const query = queries[index];
+    let value: any;
+    switch (query) {
+      case 'seoConfig':
+        value = await settings_memoryStorage.getItem(query);
+        settings.seo = value as GeneralSettings['seo'];
+        break;
+      case 'organizationConfig':
+        value = await settings_memoryStorage.getItem(query);
+        settings.organization = value as GeneralSettings['organization'];
+        break;
+      default:
+        throw createError({
+          statusCode: 404,
+          statusMessage: `no config with key ${query} found`,
+        });
     }
-  });
+  }
 
   return settings;
-})
+});

@@ -10,4 +10,6 @@ export default defineNitroPlugin(async () => {
   });
 
   storage.mount(MEMORY_STORAGE_KEY, defaultCache);
+
+  runTask('seed-cache');
 })

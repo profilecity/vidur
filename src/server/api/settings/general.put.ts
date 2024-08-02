@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm';
 import { generalSettingsSchema } from '~/schemas/setting';
 import { metaDataTable } from '~/server/db/schema';
 import authenticateAdminRequest from '~/server/utils/admin';
+import { settings_memoryStorage } from '~/server/utils/storage';
 
 export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
@@ -21,6 +22,7 @@ export default defineEventHandler(async (event) => {
         .update(metaDataTable)
         .set({ value: seoSettingsString, updatedAt: new Date() })
         .where(eq(metaDataTable.key, 'seoConfig'));
+      settings_memoryStorage.setItem('seoConfig', settingsUpdateRequest.seo);
     }
     if (settingsUpdateRequest.organization) {
       const organizationSettingsString = JSON.stringify(settingsUpdateRequest.organization);
@@ -28,6 +30,7 @@ export default defineEventHandler(async (event) => {
         .update(metaDataTable)
         .set({ value: organizationSettingsString, updatedAt: new Date() })
         .where(eq(metaDataTable.key, 'organizationConfig'));
+      settings_memoryStorage.setItem('organizationConfig', settingsUpdateRequest.organization);
     }
   });
 });
