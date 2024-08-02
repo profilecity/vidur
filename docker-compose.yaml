@@ -24,6 +24,7 @@ services:
     env_file:
       - .env
     environment:
+      PORT: 3001
       NUXT_DB_HOST: db
       NUXT_DB_PORT: ${NUXT_DB_PORT:-5432}
       NUXT_DB_USER: ${NUXT_DB_USER:-postgres}
@@ -35,6 +36,7 @@ services:
       - db
     volumes:
       - .:/app
+      - /app/node_modules
       - ./src/public/tmp:/app/src/public/tmp  # Mounting the ./src/public/tmp directory for blob storage
     command: sh -c "yarn migration:apply && yarn dev"
 
