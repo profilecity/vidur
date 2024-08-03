@@ -1,10 +1,46 @@
 <script setup lang="ts">
-import type { JobPosting } from "~/server/db/schema";
-useSeoMeta({
-  title: 'Careers @ TheNirvanaLabs',
-  description: 'Apply for job openings at The Nirvana Labs!',
+const { data: postings } = await usePublicPostings();
+const { data: generalSettings } = await useGeneralSettings();
+
+let title: string = "Careers"; // TODO: need better defaults (this will hardly be the case);
+let description: string = "Career Site"; // TODO: need better defaults (this will hardly be the case);
+if (generalSettings.value) {
+  const seoTitle = generalSettings.value.seo.title;
+  const generalName = generalSettings.value.organization.name;
+  
+  const seoDescription = generalSettings.value.seo.description;
+  const generalDescription = generalSettings.value.organization.description;
+
+  if (seoTitle) {
+    title = seoTitle;
+  } else if (generalName) {
+    title = `Careers @ ${generalName}`
+  }
+  if (seoDescription) {
+    description = seoDescription;
+  } else if (generalDescription) {
+    description = generalDescription;
+  }
+}
+
+useHead({
+  title: title,
 })
-const postings = useFetch<JobPosting[]>('/api/public/postings');
+
+useSeoMeta({
+  title: title,
+  description: description,
+
+  ogType: 'website',
+  ogUrl: useRuntimeConfig().public.origin,
+  ogTitle: title,
+  ogDescription: description,
+
+  twitterCard: 'summary',
+  twitterTitle: title,
+  twitterDescription: description,
+  twitterCreator: generalSettings.value?.seo.twitter,
+})
 </script>
 
 <template>
@@ -27,21 +63,21 @@ const postings = useFetch<JobPosting[]>('/api/public/postings');
 
           <!-- Company name and info -->
           <div class="mb-4">
-            <h2 class="text-2xl text-zinc-800 font-bold mb-2">Nirvana Labs</h2>
-            <p>Join us. Make the People's Search. Better.</p>
+            <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings?.organization.name }}</h2>
+            <p>{{ generalSettings?.organization.description }}</p>
           </div>
           <!-- Meta --> 
           <div class="inline-flex flex-wrap justify-center sm:justify-start space-x-4">
-            <div class="flex items-center">
+            <div class="flex items-center" v-if="generalSettings?.organization.location">
               <Icon class="w-4 h-4 fill-current shrink-0 text-zinc-400" name="grommet-icons:location" />
               <span class="text-sm font-medium whitespace-nowrap text-zinc-400 ml-1">
-                San Francisco, CA
+                {{ generalSettings?.organization.location }}
               </span>
             </div>
-            <div class="flex items-center">
+            <div class="flex items-center" v-if="generalSettings?.organization.links">
               <Icon name="tdesign:link" class="w-4 h-4 fill-current shrink-0 text-zinc-400" />
               <a class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1"
-                href="https://thenirvanalabs.com">thenirvanalabs.com</a>
+                :href="generalSettings.organization.links[0].href">{{ generalSettings.organization.links[0].title }}</a>
             </div>
           </div>
         </div>
@@ -52,8 +88,8 @@ const postings = useFetch<JobPosting[]>('/api/public/postings');
         <h3 class="text-xl leading-snug text-zinc-800 font-bold mb-6">
           Open Positions at Nirvana Labs
         </h3>
-        <div class="space-y-2" v-if="postings.data.value">
-          <PostingCard v-for="posting in postings.data.value" :key="posting.id" :posting="posting" />
+        <div class="space-y-2" v-if="postings">
+          <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />
         </div>
       </div>
     </div>

@@ -31,7 +31,6 @@ const [organizationLinks] = defineField("organization.links");
 // Seo Fields
 const [seoTitle] = defineField("seo.title");
 const [seoDescription] = defineField("seo.description");
-const [seoKeywords] = defineField("seo.keywords");
 const [seoTwitter] = defineField("seo.twitter");
 
 watchEffect(() => {
@@ -46,7 +45,6 @@ watchEffect(() => {
 
     seoTitle.value = gs.seo.title;
     seoDescription.value = gs.seo.description;
-    seoKeywords.value = gs.seo.keywords;
     seoTwitter.value = gs.seo.twitter;
   }
 });
@@ -151,12 +149,6 @@ const onSubmit = handleSubmit(async values => {
               @)</label>
             <input class="input-custom" type="text" placeholder="the_nirvana_labs" v-model="seoTwitter">
             <div class="text-xs mt-1 text-rose-500">{{ errors['seo.twitter'] }}</div>
-          </div>
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto">Keywords</label>
-            <input class="input-custom" type="text" placeholder="careers, space, technology, jobs..."
-              v-model="seoKeywords" />
-            <div class="text-xs mt-1 text-rose-500">{{ errors['seo.keywords'] }}</div>
           </div>
         </div>
         <!-- Panel footer -->
