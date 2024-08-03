@@ -12,7 +12,7 @@ services:
       POSTGRES_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
       POSTGRES_DB: ${NUXT_DB_DATABASE:-vidur}
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - vidur_data:/var/lib/postgresql/data
 
@@ -31,13 +31,13 @@ services:
       NUXT_DB_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
       NUXT_DB_DATABASE: ${NUXT_DB_DATABASE:-vidur}
     ports:
-      - "3001:3001"
+      - '3001:3001'
     depends_on:
       - db
     volumes:
       - .:/app
       - /app/node_modules
-      - ./src/public/tmp:/app/src/public/tmp  # Mounting the ./src/public/tmp directory for blob storage
+      - ./src/public/tmp:/app/src/public/tmp # Mounting the ./src/public/tmp directory for blob storage
     command: sh -c "yarn migration:apply && yarn dev"
 
 volumes:
