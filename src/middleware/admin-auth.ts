@@ -1,5 +1,5 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  const auth = await useAuth();
+  const auth = useAuth();
   const { redirectToLogin } = useSafeRedirectToLogin();
   
   if (!auth.isSignedIn.value) {

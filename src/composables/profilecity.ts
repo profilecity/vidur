@@ -4,7 +4,7 @@
  */
 export function useLazyOnboarder() {
   const checkIfOnboardPending = async () => {
-    const auth = await useAuth();
+    const auth = useAuth();
     const { redirectToLogin } = useSafeRedirectToLogin();
 
     if (!auth.isSignedIn) {
