@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15.1-alpine
+    container_name: database
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - vidur_data:/var/lib/postgresql/data
+    networks:
+      - internal_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: vidur_app
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    networks:
+      - internal_network
+      - external_network
+
+volumes:
+  vidur_data:
+
+networks:
+  internal_network:
+    driver: bridge
+  external_network:
+    driver: bridge
