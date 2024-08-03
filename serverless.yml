@@ -1,0 +1,27 @@
+service: vidur-service
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    NUXT_DB_USER: ${env:NUXT_DB_USER}
+    NUXT_DB_PASSWORD: ${env:NUXT_DB_PASSWORD}
+    NUXT_DB_DATABASE: ${env:NUXT_DB_DATABASE}
+    NUXT_DB_HOST: ${env:NUXT_DB_HOST}
+    NUXT_DB_PORT: ${env:NUXT_DB_PORT}
+
+functions:
+  app:
+    handler: handler.main
+    events:
+      - http:
+          path: /
+          method: any
+      - http:
+          path: /{proxy+}
+          method: any
+
+package:
+  exclude:
+    - node_modules/**
+    - .env

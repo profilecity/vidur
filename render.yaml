@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: vidur
+    env: node
+    buildCommand: 'yarn install && yarn build'
+    startCommand: 'yarn start'
+    envVars:
+      - key: NUXT_DB_USER
+        value: ${NUXT_DB_USER}
+      - key: NUXT_DB_PASSWORD
+        value: ${NUXT_DB_PASSWORD}
+      - key: NUXT_DB_DATABASE
+        value: ${NUXT_DB_DATABASE}
+      - key: NUXT_DB_HOST
+        value: ${NUXT_DB_HOST}
+      - key: NUXT_DB_PORT
+        value: ${NUXT_DB_PORT}
