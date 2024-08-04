@@ -53,9 +53,10 @@ watchEffect(() => {
     organizationDescription.value = gs.organization?.description || '';
     organizationLocation.value = gs.organization?.location || '';
 
-    if (Array.isArray(gs.organization?.links)) {
-      featuredLinks.value = gs.organization.links.map(link => ({ name: link.name || link.url, url: link.url }));
-    }
+    featuredLinks.value = (gs.organization.links || []).map(link => ({
+      name: link.name || link.url,
+      url: link.url
+    }));
 
     seoTitle.value = gs.seo?.title || '';
     seoDescription.value = gs.seo?.description || '';
