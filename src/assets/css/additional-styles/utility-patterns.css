@@ -49,6 +49,10 @@
   @apply px-2 py-0.5;
 }
 
+.btn-primary {
+  @apply bg-zinc-900 hover:bg-zinc-800 text-white;
+}
+
 /* Forms */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
