@@ -8,9 +8,6 @@ RUN yarn install
 
 COPY . .
 
-# Run any build commands (if required)
-# RUN yarn build
-
 # Stage 2: Production stage
 FROM node:18.20-alpine
 
