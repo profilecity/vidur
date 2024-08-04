@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { ref, watchEffect } from 'vue';
 import { generalSettingsSchema } from '~/schemas/setting';
+import { z } from 'zod';
 
 withDefaults(defineProps<{
   forms?: 'general' | 'seo' | 'all';
@@ -14,7 +16,6 @@ const emits = defineEmits<{
 }>();
 
 const { url, tick } = useRemoteAsset('orgImage');
-
 const generalSettings = useGeneralSettings();
 
 const formSchema = toTypedSchema(generalSettingsSchema);
@@ -33,15 +34,25 @@ const [seoTitle] = defineField("seo.title");
 const [seoDescription] = defineField("seo.description");
 const [seoTwitter] = defineField("seo.twitter");
 
+// Reactive array to store featured links
+const featuredLinks = ref<{ name: string; url: string }[]>([{ name: '', url: '' }]);
+
+const addFeaturedLink = () => {
+  featuredLinks.value = [...featuredLinks.value, { name: '', url: '' }];
+};
+
+// Initialize fields with data from settings
 watchEffect(() => {
   if (generalSettings.data.value) {
-    // Setting defaults
     const gs = generalSettings.data.value;
 
     organizationName.value = gs.organization.name;
     organizationDescription.value = gs.organization.description;
     organizationLocation.value = gs.organization.location;
-    organizationLinks.value = gs.organization.links;
+    featuredLinks.value = (gs.organization.links || []).map(link => ({
+      name: link.name || link.url,
+      url: link.url
+    }));
 
     seoTitle.value = gs.seo.title;
     seoDescription.value = gs.seo.description;
@@ -54,24 +65,48 @@ const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async values => {
   try {
     isSubmitting.value = true;
+    
+    // Validate and prepare featured links
+    const validLinks = featuredLinks.value
+      .filter(link => link.url && isValidUrl(link.url))
+      .map(link => ({ name: link.name || link.url, url: link.url }));
+
+    // Merge valid links with other values
+    const body = {
+      ...values,
+      organization: {
+        ...values.organization,
+        links: validLinks,
+      }
+    };
+
     await $fetch('/api/settings/general', {
       method: 'PUT',
-      body: {
-        ...values,
-      }
+      body,
     });
     emits('saved');
   } catch (error) {
-    console.error("error saving settings", error);
+    console.error("Error saving settings", error);
   } finally {
     isSubmitting.value = false;
   }
 });
+
+// Utility function to validate URL
+const isValidUrl = (url: string): boolean => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+};
 </script>
+
 <template>
   <div class="">
     <!-- Organization Settings -->
-    <div class="px-4 space-y-6 w-full items-center mt-4"  v-if="forms == 'general' || forms == 'all'">
+    <div class="px-4 space-y-6 w-full items-center mt-4" v-if="forms == 'general' || forms == 'all'">
       <section class="w-full md:w-1/3" v-if="forms == 'all'">
         <h2 class="text-base font-bold text-zinc-900 font-noto">Organization Settings</h2>
         <h4 class="text-sm mb-5 text-zinc-400">Configure career site's home page.</h4>
@@ -79,8 +114,7 @@ const onSubmit = handleSubmit(async values => {
       <section class="w-full md:w-2/3">
         <div class="flex items-end">
           <div class="mr-4">
-            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="url"
-              width="80" height="80" alt="User upload" />
+            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="url" width="80" height="80" alt="User upload" />
           </div>
           <AdminSettingsGeneralUpdateOrgLogo @update="tick"/>
         </div>
@@ -106,10 +140,14 @@ const onSubmit = handleSubmit(async values => {
         </div>
         <div class="w-full mt-5">
           <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Featured Links</label>
-          <div class="flex space-x-2">
-            <input class="input-custom" type="text" placeholder="Mars Mission Docs" />
-            <input class="input-custom" type="url" placeholder="https://big-space-tech.com/missions/mars" />
+          <div v-for="(link, index) in featuredLinks" :key="index" class="flex space-x-2 mb-2">
+            <input v-model="link.name" class="input-custom" type="text" placeholder="Mars Mission Docs" />
+            <input v-model="link.url" class="input-custom" type="url" placeholder="https://big-space-tech.com/missions/mars" />
           </div>
+          <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex items-center space-x-2 mt-2" @click="addFeaturedLink">
+            <Icon name="mdi:plus" class="w-5 h-5" />
+            <span>Add Link</span>
+          </button>
         </div>
         <!-- Panel footer -->
         <footer>
@@ -153,7 +191,7 @@ const onSubmit = handleSubmit(async values => {
         </div>
         <!-- Panel footer -->
         <footer>
-          <div class="flex w-full justify-start mb-10 mt-4">
+                  <div class="flex w-full justify-start mb-10 mt-4">
             <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="onSubmit" :disabled="isSubmitting">
               {{ saveLabel }}
             </button>
@@ -169,3 +207,5 @@ const onSubmit = handleSubmit(async values => {
   @apply w-full block py-2 px-4 border border-zinc-200 rounded-xl text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-inset focus:ring-zinc-300 sm:text-sm sm:leading-6 outline-0;
 }
 </style>
+
+         
