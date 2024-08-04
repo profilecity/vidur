@@ -31,5 +31,5 @@ Loom Video: [loom](https://www.loom.com/)
 - [ ] I have made corresponding changes to the documentation.
 - [ ] I have tested my feature thoroughly in different environments.
 - [ ] I have assessed the performance impact of the feature.
-- [ ] My changes do sdsdnot introduce new warnings or errors or changes to files not part of my featurew
+- [ ] My changes do sdsdnot introduce new warnings or errors or changes to files not part of my feature
 - [ ] I have checked for compatibility with other parts of the codebase.
