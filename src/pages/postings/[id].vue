@@ -1,83 +1,45 @@
 <script setup lang="ts">
-import type { JobPosting } from '~/server/db/schema';
-
 const route = useRoute();
-const auth = await useAuth();
+const id = route.params.id as string;
 
-const { checkIfOnboardPending } = useLazyOnboarder();
+const {
+  data: applicationStatus,
+  refresh: refreshApplicationStatus
+} = useApplicationStatus(id);
+const {
+  data: posting
+} = usePublicPosting(id);
+const {
+  data: generalSettings
+} = await useGeneralSettings('organizationConfig');
 
-const id = route.params.id;
+const orgName = computed(() => generalSettings.value?.organization.name);
 
-if (!id) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Posting ID required.'
-  })
-}
-
-const postingRequest = useFetch('/api/public/posting', { query: { id } });
-
-const posting: Ref<JobPosting | null> = ref(null);
-
-watchEffect(() => {
-  if (postingRequest.pending.value) {
-    return;
-  }
-  if (postingRequest.data.value) {
-    // @ts-expect-error
-    posting.value = postingRequest.data.value;
-  }
-  if (postingRequest.error.value) {
-    if (postingRequest.error.value.statusCode == 404) {
-      throw createError({
-        statusCode: 404,
-        statusMessage: 'Job posting not found. Make sure URL is correct.'
-      })
-    }
-    console.error(postingRequest.error.value);
-    throw createError({
-      statusCode: 500,
-      statusMessage: 'Error fetching job posting. Please check back later.'
-    })
-  }
+useHead({
+  title: () => `${posting.value?.title} | ${orgName.value}`,
 })
 
-useSeoMeta({
-  title: () => posting.value?.title + " | The Nirvana Labs",
-  description: () => 'Apply for ' + posting.value?.title + ' at The Nirvana Labs!',
-})
-
-const tags = ref<string[]>([]);
-if (posting.value && posting.value.tagsCSV) {
-  tags.value = posting.value.tagsCSV.split(",").map(t => t.trim());
-}
-
-// @ts-ignore
-let applicationStatus = null;
-if (auth.isSignedIn) {
-  applicationStatus = useFetch('/api/application-status', { query: { postingId: id } });
-}
+const tags = computed<string[]>(() => {
+  if (posting.value && posting.value.tagsCSV) {
+    return posting.value.tagsCSV.split(",").map(t => t.trim());
+  }
+  return [];
+});
 
 const isApplying = ref(false);
 const apply = async () => {
+  if (!route.query.fromOnboard) {
+    await navigateTo('https://connect.profilecity.xyz?callback=' + window.location.href, { external: true });
+    return;
+  }
   try {
     isApplying.value = true;
-
-    const isPending = await checkIfOnboardPending();
-    if (isPending) return;
-
     await $fetch('/api/application', { method: 'POST', body: { postingId: id } });
-    applicationStatus?.refresh();
+    refreshApplicationStatus();
   } catch (e) {
     console.error("Error occured while applying", e);
   } finally {
     isApplying.value = false;
-  }
-}
-
-if (route.query.fromOnboard) {
-  if (!(applicationStatus?.data.value?.userAlreadyApplied)) {
-    apply();
   }
 }
 </script>
@@ -110,11 +72,11 @@ if (route.query.fromOnboard) {
               <div class="inline-flex mb-3">
                 <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Nirvana Labs" />
               </div>
-              <div class="text-lg font-bold text-zinc-800 mb-1">Nirvana Labs</div>
+              <div class="text-lg font-bold text-zinc-800 mb-1">{{ orgName }}</div>
             </div>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-2">
               <div class="flex w-full items-center justify-center text-green-500 space-x-2"
-                v-if="applicationStatus?.data.value?.userAlreadyApplied">
+                v-if="applicationStatus?.userAlreadyApplied">
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
@@ -151,11 +113,11 @@ if (route.query.fromOnboard) {
               <div class="inline-flex mb-3">
                 <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Company 01" />
               </div>
-              <div class="text-lg font-bold text-zinc-800 mb-1">Nirvana Labs</div>
+              <div class="text-lg font-bold text-zinc-800 mb-1">{{ orgName }}</div>
             </div>
             <div class="space-y-2">
               <div class="flex w-full items-center justify-center text-green-500 space-x-2"
-                v-if="applicationStatus?.data.value?.userAlreadyApplied">
+                v-if="applicationStatus?.userAlreadyApplied">
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>

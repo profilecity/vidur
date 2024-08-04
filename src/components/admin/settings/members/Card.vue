@@ -6,7 +6,7 @@ const props = defineProps<{
 }>();
 
 const { removeMember } = await useMembers();
-const session = await useAuth();
+const session = useAuth();
 
 const onRemove = () => {
   removeMember({ id: props.member.id });

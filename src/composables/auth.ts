@@ -1,20 +1,7 @@
 import type { Session } from '~/types/profile-types';
 
-export async function useAuth() {
+export function useAuth() {
   const user: Ref<Session | null> = useState('oauth_user', () => null);
-  const isFetchingUser: Ref<Boolean> = useState('i_f_u', () => false);
-
-  if (!user.value && !isFetchingUser.value) {
-    try {
-      user.value = await useRequestFetch()('/api/userinfo');
-    } catch (e) {
-      console.error('Error fetching user.', e);
-      user.value = null;
-    } finally {
-      isFetchingUser.value = false;
-    }
-  }
-
   const isSignedIn = computed(() => !!user.value);
 
   return {

@@ -9,7 +9,7 @@ useHead({
 })
 
 const stats = await useFetch('/api/analytics/stats');
-const { user } = await useAuth();
+const { user } = useAuth();
 const firstName = user.value?.profile.firstName;
 </script>
 

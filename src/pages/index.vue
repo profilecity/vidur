@@ -41,6 +41,8 @@ useSeoMeta({
   twitterDescription: description,
   twitterCreator: generalSettings.value?.seo.twitter,
 })
+
+const { url: orgImageURL } = useRemoteAsset('orgImage');
 </script>
 
 <template>
@@ -57,7 +59,7 @@ useSeoMeta({
           <!-- Avatar -->
           <div class="-mt-12 mb-6">
             <div class="inline-flex -ml-1 -mt-1 sm:mb-0 p-2 bg-zinc-600/30 rounded-2xl backdrop-blur-sm">
-              <img class="w-24 rounded-2xl border border-zinc-600" src="/company-logo.png" alt="Avatar" />
+              <img class="w-24 rounded-2xl border border-zinc-600" :src="orgImageURL" alt="Avatar" />
             </div>
           </div>
 
