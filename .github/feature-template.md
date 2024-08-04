@@ -29,7 +29,7 @@ Loom Video: [loom](https://www.loom.com/)
 - [ ] I have conducted a self-review of my code and code only contains changes responsible for this feature and does not include any changes to other files (p.s Your PR will be rejected if it includes changes to any files not part of the feature.)
 - [ ] I have commented my code, particularly in complex areas.
 - [ ] I have made corresponding changes to the documentation.
-- [ ] I have tested my feature thoroughly in different environments.
+- [ ] I havesd tested my feature thoroughly in different environments.
 - [ ] I have assessed the performance impact of the feature.
 - [ ] My changes do not introduce new warnings or errors or changes to files not part of my feature
 - [ ] I have checked for compatibility with other parts of the codebase.
