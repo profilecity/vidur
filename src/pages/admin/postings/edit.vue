@@ -110,7 +110,7 @@ const onDelete = async () => {
       <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
         <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
-        <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete">
+        <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will lose access to the applicant list." @confirm="onDelete">
           <template #input="{ open }">
             <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
               <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
@@ -127,10 +127,14 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" @click="onSubmit">
-          <Icon name="lets-icons:save" class="w-4 h-4" />
-          <span>Save Changes</span>
-        </button>
+        <AbstractConfirmationBox title="Save Changes?" content="Are you sure you want to save these changes?" @confirm="onSubmit">
+          <template #input="{ open }">
+            <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" :disabled="isSubmitting" @click="open">
+              <Icon name="lets-icons:save" class="w-4 h-4" />
+              <span>Save Changes</span>
+            </button>
+          </template>
+        </AbstractConfirmationBox>
       </div>
     </div>
     <!-- Input Section -->
@@ -145,7 +149,7 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="tags-csv">Tags (CSV)</label>
-            <input id="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Fransisco"
+            <input id="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Francisco"
               v-model="tagsCSV" :disabled="isSubmitting" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.tagsCSV }}</div>
           </div>
