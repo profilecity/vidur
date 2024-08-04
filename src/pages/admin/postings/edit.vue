@@ -56,20 +56,24 @@ if (isUpdating && posting) {
 const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async values => {
-  try {
-    isSubmitting.value = true;
-    await $fetch('/api/posting', {
-      method: isUpdating ? 'PUT' : 'POST',
-      body: {
-        ...values,
-      }
-    })
-    await navigateTo("/admin/postings");
-  } catch (e) {
-    console.error(e);
-  } finally {
-    isSubmitting.value = false;
+  if (!isUpdating) {
+    return;
   }
+   
+    try {
+      isSubmitting.value = true;
+      await $fetch('/api/posting', {
+        method: isUpdating ? 'PUT' : 'POST',
+        body: {
+          ...values,
+        }
+      })
+      await navigateTo("/admin/postings");
+    } catch (e) {
+      console.error(e);
+    } finally {
+      isSubmitting.value = false;
+    }
 })
 
 const onDelete = async () => {
@@ -127,10 +131,15 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" @click="onSubmit">
-          <Icon name="lets-icons:save" class="w-4 h-4" />
-          <span>Save Changes</span>
-        </button>
+        <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
+        <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save this post?" @confirm="onSubmit">
+          <template #input="{ open }">
+            <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" :disabled="isSubmitting" @click="open">
+              <Icon name="material-symbols:save-outline" class="text-red-500 w-5 h-5" />
+              <span>Save Changes</span>
+            </button>
+          </template>
+        </AbstractConfirmationBox>
       </div>
     </div>
     <!-- Input Section -->
