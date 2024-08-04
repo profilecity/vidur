@@ -26,7 +26,7 @@ Loom Video: [loom](https://www.loom.com/)
 
 ## Checklist
 - [ ] I have taken a (git pull origin main --rebase) from main branch and tested it.
-- [ ] I have conducted a self-review of my code and code only contains changes responsible for this feature and does not include any changes to other files (p.s Your PR will be rejected if it includes changes to any files not part of the feature.)
+- [ ] I have conducted a self-review of my code, and the code contains only changes relevant to this feature, without including modifications to other files. (P.S. Your PR will be rejected if it includes changes to any files not related to the feature.)
 - [ ] I have commented my code, particularly in complex areas.
 - [ ] My changes does not introduce new warnings or errors 
 - [ ] I have ensured that changes to files do not contain changes not part of my feature
