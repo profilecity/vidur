@@ -8,13 +8,16 @@ useHead({
   title: 'Settings | Admin Panel'
 })
 
-const activeTab = useActiveTab(["general", "members"]);
+const activeTab = useActiveTab(["career-site", "seo", "members"]);
 </script>
 
 <template>
   <AdminSettingsHeader/>
-  <section v-if="activeTab == 'general'">
-    <LazyAdminSettingsGeneralUpdate class="mt-3"/>
+  <section v-if="activeTab == 'career-site'">
+    <LazyAdminSettingsGeneralUpdate :forms="'general'" class="mt-3"/>
+  </section>
+  <section v-else-if="activeTab == 'seo'">
+    <LazyAdminSettingsGeneralUpdate :forms="'seo'" class="mt-3"/>
   </section>
   <section v-else-if="activeTab == 'members'">
     <LazyAdminSettingsMembersSection class="mt-3"/>

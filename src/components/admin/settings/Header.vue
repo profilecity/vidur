@@ -1,12 +1,19 @@
 <script setup lang="ts">
-const activeTab = useActiveTab(["general", "members"]);
+const activeTab = useActiveTab(["career-site", "seo", "members"]);
 
 const tabs = [
   {
-    id: "general",
-    display: "General",
+    
+    id: "career-site",
+    display: "Career Site",
+    icon: "gg:website",
+    url: '/admin/settings?tab=career-site',
+  },
+  {
+    id: "seo",
+    display: "SEO",
     icon: "codicon:settings",
-    url: '/admin/settings?tab=general',
+    url: '/admin/settings?tab=seo',
   },
   {
     id: "members",
