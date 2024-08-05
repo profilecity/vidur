@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/posting';
 import type { JobPosting } from '~/server/db/schema';
+import { ref, computed } from 'vue';
+import MarkdownEditor from '~/components/MarkdownEditor.vue'
 
 definePageMeta({
   layout: 'admin',
@@ -39,7 +41,7 @@ const { handleSubmit, errors, defineField, errorBag } = useForm({
 const [id] = defineField("id");
 
 const [title] = defineField("title");
-const [contents] = defineField("contents");
+const [contents] = defineField("contents", () => '');
 const [tagsCSV] = defineField("tagsCSV");
 const [isPublished] = defineField("isPublished");
 
@@ -62,6 +64,7 @@ const onSubmit = handleSubmit(async values => {
       method: isUpdating ? 'PUT' : 'POST',
       body: {
         ...values,
+        contents: contents.value, // Send markdown content
       }
     })
     await navigateTo("/admin/postings");
@@ -127,7 +130,7 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <button class="btn btn-primary flex space-x-2" @click="onSubmit">
+        <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" @click="onSubmit">
           <Icon name="lets-icons:save" class="w-4 h-4" />
           <span>Save Changes</span>
         </button>
@@ -151,8 +154,12 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <textarea id="jobdescription" class="form-textarea w-full focus:border-zinc-300" rows="6" v-model="contents"
-              placeholder="We want someone who…" :disabled="isSubmitting"></textarea>
+            <MarkdownEditor
+              v-model="contents"
+              :disabled="isSubmitting"
+              placeholder="We want someone who…"
+              preview-class="markdown-preview prose prose-sm max-w-none"
+            />
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>
@@ -160,3 +167,15 @@ const onDelete = async () => {
     </form>
   </div>
 </template>
+
+<style>
+.markdown-preview h1 { font-size: 2em; font-weight: bold; margin-top: 0.67em; margin-bottom: 0.67em; }
+.markdown-preview h2 { font-size: 1.5em; font-weight: bold; margin-top: 0.83em; margin-bottom: 0.83em; }
+.markdown-preview h3 { font-size: 1.17em; font-weight: bold; margin-top: 1em; margin-bottom: 1em; }
+.markdown-preview h4 { font-size: 1em; font-weight: bold; margin-top: 1.33em; margin-bottom: 1.33em; }
+.markdown-preview h5 { font-size: 0.83em; font-weight: bold; margin-top: 1.67em; margin-bottom: 1.67em; }
+.markdown-preview h6 { font-size: 0.67em; font-weight: bold; margin-top: 2.33em; margin-bottom: 2.33em; }
+.markdown-preview p { margin-top: 1em; margin-bottom: 1em; }
+.markdown-preview ul, .markdown-preview ol { padding-left: 2em; margin-top: 1em; margin-bottom: 1em; }
+.markdown-preview li { margin-bottom: 0.5em; }
+</style>
