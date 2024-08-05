@@ -60,7 +60,7 @@ if (isUpdating && posting) {
 const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async values => {
-  const htmlContents = md.render(content.value);
+  const htmlContents = md.render(contents.value);
   try {
     isSubmitting.value = true;
     await $fetch('/api/posting', {
