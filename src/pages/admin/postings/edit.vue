@@ -3,6 +3,7 @@ import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/postin
 import type { JobPosting } from '~/server/db/schema';
 import { ref, computed } from 'vue';
 import MarkdownEditor from '~/components/MarkdownEditor.vue'
+import MarkdownIt from 'markdown-it';
 
 definePageMeta({
   layout: 'admin',
@@ -15,6 +16,7 @@ const postingId = route.query.id as string | undefined;
 
 const isUpdating = !!postingId;
 
+const md = MarkdownIt()
 // @ts-expect-error
 let posting: JobPosting = null;
 
@@ -58,13 +60,14 @@ if (isUpdating && posting) {
 const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async values => {
+  const htmlContents = md.render(content.value);
   try {
     isSubmitting.value = true;
     await $fetch('/api/posting', {
       method: isUpdating ? 'PUT' : 'POST',
       body: {
         ...values,
-        contents: contents.value, // Send markdown content
+        contents: htmlContents, 
       }
     })
     await navigateTo("/admin/postings");
