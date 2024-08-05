@@ -7,7 +7,7 @@ export function useRemoteAsset(slug: string) {
 
   const tick = () => {
     tickTs.value = new Date().getTime();
-    url.value = `${remoteAssetBase}/${slug}?tickTs=${tickTs}`;
+    url.value = `${remoteAssetBase}/${slug}?tickTs=${tickTs.value}`;
   };
   
   return { url, tick };
