@@ -1,9 +1,14 @@
 export function useRemoteAsset(slug: string) {
   const remoteAssetBase = useRuntimeConfig().public.remoteAssetBase;
   const url = useState(slug, () => remoteAssetBase);
+  const tickTs = useState(`tick-time-${slug}`, () => new Date().getTime());
+
+  url.value = `${remoteAssetBase}/${slug}?tickTs=${tickTs}`;
+
   const tick = () => {
-    url.value = `${remoteAssetBase}/${slug}?tickTs=${new Date().getTime()}`;
+    tickTs.value = new Date().getTime();
+    url.value = `${remoteAssetBase}/${slug}?tickTs=${tickTs}`;
   };
-  tick();
+  
   return { url, tick };
 }
