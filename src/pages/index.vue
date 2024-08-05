@@ -7,7 +7,7 @@ let description: string = "Career Site"; // TODO: need better defaults (this wil
 if (generalSettings.value) {
   const seoTitle = generalSettings.value.seo.title;
   const generalName = generalSettings.value.organization.name;
-  
+
   const seoDescription = generalSettings.value.seo.description;
   const generalDescription = generalSettings.value.organization.description;
 
@@ -68,7 +68,7 @@ const { url: orgImageURL } = useRemoteAsset('orgImage');
             <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings?.organization.name }}</h2>
             <p>{{ generalSettings?.organization.description }}</p>
           </div>
-          <!-- Meta --> 
+          <!-- Meta -->
           <div class="inline-flex flex-wrap justify-center sm:justify-start space-x-4">
             <div class="flex items-center" v-if="generalSettings?.organization.location">
               <Icon class="w-4 h-4 fill-current shrink-0 text-zinc-400" name="grommet-icons:location" />
@@ -76,10 +76,11 @@ const { url: orgImageURL } = useRemoteAsset('orgImage');
                 {{ generalSettings?.organization.location }}
               </span>
             </div>
-            <div class="flex items-center" v-if="generalSettings?.organization.links">
+            <div v-for="link in (generalSettings.organization.links.slice(0, 3))" :key="link.href"
+              class="flex items-center" v-if="generalSettings?.organization.links">
               <Icon name="tdesign:link" class="w-4 h-4 fill-current shrink-0 text-zinc-400" />
               <a class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1"
-                :href="generalSettings.organization.links[0].href">{{ generalSettings.organization.links[0].title }}</a>
+                :href="link.href">{{ link.title }}</a>
             </div>
           </div>
         </div>
@@ -99,11 +100,11 @@ const { url: orgImageURL } = useRemoteAsset('orgImage');
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
     <div class="relative z-50">
       <a href="https://www.vidurjobs.xyz">
-      <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
-        <p class="mr-2">Powered By</p>
-        <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
-      </div>
-    </a>
+        <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
+          <p class="mr-2">Powered By</p>
+          <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
+        </div>
+      </a>
     </div>
   </div>
 </template>
