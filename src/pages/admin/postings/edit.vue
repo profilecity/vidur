@@ -127,7 +127,7 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" @click="onSubmit">
+        <button class="btn btn-primary flex space-x-2" @click="onSubmit">
           <Icon name="lets-icons:save" class="w-4 h-4" />
           <span>Save Changes</span>
         </button>

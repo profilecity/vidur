@@ -114,7 +114,7 @@ const onSubmit = handleSubmit(async values => {
         <!-- Panel footer -->
         <footer>
           <div class="flex w-full justify-start mb-10 mt-4">
-            <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="onSubmit" :disabled="isSubmitting">
+            <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
               {{ saveLabel }}
             </button>
           </div>
@@ -154,7 +154,7 @@ const onSubmit = handleSubmit(async values => {
         <!-- Panel footer -->
         <footer>
           <div class="flex w-full justify-start mb-10 mt-4">
-            <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white" @click="onSubmit" :disabled="isSubmitting">
+            <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
               {{ saveLabel }}
             </button>
           </div>
