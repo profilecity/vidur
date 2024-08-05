@@ -2,13 +2,9 @@
 import { generalSettingsSchema } from '~/schemas/setting';
 import type { z } from "zod";
 
-withDefaults(defineProps<{
+defineProps<{
   forms?: 'general' | 'seo' | 'all';
-  saveLabel?: string;
-}>(), {
-  forms: 'all',
-  saveLabel: 'Save',
-});
+}>();
 
 const emits = defineEmits<{
   saved: [];
@@ -80,7 +76,7 @@ const onSubmit = handleSubmit(async values => {
   <div class="">
     <!-- Organization Settings -->
     <div class="px-4 space-y-6 w-full items-center mt-4" v-if="forms === 'general' || forms === 'all'">
-      <section class="w-full md:w-1/3" v-if="forms === 'all'">
+      <section class="w-full md:w-1/3">
         <h2 class="text-base font-bold text-zinc-900 font-noto">Organization Settings</h2>
         <h4 class="text-sm mb-5 text-zinc-400">Configure career site's home page.</h4>
       </section>
@@ -139,7 +135,7 @@ const onSubmit = handleSubmit(async values => {
         <footer>
           <div class="flex w-full justify-start mb-10 mt-4">
             <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
-              {{ saveLabel }}
+              Save
             </button>
           </div>
         </footer>
@@ -148,7 +144,7 @@ const onSubmit = handleSubmit(async values => {
     <div class="border-b my-8" v-if="forms == 'all'"></div>
     <!-- SEO Settings -->
     <div class="px-4 space-y-6 w-full items-center mt-4" v-if="forms == 'seo' || forms == 'all'">
-      <section class="w-full md:w-1/3" v-if="forms == 'all'">
+      <section class="w-full md:w-1/3">
         <h2 class="text-base font-bold text-zinc-900 font-noto">SEO Settings</h2>
         <h4 class="text-sm mb-5 text-zinc-400">
           These settings help your website rank better and enable better device previews.
@@ -179,7 +175,7 @@ const onSubmit = handleSubmit(async values => {
         <footer>
           <div class="flex w-full justify-start mb-10 mt-4">
             <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
-              {{ saveLabel }}
+              Save
             </button>
           </div>
         </footer>
