@@ -80,7 +80,7 @@ const apply = async () => {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <button class="btn w-full bg-zinc-900 hover:bg-zinc-800 text-white" @click="apply" :disabled="isApplying"
+              <button class="btn w-full primary-btn" @click="apply" :disabled="isApplying"
                 v-else>Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </button>
@@ -122,7 +122,7 @@ const apply = async () => {
                 <span>Applied</span>
               </div>
 
-              <button class="btn w-full bg-zinc-900 hover:bg-zinc-800 text-white" @click="apply" :disabled="isApplying"
+              <button class="btn w-full primary-btn" @click="apply" :disabled="isApplying"
                 v-else>Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </button>

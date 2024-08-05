@@ -95,7 +95,7 @@ defineExpose({
         </div>
       </div>
 
-      <button class="flex btn btn-sm mt-4 bg-zinc-900 hover:bg-zinc-800 text-white" :disabled="isSubmitting" type="submit">
+      <button class="flex btn btn-sm mt-4 primary-btn" :disabled="isSubmitting" type="submit">
         {{ isUpdating ? "Save" : "Create" }}
       </button>
     </form>

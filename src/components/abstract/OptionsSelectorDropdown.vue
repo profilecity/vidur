@@ -49,7 +49,7 @@ const clearAction = () => {
             </button>
           </li>
           <li>
-            <button class="btn-xs bg-zinc-900 hover:bg-zinc-800 text-white" @click="makeConfirmAction(close)">
+            <button class="btn-xs primary-btn" @click="makeConfirmAction(close)">
               {{ confirmLabel }}
             </button>
           </li>
