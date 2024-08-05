@@ -56,6 +56,10 @@ if (isUpdating && posting) {
 const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async values => {
+
+  if (!isUpdating) {
+    return;
+  }
   try {
     isSubmitting.value = true;
     await $fetch('/api/posting', {
@@ -127,10 +131,14 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" @click="onSubmit">
-          <Icon name="lets-icons:save" class="w-4 h-4" />
-          <span>Save Changes</span>
-        </button>
+        <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
+        <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSave">
+          <template #input="{ open }">
+            <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
+              <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+            </button>
+          </template>
+        </AbstractConfirmationBox>
       </div>
     </div>
     <!-- Input Section -->
