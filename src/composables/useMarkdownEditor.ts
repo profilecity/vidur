@@ -2,7 +2,7 @@ import { ref, watch, computed } from 'vue'
 import MarkdownIt from 'markdown-it'
 
 export function useMarkdownEditor() {
-  const markdownContent = ref('# Hello, World!\n\nThis is a test.')
+  const markdownContent = ref('')
   const htmlPreview = ref('')
 
   const md = MarkdownIt({

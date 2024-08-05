@@ -100,7 +100,7 @@ const apply = async () => {
 
           <hr class="my-6 border-t border-zinc-100" />
 
-          <p class="w-full" style="white-space: pre-line;">{{ posting.contents }}</p>
+          <div class="w-full" style="white-space: pre-line;" v-html="posting.contents"></div>
 
         </div>
 

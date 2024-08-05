@@ -41,7 +41,7 @@ const { handleSubmit, errors, defineField, errorBag } = useForm({
 const [id] = defineField("id");
 
 const [title] = defineField("title");
-const [contents] = defineField("contents", () => '');
+const [contents] = defineField("contents");
 const [tagsCSV] = defineField("tagsCSV");
 const [isPublished] = defineField("isPublished");
 
