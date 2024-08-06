@@ -56,10 +56,6 @@ if (isUpdating && posting) {
 const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async values => {
-
-  if (!isUpdating) {
-    return;
-  }
   try {
     isSubmitting.value = true;
     await $fetch('/api/posting', {
