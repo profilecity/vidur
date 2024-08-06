@@ -132,6 +132,7 @@ const onDelete = async () => {
           <template #input="{ open }">
             <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
               <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+              <span>Save Changes</span>
             </button>
           </template>
         </AbstractConfirmationBox>
