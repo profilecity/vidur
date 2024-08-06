@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { generalSettingsSchema } from '~/schemas/setting';
-import type { z } from "zod";
 
 defineProps<{
   forms?: 'general' | 'seo' | 'all';
@@ -9,7 +8,6 @@ defineProps<{
 const emits = defineEmits<{
   saved: [];
 }>();
-
 
 const { url, tick } = useRemoteAsset('orgImage');
 
@@ -32,14 +30,13 @@ const [seoTitle] = defineField('seo.title');
 const [seoDescription] = defineField('seo.description');
 const [seoTwitter] = defineField('seo.twitter');
 
-const {
-  remove: removeFeaturedLink,
-  push: addFeaturedLink,
-  fields: featuredLinks,
-} = useFieldArray<z.infer<typeof generalSettingsSchema>['organization']['links'][0]>('organization.links');
+const removeFeaturedLink = (index: number) => {
+  organizationLinks.value = organizationLinks.value?.filter((_, originalIndex) => originalIndex != index);
+}
 
 // Initialize fields with data from settings
-watchEffect(() => {
+let stopWatching: () => void;
+stopWatching = watchEffect(() => {
   if (generalSettings.data.value) {
     const gs = generalSettings.data.value;
 
@@ -51,6 +48,8 @@ watchEffect(() => {
     seoTitle.value = gs.seo.title;
     seoDescription.value = gs.seo.description;
     seoTwitter.value = gs.seo.twitter;
+
+    stopWatching && stopWatching();
   }
 });
 
@@ -73,7 +72,7 @@ const onSubmit = handleSubmit(async values => {
 </script>
 
 <template>
-  <div class="">
+  <section>
     <!-- Organization Settings -->
     <div class="px-4 space-y-6 w-full items-center mt-4" v-if="forms === 'general' || forms === 'all'">
       <section class="w-full md:w-1/3">
@@ -113,18 +112,21 @@ const onSubmit = handleSubmit(async values => {
           <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="featured-links">
             Featured Links
           </label>
-          <div v-for="(link, index) in featuredLinks" :key="link.key" class="flex space-x-2 mb-2 w-full">
-            <input v-model="link.value.title" class="input-custom-vlen w-5/12" type="text"
-              placeholder="Mars Mission Docs" />
-            <input v-model="link.value.href" class="input-custom-vlen w-5/12" type="url"
-              placeholder="https://big-space-tech.com/missions/mars" />
-            <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeFeaturedLink(index)">
-              <Icon name="mdi:minus" class="w-4 h-4" />
-              Remove
-            </button>
-          </div>
+          <ClientOnly>
+            <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full">
+              <input v-model="link.title" class="input-custom-vlen w-5/12" type="text"
+                placeholder="Mars Mission Docs" />
+              <input v-model="link.href" class="input-custom-vlen w-5/12" type="url"
+                placeholder="https://big-space-tech.com/missions/mars" />
+              <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeFeaturedLink(index)">
+                <Icon name="mdi:minus" class="w-4 h-4" />
+                Remove
+              </button>
+            </div>
+          </ClientOnly>
           <div class="flex space-x-2 items-center">
-            <button class="btn-sm flex items-center space-x-2" @click="addFeaturedLink({ title: '', href: '' })">
+            <button class="btn-sm flex items-center space-x-2"
+              @click="organizationLinks?.push({ title: '', href: '' })">
               <Icon name="mdi:plus" class="w-5 h-5" />
               Add Link
             </button>
@@ -181,7 +183,7 @@ const onSubmit = handleSubmit(async values => {
         </footer>
       </section>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
