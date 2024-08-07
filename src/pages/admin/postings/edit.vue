@@ -127,7 +127,6 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
         <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSave">
           <template #input="{ open }">
             <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
