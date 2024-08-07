@@ -20,9 +20,7 @@ export const organizationConfigSchema = z
           title: z.string().max(24),
           href: z.string().url(),
         }),
-      )
-      .nullable()
-      .optional(),
+      ),
   })
 
 export type OrganizationConfig = z.infer<typeof organizationConfigSchema>;
