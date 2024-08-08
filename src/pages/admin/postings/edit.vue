@@ -127,10 +127,13 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <button class="btn bg-zinc-900 hover:bg-zinc-800 text-white flex space-x-2" @click="onSubmit">
-          <Icon name="lets-icons:save" class="w-4 h-4" />
-          <span>Save Changes</span>
-        </button>
+        <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete">
+          <template #input="{ open }">
+            <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
+              <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+            </button>
+          </template>
+        </AbstractConfirmationBox>
       </div>
     </div>
     <form @submit.prevent="onSubmit">
