@@ -42,7 +42,7 @@
           <!-- Form -->
           <form>
             <div class="space-y-3 mb-8">
-              <label class="relative block cursor-pointer">
+              <label for="radio-buttons" class="relative block cursor-pointer">
                 <input type="radio" name="radio-buttons" class="peer sr-only" checked />
                 <div
                   class="flex items-center bg-white text-md text-zinc-800 p-4 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
@@ -53,7 +53,7 @@
                   class="absolute inset-0 border border-transparent peer-checked:border-blue-500 rounded-lg pointer-events-none"
                   aria-hidden="true"></div>
               </label>
-              <label class="relative block cursor-pointer">
+              <label for="radio-buttons" class="relative block cursor-pointer">
                 <input type="radio" name="radio-buttons" class="peer sr-only" />
                 <div
                   class="flex items-center bg-white text-md text-zinc-800 p-4 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
@@ -64,7 +64,7 @@
                   class="absolute inset-0 border border-transparent peer-checked:border-blue-500 rounded-lg pointer-events-none"
                   aria-hidden="true"></div>
               </label>
-              <label class="relative block cursor-pointer">
+              <label for="radio-buttons" class="relative block cursor-pointer">
                 <input type="radio" name="radio-buttons" class="peer sr-only" />
                 <div
                   class="flex items-center bg-white text-md text-zinc-800 p-4 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">

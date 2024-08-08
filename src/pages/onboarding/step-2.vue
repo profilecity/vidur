@@ -42,7 +42,7 @@
           <!-- Form -->
           <form>
             <div class="sm:flex space-y-3 sm:space-y-0 sm:space-x-4 mb-8">
-              <label class="flex-1 relative block cursor-pointer">
+              <label for="radio-buttons" class="flex-1 relative block cursor-pointer">
                 <input type="radio" name="radio-buttons" class="peer sr-only" checked />
                 <div
                   class="h-full text-center bg-white px-4 py-6 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
@@ -59,7 +59,7 @@
                   class="absolute inset-0 border border-transparent peer-checked:border-blue-500 rounded-lg pointer-events-none"
                   aria-hidden="true"></div>
               </label>
-              <label class="flex-1 relative block cursor-pointer">
+              <label for="radio-buttons" class="flex-1 relative block cursor-pointer">
                 <input type="radio" name="radio-buttons" class="peer sr-only" />
                 <div
                   class="h-full text-center px-4 py-6 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
