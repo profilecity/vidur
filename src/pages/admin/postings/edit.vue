@@ -2,8 +2,7 @@
 import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/posting';
 import type { JobPosting } from '~/server/db/schema';
 import { ref, computed } from 'vue';
-import MarkdownEditor from '~/components/MarkdownEditor.vue'
-import MarkdownIt from 'markdown-it';
+import WysiwygEditor from '~/components/WysiwygEditor.vue'
 
 definePageMeta({
   layout: 'admin',
@@ -16,7 +15,6 @@ const postingId = route.query.id as string | undefined;
 
 const isUpdating = !!postingId;
 
-const md = MarkdownIt()
 // @ts-expect-error
 let posting: JobPosting = null;
 
@@ -60,14 +58,13 @@ if (isUpdating && posting) {
 const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async values => {
-  const htmlContents = md.render(contents.value);
   try {
     isSubmitting.value = true;
     await $fetch('/api/posting', {
       method: isUpdating ? 'PUT' : 'POST',
       body: {
         ...values,
-        contents: htmlContents, 
+        contents: contents.value,
       }
     })
     await navigateTo("/admin/postings");
@@ -104,16 +101,13 @@ const onDelete = async () => {
 
 <template>
   <div class="w-full max-w-9xl mx-auto">
-    <!-- Page header -->
     <div class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white">
-      <!-- Left: Title -->
       <div class="mb-4 sm:mb-0">
         <h2 class="text-md md:text-lg text-zinc-800 font-bold flex items-center">
           <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />{{ isUpdating ?
             posting.title : 'New Posting' }}
         </h2>
       </div>
-      <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
         <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
         <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete">
@@ -139,8 +133,7 @@ const onDelete = async () => {
         </button>
       </div>
     </div>
-    <!-- Input Section -->
-    <form @submit="onSubmit">
+    <form @submit.prevent="onSubmit">
       <div class="px-4">
         <div class="mx-auto mt-4">
           <div>
@@ -151,18 +144,13 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="tags-csv">Tags (CSV)</label>
-            <input id="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Fransisco"
+            <input id="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Francisco"
               v-model="tagsCSV" :disabled="isSubmitting" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.tagsCSV }}</div>
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <MarkdownEditor
-              v-model="contents"
-              :disabled="isSubmitting"
-              placeholder="We want someone who…"
-              preview-class="markdown-preview prose prose-sm max-w-none"
-            />
+            <WysiwygEditor :initial-content="contents" @update:content="contents = $event" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>
@@ -170,15 +158,3 @@ const onDelete = async () => {
     </form>
   </div>
 </template>
-
-<style>
-.markdown-preview h1 { font-size: 2em; font-weight: bold; margin-top: 0.67em; margin-bottom: 0.67em; }
-.markdown-preview h2 { font-size: 1.5em; font-weight: bold; margin-top: 0.83em; margin-bottom: 0.83em; }
-.markdown-preview h3 { font-size: 1.17em; font-weight: bold; margin-top: 1em; margin-bottom: 1em; }
-.markdown-preview h4 { font-size: 1em; font-weight: bold; margin-top: 1.33em; margin-bottom: 1.33em; }
-.markdown-preview h5 { font-size: 0.83em; font-weight: bold; margin-top: 1.67em; margin-bottom: 1.67em; }
-.markdown-preview h6 { font-size: 0.67em; font-weight: bold; margin-top: 2.33em; margin-bottom: 2.33em; }
-.markdown-preview p { margin-top: 1em; margin-bottom: 1em; }
-.markdown-preview ul, .markdown-preview ol { padding-left: 2em; margin-top: 1em; margin-bottom: 1em; }
-.markdown-preview li { margin-bottom: 0.5em; }
-</style>

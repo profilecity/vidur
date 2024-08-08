@@ -1,6 +1,6 @@
 import { defineNuxtPlugin } from '#app'
-import { useMarkdownEditor } from '../../../composables/useMarkdownEditor'
+import { useWysiwygEditor } from '../../../composables/useWysiwygEditor'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.provide('markdownEditor', useMarkdownEditor)
+  nuxtApp.provide('wysiwygEditor', useWysiwygEditor)
 })

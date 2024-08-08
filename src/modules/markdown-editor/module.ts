@@ -18,7 +18,7 @@ export default defineNuxtModule({
     })
 
     nuxt.hook('imports:dirs', (dirs) => {
-      dirs.push(resolver.resolve('./composables'))
+      dirs.push(resolver.resolve('@/composables/useWysiwygEditor'))
     })
   }
 })
