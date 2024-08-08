@@ -39,7 +39,6 @@ services:
       - .:/app
       - /app/node_modules
       - static_data:/tmp/vidur-jobs-dev
-    command: sh -c "yarn migration:apply && yarn dev"
 
 volumes:
   vidur_data:
