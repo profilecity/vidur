@@ -1,3 +1,4 @@
+import { randomUUID } from "uncrypto";
 import authenticateAdminRequest from "~/server/utils/admin"
 
 export default defineEventHandler(async (event) => {
@@ -10,8 +11,15 @@ export default defineEventHandler(async (event) => {
     })
   }
   const file = body[0];
-  if (file.name == "logo") {
-    const image = Buffer.from(file.data.buffer);
-    blobStorage.setItemRaw('orgImage', image);
+  if (file.name == "asset") {
+    const asset = Buffer.from(file.data.buffer);
+    const assetId = randomUUID();
+    await blobStorage.setItemRaw(assetId, asset);
+    return { id: assetId };
   }
+
+  throw createError({
+    statusCode: 400,
+    message: "Invalid file key",
+  })
 })

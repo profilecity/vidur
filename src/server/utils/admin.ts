@@ -6,6 +6,13 @@ export default async function authenticateAdminRequest(
 ) {
   const session = await authenticateRequest(event);
 
+  const bypassAdmin = useRuntimeConfig().bypassAdmin;
+
+  if (bypassAdmin) {
+    console.log("Bypassing Admin Check.");
+    return session;
+  }
+
   if (!session.user.isAdmin) {
     throw createError({
       statusCode: 401,
@@ -14,12 +21,4 @@ export default async function authenticateAdminRequest(
   }
 
   return session;
-}
-
-export function hasPermissions(acquiredPermissions: number, requiredPermissions: number) {
-  if ((acquiredPermissions & 1) === 1) {
-    // Bypass permission check for super-admin (has virtually all the permissions)
-    return true;
-  }
-  return (acquiredPermissions & requiredPermissions) === requiredPermissions;
 }
