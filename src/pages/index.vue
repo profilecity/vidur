@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: postings } = await usePublicPostings();
-const { data: generalSettings } = await useGeneralSettings();
+const { data: generalSettings } = await usePublicGeneralSettings();
 
 let title: string = "Careers"; // TODO: need better defaults (this will hardly be the case);
 let description: string = "Career Site"; // TODO: need better defaults (this will hardly be the case);
