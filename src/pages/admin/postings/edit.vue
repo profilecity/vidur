@@ -120,7 +120,7 @@ const onDelete = async () => {
         <div class="flex space-x-1 items-center border bg-zinc-100 p-2 rounded-xl">
           <span class="text-sm">Publish?</span>
           <div class="form-switch">
-            <input type="checkbox" id="toggle1" class="sr-only" v-model="isPublished" :disabled="isSubmitting">
+            <input type="checkbox" id="toggle1" name="toggle1" class="sr-only" v-model="isPublished" :disabled="isSubmitting">
             <label class="bg-zinc-400" for="toggle1">
               <span class="bg-white shadow-sm" aria-hidden="true"></span>
               <span class="sr-only">Publish/Draft</span>
@@ -143,19 +143,19 @@ const onDelete = async () => {
         <div class="mx-auto mt-4">
           <div>
             <label class="block text-sm font-medium mb-1" for="title">Title <span class="text-rose-500">*</span></label>
-            <input id="title" class="form-input w-full" type="text" placeholder="Senior Software Engineer"
+            <input id="title" name="title" class="form-input w-full" type="text" placeholder="Senior Software Engineer"
               v-model="title" :disabled="isSubmitting" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.title }}</div>
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="tags-csv">Tags (CSV)</label>
-            <input id="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Fransisco"
+            <input id="tags-csv" name="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Fransisco"
               v-model="tagsCSV" :disabled="isSubmitting" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.tagsCSV }}</div>
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <textarea id="jobdescription" class="form-textarea w-full focus:border-zinc-300" rows="6" v-model="contents"
+            <textarea id="jobdescription" name="jobdescription" class="form-textarea w-full focus:border-zinc-300" rows="6" v-model="contents"
               placeholder="We want someone who…" :disabled="isSubmitting"></textarea>
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
