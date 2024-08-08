@@ -44,11 +44,11 @@ export default defineNuxtConfig({
       profileCity: 'https://api.thenirvanalabs.com',
       atlas: 'https://atlas.thenirvanalabs.com',
     },
+    remoteAssetBase: '/tmp',
     oauth: {
       clientId: 'profilecity-connect',
     },
     public: {
-      remoteAssetBase: '/tmp',
       origin: 'http://localhost:3001',
     }
   },
