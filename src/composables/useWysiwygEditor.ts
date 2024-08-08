@@ -5,6 +5,7 @@ export function useWysiwygEditor(): {
   editorContent: Ref<string>;
   editorId: string;
   initEditor: () => void;
+  setEditorContent: (htmlContent: string) => void;
 } {
   const editorContent = ref<string>('');
   const editorId = 'quill-editor';
@@ -30,10 +31,10 @@ export function useWysiwygEditor(): {
               [{ 'font': [] }],
               [{ 'align': [] }],
               ['clean'],
-              ['link', 'image', 'video']
-            ]
+              ['link']
+            ],
           },
-          placeholder: 'enter your JD...',
+          placeholder: 'Enter your JD...',
           theme: 'snow'
         });
 
@@ -42,12 +43,24 @@ export function useWysiwygEditor(): {
             editorContent.value = editorInstance.root.innerHTML;
           }
         });
+        if (editorContent.value) {
+          editorInstance.root.innerHTML = editorContent.value;
+        }
       });
     }
   };
 
+  const setEditorContent = (htmlContent: string) => {
+    if (editorInstance) {
+      editorInstance.root.innerHTML = htmlContent;
+      editorContent.value = htmlContent;
+    }
+  };
+
   const destroyEditor = () => {
-    editorInstance = null;
+    if (editorInstance) {
+      editorInstance = null;
+    }
   };
 
   if (typeof window !== 'undefined') {
@@ -59,5 +72,6 @@ export function useWysiwygEditor(): {
     editorContent,
     editorId,
     initEditor,
+    setEditorContent,
   };
 }

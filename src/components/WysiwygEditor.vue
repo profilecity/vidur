@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from 'vue';
+import { defineComponent, onMounted, watch } from 'vue';
 import { useWysiwygEditor } from '../composables/useWysiwygEditor';
 
 export default defineComponent({
@@ -13,12 +13,23 @@ export default defineComponent({
   props: {
     initialContent: {
       type: String,
-      default: '',
+      required: true,
     },
   },
   emits: ['update:content'],
   setup(props, { emit }) {
-    const { editorContent, editorId } = useWysiwygEditor();
+    const { editorContent, editorId, setEditorContent } = useWysiwygEditor();
+
+    onMounted(() => {
+      if (!editorContent.value) {
+        setEditorContent(props.initialContent);
+      }
+    });
+
+    // watch(() => props.initialContent, (newContent) => {
+    //   console.log("sss",newContent)
+    //   setEditorContent(newContent);
+    // });
 
     watch(editorContent, (newContent) => {
       emit('update:content', newContent);
@@ -34,10 +45,4 @@ export default defineComponent({
 
 <style>
 @import 'quill/dist/quill.snow.css';
-.quill-container .ql-container {
-  @apply border-2 border-blue-500 bg-gray-100;
-}
-.quill-container .ql-editor {
-  @apply bg-white p-4 min-h-screen;
-}
 </style>

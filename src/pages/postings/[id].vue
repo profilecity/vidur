@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import postingsGet from '~/server/api/public/postings.get';
 const route = useRoute();
 const id = route.params.id as string;
 
@@ -42,6 +44,7 @@ const apply = async () => {
     isApplying.value = false;
   }
 }
+
 </script>
 
 <template>
@@ -100,7 +103,8 @@ const apply = async () => {
 
           <hr class="my-6 border-t border-zinc-100" />
 
-          <div class="w-full" style="white-space: pre-line;" v-html="posting.contents"></div>
+          <div class="w-full" v-html="posting.contents">
+          </div>
 
         </div>
 

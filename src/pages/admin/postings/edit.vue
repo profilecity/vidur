@@ -127,10 +127,11 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete">
+      <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSubmit">
           <template #input="{ open }">
             <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
-              <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+              <Icon name="lets-icons:save" class="text-red-500 w-5 h-5" />
+              <span>Save Changes</span>
             </button>
           </template>
         </AbstractConfirmationBox>
@@ -153,7 +154,7 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <WysiwygEditor :initial-content="contents" @update:content="contents = $event" />
+            <WysiwygEditor :initial-content="contents || ''" @update:content="contents = $event" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>
