@@ -1,18 +1,18 @@
 <script setup lang="ts">
 const emits = defineEmits<{
-  update: [];
+  update: [string];
 }>();
 
 const saveImage = async (croppedBlob: Blob, closeFn: () => void) => {
   try {
     const formData = new FormData();
-    formData.append("logo", croppedBlob);
-    await $fetch('/api/settings/logo', {
+    formData.append("asset", croppedBlob);
+    const response = await $fetch('/api/asset', {
       method: 'PUT',
       body: formData,  
     })
     closeFn();
-    emits("update");
+    emits("update", response.id);
   } catch (error) {
     console.error("Error uploading logo", error);
   }
