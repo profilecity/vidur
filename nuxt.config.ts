@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     storage: {
       engine: 'local',
       local: {
-        baseDir: './src/public/tmp',
+        baseDir: '/tmp/vidur-jobs-dev',
       },
       s3: {
         accessKeyId: '',
@@ -44,7 +44,7 @@ export default defineNuxtConfig({
       profileCity: 'https://api.thenirvanalabs.com',
       atlas: 'https://atlas.thenirvanalabs.com',
     },
-    remoteAssetBase: '/tmp',
+    remoteAssetBase: '/assets',
     oauth: {
       clientId: 'profilecity-connect',
     },

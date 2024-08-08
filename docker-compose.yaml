@@ -37,8 +37,9 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - ./src/public/tmp:/app/src/public/tmp  # Mounting the ./src/public/tmp directory for blob storage
+      - static_data:/tmp/vidur-jobs-dev
     command: sh -c "yarn migration:apply && yarn dev"
 
 volumes:
   vidur_data:
+  static_data:
