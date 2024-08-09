@@ -6,4 +6,4 @@ updates:
       interval: "weekly"
       time: "23:00"
       timezone: America/Los_Angeles
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 3
