@@ -9,8 +9,6 @@ const emits = defineEmits<{
   saved: [];
 }>();
 
-const { url, tick } = useRemoteAsset('orgImage');
-
 const generalSettings = useGeneralSettings();
 
 // Define form schema and use it in the form handling
@@ -24,6 +22,7 @@ const [organizationName] = defineField('organization.name');
 const [organizationDescription] = defineField('organization.description');
 const [organizationLocation] = defineField('organization.location');
 const [organizationLinks] = defineField('organization.links');
+const [organizationLogo] = defineField('organization.logo');
 
 // SEO Fields
 const [seoTitle] = defineField('seo.title');
@@ -44,6 +43,7 @@ stopWatching = watchEffect(() => {
     organizationDescription.value = gs.organization.description;
     organizationLocation.value = gs.organization.location;
     organizationLinks.value = gs.organization.links;
+    organizationLogo.value = gs.organization.logo;
 
     seoTitle.value = gs.seo.title;
     seoDescription.value = gs.seo.description;
@@ -69,6 +69,16 @@ const onSubmit = handleSubmit(async values => {
     isSubmitting.value = false;
   }
 });
+
+const logoURL = computed(() => {
+  if (organizationLogo.value) {
+    return useRemoteAsset(organizationLogo.value).url;
+  }
+  return undefined;
+});
+const logoUpdated = (id: string) => {
+  organizationLogo.value = id;
+}
 </script>
 
 <template>
@@ -82,9 +92,11 @@ const onSubmit = handleSubmit(async values => {
       <section class="w-full md:w-2/3">
         <div class="flex items-end">
           <div class="mr-4">
-            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="url" width="80" height="80" alt="User upload" />
+            <ClientOnly>
+              <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="logoURL" width="80" height="80" alt="User upload" />
+            </ClientOnly>
           </div>
-          <AdminSettingsGeneralUpdateOrgLogo @update="tick" />
+          <AdminSettingsGeneralUpdateOrgLogo @update="logoUpdated" />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <div class="w-full md:w-2/3">

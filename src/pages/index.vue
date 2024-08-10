@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: postings } = await usePublicPostings();
-const { data: generalSettings } = await useGeneralSettings();
+const { data: generalSettings } = await usePublicGeneralSettings();
 
 let title: string = "Careers"; // TODO: need better defaults (this will hardly be the case);
 let description: string = "Career Site"; // TODO: need better defaults (this will hardly be the case);
@@ -42,7 +42,7 @@ useSeoMeta({
   twitterCreator: generalSettings.value?.seo.twitter,
 })
 
-const { url: orgImageURL } = useRemoteAsset('orgImage');
+const logoURL = useRemoteAsset(generalSettings.value?.organization.logo as string).url;
 </script>
 
 <template>
@@ -59,7 +59,7 @@ const { url: orgImageURL } = useRemoteAsset('orgImage');
           <!-- Avatar -->
           <div class="-mt-12 mb-6">
             <div class="inline-flex -ml-1 -mt-1 sm:mb-0 p-2 bg-zinc-600/30 rounded-2xl backdrop-blur-sm">
-              <img class="w-24 rounded-2xl border border-zinc-600" :src="orgImageURL" alt="Avatar" />
+              <img class="w-24 rounded-2xl border border-zinc-600" :src="logoURL" alt="Avatar" />
             </div>
           </div>
 

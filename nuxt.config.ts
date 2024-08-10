@@ -30,7 +30,7 @@ export default defineNuxtConfig({
     storage: {
       engine: 'local',
       local: {
-        baseDir: './src/public/tmp',
+        baseDir: '/tmp/vidur-jobs-dev',
       },
       s3: {
         accessKeyId: '',
@@ -40,15 +40,16 @@ export default defineNuxtConfig({
         region: '',
       },
     },
+    bypassAdmin: false, // THIS IS ONLY FOR DEMO INSTANCES / DEV MODE. NOT MEANT TO BE USED AS A FULL FEATURE.
     services: {
       profileCity: 'https://api.thenirvanalabs.com',
       atlas: 'https://atlas.thenirvanalabs.com',
     },
+    remoteAssetBase: '/assets',
     oauth: {
       clientId: 'profilecity-connect',
     },
     public: {
-      remoteAssetBase: '/tmp',
       origin: 'http://localhost:3001',
     }
   },
