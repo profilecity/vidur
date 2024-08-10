@@ -19,7 +19,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@vee-validate/nuxt": "^4.13.1",
     "@vee-validate/zod": "^4.13.1",
-    "@vueuse/core": "^10.11.0",
+    "@vueuse/core": "^10.11.1",
     "drizzle-kit": "^0.22.7",
     "drizzle-orm": "^0.31.2",
     "jsonwebtoken": "^9.0.2",
