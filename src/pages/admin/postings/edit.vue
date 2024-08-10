@@ -127,10 +127,10 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSave">
+        <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSubmit">
           <template #input="{ open }">
-            <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
-              <Icon name="lets-icons:save" class="text-red-500 w-5 h-5" />
+            <button class="btn btn-primary space-x-2 items-center" :disabled="isSubmitting" @click="open">
+              <Icon name="lets-icons:save" class="w-5 h-5" />
               <span>Save Changes</span>
             </button>
           </template>

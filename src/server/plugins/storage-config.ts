@@ -12,6 +12,9 @@ export default defineNitroPlugin(() => {
 
   switch(config.engine) {
     case 's3':
+      if (!config.s3) {
+        throw new Error("Selected blob storage service s3. No config provided.")
+      }
       driver = s3Driver({
         accessKeyId: config.s3.accessKeyId,
         secretAccessKey: config.s3.secretAccessKey,
@@ -21,6 +24,10 @@ export default defineNitroPlugin(() => {
       });
       break;
     case 'local':
+      if (!config.local) {
+        throw new Error("Selected blob storage service local. No config provided.")
+      }
+      console.log("Mounting files on", config.local.baseDir);
       driver = fsLite({
         base: config.local.baseDir,
       })
