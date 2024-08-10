@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import postingsGet from '~/server/api/public/postings.get';
 const route = useRoute();
 const id = route.params.id as string;
 
