@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/posting';
 import type { JobPosting } from '~/server/db/schema';
-import { ref, computed } from 'vue';
 import WysiwygEditor from '~/components/WysiwygEditor.vue'
 
 definePageMeta({
@@ -101,13 +100,16 @@ const onDelete = async () => {
 
 <template>
   <div class="w-full max-w-9xl mx-auto">
+    <!-- Page header -->
     <div class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white">
+      <!-- Left: Title -->
       <div class="mb-4 sm:mb-0">
         <h2 class="text-md md:text-lg text-zinc-800 font-bold flex items-center">
           <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />{{ isUpdating ?
             posting.title : 'New Posting' }}
         </h2>
       </div>
+      <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
         <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
         <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete">
@@ -127,17 +129,18 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-      <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSubmit">
+        <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSubmit">
           <template #input="{ open }">
-            <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
-              <Icon name="lets-icons:save" class="text-red-500 w-5 h-5" />
+            <button class="btn btn-primary space-x-2 items-center" :disabled="isSubmitting" @click="open">
+              <Icon name="lets-icons:save" class="w-5 h-5" />
               <span>Save Changes</span>
             </button>
           </template>
         </AbstractConfirmationBox>
       </div>
     </div>
-    <form @submit.prevent="onSubmit">
+    <!-- Input Section -->
+    <form @submit="onSubmit">
       <div class="px-4">
         <div class="mx-auto mt-4">
           <div>
@@ -148,7 +151,7 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="tags-csv">Tags (CSV)</label>
-            <input id="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Francisco"
+            <input id="tags-csv" class="form-input w-full" type="text" placeholder="Remote, Full Time, San Fransisco"
               v-model="tagsCSV" :disabled="isSubmitting" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.tagsCSV }}</div>
           </div>
