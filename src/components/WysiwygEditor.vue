@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch } from 'vue';
+import { defineComponent, onMounted, watch, nextTick } from 'vue';
 import { useWysiwygEditor } from '../composables/useWysiwygEditor';
 
 export default defineComponent({
@@ -18,18 +18,19 @@ export default defineComponent({
   },
   emits: ['update:content'],
   setup(props, { emit }) {
-    const { editorContent, editorId, setEditorContent } = useWysiwygEditor();
+    const { editorContent, editorId, initEditor, setEditorContent } = useWysiwygEditor();
 
-    onMounted(() => {
-      if (!editorContent.value) {
-        setEditorContent(props.initialContent);
-      }
+    onMounted(async () => {
+      await nextTick();
+      initEditor();
+      setEditorContent(props.initialContent);
     });
 
-    // watch(() => props.initialContent, (newContent) => {
-    //   console.log("sss",newContent)
-    //   setEditorContent(newContent);
-    // });
+    watch(() => props.initialContent, (newContent) => {
+      if (newContent !== editorContent.value) {
+        setEditorContent(newContent);
+      }
+    });
 
     watch(editorContent, (newContent) => {
       emit('update:content', newContent);

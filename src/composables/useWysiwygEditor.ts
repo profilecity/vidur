@@ -37,14 +37,16 @@ export function useWysiwygEditor(): {
           theme: 'snow'
         });
 
+        if (editorContent.value) {
+          editorInstance.root.innerHTML = editorContent.value;
+        }
+
         editorInstance.on('text-change', () => {
           if (editorInstance) {
             editorContent.value = editorInstance.root.innerHTML;
           }
         });
-        if (editorContent.value) {
-          editorInstance.root.innerHTML = editorContent.value;
-        }
+       
       });
     }
   };
@@ -52,6 +54,8 @@ export function useWysiwygEditor(): {
   const setEditorContent = (htmlContent: string) => {
     if (editorInstance) {
       editorInstance.root.innerHTML = htmlContent;
+      editorContent.value = htmlContent;
+    } else {
       editorContent.value = htmlContent;
     }
   };
@@ -63,9 +67,9 @@ export function useWysiwygEditor(): {
   };
 
   if (typeof window !== 'undefined') {
-    onMounted(initEditor);
     onUnmounted(destroyEditor);
   }
+
 
   return {
     editorContent,
