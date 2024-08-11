@@ -10,6 +10,7 @@ const emits = defineEmits<{
 }>();
 
 const generalSettings = useGeneralSettings();
+const { updateGeneralSettings } = usePublicGeneralSettings();
 
 // Define form schema and use it in the form handling
 const formSchema = toTypedSchema(generalSettingsSchema);
@@ -61,7 +62,7 @@ const onSubmit = handleSubmit(async values => {
       method: 'PUT',
       body: { ...values },
     });
-
+    updateGeneralSettings(values);
     emits('saved');
   } catch (error) {
     console.error("Error saving settings", error);

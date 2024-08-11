@@ -15,7 +15,7 @@ export const organizationConfigSchema = z
     name: z.string().max(36).min(1),
     description: z.string().nullable().optional(),
     location: z.string().max(24).nullable().optional(),
-    logo: z.string().uuid().nullable().optional(),
+    logo: z.string().uuid(),
     links: z
       .array(
         z.object({
