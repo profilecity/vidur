@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/posting';
 import type { JobPosting } from '~/server/db/schema';
-import WysiwygEditor from '~/components/WysiwygEditor.vue'
 
 definePageMeta({
   layout: 'admin',
@@ -157,7 +156,12 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <WysiwygEditor :initial-content="contents || ''" @update:content="contents = $event" />
+            <ClientOnly>
+              <Editor placeholder="We are looking for someone who can..." v-model="contents" />
+              <template #fallback>
+                Loading editor...
+              </template>
+            </ClientOnly>
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>
