@@ -1,4 +1,3 @@
-import { ref, onMounted, onUnmounted, type Ref } from 'vue';
 import type Quill from 'quill';
 
 export function useWysiwygEditor(): {
