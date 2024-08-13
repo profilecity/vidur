@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const { url } = useRemoteAsset("orgImage");
+const orgSettings = usePublicOrganizationSettings();
+const logoURL = computed(() => useRemoteAsset(orgSettings.value.logo).url);
 </script>
 
 <template>
@@ -10,9 +11,8 @@ const { url } = useRemoteAsset("orgImage");
       <div
         class="flex px-2 py-2 justify-between rounded-xl text-zinc-600 border hover:bg-zinc-50 hover:border-zinc-200 space-x-2">
         <div class="flex items-center">
-          <img class="rounded-lg w-6 border border-zinc-200" :src="url"
-            alt="avatar" />
-          <span class="text-xs ml-2 truncate font-noto">The Nirvana Labs</span>
+          <img class="rounded-lg w-6 border border-zinc-200" :src="logoURL" alt="avatar" />
+          <span class="text-xs ml-2 truncate font-noto">{{ orgSettings.name }}</span>
         </div>
         <div class="flex items-center text-zinc-600">
           <Icon class="w-5 h-5 fill-current" name="icon-park-outline:down" />

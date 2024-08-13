@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const seoConfigSchema = z
   .object({
+    favicon: z.string().uuid().nullable().optional(),
     title: z.string().max(60).nullable().optional(), // Std. recommended size.
     description: z.string().max(110).nullable().optional(), // Std. recommended size. (To not cutoff in mobile display)
     twitter: z.string().max(15).nullable().optional(), // Official twitter handle size.
@@ -14,6 +15,7 @@ export const organizationConfigSchema = z
     name: z.string().max(36).min(1),
     description: z.string().nullable().optional(),
     location: z.string().max(24).nullable().optional(),
+    logo: z.string().uuid(),
     links: z
       .array(
         z.object({

@@ -30,6 +30,7 @@ services:
       NUXT_DB_USER: ${NUXT_DB_USER:-postgres}
       NUXT_DB_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
       NUXT_DB_DATABASE: ${NUXT_DB_DATABASE:-vidur}
+      NUXT_BYPASS_ADMIN: ${NUXT_BYPASS_ADMIN:-true}
     ports:
       - "3001:3001"
     depends_on:
@@ -37,8 +38,8 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - ./src/public/tmp:/app/src/public/tmp  # Mounting the ./src/public/tmp directory for blob storage
-    command: sh -c "yarn migration:apply && yarn dev"
+      - static_data:/tmp/vidur-jobs-dev
 
 volumes:
   vidur_data:
+  static_data:

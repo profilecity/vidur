@@ -127,10 +127,10 @@ const onDelete = async () => {
             </label>
           </div>
         </div>
-        <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSave">
+        <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSubmit">
           <template #input="{ open }">
-            <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
-              <Icon name="lets-icons:save" class="text-red-500 w-5 h-5" />
+            <button class="btn btn-primary space-x-2 items-center" :disabled="isSubmitting" @click="open">
+              <Icon name="lets-icons:save" class="w-5 h-5" />
               <span>Save Changes</span>
             </button>
           </template>
@@ -155,8 +155,12 @@ const onDelete = async () => {
           </div>
           <div class="mt-4">
             <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <textarea id="jobdescription" name="jobdescription" class="form-textarea w-full focus:border-zinc-300" rows="6" v-model="contents"
-              placeholder="We want someone who…" :disabled="isSubmitting"></textarea>
+            <ClientOnly>
+              <Editor placeholder="We are looking for someone who can..." v-model="contents" />
+              <template #fallback>
+                Loading editor...
+              </template>
+            </ClientOnly>
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>
@@ -164,3 +168,9 @@ const onDelete = async () => {
     </form>
   </div>
 </template>
+
+<style>
+h1 {
+  @apply text-4xl;
+}
+</style>

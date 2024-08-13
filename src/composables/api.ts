@@ -9,14 +9,6 @@ export function useGeneralSettings(config?: string) {
   });
 }
 
-export function usePublicGeneralSettings(config?: string) {
-  return useFetch<GeneralSettings>('/api/public/settings', {
-    query: {
-      config,
-    }
-  });
-}
-
 export function usePublicPostings() {
   return useFetch<JobPosting[]>('/api/public/postings');
 }

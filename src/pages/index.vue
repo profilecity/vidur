@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { data: postings } = await usePublicPostings();
-const { data: generalSettings } = await usePublicGeneralSettings();
+const { generalSettings } = usePublicGeneralSettings();
 
 let title: string = "Careers"; // TODO: need better defaults (this will hardly be the case);
 let description: string = "Career Site"; // TODO: need better defaults (this will hardly be the case);
@@ -42,7 +42,7 @@ useSeoMeta({
   twitterCreator: generalSettings.value?.seo.twitter,
 })
 
-const { url: orgImageURL } = useRemoteAsset('orgImage');
+const logoURL = useRemoteAsset(generalSettings.value.organization.logo).url;
 </script>
 
 <template>
@@ -59,25 +59,25 @@ const { url: orgImageURL } = useRemoteAsset('orgImage');
           <!-- Avatar -->
           <div class="-mt-12 mb-6">
             <div class="inline-flex -ml-1 -mt-1 sm:mb-0 p-2 bg-zinc-600/30 rounded-2xl backdrop-blur-sm">
-              <img class="w-24 rounded-2xl border border-zinc-600" :src="orgImageURL" alt="Avatar" />
+              <img class="w-24 rounded-2xl border border-zinc-600" :src="logoURL" alt="Avatar" />
             </div>
           </div>
 
           <!-- Company name and info -->
           <div class="mb-4">
-            <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings?.organization.name }}</h2>
-            <p>{{ generalSettings?.organization.description }}</p>
+            <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings.organization.name }}</h2>
+            <p>{{ generalSettings.organization.description }}</p>
           </div>
           <!-- Meta -->
           <div class="inline-flex flex-wrap justify-center sm:justify-start space-x-4">
-            <div class="flex items-center" v-if="generalSettings?.organization.location">
+            <div class="flex items-center" v-if="generalSettings.organization.location">
               <Icon class="w-4 h-4 fill-current shrink-0 text-zinc-400" name="grommet-icons:location" />
               <span class="text-sm font-medium whitespace-nowrap text-zinc-400 ml-1">
-                {{ generalSettings?.organization.location }}
+                {{ generalSettings.organization.location }}
               </span>
             </div>
             <div v-for="link in (generalSettings.organization.links.slice(0, 3))" :key="link.href"
-              class="flex items-center" v-if="generalSettings?.organization.links">
+              class="flex items-center" v-if="generalSettings.organization.links">
               <Icon name="tdesign:link" class="w-4 h-4 fill-current shrink-0 text-zinc-400" />
               <a class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1"
                 :href="link.href">{{ link.title }}</a>
@@ -89,7 +89,7 @@ const { url: orgImageURL } = useRemoteAsset('orgImage');
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full">
       <div class="max-w-3xl mx-auto">
         <h3 class="text-xl leading-snug text-zinc-800 font-bold mb-6">
-          Open Positions at Nirvana Labs
+          Open Positions at {{ generalSettings.organization.name }}
         </h3>
         <div class="space-y-2" v-if="postings">
           <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />

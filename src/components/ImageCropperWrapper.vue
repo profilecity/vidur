@@ -8,6 +8,12 @@ const emits = defineEmits<{
   onCrop: [Blob]; // croppedBlob
 }>();
 
+withDefaults(defineProps<{
+  aspectRatio?: number,
+}>(), {
+  aspectRatio: 1,
+})
+
 const dropZoneRef = ref<HTMLDivElement>();
 const selectedFile = ref<File | null>(null);
 
@@ -34,7 +40,7 @@ const save = () => {
 
 <template>
   <div class="max-w-xl" v-if="selectedFile && !croppedBlob">
-    <image-cropper ref="cropperRef" :src="blobURL" :stencil-props="{ aspectRatio: 1 }" />
+    <image-cropper ref="cropperRef" :src="blobURL" :stencil-props="{ aspectRatio }" />
     <div class="flex w-full justify-end items-center space-x-1 mt-2">
       <button class="px-2 py-1 bg-zinc-200 rounded hover:bg-zinc-300 text-sm" @click="selectedFile = null">Reset</button>
       <button class="px-2 py-1 bg-zinc-900 rounded hover:bg-zinc-800 text-white text-sm" @click="crop">Crop</button>
