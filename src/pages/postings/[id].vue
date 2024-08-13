@@ -98,12 +98,8 @@ const apply = async () => {
               </div>
             </div>
           </div>
-
           <hr class="my-6 border-t border-zinc-100" />
-
-          <div class="w-full" v-html="posting.contents">
-          </div>
-
+          <Editor :read-only="true" v-model="posting.contents"/>
         </div>
 
         <!-- Sidebar -->
@@ -148,3 +144,7 @@ const apply = async () => {
     </div>
   </div>
 </template>
+
+<style>
+@import 'quill/dist/quill.snow.css';
+</style>

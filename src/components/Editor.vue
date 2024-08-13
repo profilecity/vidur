@@ -1,49 +1,74 @@
-<script setup lang="ts">
-if (!import.meta.client) {
-  throw new Error("Cannot mount <Editor/> in SSR. Wrap with <ClientOnly/>");
-}
+<template>
+  <div id="snow-wrapper">
+    <div id="snow-container">
+      <div class="toolbar bg-white rounded-t-xl mt-2" v-if="!readOnly">
+        <span class="ql-formats">
+          <select class="ql-header" defaultValue="3">
+            <option value="1">Heading</option>
+            <option value="2">Subheading</option>
+            <option value="3">Normal</option>
+          </select>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-bold"></button>
+          <button class="ql-italic"></button>
+          <button class="ql-underline"></button>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-list" value="ordered"></button>
+          <button class="ql-list" value="bullet"></button>
+          <select class="ql-align" defaultValue="false">
+            <option label="left"></option>
+            <option label="center" value="center"></option>
+            <option label="right" value="right"></option>
+            <option label="justify" value="justify"></option>
+          </select>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-link"></button>
+        </span>
+        <span class="ql-formats">
+          <button class="ql-clean"></button>
+        </span>
+      </div>
+      <div class="bg-white rounded-b-xl border p-4" :class="readOnly ? 'ql-e-blank' : ''" :id="editorId"></div>
+    </div>
+  </div>
+</template>
 
+<script setup lang="ts">
 import { useVModel } from "@vueuse/core";
-import { randomUUID } from "uncrypto";
 import type Quill from 'quill';
 
-const props = defineProps<{
-  'modelValue': string;
-  'placeholder': string;
-}>();
+const props = withDefaults(defineProps<{
+  modelValue: string;
+  placeholder: string;
+  id?: string;
+  readOnly?: boolean;
+}>(), {
+  id: 'vidur-editor',
+  readOnly: false,
+});
 const emit = defineEmits<{
   'update:modelValue': [],
 }>();
 
 const editorContent = useVModel(props, 'modelValue', emit);
-const editorId = "randomUUID";
+const editorId = props.id;
 let editorInstance: Quill | null;
 
 onMounted(async () => {
-  await nextTick();
   const QuillEditor = (await import('quill')).default;
 
   editorInstance = new QuillEditor(`#${editorId}`, {
+    bounds: '#snow-container .ql-container',
     modules: {
-      toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block'],
-        [{ 'header': 1 }, { 'header': 2 }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }],
-        [{ 'direction': 'rtl' }],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
-        [{ 'align': [] }],
-        ['clean'],
-        ['link']
-      ],
+      // syntax: true, TODO: ref: https://quilljs.com/docs/modules/syntax
+      toolbar: props.readOnly ? false : '#snow-container .toolbar',
     },
     placeholder: props.placeholder,
-    theme: 'snow'
+    theme: 'snow',
+    readOnly: props.readOnly,
   });
 
   if (editorContent.value) {
@@ -61,10 +86,16 @@ onUnmounted(() => {
 });
 </script>
 
-<template>
-  <div :id="editorId"></div>
-</template>
-
 <style>
 @import 'quill/dist/quill.snow.css';
+
+.ql-editor {
+  padding: 0% !important;
+  border: 0px !important;
+}
+
+.ql-e-blank {
+  padding: 0% !important;
+  border: 0px !important;
+}
 </style>

@@ -62,7 +62,6 @@ const onSubmit = handleSubmit(async values => {
       method: isUpdating ? 'PUT' : 'POST',
       body: {
         ...values,
-        contents: contents.value,
       }
     })
     await navigateTo("/admin/postings");
@@ -169,3 +168,9 @@ const onDelete = async () => {
     </form>
   </div>
 </template>
+
+<style>
+h1 {
+  @apply text-4xl;
+}
+</style>
