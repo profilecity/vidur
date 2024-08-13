@@ -42,8 +42,8 @@
           <!-- Form -->
           <form>
             <div class="sm:flex space-y-3 sm:space-y-0 sm:space-x-4 mb-8">
-              <label class="flex-1 relative block cursor-pointer">
-                <input type="radio" name="radio-buttons" class="peer sr-only" checked />
+              <label for="radio-freelancer" class="flex-1 relative block cursor-pointer">
+                <input type="radio" id="radio-freelancer" name="radio-freelancer" class="peer sr-only" checked />
                 <div
                   class="h-full text-center bg-white px-4 py-6 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
                   <svg class="inline-flex fill-current text-zinc-800 mt-2 mb-4" xmlns="http://www.w3.org/2000/svg"
@@ -59,8 +59,8 @@
                   class="absolute inset-0 border border-transparent peer-checked:border-blue-500 rounded-lg pointer-events-none"
                   aria-hidden="true"></div>
               </label>
-              <label class="flex-1 relative block cursor-pointer">
-                <input type="radio" name="radio-buttons" class="peer sr-only" />
+              <label for="radio-recruiter" class="flex-1 relative block cursor-pointer">
+                <input type="radio" id="radio-recruiter" name="radio-recruiter" class="peer sr-only" />
                 <div
                   class="h-full text-center px-4 py-6 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
                   <svg class="inline-flex fill-current text-zinc-800 mt-2 mb-4" xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@
               </div>
               <div class="flex items-center">
                 <div class="form-switch">
-                  <input type="checkbox" id="switch" class="sr-only" checked />
+                  <input type="checkbox" id="switch" name="switch" class="sr-only" checked />
                   <label class="bg-zinc-400" for="switch">
                     <span class="bg-white shadow-sm" aria-hidden="true"></span>
                     <span class="sr-only">Switch label</span>
