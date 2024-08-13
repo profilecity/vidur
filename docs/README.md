@@ -48,13 +48,10 @@ yarn migration:apply  # Create database schema.
 yarn dev              # Finally, start the dev server.
 ```
 
-### Commands to Run Via Docker 
-
-  **Run the Development Environment:**
-
-   ```bash
-   docker compose --profile dev up 
-   ```
+**Or simply use Docker**
+```bash
+docker compose --profile dev up 
+```
 
 This command starts the `db` and `app` services using the `dev` profile. It runs PostgreSQL as `database` and the app as `vidur_app`.
 
