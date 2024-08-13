@@ -56,7 +56,7 @@ yarn dev              # Finally, start the dev server.
    docker compose --profile dev up 
    ```
 
-   This command starts the `db` and `app` services using the `dev` profile. It runs PostgreSQL as `database` and the app as `vidur_app`.service mounts your local code into the container, enabling real-time updates without rebuilding. Changes in your code are automatically reflected in the running application.
+This command starts the `db` and `app` services using the `dev` profile. It runs PostgreSQL as `database` and the app as `vidur_app`.
 
 ## Contributing
 There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
