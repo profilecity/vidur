@@ -42,6 +42,7 @@ const apply = async () => {
     isApplying.value = false;
   }
 }
+
 </script>
 
 <template>
@@ -97,11 +98,8 @@ const apply = async () => {
               </div>
             </div>
           </div>
-
           <hr class="my-6 border-t border-zinc-100" />
-
-          <p class="w-full" style="white-space: pre-line;">{{ posting.contents }}</p>
-
+          <Editor :read-only="true" v-model="posting.contents"/>
         </div>
 
         <!-- Sidebar -->
@@ -146,3 +144,7 @@ const apply = async () => {
     </div>
   </div>
 </template>
+
+<style>
+@import 'quill/dist/quill.snow.css';
+</style>
