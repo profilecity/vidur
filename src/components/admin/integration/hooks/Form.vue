@@ -78,18 +78,18 @@ defineExpose({
     <form class="flex flex-col items-start" @submit="onSubmit">
 
       <div class="flex flex-col justify-items-start w-4/5">
-        <label class="block text-sm flex" for="title">Title <span class="text-rose-500">*</span></label>
+        <label class="text-sm flex" for="title">Title <span class="text-rose-500">*</span></label>
         <div class="flex">
-          <input id="title" class="input-custom" placeholder="My External ATS Provider" type="text" v-model="title"
+          <input id="title" name="title" class="input-custom" placeholder="My External ATS Provider" type="text" v-model="title"
             :disabled="isSubmitting" />
           <div class="text-xs mt-1 text-rose-500">{{ errors.title }}</div>
         </div>
       </div>
 
       <div class="flex flex-col justify-items-start w-4/5 mt-4">
-        <label class="flex block text-sm" for="url">URL <span class="text-rose-500">*</span></label>
+        <label class="flex text-sm" for="url">URL <span class="text-rose-500">*</span></label>
         <div class="flex">
-          <input id="url" class="input-custom" placeholder="https://ats-provider.com/api/register-event" type="url"
+          <input id="url" name="url" class="input-custom" placeholder="https://ats-provider.com/api/register-event" type="url"
             v-model="url" :disabled="isSubmitting" />
           <div class="text-xs mt-1 text-rose-500">{{ errors.url }}</div>
         </div>

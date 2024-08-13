@@ -5,15 +5,7 @@ export function useGeneralSettings(config?: string) {
   return useFetch<GeneralSettings>('/api/settings/general', {
     query: {
       config,
-    }
-  });
-}
-
-export function usePublicGeneralSettings(config?: string) {
-  return useFetch<GeneralSettings>('/api/public/settings', {
-    query: {
-      config,
-    }
+    },
   });
 }
 
@@ -28,16 +20,16 @@ export function usePublicPosting(id: string) {
       if (res.error.value.statusCode == 404) {
         throw createError({
           statusCode: 404,
-          statusMessage: 'Job posting not found.'
-        })
+          statusMessage: 'Job posting not found.',
+        });
       }
       console.error(res.error.value);
       throw createError({
         statusCode: 500,
-        statusMessage: 'Error fetching job posting.'
-      })
+        statusMessage: 'Error fetching job posting.',
+      });
     }
-  })
+  });
   return res;
 }
 

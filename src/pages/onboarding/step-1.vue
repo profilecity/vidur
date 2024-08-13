@@ -42,8 +42,8 @@
           <!-- Form -->
           <form>
             <div class="space-y-3 mb-8">
-              <label class="relative block cursor-pointer">
-                <input type="radio" name="radio-buttons" class="peer sr-only" checked />
+              <label for="radio-experienced" class="relative block cursor-pointer">
+                <input type="radio" id="radio-experienced" name="radio-experienced" class="peer sr-only" checked />
                 <div
                   class="flex items-center bg-white text-md text-zinc-800 p-4 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
                   <Icon class="w-6 h-6 mr-2" name="game-icons:rank-3" />
@@ -53,8 +53,8 @@
                   class="absolute inset-0 border border-transparent peer-checked:border-blue-500 rounded-lg pointer-events-none"
                   aria-hidden="true"></div>
               </label>
-              <label class="relative block cursor-pointer">
-                <input type="radio" name="radio-buttons" class="peer sr-only" />
+              <label for="radio-used-before" class="relative block cursor-pointer">
+                <input type="radio" id="radio-used-before" name="radio-used-before" class="peer sr-only" />
                 <div
                   class="flex items-center bg-white text-md text-zinc-800 p-4 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
                   <Icon class="w-6 h-6 mr-2" name="game-icons:rank-2" />
@@ -64,8 +64,8 @@
                   class="absolute inset-0 border border-transparent peer-checked:border-blue-500 rounded-lg pointer-events-none"
                   aria-hidden="true"></div>
               </label>
-              <label class="relative block cursor-pointer">
-                <input type="radio" name="radio-buttons" class="peer sr-only" />
+              <label for="radio-beginner" class="relative block cursor-pointer">
+                <input type="radio" id="radio-beginner" name="radio-beginner" class="peer sr-only" />
                 <div
                   class="flex items-center bg-white text-md text-zinc-800 p-4 rounded-lg border border-zinc-200 hover:border-zinc-300 shadow-sm transition">
                   <Icon class="w-6 h-6 mr-2" name="game-icons:rank-1" />

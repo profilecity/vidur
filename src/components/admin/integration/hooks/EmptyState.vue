@@ -40,10 +40,10 @@
         <!-- List item -->
         <li class="relative py-2">
           <div class="flex items-center mb-1">
-            <div class="absolute left-0 w-7 h-7 rounded-full bg-zinc-800" aria-hidden="true">
+            <div class="absolute left-0 rounded-full bg-zinc-600" aria-hidden="true">
               <Icon name="mdi:number-3" class="w-5 h-5 fill-current text-white" />
             </div>
-            <h3 class="text-base text-zinc-600 pl-6">Create custom actions!</h3>
+            <h3 class="text-base text-zinc-800 pl-6">Create custom actions!</h3>
           </div>
         </li>
       </ul>
