@@ -14,7 +14,7 @@ services:
     volumes:
       - vidur_data:/var/lib/postgresql/data
     profiles:
-      - ''
+      - dev
 
   app:
     build:
@@ -40,7 +40,7 @@ services:
       - /app/node_modules
       - static_data:/tmp/vidur-jobs-dev
     profiles:
-      - ''
+      - dev
 
   app-prod:
     build:
