@@ -42,7 +42,7 @@ import type Quill from 'quill';
 
 const props = withDefaults(defineProps<{
   modelValue: string;
-  placeholder: string;
+  placeholder?: string;
   id?: string;
   readOnly?: boolean;
 }>(), {
