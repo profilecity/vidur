@@ -313,6 +313,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-3.1.1.tgz#63085d2995ca0f0e55aa8b8a07d69bfd48b844fe"
   integrity sha512-a7cxGcJ2wIlMFLlh8z2ONm+715QkPHiyJcxwQlKOz/03GPw1COpfhcmC9wm4xlZfp//jWHNNMwzjtqHXVWU9KA==
 
+"@drizzle-team/brocli@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@drizzle-team/brocli/-/brocli-0.8.2.tgz#a397253fa1094b16f761b776f39dbdd119838ef7"
+  integrity sha512-zTrFENsqGvOkBOuHDC1pXCkDXNd2UhP4lI3gYGhQ1R1SPeAAfqzPsV1dcpMy4uNU6kB5VpU5NGhvwxVNETR02A==
+
 "@esbuild-kit/core-utils@^3.3.2":
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/@esbuild-kit/core-utils/-/core-utils-3.3.2.tgz#186b6598a5066f0413471d7c4d45828e399ba96c"
@@ -2894,11 +2899,12 @@ dotenv@^16.4.5:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.4.5.tgz#cdd3b3b604cb327e286b4762e13502f717cb099f"
   integrity sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==
 
-drizzle-kit@^0.22.7:
-  version "0.22.8"
-  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.22.8.tgz#0f85d84cd5a1dbad045228067105ff636fc597bf"
-  integrity sha512-VjI4wsJjk3hSqHSa3TwBf+uvH6M6pRHyxyoVbt935GUzP9tUR/BRZ+MhEJNgryqbzN2Za1KP0eJMTgKEPsalYQ==
+drizzle-kit@^0.24.0:
+  version "0.24.0"
+  resolved "https://registry.yarnpkg.com/drizzle-kit/-/drizzle-kit-0.24.0.tgz#64bb400b2a1a8681f749fc1eb8e6a62c908ff3ab"
+  integrity sha512-rUl5Rf5HLOVkAwHEVEi8xgulIRWzoys0q77RHGCxv5e9v8AI3JGFg7Ug5K1kn513RwNZbuNJMUKOXo0j8kPRgg==
   dependencies:
+    "@drizzle-team/brocli" "^0.8.2"
     "@esbuild-kit/esm-loader" "^2.5.5"
     esbuild "^0.19.7"
     esbuild-register "^3.5.0"
