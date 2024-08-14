@@ -22,7 +22,7 @@ const fetchingUserSuggestions = ref(false);
 watchDebounced(userSearchQuery, async (q) => {
   try {
     fetchingUserSuggestions.value = true;
-    suggestedUsers.value = await $fetch("/api/user/lookup", {
+    suggestedUsers.value = await $fetch<User[]>("/api/user/lookup", {
       query: {
         q,
       }

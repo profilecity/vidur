@@ -72,6 +72,7 @@ const onSubmit = handleSubmit(async values => {
   }
 })
 
+const isDeleting = ref(false);
 const onDelete = async () => {
   if (!isUpdating) {
     return;
@@ -80,7 +81,7 @@ const onDelete = async () => {
     if (errorBag.value) {
       console.log(errorBag.value);
     }
-    isSubmitting.value = true;
+    isDeleting.value = true;
     await $fetch('/api/posting', {
       method: 'DELETE',
       query: {
@@ -91,7 +92,7 @@ const onDelete = async () => {
   } catch (e) {
     console.error(e);
   } finally {
-    isSubmitting.value = false;
+    isDeleting.value = false;
   }
 }
 </script>
@@ -109,11 +110,12 @@ const onDelete = async () => {
       </div>
       <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
-        <Icon name="ei:spinner-3" class="w-6 h-6 text-zinc-900 animate-spin" v-if="isSubmitting" />
-        <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete">
+        <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete" v-if="isUpdating">
           <template #input="{ open }">
             <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
-              <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+              <AbstractAsyncAction :executing="isDeleting" spinner-class="text-zinc-800 w-5">
+                <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
+              </AbstractAsyncAction>
             </button>
           </template>
         </AbstractConfirmationBox>
@@ -129,9 +131,13 @@ const onDelete = async () => {
         </div>
         <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSubmit">
           <template #input="{ open }">
-            <button class="btn btn-primary space-x-2 items-center" :disabled="isSubmitting" @click="open">
-              <Icon name="lets-icons:save" class="w-5 h-5" />
-              <span>Save Changes</span>
+            <button class="btn btn-primary" :disabled="isSubmitting" @click="open">
+              <AbstractAsyncAction :executing="isSubmitting" spinner-class="w-5 text-white">
+                <div class="flex spece-x-2 items-center">
+                  <Icon name="lets-icons:save" class="w-3 h-3 mr-1" />
+                  <span>Save</span>
+                </div>
+              </AbstractAsyncAction>
             </button>
           </template>
         </AbstractConfirmationBox>
