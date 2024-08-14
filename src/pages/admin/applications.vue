@@ -27,10 +27,6 @@ if (postingIdsQuery) {
   }
 }
 
-const onPostingsSelected = (postingIds: string[]) => {
-  selectedPostings.value = postingIds;
-}
-
 watch(selectedPostings, fetchApplicants);
 
 watchEffect(() => {
@@ -43,7 +39,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <AdminApplicationsHeader :posting-ids="selectedPostings" :postings @postings-selected="onPostingsSelected" />
+  <AdminApplicationsHeader :postings v-model="selectedPostings" />
   <section class="p-4"v-if="selectedPostings.length > 0">
     <section class="mb-6" v-for="posting in selectedPostings" :key="posting">
       <div class="text-md" v-if="applications[posting]">
