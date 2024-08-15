@@ -6,6 +6,9 @@ export default defineNuxtConfig({
     },
   },
   srcDir: 'src/',
+  routeRules: {
+    '/admin/*': { ssr: false },
+  },
   modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', '@nuxtjs/google-fonts', 'nuxt-cropper'],
   googleFonts: {
     families: {
@@ -52,7 +55,7 @@ export default defineNuxtConfig({
     },
     public: {
       origin: 'http://localhost:3001',
-    }
+    },
   },
   compatibilityDate: '2024-07-31',
 });
