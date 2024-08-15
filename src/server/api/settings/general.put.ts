@@ -3,12 +3,14 @@ import { generalSettingsSchema } from '~/schemas/setting';
 import { metaDataTable } from '~/server/db/schema';
 import authenticateAdminRequest from '~/server/utils/admin';
 import { settings_memoryStorage } from '~/server/utils/storage';
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
   if (IS_DEV) {
-    console.log('updating settings');
+    logger.info('updating settings');
   }
 
   const settingsUpdateRequest = await readValidatedBody(event, generalSettingsSchema.parse);

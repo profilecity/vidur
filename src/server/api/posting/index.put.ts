@@ -2,7 +2,9 @@ import { jobPostingsTable } from '../../db/schema';
 import authenticateAdminRequest from '../../utils/admin';
 import { eq } from 'drizzle-orm';
 import { updateJobPostingSchema } from '~/schemas/posting';
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
   const database = await useDatabase();
 
@@ -10,7 +12,7 @@ export default defineEventHandler(async (event) => {
   const q = await readValidatedBody(event, updateJobPostingSchema.parse);
 
   if (IS_DEV) {
-    console.log('updating posting id', q.id);
+    logger.info('updating posting id', q.id);
   }
 
   const updateQuery = {

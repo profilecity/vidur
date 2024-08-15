@@ -1,3 +1,6 @@
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
   const key = getRouterParam(event, "key");
   if (!key) {
@@ -9,7 +12,7 @@ export default defineEventHandler(async (event) => {
   const asset = await blobStorage.getItemRaw(key);
 
   if (IS_DEV) {
-    console.log("grabbing asset", key);
+    logger.info("grabbing asset", key);
   }
 
   return asset;

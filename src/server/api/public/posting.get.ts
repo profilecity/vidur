@@ -1,13 +1,15 @@
 import { and, eq } from "drizzle-orm";
 import { jobPostingsTable } from "~/server/db/schema";
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
   const database = await useDatabase();
 
   const query = getQuery<{ id: string }>(event);
 
   if (IS_DEV) {
-    console.log("[PUBLIC] fetching posting with id", query.id);
+    logger.info("[PUBLIC] fetching posting with id", query.id);
   }
 
   if (!query.id) {
@@ -30,7 +32,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (IS_DEV) {
-    console.log("[PUBLIC] postings page found", postings.length, "postings with id", query.id);
+    logger.info("[PUBLIC] postings page found", postings.length, "postings with id", query.id);
   }
 
   return postings[0];

@@ -2,7 +2,9 @@ import { eq, inArray } from 'drizzle-orm';
 import { postingApplicantsTable, User, UserHandle, userHandlesTable, usersTable } from '../db/schema';
 import authenticateAdminRequest from '../utils/admin';
 import { applicationsLookupSchema } from '~/schemas/application';
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
@@ -17,7 +19,7 @@ export default defineEventHandler(async (event) => {
 
   if (query.postingIds.length == 0) {
     if (IS_DEV) {
-      console.log('applications lookup', 'no posting ids found in query');
+      logger.info('applications lookup', 'no posting ids found in query');
     }
     return {
       applications: [],

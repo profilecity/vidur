@@ -3,14 +3,16 @@ import { metaDataTable } from '../db/schema';
 import { GeneralSettings } from '~/schemas/setting';
 import { prefixStorage } from 'unstorage';
 import { settings_memoryStorage } from '../utils/storage';
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineTask<boolean>({
   meta: {
     name: 'seed-cache',
     description: 'This task runs when Nitro server boots up. It initialises cache with default metadata',
   },
   async run() {
-    console.log('Seeding Cache');
+    logger.info('Seeding Cache');
     const db = await useDatabase();
 
     const settingEntries = await db

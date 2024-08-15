@@ -6,7 +6,9 @@ import { seeds } from '../utils/seeds';
 export type SeedContext = { db: NodePgDatabase };
 export type SeedPayload = { startKey: string };
 export type SeedFn = (ctx: SeedContext, payload: SeedPayload) => Promise<void> | void;
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 const seedDatabase = async (payload: SeedPayload) => {
   const db = await useDatabase();
 
@@ -15,7 +17,7 @@ const seedDatabase = async (payload: SeedPayload) => {
   const currentSeedVersion = dbResponse.length > 0 ? parseInt(dbResponse[dbResponse.length - 1].value || '0') : 0;
   const seedingForFirstTime = !(dbResponse.length > 0);
 
-  console.log('Current Seed Version', currentSeedVersion, 'Total Seed Versions', seeds.length);
+  logger.info('Current Seed Version', currentSeedVersion, 'Total Seed Versions', seeds.length);
 
   let success = true;
 
@@ -24,12 +26,12 @@ const seedDatabase = async (payload: SeedPayload) => {
 
     for (let index = currentSeedVersion; index < seeds.length; index++) {
       const seedFn = seeds[index];
-      console.log('Applying SeedCTX', index + 1);
+      logger.info('Applying SeedCTX', index + 1);
       try {
         await seedFn(seedCtx, payload);
       } catch (e) {
         console.error('Error applying seed', index, e);
-        console.log('Rolling back...');
+        logger.info('Rolling back...');
         tx.rollback();
         success = false;
         break;
@@ -57,7 +59,7 @@ export default defineTask<boolean>({
   async run({ payload }) {
     const seedPayload = payload as SeedPayload;
 
-    console.log('Seeding Database');
+    logger.info('Seeding Database');
     const result = await seedDatabase(seedPayload);
     return {
       result,

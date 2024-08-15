@@ -1,7 +1,9 @@
 import authenticateAdminRequest from "../../utils/admin";
 import { createJobPostingSchema } from "~/schemas/posting";
 import { jobPostingsTable } from "../../db/schema";
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
 
   const session = await authenticateAdminRequest(event);
@@ -11,7 +13,7 @@ export default defineEventHandler(async (event) => {
   );
 
   if (IS_DEV) {
-    console.log("creating posting", jobPostingRequest);
+    logger.info("creating posting", jobPostingRequest);
   }
 
   const database = await useDatabase();

@@ -1,6 +1,8 @@
 import { eq, getTableColumns } from "drizzle-orm";
 import { JobPosting, jobPostingsTable } from "~/server/db/schema";
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (_) => {
   const database = await useDatabase();
 
@@ -20,7 +22,7 @@ export default defineEventHandler(async (_) => {
     .where(eq(jobPostingsTable.isPublished, true));
 
   if (IS_DEV) {
-    console.log("[PUBLIC] postings page found", postings.length, "postings.");
+    logger.info("[PUBLIC] postings page found", postings.length, "postings.");
   }
 
   return (postings as JobPosting[]);

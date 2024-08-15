@@ -5,7 +5,9 @@ import type { H3Event } from 'h3';
 import { getToken } from './jwt';
 
 export type OnboardingStatus = { onboardingURL: string | null };
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export async function getUserOnboardStatus(event: H3Event): Promise<OnboardingStatus> {
   const config = useRuntimeConfig();
   const accessToken = await getToken(event);
@@ -22,7 +24,7 @@ export async function getUserOnboardStatus(event: H3Event): Promise<OnboardingSt
 
 export async function getOrCreateUser(verifiedDetails: { email: string }, token: string): Promise<User> {
   if (IS_DEV) {
-    console.log('getOrCreateUser called');
+    logger.info("GetOrCreateuser called")
   }
   const db = await useDatabase();
   const config = useRuntimeConfig();
@@ -36,7 +38,7 @@ export async function getOrCreateUser(verifiedDetails: { email: string }, token:
   let userBasicProfile: BasicProfile | null = null;
   try {
     if (IS_DEV) {
-      console.log('Calling userBasicProfile');
+      logger.info('Calling userBasicProfile');
     }
     userBasicProfile = await $fetch<BasicProfile>('/user/basic-profile', {
       baseURL: config.services.profileCity,
@@ -47,7 +49,7 @@ export async function getOrCreateUser(verifiedDetails: { email: string }, token:
     });
 
     if (IS_DEV) {
-      console.log(userBasicProfile);
+      logger.info(userBasicProfile);
     }
   } catch (e: any) {
     console.error('Error fetching `basic-profile`', e);

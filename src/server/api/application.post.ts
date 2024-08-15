@@ -2,13 +2,15 @@ import { applicationCreateSchema } from '~/schemas/application';
 import authenticateRequest from '../utils/auth';
 import { and, count, eq, sql } from 'drizzle-orm';
 import { jobPostingsTable, postingApplicantsTable } from '../db/schema';
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
   const session = await authenticateRequest(event);
   const body = await readValidatedBody(event, applicationCreateSchema.parse);
 
   if (IS_DEV) {
-    console.log('user', session.user.id, 'applying to', body.postingId);
+    logger.info('user', session.user.id, 'applying to', body.postingId);
   }
 
   const database = await useDatabase();
@@ -28,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
   if (!postingExistsAndIsPublished) {
     if (IS_DEV) {
-      console.log('posting not found.', 'applying to', body.postingId);
+      logger.info('posting not found.', 'applying to', body.postingId);
     }
     throw createError({
       statusCode: 404,
@@ -51,7 +53,7 @@ export default defineEventHandler(async (event) => {
 
   if (userAlreadyApplied) {
     if (IS_DEV) {
-      console.log(
+      logger.info(
         'user already applied. userId',
         session.user.id,
         'applying to',
@@ -79,7 +81,7 @@ export default defineEventHandler(async (event) => {
   });
 
   if (IS_DEV) {
-    console.log('calling hook:application-create');
+    logger.info('calling hook:application-create');
   }
 
   // Don't await for task.
@@ -92,7 +94,7 @@ export default defineEventHandler(async (event) => {
   });
 
   if (IS_DEV) {
-    console.log(
+    logger.info(
       'user',
       session.user.id,
       "'s application successful for",

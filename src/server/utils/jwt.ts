@@ -1,11 +1,14 @@
 import jwt from 'jsonwebtoken';
 import { JwksClient } from 'jwks-rsa';
 import type { H3Event } from 'h3';
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 
 let jwksClient: JwksClient | null = null;
 
 if (IS_DEV) {
-  console.log('!!! NOTICE !!!\nBYPASSING TOKEN VALIDATION IN DEV MODE');
+  logger.info('!!! NOTICE !!! BYPASSING TOKEN VALIDATION IN DEV MODE');
 }
 
 export async function getToken(

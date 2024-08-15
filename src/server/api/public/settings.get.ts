@@ -1,7 +1,9 @@
 import { z } from 'zod';
 import { GeneralSettings } from '~/schemas/setting';
 import { settings_memoryStorage } from '~/server/utils/storage';
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 const settingsLookupSchema = z.object({
   config: z.enum(['seoConfig', 'organizationConfig']).optional(),
 });
@@ -11,7 +13,7 @@ export default defineEventHandler(async (event) => {
   const queries = query.config ? [query.config] : ['seoConfig', 'organizationConfig'];
 
   if (IS_DEV) {
-    console.log("fetching public settings. queries:", queries);
+    logger.info("fetching public settings. queries:", queries);
   }
 
   const settings: GeneralSettings = {

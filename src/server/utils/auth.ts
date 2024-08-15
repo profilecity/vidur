@@ -1,7 +1,9 @@
 import { H3Event } from "h3";
 import type { User } from "../db/schema";
 import { getToken } from "./jwt";
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export type Credentials = {
   token: string;
   tokenType: string;

@@ -1,5 +1,8 @@
 import { H3Event } from "h3";
 import authenticateRequest from "./auth";
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 
 export default async function authenticateAdminRequest(
   event: H3Event,
@@ -9,7 +12,7 @@ export default async function authenticateAdminRequest(
   const bypassAdmin = useRuntimeConfig().bypassAdmin;
 
   if (bypassAdmin) {
-    console.log("Bypassing Admin Check.");
+    logger.info("Bypassing Admin Check.");
     return session;
   }
 

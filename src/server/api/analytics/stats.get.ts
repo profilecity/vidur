@@ -1,7 +1,9 @@
 import { count, eq, not } from "drizzle-orm";
 import { jobPostingsTable, usersTable } from "~/server/db/schema";
 import authenticateAdminRequest from "~/server/utils/admin"
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export type Stats = {
   totalActivePostings: number;
   totalActiveApplicants: number;
@@ -28,7 +30,7 @@ export default defineEventHandler(async (event) => {
   } satisfies Stats;
 
   if (IS_DEV) {
-    console.log(stats);
+    logger.info(stats);
   }
 
   return stats;

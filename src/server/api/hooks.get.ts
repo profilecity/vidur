@@ -1,6 +1,8 @@
 import { hooksTable } from "../db/schema";
 import authenticateAdminRequest from "../utils/admin"
-
+import { NitroApp } from 'nitropack'
+const nitroApp = useNitroApp()
+const logger = nitroApp.logger
 export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
   
@@ -9,7 +11,7 @@ export default defineEventHandler(async (event) => {
   const hooks = await db.select().from(hooksTable);
 
   if (IS_DEV) {
-    console.log("Found", hooks.length, "Hooks");
+    logger.info("Found", hooks.length, "Hooks");
   }
 
   return hooks;
