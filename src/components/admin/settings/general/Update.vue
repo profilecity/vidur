@@ -20,10 +20,21 @@ const { handleSubmit, errors, defineField } = useForm({
 
 // Organization Fields
 const [organizationName] = defineField('organization.name');
+const [organizationBio] = defineField('organization.bio');
 const [organizationDescription] = defineField('organization.description');
 const [organizationLocation] = defineField('organization.location');
 const [organizationLinks] = defineField('organization.links');
 const [organizationLogo] = defineField('organization.logo');
+const [organizationOverviewSocials] = defineField('organization.overview.socials');
+const [organizationOverviewCompanySize] = defineField('organization.overview.companySize');
+const [organizationOverviewTotalRaised] = defineField('organization.overview.totalRaised');
+const [organizationOverviewMarkets] = defineField('organization.overview.markets');
+
+// Initialise fields to prevent type-errors.
+organizationLinks.value = [];
+organizationDescription.value = "";
+organizationOverviewSocials.value = [];
+organizationOverviewCompanySize.value = 0;
 
 // SEO Fields
 const [seoTitle] = defineField('seo.title');
@@ -34,6 +45,10 @@ const removeFeaturedLink = (index: number) => {
   organizationLinks.value = organizationLinks.value?.filter((_, originalIndex) => originalIndex != index);
 }
 
+const removeSocialHandle = (index: number) => {
+  organizationOverviewSocials.value = organizationOverviewSocials.value?.filter((_, originalIndex) => originalIndex != index);
+}
+
 // Initialize fields with data from settings
 let stopWatching: () => void;
 stopWatching = watchEffect(() => {
@@ -41,10 +56,15 @@ stopWatching = watchEffect(() => {
     const gs = generalSettings.data.value;
 
     organizationName.value = gs.organization.name;
+    organizationBio.value = gs.organization.bio;
     organizationDescription.value = gs.organization.description;
     organizationLocation.value = gs.organization.location;
     organizationLinks.value = gs.organization.links;
     organizationLogo.value = gs.organization.logo;
+    organizationOverviewSocials.value = gs.organization.overview.socials;
+    organizationOverviewCompanySize.value = gs.organization.overview.companySize;
+    organizationOverviewTotalRaised.value = gs.organization.overview.totalRaised;
+    organizationOverviewMarkets.value = gs.organization.overview.markets;
 
     seoTitle.value = gs.seo.title;
     seoDescription.value = gs.seo.description;
@@ -93,9 +113,7 @@ const logoUpdated = (id: string) => {
       <section class="w-full md:w-2/3">
         <div class="flex items-end">
           <div class="mr-4">
-            <ClientOnly>
-              <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="logoURL" width="80" height="80" alt="User upload" />
-            </ClientOnly>
+            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="logoURL" width="80" height="80" alt="User upload" />
           </div>
           <AdminSettingsGeneralUpdateOrgLogo @update="logoUpdated" />
         </div>
@@ -115,28 +133,33 @@ const logoUpdated = (id: string) => {
           </div>
         </div>
         <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="description">
-            Bio <span class="text-xs ml-1 text-rose-500">{{ errors['organization.description'] }}</span>
+          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="bio">
+            Bio <span class="text-xs ml-1 text-rose-500">{{ errors['organization.bio'] }}</span>
           </label>
-          <textarea class="input-custom" placeholder="Join us in building next generation space technology.."
+          <input type="text" class="input-custom" placeholder="Join us in building next generation space technology.."
+            v-model="organizationBio" />
+        </div>
+        <div class="w-full mt-5">
+          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="description">
+            Description <span class="text-xs ml-1 text-rose-500">{{ errors['organization.description'] }}</span>
+          </label>
+          <Editor placeholder="We started as a group of mad scientists, curious about space..."
             v-model="organizationDescription" />
         </div>
         <div class="w-full mt-5">
           <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="featured-links">
             Featured Links
           </label>
-          <ClientOnly>
-            <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full">
-              <input v-model="link.title" class="input-custom-vlen w-5/12" type="text"
-                placeholder="Mars Mission Docs" />
-              <input v-model="link.href" class="input-custom-vlen w-5/12" type="url"
-                placeholder="https://big-space-tech.com/missions/mars" />
-              <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeFeaturedLink(index)">
-                <Icon name="mdi:minus" class="w-4 h-4" />
-                Remove
-              </button>
-            </div>
-          </ClientOnly>
+          <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full">
+            <input v-model="link.title" class="input-custom-vlen w-5/12" type="text"
+              placeholder="Mars Mission Docs" />
+            <input v-model="link.href" class="input-custom-vlen w-5/12" type="url"
+              placeholder="https://big-space-tech.com/missions/mars" />
+            <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeFeaturedLink(index)">
+              <Icon name="mdi:minus" class="w-4 h-4" />
+              Remove
+            </button>
+          </div>
           <div class="flex space-x-2 items-center">
             <button class="btn-sm flex items-center space-x-2"
               @click="organizationLinks?.push({ title: '', href: '' })">
@@ -144,6 +167,50 @@ const logoUpdated = (id: string) => {
               Add Link
             </button>
             <span class="text-sm text-rose-500">{{ errors[`organization.links`] }}</span>
+          </div>
+        </div>
+        <div class="w-full mt-5">
+          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="featured-links">
+            Social Handles
+          </label>
+          <div v-for="(social, index) in organizationOverviewSocials" :key="index" class="flex space-x-2 mb-2 w-full">
+            <AbstractSocialSelector v-model="social.handle"/>
+            <input v-model="social.href" class="input-custom-vlen w-5/12" type="url"
+              placeholder="https://big-space-tech.com/missions/mars" />
+            <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeSocialHandle(index)">
+              <Icon name="mdi:minus" class="w-4 h-4" />
+              Remove
+            </button>
+          </div>
+          <div class="flex space-x-2 items-center">
+            <button class="btn-sm flex items-center space-x-2"
+              @click="organizationOverviewSocials?.push({ handle: '', href: '' })">
+              <Icon name="mdi:plus" class="w-5 h-5" />
+              Add Handle
+            </button>
+            <span class="text-sm text-rose-500">{{ errors[`organization.overview.socials`] }}</span>
+          </div>
+        </div>
+        <div class="md:flex gap-4 items-center mt-5">
+          <div>
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="companySize">
+              Company Size <span class="text-xs ml-1 text-rose-500">{{ errors['organization.overview.companySize'] }}</span>
+            </label>
+            <AbstractCompanySizeSelector v-model="organizationOverviewCompanySize"/>
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="totalRaised">
+              Total Raised <span class="text-xs ml-1 text-rose-500">{{ errors['organization.overview.totalRaised'] }}</span>
+            </label>
+            <input class="input-custom" type="text" placeholder="$220k Pre Seed"
+              v-model="organizationOverviewTotalRaised" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto w-full" for="markets">
+              Markets (CSV) <span class="text-xs ml-1 text-rose-500">{{ errors['organization.overview.markets'] }}</span>
+            </label>
+            <input class="input-custom" type="text" placeholder="space, astrology, humankind"
+              v-model="organizationOverviewMarkets" />
           </div>
         </div>
         <!-- Panel footer -->
