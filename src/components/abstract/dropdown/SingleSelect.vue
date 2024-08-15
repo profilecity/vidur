@@ -3,13 +3,13 @@ import type { SelectableOption } from "~/types/general";
 import { useVModel } from "@vueuse/core";
 
 const props = defineProps<{
-  modelValue: string;
+  modelValue: SelectableOption['id'];
   title: string;
   options: SelectableOption[];
 }>();
 
 const emits = defineEmits<{
-  "update:modelValue": [string];
+  "update:modelValue": [SelectableOption['id']];
 }>();
 
 const selectedOptionId = useVModel(props, "modelValue", emits);
@@ -19,7 +19,7 @@ const selectedOption = computed(() => {
   }
 })
 
-const setSelectedOption = (id: string, closeFn: () => void) => {
+const setSelectedOption = (id: SelectableOption['id'], closeFn: () => void) => {
   selectedOptionId.value = id;
   closeFn();
 }
