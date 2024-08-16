@@ -51,15 +51,13 @@ export function timeAgo(date: Date) {
   return `Just Now`;
 }
 
-export function formatDate(date: Date) {
-  const options = {
+export function formatDate(date: Date): string {
+  const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   };
 
-  // TODO: fix this.
-  // @ts-expect-error
   return date.toLocaleDateString('en-US', options);
 }
 
