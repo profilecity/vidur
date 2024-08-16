@@ -17,7 +17,7 @@
     <br />
     <a href="https://discord.gg/Pt2W9Sx7ap">Discord</a>
     ·
-    <a href="https://www.vidurjobs.xyz">Website</a>
+    <a href="https://www.profilecity.xyz/vidur">Website</a>
     ·
     <a href="https://github.com/nirvanaOSS/vidur/issues">Issues</a>
     ·
