@@ -2,7 +2,6 @@ import consola from 'consola'
 
 function getDynamicTag(){
   const timestamp = new Date().toISOString() // Get the current timestamp
-    
      // Construct the log message
     return  `vidur [${timestamp}]`
 
