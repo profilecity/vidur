@@ -12,23 +12,21 @@
   <p align="center">
     The open-source next-gen Recruiting OS.
     <br />
-    <a href="https://www.vidurjobs.xyz"><strong>Learn more »</strong></a>
+    <a href="https://www.profilecity.xyz/vidur"><strong>Learn more »</strong></a>
     <br />
     <br />
-    <a href="https://discord.gg/Pt2W9Sx7ap">Discord</a>
+    <a href="https://discord.gg/9ms5uYF8xF">Discord</a>
     ·
     <a href="https://www.profilecity.xyz/vidur">Website</a>
     ·
-    <a href="https://github.com/nirvanaOSS/vidur/issues">Issues</a>
-    ·
-    <a href="https://www.vidurjobs.xyz/roadmap">Roadmap</a>
+    <a href="https://github.com/profilecity/vidur/issues">Issues</a>
   </p>
 </p>
 
 <p align="center">
-   <a href="https://x.com/thenirvanalabs"><img src="https://img.shields.io/twitter/follow/thenirvanalabs" alt="Follow Us on X"></a>
-   <a href="https://discord.gg/Pt2W9Sx7ap"><img src="https://img.shields.io/badge/Discord%20-%20Join%20the%20Community%20-%20%235865F2" alt="Join the Community"></a>
-   <a href="https://www.linkedin.com/company/thenirvanalabs"><img src="https://img.shields.io/badge/LinkedIn%20-%20The%20Nirvana%20Labs%20-%20%230E92D5" alt="Follow Us on LinkedIn"></a>
+   <a href="https://x.com/profilecityhq"><img src="https://img.shields.io/twitter/follow/profilecityhq" alt="Follow Us on X"></a>
+   <a href="https://discord.gg/9ms5uYF8xF"><img src="https://img.shields.io/badge/Discord%20-%20Join%20the%20Community%20-%20%235865F2" alt="Join the Community"></a>
+   <a href="https://www.linkedin.com/company/profilecity"><img src="https://img.shields.io/badge/LinkedIn%20-%20The%20Nirvana%20Labs%20-%20%230E92D5" alt="Follow Us on LinkedIn"></a>
    <a href="https://www.producthunt.com/products/vidur"><img src="https://img.shields.io/badge/Product%20Hunt%20-%20Vidur%20-%20%23DA552F" alt="Product Hunt"></a>
 </p>
 
