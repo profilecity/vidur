@@ -54,7 +54,7 @@ const onSubmit = handleSubmit(async values => {
 
 const clear = () => {
   if (isUpdating) {
-    throw new Error("Cannot call clear when updating");
+    throw new Error("Can not call clear when updating");
   }
   title.value = undefined;
   url.value = undefined;
@@ -69,7 +69,7 @@ defineExpose({
 <template>
   <div>
     <div class="text-sm mb-4 text-zinc-500" v-if="!isUpdating">
-      Create a hook to start receiving events immediatly. <br>
+      Create a hook to start receiving events immediately. <br>
       Use
       <a class="underline text-blue-500" href="https://atlas.thenirvanalabs.com/oauth2/jwks" target="_blank">this</a>
       JWKs RSA key to authorise requests.
