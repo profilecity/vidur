@@ -11,7 +11,8 @@
     "migration:generate": "drizzle-kit generate",
     "migration:apply": "drizzle-kit migrate",
     "drizzle:update": "drizzle-kit up",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md}\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
@@ -39,9 +40,9 @@
   },
   "devDependencies": {
     "@types/pg": "^8.11.6",
+    "husky": "^9.1.5",
     "prettier": "^3.3.3"
   },
-
   "prettier": {
     "parser": "typescript"
   }
