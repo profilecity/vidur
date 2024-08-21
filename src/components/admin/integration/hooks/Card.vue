@@ -9,7 +9,7 @@ const { deleteHook } = await useHooks();
 
 const onDelete = () => {
   deleteHook(props.hook.id);
-}
+};
 </script>
 
 <template>
@@ -19,7 +19,8 @@ const onDelete = () => {
       <div class="grow">
         <header class="flex mb-4 items-start">
           <div
-            class="w-10 h-10 rounded-xl shrink-0 bg-gradient-to-tr from-amber-500 to-pink-300 mr-3 flex items-center justify-center">
+            class="w-10 h-10 rounded-xl shrink-0 bg-gradient-to-tr from-amber-500 to-pink-300 mr-3 flex items-center justify-center"
+          >
             <Icon name="mingcute:plugin-2-line" class="w-5 h-5 fill-current text-white" />
           </div>
           <div class="flex-col">
@@ -39,15 +40,23 @@ const onDelete = () => {
             </div>
           </div>
           <!-- Right side -->
-          <div class="flex space-x-1">  
-            <AbstractConfirmationBox @confirm="onDelete" title="Delete Hook?" confirmLabel="Delete" content="Hook will stop receiving further events immediatly. You cannot undo this action.">
+          <div class="flex space-x-1">
+            <AbstractConfirmationBox
+              @confirm="onDelete"
+              title="Delete Hook?"
+              confirmLabel="Delete"
+              content="Hook will stop receiving further events immediately. You cannot undo this action."
+            >
               <template #input="{ open }">
-                <button class="w-10 h-10 border rounded-xl border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300 flex justify-center items-center" @click="open">
+                <button
+                  class="w-10 h-10 border rounded-xl border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300 flex justify-center items-center"
+                  @click="open"
+                >
                   <Icon name="mdi:delete" class="w-5 h-5 text-rose-500" />
                 </button>
               </template>
             </AbstractConfirmationBox>
-            <AdminIntegrationHooksEditAction :hook="hook"/>
+            <AdminIntegrationHooksEditAction :hook="hook" />
           </div>
         </div>
       </footer>

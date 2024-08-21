@@ -8,8 +8,12 @@ const props = defineProps<{
 const { removeMember } = await useMembers();
 const session = useAuth();
 
-const onRemove = () => {
-  removeMember({ id: props.member.id });
+const onRemove = async () => {
+  try {
+    await removeMember({ id: props.member.id });
+  } catch (e) {
+    console.error("Error occurred while removing member", e);
+  }
 }
 </script>
 
@@ -25,14 +29,18 @@ const onRemove = () => {
         </div>
       </div>
       <AbstractConfirmationBox @confirm="onRemove" title="Remove Member?" confirmLabel="Remove"
-        content="Member's access will be immediatly disabled. No actions performed by member will be reverted."
+        content="Member's access will be immediately disabled. No actions performed by member will be reverted."
         v-if="session.user.value?.profile.id != member.id">
-        <template #input="{ open }">
-          <button class="btn btn-sm border border-zinc-200 hover:border-zinc-300 flex space-x-1 items-center"
-            @click="open">
-            <Icon name="mdi:delete" class="w-4 h-4 text-red-500" />
-            <span>Remove</span>
-          </button>
+        <template #input="{ open, startAction }">
+          <AbstractAsyncAction :is-loading="isRemoving">
+            <template #default="{ startAction }">
+              <button class="btn btn-sm border border-zinc-200 hover:border-zinc-300 flex space-x-1 items-center"
+                @click="open">
+                <Icon name="mdi:delete" class="w-4 h-4 text-red-500" />
+                <span>Remove</span>
+              </button>
+            </template>
+          </AbstractAsyncAction>
         </template>
       </AbstractConfirmationBox>
     </div>

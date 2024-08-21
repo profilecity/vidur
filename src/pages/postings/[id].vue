@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useRoute, useHead, navigateTo } from 'vue-router';
+import { useApplicationStatus, usePublicPosting, useGeneralSettings } from '@/composables'; // Adjust imports as necessary
+import AbstractAsyncAction from '@/components/AbstractAsyncAction.vue';
+import Editor from '@/components/Editor.vue';
+import Icon from '@mdi/vue/Icon';
+
 const route = useRoute();
 const id = route.params.id as string;
 
@@ -37,7 +44,7 @@ const apply = async () => {
     await $fetch('/api/application', { method: 'POST', body: { postingId: id } });
     refreshApplicationStatus();
   } catch (e) {
-    console.error("Error occured while applying", e);
+    console.error("Error occurred while applying", e);
   } finally {
     isApplying.value = false;
   }
@@ -81,10 +88,14 @@ const apply = async () => {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <button class="btn w-full btn-primary" @click="apply" :disabled="isApplying"
-                v-else>Apply Today
-                <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </button>
+              <AbstractAsyncAction :is-loading="isApplying">
+                <template #default="{ startAction }">
+                  <button class="btn w-full btn-primary" @click="startAction(apply)" :disabled="isApplying">
+                    Apply Today
+                    <Icon class="fill-current ml-1" name="mdi:arrow-right" />
+                  </button>
+                </template>
+              </AbstractAsyncAction>
             </div>
           </div>
 
@@ -94,7 +105,7 @@ const apply = async () => {
               <div class="m-1">
                 <span
                   class="text-xs inline-flex font-medium bg-zinc-100/30 text-zinc-800 rounded-xl text-center px-2.5 py-1 border border-zinc-500 mr-2"
-                  v-for="tag in tags">{{ tag }}</span>
+                  v-for="tag in tags" :key="tag">{{ tag }}</span>
               </div>
             </div>
           </div>
@@ -120,10 +131,14 @@ const apply = async () => {
                 <span>Applied</span>
               </div>
 
-              <button class="btn w-full btn-primary" @click="apply" :disabled="isApplying"
-                v-else>Apply Today
-                <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </button>
+              <AbstractAsyncAction :is-loading="isApplying">
+                <template #default="{ startAction }">
+                  <button class="btn w-full btn-primary" @click="startAction(apply)" :disabled="isApplying">
+                    Apply Today
+                    <Icon class="fill-current ml-1" name="mdi:arrow-right" />
+                  </button>
+                </template>
+              </AbstractAsyncAction>
             </div>
           </div>
 
@@ -145,6 +160,6 @@ const apply = async () => {
   </div>
 </template>
 
-<style>
+<style scoped>
 @import 'quill/dist/quill.snow.css';
 </style>

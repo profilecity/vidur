@@ -95,9 +95,12 @@ defineExpose({
         </div>
       </div>
 
-      <button class="flex btn btn-sm mt-4 btn-primary" :disabled="isSubmitting" type="submit">
-        {{ isUpdating ? "Save" : "Create" }}
-      </button>
+      <!-- Wrap button content in AbstractAsyncAction to show loading state during submission -->
+      <AbstractAsyncAction :loading="isSubmitting">
+        <button class="flex btn btn-sm mt-4 btn-primary" :disabled="isSubmitting" type="submit">
+          {{ isUpdating ? "Save" : "Create" }}
+        </button>
+      </AbstractAsyncAction>
     </form>
   </div>
 </template>
