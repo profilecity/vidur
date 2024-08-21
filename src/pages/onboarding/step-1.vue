@@ -77,10 +77,10 @@
               </label>
             </div>
             <div class="flex items-center justify-between">
-              <router-link class="btn bg-zinc-900 text-zinc-100 hover:bg-zinc-800 ml-auto" to="/onboarding/step-2">Next
+              <InputButton as="NuxtLink" to="/onboarding/step-2">Next
                 Step
                 <Icon name="ep:right" class="w-4 h-4 ml-1" />
-              </router-link>
+              </InputButton>
             </div>
           </form>
         </div>

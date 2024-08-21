@@ -42,8 +42,8 @@ const save = () => {
   <div class="max-w-xl" v-if="selectedFile && !croppedBlob">
     <image-cropper ref="cropperRef" :src="blobURL" :stencil-props="{ aspectRatio }" />
     <div class="flex w-full justify-end items-center space-x-1 mt-2">
-      <button class="px-2 py-1 bg-zinc-200 rounded hover:bg-zinc-300 text-sm" @click="selectedFile = null">Reset</button>
-      <button class="px-2 py-1 bg-zinc-900 rounded hover:bg-zinc-800 text-white text-sm" @click="crop">Crop</button>
+      <InputButton variant="secondary" @click="selectedFile = null">Reset</InputButton>
+      <InputButton @click="crop">Crop</InputButton>
     </div>
   </div>
   <div class="max-w-xl" v-else-if="selectedFile && croppedBlob">
@@ -51,8 +51,8 @@ const save = () => {
       <img :src="croppedBlobURL" class="w-64 h-64 border border-zinc-700 rounded-xl"/>
     </div>
     <div class="flex w-full justify-end items-center space-x-1 mt-2">
-      <button class="px-2 py-1 bg-zinc-200 rounded hover:bg-zinc-300 text-sm" @click="reset">Reset</button>
-      <button class="px-2 py-1 bg-zinc-900 rounded hover:bg-zinc-800 text-white text-sm" @click="save">Save</button>
+      <InputButton variant="secondary" @click="reset">Reset</InputButton>
+      <InputButton @click="save">Save</InputButton>
     </div>
   </div>
   <div class="max-w-xl" ref="dropZoneRef" v-else>

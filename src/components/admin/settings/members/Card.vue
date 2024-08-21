@@ -28,11 +28,9 @@ const onRemove = () => {
         content="Member's access will be immediatly disabled. No actions performed by member will be reverted."
         v-if="session.user.value?.profile.id != member.id">
         <template #input="{ open }">
-          <button class="btn btn-sm border border-zinc-200 hover:border-zinc-300 flex space-x-1 items-center"
-            @click="open">
-            <Icon name="mdi:delete" class="w-4 h-4 text-red-500" />
-            <span>Remove</span>
-          </button>
+          <InputButton variant="destructive" size="icon" @click="open">
+            <Icon name="mdi:delete" />
+          </InputButton>
         </template>
       </AbstractConfirmationBox>
     </div>

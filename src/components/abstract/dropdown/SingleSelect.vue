@@ -29,26 +29,24 @@ const setSelectedOption = (id: SelectableOption['id'], closeFn: () => void) => {
   <Dropdown :title="title" :close-on-esc="true">
     <template #input="{ open }">
       <slot name="input" :open="open">
-        <button class="btn bg-white border-zinc-200 text-zinc-900 hover:border-slate-300 hover:text-slate-800"
-          @click="open" v-if="selectedOption">
+        <InputButton variant="outline" @click="open" v-if="selectedOption">
           <Icon :name="selectedOption.logo" class="w-4 h-4 fill-current mr-2" v-if="selectedOption.logo" />
           <span>{{ selectedOption.title }}</span>
-        </button>
-        <button class="btn bg-white border-zinc-200 text-zinc-900 hover:border-slate-300 hover:text-slate-800 space-x-2 items-center"
+        </InputButton>
+        <InputButton variant="outline"
           @click="open" v-else>
           <Icon name="octicon:filter-16" class="w-4 h-4 fill-current" />
           <span class="mr-2">{{ title }}</span>
-        </button>
+        </InputButton>
       </slot>
     </template>
     <template #content="{ close }">
       <ul class="mb-4">
-        <li class="py-1 px-3" v-for="option in options" :key="option.id">
-          <button class="text-zinc-900 hover:text-slate-800"
-            @click="setSelectedOption(option.id, close)">
+        <li v-for="option in options" :key="option.id">
+          <InputButton variant="ghost" @click="setSelectedOption(option.id, close)">
             <Icon :name="option.logo" class="w-4 h-4 fill-current mr-2" v-if="option.logo" />
             <span>{{ option.title }}</span>
-          </button>
+          </InputButton>
         </li>
       </ul>
     </template>

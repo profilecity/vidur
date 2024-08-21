@@ -12,7 +12,8 @@ const user = props.applicant.user;
     <div class="flex">
       <div class="flex items-center">
         <div class="w-10 h-10 mr-2">
-          <img class="rounded-xl" :src="user.picture || undefined" width="36" height="36" :alt="`${user.firstName}'s Profile Picture'`" />
+          <img class="rounded-xl" :src="user.picture || undefined" width="36" height="36"
+            :alt="`${user.firstName}'s Profile Picture'`" />
         </div>
         <div class="font-medium text-zinc-800">
           <span class="font-bold">{{ user.firstName + " " + user.lastName }}</span><br>
@@ -22,14 +23,15 @@ const user = props.applicant.user;
     </div>
     <div class="flex items-center justify-between space-x-20">
       <div class="whitespace-nowrap">
-        <HandleFlexStrip :handles="applicant.handles"/>
+        <HandleFlexStrip :handles="applicant.handles" />
       </div>
       <div class="whitespace-nowrap">
         <div class="text-left">{{ timeAgo(new Date(application.createdAt)) }}</div>
       </div>
-      <button class="btn whitespace-nowrap hover:border-zinc-300 hover:bg-zinc-100">
-        <a target="_blank" :href="applicant.handles.find(h => h.key == 'resume')?.value">View Resume</a>
-      </button>
+      <InputButton variant="secondary" as="a" target="_blank"
+        :href="applicant.handles.find(h => h.key == 'resume')?.value">
+        View Resume
+      </InputButton>
     </div>
   </div>
 </template>

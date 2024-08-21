@@ -48,9 +48,9 @@
       </li>
     </ul>
     </div>
-    <NuxtLink to="/admin/postings/edit" class="btn btn-primary">
+    <InputButton as="NuxtLink" to="/admin/postings/edit">
       <Icon name="ic:baseline-plus" class="w-5 h-5"/>
       <span class="ml-1">Create First Posting</span>
-    </NuxtLink>
+    </InputButton>
   </div>
 </template>

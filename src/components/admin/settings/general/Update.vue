@@ -131,45 +131,36 @@ const logoUpdated = (id: string) => {
             placeholder="We started as a group of mad scientists, curious about space..."
             v-model="organizationDescription" />
         </div>
-        <div class="w-full mt-5">
-          <InputLabel label="Featured Links" id="featued-links" />
-          <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full">
+        <div class="w-full mt-8">
+          <InputLabel label="Featured Links" id="featued-links" :error="errors['organization.links']" />
+          <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full items-center">
             <InputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
             <InputText v-model="link.href" :id="`link-url-${index}`"
               placeholder="https://big-space-tech.com/mission/mars" type-override="url" />
-            <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeFeaturedLink(index)">
-              <Icon name="mdi:minus" class="w-4 h-4" />
-              Remove
-            </button>
+            <InputButton variant="destructive" size="icon" @click="removeFeaturedLink(index)">
+              <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
+            </InputButton>
           </div>
-          <div class="flex space-x-2 items-center">
-            <button class="btn-sm flex items-center space-x-2"
-              @click="organizationLinks?.push({ title: '', href: '' })">
-              <Icon name="mdi:plus" class="w-5 h-5" />
-              Add Link
-            </button>
-            <span class="text-sm text-rose-500">{{ errors[`organization.links`] }}</span>
-          </div>
+          <InputButton variant="secondary" @click="organizationLinks?.push({ title: '', href: '' })">
+            <Icon name="mdi:plus" class="w-5 h-5" />
+            Add Link
+          </InputButton>
         </div>
-        <div class="w-full mt-5">
-          <InputLabel label="Social Handles" id="social-handles" />
-          <div v-for="(social, index) in organizationOverviewSocials" :key="index" class="flex space-x-2 mb-2 w-full">
+        <div class="w-full mt-8">
+          <InputLabel label="Social Handles" id="social-handles" :error="errors[`organization.overview.socials`]" />
+          <div v-for="(social, index) in organizationOverviewSocials" :key="index"
+            class="flex space-x-2 mb-2 w-full items-center">
             <AbstractSocialSelector v-model="social.handle" />
             <InputText class="w-2/3 md:w-1/3" v-model="social.href" :id="`social-url-${index}`"
               placeholder="https://social-handle.com/@big-space-tech" type-override="url" />
-            <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeSocialHandle(index)">
-              <Icon name="mdi:minus" class="w-4 h-4" />
-              Remove
-            </button>
+            <InputButton variant="destructive" size="icon" @click="removeSocialHandle(index)">
+              <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
+            </InputButton>
           </div>
-          <div class="flex space-x-2 items-center">
-            <button class="btn-sm flex items-center space-x-2"
-              @click="organizationOverviewSocials?.push({ handle: '', href: '' })">
-              <Icon name="mdi:plus" class="w-5 h-5" />
-              Add Handle
-            </button>
-            <span class="text-sm text-rose-500">{{ errors[`organization.overview.socials`] }}</span>
-          </div>
+          <InputButton variant="secondary" @click="organizationOverviewSocials?.push({ handle: '', href: '' })">
+            <Icon name="mdi:plus" class="w-5 h-5" />
+            Add Social
+          </InputButton>
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <div>
@@ -183,12 +174,10 @@ const logoUpdated = (id: string) => {
             :error="errors['organization.overview.markets']" />
         </div>
         <!-- Panel footer -->
-        <footer>
-          <div class="flex w-full justify-start mb-10 mt-4">
-            <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
-              Save
-            </button>
-          </div>
+        <footer class="my-2">
+          <InputButton @click="onSubmit" :disabled="isSubmitting">
+            Save
+          </InputButton>
         </footer>
       </section>
     </div>
@@ -214,11 +203,9 @@ const logoUpdated = (id: string) => {
         </div>
         <!-- Panel footer -->
         <footer>
-          <div class="flex w-full justify-start mb-10 mt-4">
-            <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
-              Save
-            </button>
-          </div>
+          <InputButton @click="onSubmit" :disabled="isSubmitting">
+            Save
+          </InputButton>
         </footer>
       </section>
     </div>

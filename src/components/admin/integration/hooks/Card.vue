@@ -42,9 +42,9 @@ const onDelete = () => {
           <div class="flex space-x-1">  
             <AbstractConfirmationBox @confirm="onDelete" title="Delete Hook?" confirmLabel="Delete" content="Hook will stop receiving further events immediatly. You cannot undo this action.">
               <template #input="{ open }">
-                <button class="w-10 h-10 border rounded-xl border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300 flex justify-center items-center" @click="open">
-                  <Icon name="mdi:delete" class="w-5 h-5 text-rose-500" />
-                </button>
+                <InputButton variant="destructive" size="icon" @click="open">
+                  <Icon name="mdi:delete" />
+                </InputButton>
               </template>
             </AbstractConfirmationBox>
             <AdminIntegrationHooksEditAction :hook="hook"/>

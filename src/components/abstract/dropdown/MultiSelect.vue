@@ -29,7 +29,7 @@ const clearAction = () => {
   <Dropdown :title="title" :close-on-esc="true">
     <template #input="{ open }">
       <slot name="input" :open="open">
-        <button class="btn bg-white border-zinc-200 text-zinc-900 hover:border-slate-300 hover:text-slate-800"
+        <InputButton variant="secondary"
           @click="open">
           <span class="mr-2">{{ title }}</span>
           <Icon name="octicon:filter-16" class="w-4 h-4 fill-current" />
@@ -37,7 +37,7 @@ const clearAction = () => {
             v-if="selectedOptions.length > 0">
             {{ selectedOptions.length }}
           </span>
-        </button>
+        </InputButton>
       </slot>
     </template>
     <template #content="{ close }">
@@ -50,13 +50,13 @@ const clearAction = () => {
         </li>
       </ul>
       <div class="p-2 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between">
-        <button class="btn-xs bg-white border-zinc-200 hover:border-zinc-300 text-zinc-500 hover:text-zinc-600"
+        <InputButton variant="secondary" size="sm"
           @click="clearAction">
           Clear
-        </button>
-        <button class="btn-xs btn-primary" @click="confirm(close)">
+        </InputButton>
+        <InputButton size="sm" @click="confirm(close)">
           Select
-        </button>
+        </InputButton>
       </div>
     </template>
   </Dropdown>

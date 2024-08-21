@@ -26,6 +26,6 @@ const model = useVModel(props, "modelValue")
 
 <style scoped>
 .input-css {
-  @apply w-full py-2 px-4 border border-zinc-200 rounded-xl text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-inset focus:ring-zinc-300 sm:text-sm sm:leading-6 outline-none;
+  @apply w-full py-1.5 px-2.5 border border-zinc-200 rounded-lg text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-inset focus:ring-zinc-300 sm:text-sm sm:leading-6 outline-none;
 }
 </style>

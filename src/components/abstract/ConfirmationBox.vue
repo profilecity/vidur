@@ -50,12 +50,12 @@ const cancel = (closeModalFn: () => void) => {
       </div>
       <!-- Modal footer -->
       <div class="flex flex-wrap justify-end space-x-2">
-        <button class="btn-sm border-zinc-200 hover:border-zinc-300 text-zinc-600" @click.stop="cancel(close)">
+        <InputButton variant="secondary" @click="cancel(close)">
           {{ cancelLabel }}
-        </button>
-        <button class="btn-sm btn-primary" @click.stop="confirm(close)">
+        </InputButton>
+        <InputButton  @click="confirm(close)">
           {{ confirmLabel }}
-        </button>
+        </InputButton>
       </div>
     </template>
   </Modal>

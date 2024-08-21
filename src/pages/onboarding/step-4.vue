@@ -43,9 +43,8 @@
               d="M37.22 26.375a1 1 0 1 1 1.56 1.25l-8 10a1 1 0 0 1-1.487.082l-4-4a1 1 0 0 1 1.414-1.414l3.21 3.21 7.302-9.128Z" />
           </svg>
           <h1 class="text-2xl font-noto text-zinc-800 font-bold mb-8">Nice to have you, Acme Inc. 🙌</h1>
-          <router-link
-            class="btn bg-zinc-900 text-zinc-100 hover:bg-zinc-800"
-            to="/admin">Go To Dashboard <Icon name="ep:right" class="w-4 h-4 ml-1"/></router-link>
+          <InputButton as="NuxtLink"
+            to="/admin">Go To Dashboard <Icon name="ep:right" class="w-4 h-4 ml-1"/></InputButton>
         </div>
       </div>
     </div>

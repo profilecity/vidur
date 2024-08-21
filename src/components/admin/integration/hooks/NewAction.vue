@@ -9,10 +9,10 @@ withDefaults(defineProps<{
 <template>
   <Modal title="Create New hook">
     <template #input="{ open }">
-      <button class="btn bg-zinc-900 border border-zinc-900 hover:bg-zinc-700 text-white" @click="open">
+      <InputButton @click="open">
         <span>{{ inputLabel }}</span>
         <Icon name="ic:baseline-plus" class="ml-1 w-5 h-5" />
-      </button>
+      </InputButton>
     </template>
     <template #content="{ close }">
       <AdminIntegrationHooksForm @created="close"/>

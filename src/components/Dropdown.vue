@@ -53,7 +53,7 @@ if (props.closeOnEsc) {
         <div ref="dropdownRef">
           <div class="flex w-full justify-between text-slate-400 pb-2 px-3 items-center">
             <div class="text-xs uppercase">{{ title }}</div>
-            <button class="hover:text-zinc-600" @click="close"><Icon name="ion:close" class="text"/></button>
+            <InputButton variant="ghost" size="icon-xs" @click="close"><Icon name="ion:close"/></InputButton>
           </div>
           <slot name="content" :close="close" />        
         </div>

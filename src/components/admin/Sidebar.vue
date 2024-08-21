@@ -43,8 +43,8 @@ const logoURL = computed(() => useRemoteAsset(orgSettings.value.logo).url);
             premium
           </div>
         </div>
-        <div class="text-xs mt-2 text-zinc-500">Get access to AI powered profiles and People's Search.</div>
-        <button class="text-xs py-2 px-4 rounded-xl bg-zinc-900 mt-2 text-zinc-50">Upgrade Now</button>
+        <div class="text-xs my-2 text-zinc-500">Get access to AI powered profiles and People's Search.</div>
+        <InputButton size="sm">Upgrade Now</InputButton>
       </div>
       <div class="flex justify-between mt-4">
         <div class="text-zinc-900 text-sm">v.0.0.1</div>

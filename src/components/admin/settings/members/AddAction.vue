@@ -37,10 +37,10 @@ watchDebounced(userSearchQuery, async (q) => {
 <template>
   <Modal title="Add Member">
     <template #input="{ open }">
-      <button class="btn bg-zinc-800 hover:bg-zinc-800 text-white text-xs" @click="open">
+      <InputButton @click="open">
         <span class="mr-2">Add Member</span>
         <Icon name="ic:baseline-plus" class="w-5 h-5" />
-      </button>
+      </InputButton>
     </template>
     <template #content="{ close }">
       <form>
@@ -55,7 +55,7 @@ watchDebounced(userSearchQuery, async (q) => {
                 <span>{{ user.email }}</span>
               </div>
             </div>
-            <button class="btn btn-sm border text-sm" @click="submit(user.id, close)" :disabled="isSubmitting">Add</button>
+            <InputButton size="sm" variant="outline" @click="submit(user.id, close)" :disabled="isSubmitting">Add</InputButton>
           </div>
         </div>
         <div class="h-64 flex w-full justify-center items-center" v-else>
