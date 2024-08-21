@@ -105,7 +105,9 @@
             <AbstractAsyncAction :is-loading="isSubmitting">
               <template #default="{ startAction }">
                 <button class="btn btn-primary" @click="startAction(onSubmit)" :disabled="isSubmitting">
+                 <span>
                   Save
+                 </span> 
                 </button>
               </template>
             </AbstractAsyncAction>
@@ -153,7 +155,9 @@
             <AbstractAsyncAction :is-loading="isSubmitting">
               <template #default="{ startAction }">
                 <button class="btn btn-primary" @click="startAction(onSubmit)" :disabled="isSubmitting">
+                 <span>
                   Save
+                 </span> 
                 </button>
               </template>
             </AbstractAsyncAction>

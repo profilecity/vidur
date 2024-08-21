@@ -22,7 +22,7 @@
             <AbstractAsyncAction :is-loading="isSubmitting">
               <template #default="{ startAction }">
                 <button class="btn btn-sm border text-sm" @click="startAction(() => submit(user.id, close))" :disabled="isSubmitting">
-                  Add
+                  <span>Add</span>
                 </button>
               </template>
             </AbstractAsyncAction>

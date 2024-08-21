@@ -52,7 +52,9 @@ const onDelete = () => {
                   class="w-10 h-10 border rounded-xl border-zinc-200 hover:bg-zinc-100 hover:border-zinc-300 flex justify-center items-center"
                   @click="open"
                 >
-                  <Icon name="mdi:delete" class="w-5 h-5 text-rose-500" />
+                  <span>
+                    <Icon name="mdi:delete" class="w-5 h-5 text-rose-500" />
+                  </span>
                 </button>
               </template>
             </AbstractConfirmationBox>

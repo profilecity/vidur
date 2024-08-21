@@ -91,7 +91,9 @@ const apply = async () => {
               <AbstractAsyncAction :is-loading="isApplying">
                 <template #default="{ startAction }">
                   <button class="btn w-full btn-primary" @click="startAction(apply)" :disabled="isApplying">
-                    Apply Today
+                    <span>
+                      Apply Today
+                    </span>
                     <Icon class="fill-current ml-1" name="mdi:arrow-right" />
                   </button>
                 </template>
@@ -134,7 +136,9 @@ const apply = async () => {
               <AbstractAsyncAction :is-loading="isApplying">
                 <template #default="{ startAction }">
                   <button class="btn w-full btn-primary" @click="startAction(apply)" :disabled="isApplying">
-                    Apply Today
+                    <span>
+                      Apply Today
+                    </span>
                     <Icon class="fill-current ml-1" name="mdi:arrow-right" />
                   </button>
                 </template>

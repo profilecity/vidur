@@ -36,8 +36,10 @@ const onRemove = async () => {
             <template #default="{ startAction }">
               <button class="btn btn-sm border border-zinc-200 hover:border-zinc-300 flex space-x-1 items-center"
                 @click="open">
-                <Icon name="mdi:delete" class="w-4 h-4 text-red-500" />
-                <span>Remove</span>
+                <span class="flex items-center space-x-1">
+                  <Icon name="mdi:delete" class="w-4 h-4 text-red-500" />
+                  <span>Remove</span>
+                </span>
               </button>
             </template>
           </AbstractAsyncAction>
