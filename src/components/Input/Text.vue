@@ -18,13 +18,10 @@ const model = useVModel(props, "modelValue")
 </script>
 
 <template>
-  <div>
-    <InputLabel :labelClass :label :error :id/>
-    <input
-      class="input-css"
-      :type="typeOverride || 'text'"
-      :class="inputClass" v-model="model" :placeholder :id>
-  </div>
+  <fieldset>
+    <InputLabel :labelClass :label :error :id />
+    <input class="input-css" :type="typeOverride || 'text'" :class="inputClass" v-model="model" :placeholder :id>
+  </fieldset>
 </template>
 
 <style scoped>
