@@ -17,7 +17,6 @@ export default defineNuxtConfig({
     },
     useStylesheet: true,
   },
-  css: ['~/assets/css/style.css', '~/assets/css/additional-styles/utility-patterns.css'],
   devtools: { enabled: true },
   /**
    * Sensible defaults, overriden by env vars.
