@@ -1,3 +1,6 @@
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
 export const generalColors = [
   'red',
   'orange',
@@ -82,4 +85,8 @@ export function getHash(input: string) {
   }
 
   return hash;
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }
