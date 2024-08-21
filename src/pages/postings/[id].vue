@@ -93,8 +93,8 @@ const apply = async () => {
                   <button class="btn w-full btn-primary" @click="startAction(apply)" :disabled="isApplying">
                     <span>
                       Apply Today
+                      <Icon class="fill-current ml-1" name="mdi:arrow-right" />
                     </span>
-                    <Icon class="fill-current ml-1" name="mdi:arrow-right" />
                   </button>
                 </template>
               </AbstractAsyncAction>
