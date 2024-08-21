@@ -14,38 +14,25 @@
           <AdminSettingsGeneralUpdateOrgLogo @update="logoUpdated" />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">
-              Organization Name <span class="text-xs ml-1 text-rose-500">{{ errors['organization.name'] }}</span>
-            </label>
-            <input class="input-custom" type="text" placeholder="Organization Name" v-model="organizationName">
-          </div>
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="location">
-              Location <span class="text-xs ml-1 text-rose-500">{{ errors['organization.location'] }}</span>
-            </label>
-            <input id="location" class="input-custom" type="text" placeholder="Boston, MA" v-model="organizationLocation" />
-          </div>
+          <InputText class="w-full md:w-2/3" placeholder="Organization Name" v-model="organizationName"
+            id="organization-name" :error="errors['organization.name']" label="Organization Name" />
+          <InputText class="w-full md:w-2/3" placeholder="Location" v-model="organizationLocation"
+            id="organization-location" :error="errors['organization.location']" label="Location" />
+        </div>
+        <InputText class="w-full mt-5" placeholder="Join us in building next generation space technology.."
+          v-model="organizationBio" id="organization-bio" :error="errors['organization.bio']" label="Bio" />
+        <div class="w-full mt-5">
+          <InputLabel label="Description" id="organization-description" :error="errors['organization.description']" />
+          <Editor id="organization-description"
+            placeholder="We started as a group of mad scientists, curious about space..."
+            v-model="organizationDescription" />
         </div>
         <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="bio">
-            Bio <span class="text-xs ml-1 text-rose-500">{{ errors['organization.bio'] }}</span>
-          </label>
-          <input type="text" class="input-custom" placeholder="Join us in building next generation space technology.." v-model="organizationBio" />
-        </div>
-        <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="description">
-            Description <span class="text-xs ml-1 text-rose-500">{{ errors['organization.description'] }}</span>
-          </label>
-          <Editor placeholder="We started as a group of mad scientists, curious about space..." v-model="organizationDescription" />
-        </div>
-        <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="featured-links">
-            Featured Links
-          </label>
+          <InputLabel label="Featured Links" id="featued-links" />
           <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full">
-            <input v-model="link.title" class="input-custom-vlen w-5/12" type="text" placeholder="Mars Mission Docs" />
-            <input v-model="link.href" class="input-custom-vlen w-5/12" type="url" placeholder="https://big-space-tech.com/missions/mars" />
+            <InputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
+            <InputText v-model="link.href" :id="`link-url-${index}`"
+              placeholder="https://big-space-tech.com/mission/mars" type-override="url" />
             <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeFeaturedLink(index)">
               <Icon name="mdi:minus" class="w-4 h-4" />
               Remove
@@ -60,12 +47,11 @@
           </div>
         </div>
         <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="featured-links">
-            Social Handles
-          </label>
+          <InputLabel label="Social Handles" id="social-handles" />
           <div v-for="(social, index) in organizationOverviewSocials" :key="index" class="flex space-x-2 mb-2 w-full">
-            <AbstractSocialSelector v-model="social.handle"/>
-            <input v-model="social.href" class="input-custom-vlen w-5/12" type="url" placeholder="https://big-space-tech.com/missions/mars" />
+            <AbstractSocialSelector v-model="social.handle" />
+            <InputText class="w-2/3 md:w-1/3" v-model="social.href" :id="`social-url-${index}`"
+              placeholder="https://social-handle.com/@big-space-tech" type-override="url" />
             <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeSocialHandle(index)">
               <Icon name="mdi:minus" class="w-4 h-4" />
               Remove
@@ -80,24 +66,13 @@
           </div>
         </div>
         <div class="md:flex gap-4 items-center mt-5">
-          <div>
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="companySize">
-              Company Size <span class="text-xs ml-1 text-rose-500">{{ errors['organization.overview.companySize'] }}</span>
-            </label>
-            <AbstractCompanySizeSelector v-model="organizationOverviewCompanySize"/>
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="totalRaised">
-              Total Raised <span class="text-xs ml-1 text-rose-500">{{ errors['organization.overview.totalRaised'] }}</span>
-            </label>
-            <input class="input-custom" type="text" placeholder="$220k Pre Seed" v-model="organizationOverviewTotalRaised" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto w-full" for="markets">
-              Markets (CSV) <span class="text-xs ml-1 text-rose-500">{{ errors['organization.overview.markets'] }}</span>
-            </label>
-            <input class="input-custom" type="text" placeholder="space, astrology, humankind" v-model="organizationOverviewMarkets" />
-          </div>
+          <InputLabel label="Company Size" :error="errors['organization.overview.companySize']" id="company-size" />
+          <AbstractCompanySizeSelector v-model="organizationOverviewCompanySize" />
+          <InputText v-model="organizationOverviewTotalRaised" id="organization-overview-total-raised"
+            placeholder="$220k Pre Seed" label="Total Raised" :error="errors['organization.overview.totalRaised']" />
+          <InputText v-model="organizationOverviewMarkets" id="organization-overview-markets"
+            placeholder="Space Tech, Inter-galactic Wars" label="Markets(CSV)"
+            :error="errors['organization.overview.markets']" />
         </div>
         <!-- Panel footer -->
         <footer>
@@ -105,9 +80,7 @@
             <AbstractAsyncAction :is-loading="isSubmitting">
               <template #default="{ startAction }">
                 <button class="btn btn-primary" @click="startAction(onSubmit)" :disabled="isSubmitting">
-                 <span>
-                  Save
-                 </span> 
+                  <span>Save</span> 
                 </button>
               </template>
             </AbstractAsyncAction>
@@ -126,28 +99,14 @@
       </section>
       <section class="w-full md:w-2/3">
         <div class="md:flex gap-4 items-center mt-5">
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Website Title</label>
-            <input class="input-custom" type="text" placeholder="Organization Name" v-model="seoTitle">
-            <div class="text-xs mt-1 text-rose-500">{{ errors['seo.title'] }}</div>
-          </div>
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto">Website Description</label>
-            <input class="input-custom" type="text" placeholder="We build space tech" v-model="seoDescription" />
-            <div class="text-xs mt-1 text-rose-500">{{ errors['seo.description'] }}</div>
-          </div>
+          <InputText class="w-full md:w-1/2" placeholder="Big Space Career Site" v-model="seoTitle" id="seo-title"
+            :error="errors['seo.title']" label="Website Title" />
+          <InputText class="w-full md:w-1/2" placeholder="Big Space Career Site Description" v-model="seoDescription"
+            id="seo-description" :error="errors['seo.description']" label="Website Description" />
         </div>
-        <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto">Facebook Share Image</label>
-          <img class="w-24 h-24 md:w-32 md:h-32 rounded-xl" :src="seoFacebookShareImageURL" width="80" height="80" alt="Facebook Share Image">
-          <AdminSettingsGeneralUpdateFacebookImage @update="facebookImageUpdated" />
-          <div class="text-xs mt-1 text-rose-500">{{ errors['seo.facebookShareImage'] }}</div>
-        </div>
-        <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto">Twitter Share Image</label>
-          <img class="w-24 h-24 md:w-32 md:h-32 rounded-xl" :src="seoTwitterShareImageURL" width="80" height="80" alt="Twitter Share Image">
-          <AdminSettingsGeneralUpdateTwitterImage @update="twitterImageUpdated" />
-          <div class="text-xs mt-1 text-rose-500">{{ errors['seo.twitterShareImage'] }}</div>
+        <div class="md:flex gap-4 items-center mt-5">
+          <InputText class="w-full md:w-1/2" placeholder="big_space_tech" v-model="seoTwitter" id="seo-twitter"
+            :error="errors['seo.twitter']" label="Twitter Handle (without @)" />
         </div>
         <!-- Panel footer -->
         <footer>
@@ -155,9 +114,7 @@
             <AbstractAsyncAction :is-loading="isSubmitting">
               <template #default="{ startAction }">
                 <button class="btn btn-primary" @click="startAction(onSubmit)" :disabled="isSubmitting">
-                 <span>
-                  Save
-                 </span> 
+                  <span>Save</span> 
                 </button>
               </template>
             </AbstractAsyncAction>
@@ -257,7 +214,3 @@ onMounted(() => {
   });
 });
 </script>
-
-<style scoped>
-/* Your CSS here */
-</style>
