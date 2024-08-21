@@ -9,7 +9,7 @@ export default defineNuxtConfig({
   routeRules: {
     '/admin/*': { ssr: false },
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', '@nuxtjs/google-fonts', 'nuxt-cropper'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', '@nuxtjs/google-fonts', 'nuxt-cropper', 'radix-vue/nuxt'],
   googleFonts: {
     families: {
       'Noto+Sans': [400, 500, 600, 700],
