@@ -41,7 +41,7 @@ import { useVModel } from "@vueuse/core";
 import type Quill from 'quill';
 
 const props = withDefaults(defineProps<{
-  modelValue: string;
+  modelValue?: string;
   placeholder?: string;
   id?: string;
   readOnly?: boolean;
@@ -60,25 +60,27 @@ let editorInstance: Quill | null;
 onMounted(async () => {
   const QuillEditor = (await import('quill')).default;
 
-  editorInstance = new QuillEditor(`#${editorId}`, {
-    bounds: '#snow-container .ql-container',
-    modules: {
-      // syntax: true, TODO: ref: https://quilljs.com/docs/modules/syntax
-      toolbar: props.readOnly ? false : '#snow-container .toolbar',
-    },
-    placeholder: props.placeholder,
-    theme: 'snow',
-    readOnly: props.readOnly,
-  });
+  nextTick(() => {
+    editorInstance = new QuillEditor(`#${editorId}`, {
+      bounds: '#snow-container .ql-container',
+      modules: {
+        // syntax: true, TODO: ref: https://quilljs.com/docs/modules/syntax
+        toolbar: props.readOnly ? false : '#snow-container .toolbar',
+      },
+      placeholder: props.placeholder,
+      theme: 'snow',
+      readOnly: props.readOnly,
+    });
 
-  if (editorContent.value) {
-    editorInstance.root.innerHTML = editorContent.value;
-  }
+    if (editorContent.value) {
+      editorInstance.root.innerHTML = editorContent.value;
+    }
 
-  editorInstance.on('text-change', () => {
-    if (!editorInstance) return;
-    editorContent.value = editorInstance.root.innerHTML;
-  });
+    editorInstance.on('text-change', () => {
+      if (!editorInstance) return;
+      editorContent.value = editorInstance.root.innerHTML;
+    });
+  })
 });
 
 onUnmounted(() => {

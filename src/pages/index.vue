@@ -9,7 +9,7 @@ if (generalSettings.value) {
   const generalName = generalSettings.value.organization.name;
 
   const seoDescription = generalSettings.value.seo.description;
-  const generalDescription = generalSettings.value.organization.description;
+  const generalBio = generalSettings.value.organization.bio;
 
   if (seoTitle) {
     title = seoTitle;
@@ -18,8 +18,8 @@ if (generalSettings.value) {
   }
   if (seoDescription) {
     description = seoDescription;
-  } else if (generalDescription) {
-    description = generalDescription;
+  } else if (generalBio) {
+    description = generalBio;
   }
 }
 
@@ -66,7 +66,7 @@ const logoURL = useRemoteAsset(generalSettings.value.organization.logo).url;
           <!-- Company name and info -->
           <div class="mb-4">
             <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings.organization.name }}</h2>
-            <p>{{ generalSettings.organization.description }}</p>
+            <p>{{ generalSettings.organization.bio }}</p>
           </div>
           <!-- Meta -->
           <div class="inline-flex flex-wrap justify-center sm:justify-start space-x-4">

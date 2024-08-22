@@ -112,14 +112,12 @@ const onDelete = async () => {
       <div class="flex items-center space-x-3">
         <AbstractConfirmationBox title="Delete Posting?" content="You won't be able to undo this action. You will loose access to applicant list." @confirm="onDelete" v-if="isUpdating">
           <template #input="{ open }">
-            <button class="btn border border-zinc-100" :disabled="isSubmitting" @click="open">
-              <AbstractAsyncAction :executing="isDeleting" spinner-class="text-zinc-800 w-5">
-                <Icon name="material-symbols:delete-outline" class="text-red-500 w-5 h-5" />
-              </AbstractAsyncAction>
-            </button>
+            <InputButton variant="destructive" size="icon" @click="open" :disabled="isSubmitting">
+              <Icon name="material-symbols:delete-outline" class="h-4 w-4" />
+            </InputButton>
           </template>
         </AbstractConfirmationBox>
-        <div class="flex space-x-1 items-center border bg-zinc-100 p-2 rounded-xl">
+        <!-- <div class="flex space-x-1 items-center border bg-zinc-100 p-2 rounded-xl">
           <span class="text-sm">Publish?</span>
           <div class="form-switch">
             <input type="checkbox" id="toggle1" name="toggle1" class="sr-only" v-model="isPublished" :disabled="isSubmitting">
@@ -128,17 +126,16 @@ const onDelete = async () => {
               <span class="sr-only">Publish/Draft</span>
             </label>
           </div>
-        </div>
+        </div> -->
+        <InputSwitch label="Publish?" v-model="isPublished"/>
         <AbstractConfirmationBox title="Save Posting?" content="Are you sure you want to save the changes?" @confirm="onSubmit">
           <template #input="{ open }">
-            <button class="btn btn-primary" :disabled="isSubmitting" @click="open">
-              <AbstractAsyncAction :executing="isSubmitting" spinner-class="w-5 text-white">
-                <div class="flex spece-x-2 items-center">
-                  <Icon name="lets-icons:save" class="w-3 h-3 mr-1" />
-                  <span>Save</span>
-                </div>
-              </AbstractAsyncAction>
-            </button>
+            <InputButton :disabled="isSubmitting" @click="open">
+              <div class="flex spece-x-2 items-center">
+                <Icon name="lets-icons:save" class="w-3 h-3 mr-1" />
+                <span>Save</span>
+              </div>
+            </InputButton>
           </template>
         </AbstractConfirmationBox>
       </div>

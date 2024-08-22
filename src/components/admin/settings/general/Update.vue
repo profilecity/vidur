@@ -20,10 +20,21 @@ const { handleSubmit, errors, defineField } = useForm({
 
 // Organization Fields
 const [organizationName] = defineField('organization.name');
+const [organizationBio] = defineField('organization.bio');
 const [organizationDescription] = defineField('organization.description');
 const [organizationLocation] = defineField('organization.location');
 const [organizationLinks] = defineField('organization.links');
 const [organizationLogo] = defineField('organization.logo');
+const [organizationOverviewSocials] = defineField('organization.overview.socials');
+const [organizationOverviewCompanySize] = defineField('organization.overview.companySize');
+const [organizationOverviewTotalRaised] = defineField('organization.overview.totalRaised');
+const [organizationOverviewMarkets] = defineField('organization.overview.markets');
+
+// Initialise fields to prevent type-errors.
+organizationLinks.value = [];
+organizationDescription.value = "";
+organizationOverviewSocials.value = [];
+organizationOverviewCompanySize.value = 0;
 
 // SEO Fields
 const [seoTitle] = defineField('seo.title');
@@ -34,6 +45,10 @@ const removeFeaturedLink = (index: number) => {
   organizationLinks.value = organizationLinks.value?.filter((_, originalIndex) => originalIndex != index);
 }
 
+const removeSocialHandle = (index: number) => {
+  organizationOverviewSocials.value = organizationOverviewSocials.value?.filter((_, originalIndex) => originalIndex != index);
+}
+
 // Initialize fields with data from settings
 let stopWatching: () => void;
 stopWatching = watchEffect(() => {
@@ -41,10 +56,15 @@ stopWatching = watchEffect(() => {
     const gs = generalSettings.data.value;
 
     organizationName.value = gs.organization.name;
+    organizationBio.value = gs.organization.bio;
     organizationDescription.value = gs.organization.description;
     organizationLocation.value = gs.organization.location;
     organizationLinks.value = gs.organization.links;
     organizationLogo.value = gs.organization.logo;
+    organizationOverviewSocials.value = gs.organization.overview.socials;
+    organizationOverviewCompanySize.value = gs.organization.overview.companySize;
+    organizationOverviewTotalRaised.value = gs.organization.overview.totalRaised;
+    organizationOverviewMarkets.value = gs.organization.overview.markets;
 
     seoTitle.value = gs.seo.title;
     seoDescription.value = gs.seo.description;
@@ -93,66 +113,71 @@ const logoUpdated = (id: string) => {
       <section class="w-full md:w-2/3">
         <div class="flex items-end">
           <div class="mr-4">
-            <ClientOnly>
-              <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="logoURL" width="80" height="80" alt="User upload" />
-            </ClientOnly>
+            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="logoURL" width="80" height="80" alt="User upload" />
           </div>
           <AdminSettingsGeneralUpdateOrgLogo @update="logoUpdated" />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">
-              Organization Name <span class="text-xs ml-1 text-rose-500">{{ errors['organization.name'] }}</span>
-            </label>
-            <input class="input-custom" type="text" placeholder="Organization Name" v-model="organizationName">
-          </div>
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="location">
-              Location <span class="text-xs ml-1 text-rose-500">{{ errors['organization.location'] }}</span>
-            </label>
-            <input id="location" class="input-custom" type="text" placeholder="Boston, MA"
-              v-model="organizationLocation" />
-          </div>
+          <InputText class="w-full md:w-2/3" placeholder="Organization Name" v-model="organizationName"
+            id="organization-name" :error="errors['organization.name']" label="Organization Name" />
+          <InputText class="w-full md:w-2/3" placeholder="Location" v-model="organizationLocation"
+            id="organization-location" :error="errors['organization.location']" label="Location" />
         </div>
+        <InputText class="w-full mt-5" placeholder="Join us in building next generation space technology.."
+          v-model="organizationBio" id="organization-bio" :error="errors['organization.bio']" label="Bio" />
         <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="description">
-            Bio <span class="text-xs ml-1 text-rose-500">{{ errors['organization.description'] }}</span>
-          </label>
-          <textarea class="input-custom" placeholder="Join us in building next generation space technology.."
+          <InputLabel label="Description" id="organization-description" :error="errors['organization.description']" />
+          <Editor id="organization-description"
+            placeholder="We started as a group of mad scientists, curious about space..."
             v-model="organizationDescription" />
         </div>
-        <div class="w-full mt-5">
-          <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="featured-links">
-            Featured Links
-          </label>
-          <ClientOnly>
-            <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full">
-              <input v-model="link.title" class="input-custom-vlen w-5/12" type="text"
-                placeholder="Mars Mission Docs" />
-              <input v-model="link.href" class="input-custom-vlen w-5/12" type="url"
-                placeholder="https://big-space-tech.com/missions/mars" />
-              <button class="btn-sm flex items-center space-x-2 w-1/12 text-red-500" @click="removeFeaturedLink(index)">
-                <Icon name="mdi:minus" class="w-4 h-4" />
-                Remove
-              </button>
-            </div>
-          </ClientOnly>
-          <div class="flex space-x-2 items-center">
-            <button class="btn-sm flex items-center space-x-2"
-              @click="organizationLinks?.push({ title: '', href: '' })">
-              <Icon name="mdi:plus" class="w-5 h-5" />
-              Add Link
-            </button>
-            <span class="text-sm text-rose-500">{{ errors[`organization.links`] }}</span>
+        <div class="w-full mt-8">
+          <InputLabel label="Featured Links" id="featued-links" :error="errors['organization.links']" />
+          <div v-for="(link, index) in organizationLinks" :key="index" class="flex space-x-2 mb-2 w-full items-center">
+            <InputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
+            <InputText v-model="link.href" :id="`link-url-${index}`"
+              placeholder="https://big-space-tech.com/mission/mars" type-override="url" />
+            <InputButton variant="destructive" size="icon" @click="removeFeaturedLink(index)">
+              <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
+            </InputButton>
           </div>
+          <InputButton variant="secondary" @click="organizationLinks?.push({ title: '', href: '' })">
+            <Icon name="mdi:plus" class="w-5 h-5" />
+            Add Link
+          </InputButton>
+        </div>
+        <div class="w-full mt-8">
+          <InputLabel label="Social Handles" id="social-handles" :error="errors[`organization.overview.socials`]" />
+          <div v-for="(social, index) in organizationOverviewSocials" :key="index"
+            class="flex space-x-2 mb-2 w-full items-center">
+            <AbstractSocialSelector v-model="social.handle" />
+            <InputText class="w-2/3 md:w-1/3" v-model="social.href" :id="`social-url-${index}`"
+              placeholder="https://social-handle.com/@big-space-tech" type-override="url" />
+            <InputButton variant="destructive" size="icon" @click="removeSocialHandle(index)">
+              <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
+            </InputButton>
+          </div>
+          <InputButton variant="secondary" @click="organizationOverviewSocials?.push({ handle: '', href: '' })">
+            <Icon name="mdi:plus" class="w-5 h-5" />
+            Add Social
+          </InputButton>
+        </div>
+        <div class="md:flex gap-4 items-center mt-5">
+          <div>
+            <InputLabel label="Company Size" :error="errors['organization.overview.companySize']" id="company-size" />
+            <AbstractCompanySizeSelector v-model="organizationOverviewCompanySize" />
+          </div>
+          <InputText v-model="organizationOverviewTotalRaised" id="organization-overview-total-raised"
+            placeholder="$220k Pre Seed" label="Total Raised" :error="errors['organization.overview.totalRaised']" />
+          <InputText v-model="organizationOverviewMarkets" id="organization-overview-markets"
+            placeholder="Space Tech, Inter-galactic Wars" label="Markets(CSV)"
+            :error="errors['organization.overview.markets']" />
         </div>
         <!-- Panel footer -->
-        <footer>
-          <div class="flex w-full justify-start mb-10 mt-4">
-            <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
-              Save
-            </button>
-          </div>
+        <footer class="my-2">
+          <InputButton @click="onSubmit" :disabled="isSubmitting">
+            Save
+          </InputButton>
         </footer>
       </section>
     </div>
@@ -167,44 +192,22 @@ const logoUpdated = (id: string) => {
       </section>
       <section class="w-full md:w-2/3">
         <div class="md:flex gap-4 items-center mt-5">
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Website Title</label>
-            <input class="input-custom" type="text" placeholder="Organization Name" v-model="seoTitle">
-            <div class="text-xs mt-1 text-rose-500">{{ errors['seo.title'] }}</div>
-          </div>
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto">Website Description</label>
-            <input class="input-custom" type="text" placeholder="We build space tech" v-model="seoDescription" />
-            <div class="text-xs mt-1 text-rose-500">{{ errors['seo.description'] }}</div>
-          </div>
+          <InputText class="w-full md:w-1/2" placeholder="Big Space Career Site" v-model="seoTitle" id="seo-title"
+            :error="errors['seo.title']" label="Website Title" />
+          <InputText class="w-full md:w-1/2" placeholder="Big Space Career Site Decrition" v-model="seoDescription"
+            id="seo-description" :error="errors['seo.description']" label="Website Description" />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
-          <div class="w-full md:w-2/3">
-            <label class="block text-sm font-medium mb-1 text-zinc-900 font-noto" for="name">Twitter Handle (without
-              @)</label>
-            <input class="input-custom" type="text" placeholder="the_nirvana_labs" v-model="seoTwitter">
-            <div class="text-xs mt-1 text-rose-500">{{ errors['seo.twitter'] }}</div>
-          </div>
+          <InputText class="w-full md:w-1/2" placeholder="big_space_tech" v-model="seoTwitter" id="seo-twitter"
+            :error="errors['seo.twitter']" label="Twitter Handle (without @)" />
         </div>
         <!-- Panel footer -->
         <footer>
-          <div class="flex w-full justify-start mb-10 mt-4">
-            <button class="btn btn-primary" @click="onSubmit" :disabled="isSubmitting">
-              Save
-            </button>
-          </div>
+          <InputButton @click="onSubmit" :disabled="isSubmitting">
+            Save
+          </InputButton>
         </footer>
       </section>
     </div>
   </section>
 </template>
-
-<style scoped>
-.input-custom {
-  @apply w-full block py-2 px-4 border border-zinc-200 rounded-xl text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-inset focus:ring-zinc-300 sm:text-sm sm:leading-6 outline-0;
-}
-
-.input-custom-vlen {
-  @apply block py-2 px-4 border border-zinc-200 rounded-xl text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-inset focus:ring-zinc-300 sm:text-sm sm:leading-6 outline-0;
-}
-</style>

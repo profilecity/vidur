@@ -53,10 +53,10 @@ const apply = async () => {
         <!-- Content -->
         <div class="w-full">
           <div class="mb-6">
-            <NuxtLink class="btn-sm px-3 bg-white border-zinc-200 hover:border-zinc-300 text-zinc-600 border" to="/">
+            <InputButton as="NuxtLink" variant="outline" to="/">
               <Icon class="fill-current text-zinc-500 mr-2" name="mdi:arrow-left" />
               <span>Back To Jobs</span>
-            </NuxtLink>
+            </InputButton>
           </div>
           <div class="text-sm text-zinc-500 italic mb-2">
             Posted {{ formatDate(new Date(posting.updatedAt)) }}
@@ -81,10 +81,10 @@ const apply = async () => {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <button class="btn w-full btn-primary" @click="apply" :disabled="isApplying"
-                v-else>Apply Today
+              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
+                Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </button>
+              </InputButton>
             </div>
           </div>
 
@@ -99,7 +99,7 @@ const apply = async () => {
             </div>
           </div>
           <hr class="my-6 border-t border-zinc-100" />
-          <Editor :read-only="true" v-model="posting.contents"/>
+          <Editor :read-only="true" v-model="posting.contents" />
         </div>
 
         <!-- Sidebar -->
@@ -120,10 +120,10 @@ const apply = async () => {
                 <span>Applied</span>
               </div>
 
-              <button class="btn w-full btn-primary" @click="apply" :disabled="isApplying"
-                v-else>Apply Today
+              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
+                Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </button>
+              </InputButton>
             </div>
           </div>
 

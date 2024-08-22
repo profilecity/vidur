@@ -6,7 +6,10 @@ export default defineNuxtConfig({
     },
   },
   srcDir: 'src/',
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', '@nuxtjs/google-fonts', 'nuxt-cropper'],
+  routeRules: {
+    '/admin/*': { ssr: false },
+  },
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', '@nuxtjs/google-fonts', 'nuxt-cropper', 'radix-vue/nuxt'],
   googleFonts: {
     families: {
       'Noto+Sans': [400, 500, 600, 700],
@@ -14,7 +17,6 @@ export default defineNuxtConfig({
     },
     useStylesheet: true,
   },
-  css: ['~/assets/css/style.css', '~/assets/css/additional-styles/utility-patterns.css'],
   devtools: { enabled: true },
   /**
    * Sensible defaults, overriden by env vars.
@@ -52,7 +54,7 @@ export default defineNuxtConfig({
     },
     public: {
       origin: 'http://localhost:3001',
-    }
+    },
   },
   compatibilityDate: '2024-07-31',
 });

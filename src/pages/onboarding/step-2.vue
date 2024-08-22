@@ -93,9 +93,8 @@
             </div>
             <div class="flex items-center justify-between">
               <NuxtLink class="text-sm underline hover:no-underline" to="/onboarding/step-1"><Icon name="solar:undo-left-linear" class="w-4 h-4 mr-1" /> Back</NuxtLink>
-              <NuxtLink
-                class="btn bg-zinc-900 text-zinc-100 hover:bg-zinc-800"
-                to="/onboarding/step-3">Next Step <Icon name="ep:right" class="w-4 h-4 ml-1" /></NuxtLink>
+              <InputButton as="NuxtLink"
+                to="/onboarding/step-3">Next Step <Icon name="ep:right" class="w-4 h-4 ml-1" /></InputButton>
             </div>
           </form>
         </div>

@@ -15,7 +15,7 @@ const seed1: SeedFn = async (ctx, _) => {
     },
     {
       key: 'organizationConfig',
-      value: '{ "links": [] }',
+      value: '{ "links": [], "overview": { "socials": [] } }',
     },
   ]);
 };

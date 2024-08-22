@@ -12,7 +12,7 @@
               placeholder="vidur-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
         </div>
         <div class="flex justify-center mt-6">
-          <NuxtLink to="/onboarding/step-1" class="btn bg-gray-900 text-gray-100 hover:bg-gray-800 whitespace-nowrap">Verify</NuxtLink>
+          <InputButton as="NuxtLink" to="/onboarding/step-1">Verify</InputButton>
         </div>
       </form>
     </div>

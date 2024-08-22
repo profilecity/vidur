@@ -47,10 +47,10 @@ onKeyStroke('Escape', close);
           <div class="mb-2">
             <div class="flex justify-between items-center text-zinc-800">
               <div class="text-lg font-semibold" v-if="title">{{ title }}</div>
-              <button class="hover:text-zinc-500 flex" @click.stop="close">
+              <InputButton variant="ghost" size="icon" @click.stop="close">
                 <div class="sr-only">Close</div>
                 <Icon class="w-5 h-5" name="mdi:close" />
-              </button>
+              </InputButton>
             </div>
           </div>
           <slot name="content" :close="close" />

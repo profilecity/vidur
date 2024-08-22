@@ -1,3 +1,6 @@
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
+
 export const generalColors = [
   'red',
   'orange',
@@ -51,15 +54,13 @@ export function timeAgo(date: Date) {
   return `Just Now`;
 }
 
-export function formatDate(date: Date) {
-  const options = {
+export function formatDate(date: Date): string {
+  const options: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   };
 
-  // TODO: fix this.
-  // @ts-expect-error
   return date.toLocaleDateString('en-US', options);
 }
 
@@ -84,4 +85,8 @@ export function getHash(input: string) {
   }
 
   return hash;
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }

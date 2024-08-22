@@ -23,11 +23,12 @@ if (props.posting && props.posting.tagsCSV) {
             <Icon class="w-5 h-5 shrink-0 text-zinc-800" name="hugeicons:permanent-job" />
           </div>
           <div class="flex shrink-0 -space-x-3 -ml-px">
-            <NuxtLink
-              class="text-xs inline-flex font-medium rounded-lg text-center px-2.5 py-1 bg-zinc-100 hover:bg-zinc-200"
+            <InputButton as="NuxtLink"
+              variant="secondary"
+              size="sm"
               :to="'/admin/applications?postings=' + posting.id">
               {{ posting.totalApplicants }} Applicants
-            </NuxtLink>
+            </InputButton>
           </div>
         </div>
       </header>
@@ -51,9 +52,9 @@ if (props.posting && props.posting.tagsCSV) {
           <div class="text-xs font-medium rounded-lg text-center px-2.5 py-1 bg-sky-100 text-sky-700" v-else>
             Draft
           </div>
-          <NuxtLink class="btn-sm w-10 h-10 border border-zinc-200 hover:border-zinc-300 flex space-x-2 items-center text-zinc-700"
+          <InputButton as="NuxtLink" variant="outline" size="icon"
             :to="'/admin/postings/edit?id=' + posting.id"><Icon name="iconamoon:edit" class="w-5 h-5" />
-          </NuxtLink>
+          </InputButton>
           
         </div>
       </footer>
