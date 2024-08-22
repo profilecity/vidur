@@ -3,7 +3,12 @@
 node_modules
 npm-debug.log
 .git
+.gitignore
 .env
+.env-example
+.nuxt
+docs
+.md
 
 # IDE and OS files
 .idea
