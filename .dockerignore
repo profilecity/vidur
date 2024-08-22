@@ -1,0 +1,15 @@
+# ignore some file in order to increase build performance
+
+node_modules
+npm-debug.log
+.git
+.env
+
+# IDE and OS files
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist
