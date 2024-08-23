@@ -8,9 +8,9 @@ export function usePublicGeneralSettings() {
   return { generalSettings, updateGeneralSettings };
 }
 
-export function usePublicOrganizationSettings() {
+export function usePublicCareerSiteSettings() {
   const { generalSettings } = usePublicGeneralSettings();
-  return computed(() => generalSettings.value.organization);
+  return computed(() => generalSettings.value.careerSite);
 }
 
 export function usePublicSeoSettings() {

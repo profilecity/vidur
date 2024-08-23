@@ -3,7 +3,7 @@
 const props = withDefaults(defineProps<{
   title?: string;
   content?: string;
-  type?: 'danger' | 'warning' | 'default';
+  type?: 'destructive' | 'default';
   closeIsCancel?: boolean;
   confirmLabel?: string;
   cancelLabel?: string;
@@ -17,15 +17,7 @@ const props = withDefaults(defineProps<{
 const emit = defineEmits<{
   confirm: [],
   cancel: [],
-  close: [],
 }>()
-
-const close = () => {
-  emit('close');
-  if (props.closeIsCancel) {
-    emit('cancel');
-  }
-}
 
 const confirm = (closeModalFn: () => void) => {
   closeModalFn();
@@ -38,22 +30,17 @@ const cancel = (closeModalFn: () => void) => {
 }
 </script>
 <template>
-  <Modal :title="title" @close="close">
+  <Modal :title="title" :description="content">
     <template #input="{ open }">
       <slot name="input" :open="open" />
     </template>
     <template #content="{ close }">
-      <div class="text-sm mb-5">
-        <div class="space-y-2">
-          <p v-if="content">{{ content }}</p>
-        </div>
-      </div>
       <!-- Modal footer -->
       <div class="flex flex-wrap justify-end space-x-2">
         <InputButton variant="secondary" @click="cancel(close)">
           {{ cancelLabel }}
         </InputButton>
-        <InputButton  @click="confirm(close)">
+        <InputButton :variant="props.type" @click="confirm(close)">
           {{ confirmLabel }}
         </InputButton>
       </div>

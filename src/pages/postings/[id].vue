@@ -9,14 +9,11 @@ const {
 const {
   data: posting
 } = usePublicPosting(id);
-const {
-  data: generalSettings
-} = await useGeneralSettings('organizationConfig');
 
-const orgName = computed(() => generalSettings.value?.organization.name);
+const careerSite = usePublicCareerSiteSettings();
 
 useHead({
-  title: () => `${posting.value?.title} | ${orgName.value}`,
+  title: () => `${posting.value?.title} | ${careerSite.value.name}`,
 })
 
 const tags = computed<string[]>(() => {
@@ -73,7 +70,7 @@ const apply = async () => {
               <div class="inline-flex mb-3">
                 <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Nirvana Labs" />
               </div>
-              <div class="text-lg font-bold text-zinc-800 mb-1">{{ orgName }}</div>
+              <div class="text-lg font-bold text-zinc-800 mb-1">{{ careerSite.name }}</div>
             </div>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-2">
               <div class="flex w-full items-center justify-center text-green-500 space-x-2"
@@ -111,7 +108,7 @@ const apply = async () => {
               <div class="inline-flex mb-3">
                 <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Company 01" />
               </div>
-              <div class="text-lg font-bold text-zinc-800 mb-1">{{ orgName }}</div>
+              <div class="text-lg font-bold text-zinc-800 mb-1">{{ careerSite.name }}</div>
             </div>
             <div class="space-y-2">
               <div class="flex w-full items-center justify-center text-green-500 space-x-2"

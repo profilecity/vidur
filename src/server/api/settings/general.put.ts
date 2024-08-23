@@ -24,13 +24,13 @@ export default defineEventHandler(async (event) => {
         .where(eq(metaDataTable.key, 'seoConfig'));
       settings_memoryStorage.setItem('seoConfig', settingsUpdateRequest.seo);
     }
-    if (settingsUpdateRequest.organization) {
-      const organizationSettingsString = JSON.stringify(settingsUpdateRequest.organization);
+    if (settingsUpdateRequest.careerSite) {
+      const careerSiteString = JSON.stringify(settingsUpdateRequest.careerSite);
       await tx
         .update(metaDataTable)
-        .set({ value: organizationSettingsString, updatedAt: new Date() })
-        .where(eq(metaDataTable.key, 'organizationConfig'));
-      settings_memoryStorage.setItem('organizationConfig', settingsUpdateRequest.organization);
+        .set({ value: careerSiteString, updatedAt: new Date() })
+        .where(eq(metaDataTable.key, 'careerSiteConfig'));
+      settings_memoryStorage.setItem('careerSiteConfig', settingsUpdateRequest.careerSite);
     }
   });
 });

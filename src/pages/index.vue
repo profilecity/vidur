@@ -6,10 +6,10 @@ let title: string = "Careers"; // TODO: need better defaults (this will hardly b
 let description: string = "Career Site"; // TODO: need better defaults (this will hardly be the case);
 if (generalSettings.value) {
   const seoTitle = generalSettings.value.seo.title;
-  const generalName = generalSettings.value.organization.name;
+  const generalName = generalSettings.value.careerSite.name;
 
   const seoDescription = generalSettings.value.seo.description;
-  const generalBio = generalSettings.value.organization.bio;
+  const generalBio = generalSettings.value.careerSite.bio;
 
   if (seoTitle) {
     title = seoTitle;
@@ -42,7 +42,7 @@ useSeoMeta({
   twitterCreator: generalSettings.value?.seo.twitter,
 })
 
-const logoURL = useRemoteAsset(generalSettings.value.organization.logo).url;
+const logoURL = useRemoteAsset(generalSettings.value.careerSite.logo).url;
 </script>
 
 <template>
@@ -65,19 +65,19 @@ const logoURL = useRemoteAsset(generalSettings.value.organization.logo).url;
 
           <!-- Company name and info -->
           <div class="mb-4">
-            <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings.organization.name }}</h2>
-            <p>{{ generalSettings.organization.bio }}</p>
+            <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings.careerSite.name }}</h2>
+            <p>{{ generalSettings.careerSite.bio }}</p>
           </div>
           <!-- Meta -->
           <div class="inline-flex flex-wrap justify-center sm:justify-start space-x-4">
-            <div class="flex items-center" v-if="generalSettings.organization.location">
+            <div class="flex items-center" v-if="generalSettings.careerSite.location">
               <Icon class="w-4 h-4 fill-current shrink-0 text-zinc-400" name="grommet-icons:location" />
               <span class="text-sm font-medium whitespace-nowrap text-zinc-400 ml-1">
-                {{ generalSettings.organization.location }}
+                {{ generalSettings.careerSite.location }}
               </span>
             </div>
-            <div v-for="link in (generalSettings.organization.links.slice(0, 3))" :key="link.href"
-              class="flex items-center" v-if="generalSettings.organization.links">
+            <div v-for="link in (generalSettings.careerSite.links.slice(0, 3))" :key="link.href"
+              class="flex items-center" v-if="generalSettings.careerSite.links">
               <Icon name="tdesign:link" class="w-4 h-4 fill-current shrink-0 text-zinc-400" />
               <a class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1"
                 :href="link.href">{{ link.title }}</a>
@@ -89,7 +89,7 @@ const logoURL = useRemoteAsset(generalSettings.value.organization.logo).url;
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full">
       <div class="max-w-3xl mx-auto">
         <h3 class="text-xl leading-snug text-zinc-800 font-bold mb-6">
-          Open Positions at {{ generalSettings.organization.name }}
+          Open Positions at {{ generalSettings.careerSite.name }}
         </h3>
         <div class="space-y-2" v-if="postings">
           <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />

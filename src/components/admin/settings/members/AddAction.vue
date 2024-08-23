@@ -44,7 +44,7 @@ watchDebounced(userSearchQuery, async (q) => {
     </template>
     <template #content="{ close }">
       <form>
-        <input type="text" class="input-custom" placeholder="Start searching to add members"v-model="userSearchQuery" :disabled="isSubmitting" />
+        <input type="text" class="input-custom" placeholder="Start searching to add members" v-model="userSearchQuery" :disabled="isSubmitting" />
         <div class="flex flex-col space-y-3 overflow-y-scroll no-scrollbar h-64 mt-3"
           v-if="suggestedUsers && suggestedUsers.length > 0">
           <div class="flex w-full justify-between p-2 border rounded-lg" v-for="user in suggestedUsers" :key="user.id">

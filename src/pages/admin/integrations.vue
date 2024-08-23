@@ -8,15 +8,10 @@ useHead({
   title: 'Integrations | Admin Panel'
 })
 
-const activeTab = useActiveTab(["hooks", "plugins"]);
+const { activeTab } = useTabGroup("integration");
 </script>
 
 <template>
-  <AdminIntegrationHeader />
-  <section v-if="activeTab == 'hooks'">
-    <LazyAdminIntegrationHooksSection />
-  </section>
-  <section v-else-if="activeTab == 'plugins'">
-
-  </section>
+  <AdminIntegrationHooksFrame v-if="activeTab.id == 'hooks'" />
+  <AdminIntegrationPluginsFrame v-else-if="activeTab.id == 'plugins'" />
 </template>

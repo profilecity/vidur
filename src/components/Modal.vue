@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { onKeyStroke } from '@vueuse/core';
-
-const emit = defineEmits<{
-  'close': [];
-}>();
+import {
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+} from 'radix-vue'
 
 defineProps<{
   title?: string;
+  description?: string;
 }>()
 
 const isModalOpen = ref(false);
@@ -16,46 +22,28 @@ const open = () => {
 }; 
 
 const close = () => {
-  if (isModalOpen.value) {
-    isModalOpen.value = false;
-    emit('close');
-  }
+  isModalOpen.value = false;
 };
-
-onKeyStroke('Escape', close);
 </script>
 
 <template>
-  <slot name="input" :open="open" :close="close" />
-  <!-- Modal backdrop -->
-  <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0"
-    enter-to-class="opacity-100" leave-active-class="transition ease-out duration-100" leave-from-class="opacity-100"
-    leave-to-class="opacity-0">
-    <div v-show="isModalOpen" class="fixed inset-0 bg-zinc-900 bg-opacity-60 z-50 transition-opacity backdrop-blur-sm"
-      aria-hidden="true"></div>
-  </transition>
-  <!-- Modal dialog -->
-  <transition enter-active-class="transition ease-in-out duration-200" enter-from-class="opacity-0 translate-y-4"
-    enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in-out duration-200"
-    leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-4">
-    <div v-show="isModalOpen"
-      class="fixed inset-0 z-50 overflow-hidden flex items-center my-4 justify-center px-4 sm:px-6" role="dialog"
-      aria-modal="true">
-      <div ref="modalContent" class="bg-white rounded-xl  border border-zinc-200 overflow-auto max-w-lg w-full max-h-full">
-        <div class="p-5">
-          <!-- Modal header -->
-          <div class="mb-2">
-            <div class="flex justify-between items-center text-zinc-800">
-              <div class="text-lg font-semibold" v-if="title">{{ title }}</div>
-              <InputButton variant="ghost" size="icon" @click.stop="close">
-                <div class="sr-only">Close</div>
-                <Icon class="w-5 h-5" name="mdi:close" />
-              </InputButton>
-            </div>
-          </div>
-          <slot name="content" :close="close" />
-        </div>
-      </div>
-    </div>
-  </transition>
+  <DialogRoot v-model:open="isModalOpen">
+    <DialogTrigger as-child>
+      <slot name="input" :open="open" />
+    </DialogTrigger>
+    <DialogPortal>
+      <DialogOverlay class="bg-zinc-900 bg-opacity-60 backdrop-blur-sm data-[state=open]:animate-overlayShow fixed inset-0 z-30"/>
+      <DialogContent class="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[85vh] w-[90vw] max-w-[450px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-white p-[25px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]">
+        <DialogTitle v-if="title">{{ title }}</DialogTitle>
+        <DialogDescription v-if="description">{{ description }}</DialogDescription>
+        <slot name="content" :close="close" />
+        <DialogClose class="absolute top-[10px] right-[10px] inline-flex items-center justify-center">
+          <InputButton variant="ghost" size="icon" @click.stop="close">
+            <div class="sr-only">Close</div>
+            <Icon class="w-5 h-5" name="mdi:close" />
+          </InputButton>
+        </DialogClose>
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
 </template>
