@@ -67,7 +67,7 @@ const onSubmit = handleSubmit(async values => {
     isSubmitting.value = true;
     await $fetch('/api/settings/general', {
       method: 'PUT',
-      body: { ...values },
+      body: { organization: values, seo: generalSettingsPublic.value.seo },
     });
     updateGeneralSettings({ organization: values, seo: generalSettingsPublic.value.seo });
     emits('saved');
