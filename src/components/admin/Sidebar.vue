@@ -1,6 +1,6 @@
 <script setup lang="ts">
-const orgSettings = usePublicOrganizationSettings();
-const logoURL = computed(() => useRemoteAsset(orgSettings.value.logo).url);
+const careerSiteSettings = usePublicCareerSiteSettings();
+const logoURL = computed(() => useRemoteAsset(careerSiteSettings.value.logo).url);
 </script>
 
 <template>
@@ -10,7 +10,7 @@ const logoURL = computed(() => useRemoteAsset(orgSettings.value.logo).url);
       <!-- Company Profile -->
       <div class="flex items-center">
         <img class="rounded-lg w-8 border border-zinc-200" :src="logoURL" alt="avatar" />
-        <span class="font-bold ml-2 truncate font-noto">{{ orgSettings.name }}</span>
+        <span class="font-bold ml-2 truncate font-noto">{{ careerSiteSettings.name }}</span>
       </div>
       <!-- Home -->
       <div class="text-xs text-zinc-500 mb-2 mt-6">Home</div>

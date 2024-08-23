@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { organizationConfigSchema } from '~/schemas/setting';
+import { careerSiteConfigSchema } from '~/schemas/setting';
 
 const emits = defineEmits<{
   saved: [];
@@ -9,12 +9,12 @@ const generalSettings = useGeneralSettings();
 const { updateGeneralSettings, generalSettings: generalSettingsPublic } = usePublicGeneralSettings();
 
 // Define form schema and use it in the form handling
-const formSchema = toTypedSchema(organizationConfigSchema);
+const formSchema = toTypedSchema(careerSiteConfigSchema);
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: formSchema,
 });
 
-// Organization Fields
+// Career Site Fields
 const [name] = defineField('name');
 const [bio] = defineField('bio');
 const [description] = defineField('description');
@@ -46,16 +46,16 @@ stopWatching = watchEffect(() => {
   if (generalSettings.data.value) {
     const gs = generalSettings.data.value;
 
-    name.value = gs.organization.name;
-    bio.value = gs.organization.bio;
-    description.value = gs.organization.description;
-    location.value = gs.organization.location;
-    links.value = gs.organization.links;
-    logo.value = gs.organization.logo;
-    overviewSocials.value = gs.organization.overview.socials;
-    overviewCompanySize.value = gs.organization.overview.companySize;
-    overviewTotalRaised.value = gs.organization.overview.totalRaised;
-    overviewMarkets.value = gs.organization.overview.markets;
+    name.value = gs.careerSite.name;
+    bio.value = gs.careerSite.bio;
+    description.value = gs.careerSite.description;
+    location.value = gs.careerSite.location;
+    links.value = gs.careerSite.links;
+    logo.value = gs.careerSite.logo;
+    overviewSocials.value = gs.careerSite.overview.socials;
+    overviewCompanySize.value = gs.careerSite.overview.companySize;
+    overviewTotalRaised.value = gs.careerSite.overview.totalRaised;
+    overviewMarkets.value = gs.careerSite.overview.markets;
 
     stopWatching && stopWatching();
   }
@@ -65,11 +65,12 @@ const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async values => {
   try {
     isSubmitting.value = true;
+    const updatedSettings = { careerSite: values, seo: generalSettingsPublic.value.seo };
     await $fetch('/api/settings/general', {
       method: 'PUT',
-      body: { organization: values, seo: generalSettingsPublic.value.seo },
+      body: updatedSettings,
     });
-    updateGeneralSettings({ organization: values, seo: generalSettingsPublic.value.seo });
+    updateGeneralSettings(updatedSettings);
     emits('saved');
   } catch (error) {
     console.error("Error saving settings", error);

@@ -4,17 +4,17 @@ import authenticateAdminRequest from '~/server/utils/admin';
 import { settings_memoryStorage } from '~/server/utils/storage';
 
 const settingsLookupSchema = z.object({
-  config: z.enum(['seoConfig', 'organizationConfig']).optional(),
+  config: z.enum(['seoConfig', 'careerSiteConfig']).optional(),
 });
 
 export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
   const query = await getValidatedQuery(event, settingsLookupSchema.parse);
-  const queries = query.config ? [query.config] : ['seoConfig', 'organizationConfig'];
+  const queries = query.config ? [query.config] : ['seoConfig', 'careerSiteConfig'];
 
   const settings: GeneralSettings = {
-    organization: {},
+    careerSite: {},
     seo: {},
   } as GeneralSettings; // Ignore validation errors here.
 
@@ -26,9 +26,9 @@ export default defineEventHandler(async (event) => {
         value = await settings_memoryStorage.getItem(query);
         settings.seo = value as GeneralSettings['seo'];
         break;
-      case 'organizationConfig':
+      case 'careerSiteConfig':
         value = await settings_memoryStorage.getItem(query);
-        settings.organization = value as GeneralSettings['organization'];
+        settings.careerSite = value as GeneralSettings['careerSite'];
         break;
       default:
         throw createError({

@@ -35,13 +35,14 @@ stopWatching = watchEffect(() => {
 
 const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async values => {
+  const updatedSettings = { seo: values, careerSite: generalSettingsPublic.value.careerSite };
   try {
     isSubmitting.value = true;
     await $fetch('/api/settings/general', {
       method: 'PUT',
-      body: { ...values },
+      body: updatedSettings,
     });
-    updateGeneralSettings({ seo: values, organization: generalSettingsPublic.value.organization });
+    updateGeneralSettings(updatedSettings);
     emits('saved');
   } catch (error) {
     console.error("Error saving settings", error);

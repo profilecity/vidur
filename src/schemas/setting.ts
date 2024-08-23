@@ -9,7 +9,7 @@ export const seoConfigSchema = z.object({
 
 export type SEOConfig = z.infer<typeof seoConfigSchema>;
 
-export const organizationConfigSchema = z.object({
+export const careerSiteConfigSchema = z.object({
   name: z.string().max(36).min(1),
   bio: z.string().max(120).min(0).optional(), // Standard one-liner to show as tagline.
   description: z.string().nullable().optional(), // Proper markdown enabled bio page.
@@ -34,10 +34,10 @@ export const organizationConfigSchema = z.object({
   ),
 });
 
-export type OrganizationConfig = z.infer<typeof organizationConfigSchema>;
+export type careerSiteConfig = z.infer<typeof careerSiteConfigSchema>;
 
 export const generalSettingsSchema = z.object({
-  organization: organizationConfigSchema,
+  careerSite: careerSiteConfigSchema,
   seo: seoConfigSchema,
 });
 

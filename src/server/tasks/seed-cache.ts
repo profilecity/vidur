@@ -1,7 +1,6 @@
 import { inArray } from 'drizzle-orm';
 import { metaDataTable } from '../db/schema';
 import { GeneralSettings } from '~/schemas/setting';
-import { prefixStorage } from 'unstorage';
 import { settings_memoryStorage } from '../utils/storage';
 
 export default defineTask<boolean>({
@@ -16,23 +15,23 @@ export default defineTask<boolean>({
     const settingEntries = await db
       .select()
       .from(metaDataTable)
-      .where(inArray(metaDataTable.key, ['seoConfig', 'organizationConfig']));
+      .where(inArray(metaDataTable.key, ['seoConfig', 'careerSiteConfig']));
 
     const settings: GeneralSettings = {
-      organization: {},
+      careerSite: {},
       seo: {},
     } as GeneralSettings; // Ignore validation errors here.
 
     settingEntries.forEach((s) => {
       if (s.key == 'seoConfig' && s.value) {
         settings.seo = JSON.parse(s.value);
-      } else if (s.key == 'organizationConfig' && s.value) {
-        settings.organization = JSON.parse(s.value);
+      } else if (s.key == 'careerSiteConfig' && s.value) {
+        settings.careerSite = JSON.parse(s.value);
       }
     });
 
     await Promise.all([
-      settings_memoryStorage.setItem('organizationConfig', settings.organization),
+      settings_memoryStorage.setItem('careerSiteConfig', settings.careerSite),
       settings_memoryStorage.setItem('seoConfig', settings.seo),
     ]);
 
