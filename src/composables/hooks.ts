@@ -69,12 +69,8 @@ export async function useHooks() {
     }
   };
 
-  const showEmptyState = computed(() => hooks.value.length == 0);
-
   return {
     hooks,
-
-    showEmptyState,
     isSubmitting,
 
     saveHook,
