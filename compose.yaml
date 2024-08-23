@@ -6,11 +6,11 @@ services:
       - .env
     environment:
       POSTGRES_USER: ${NUXT_DB_USER:-postgres}
-      POSTGRES_PORT: ${NUXT_DB_PORT:-5432}
+      POSTGRES_PORT: 5432
       POSTGRES_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
       POSTGRES_DB: ${NUXT_DB_DATABASE:-vidur}
     ports:
-      - "${NUXT_DB_PORT:-5432}:5432"
+      - "5432:5432"
     volumes:
       - vidur_data:/var/lib/postgresql/data
     profiles:
@@ -26,7 +26,7 @@ services:
     environment:
       PORT: ${PORT:-3001}
       NUXT_DB_HOST: db
-      NUXT_DB_PORT: ${NUXT_DB_PORT:-5432}
+      NUXT_DB_PORT: 5432
       NUXT_DB_USER: ${NUXT_DB_USER:-postgres}
       NUXT_DB_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
       NUXT_DB_DATABASE: ${NUXT_DB_DATABASE:-vidur}
