@@ -1,11 +1,18 @@
 <script setup lang="ts">
 const careerSiteSettings = usePublicCareerSiteSettings();
 const logoURL = computed(() => useRemoteAsset(careerSiteSettings.value.logo).url);
+
+const config = useRuntimeConfig();
+const github = config.public.github as string;
+const discord = config.public.discord as string;
+const twitter = config.public.twitter as string;
+const version = config.public.version as string;
+
 </script>
 
 <template>
-  <div
-    class="flex fixed top-0 left-0 flex-col px-4 py-6 border-b md:border-b-0 md:border-r border-zinc-200 max-w-60 h-screen">
+  <div 
+   class="flex fixed top-0 left-0 flex-col px-4 py-6 border-b md:border-b-0 md:border-r border-zinc-200 max-w-60 h-screen">
     <div class="flex flex-col">
       <!-- Company Profile -->
       <div class="flex items-center">
@@ -41,19 +48,19 @@ const logoURL = computed(() => useRemoteAsset(careerSiteSettings.value.logo).url
         <InputButton size="sm">Upgrade Now</InputButton>
       </div>
       <div class="flex justify-between mt-4">
-        <div class="text-zinc-900 text-sm">v.0.0.1</div>
+        <div class="text-zinc-900 text-sm">{{ version }}</div>
         <div class="flex space-x-2 items-center text-zinc-900">
-          <a href="https://github.com/profilecity/vidur">
-            <Icon class="w-5 h-5 shrink-0 fill-current" name="mdi:github" />
-          </a>
-          <a href="">
-            <Icon class="w-5 h-5 shrink-0 fill-current" name="ic:sharp-discord" />
-          </a>
-          <a href="https://x.com/thenirvanalabs">
-            <Icon class="w-4 h-4 shrink-0 fill-current" name="pajamas:twitter" />
-          </a>
-        </div>
+        <a :href="github">
+          <Icon class="w-5 h-5 shrink-0 fill-current" name="mdi:github" />
+        </a>
+        <a :href="discord">
+          <Icon class="w-5 h-5 shrink-0 fill-current" name="ic:sharp-discord" />
+        </a>
+        <a :href="twitter">
+          <Icon class="w-4 h-4 shrink-0 fill-current" name="pajamas:twitter" />
+        </a>
       </div>
     </div>
+  </div>
   </div>
 </template>
