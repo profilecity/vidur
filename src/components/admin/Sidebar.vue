@@ -45,13 +45,13 @@ const publicConfig = useRuntimeConfig().public;
       <div class="flex justify-between mt-4">
         <div class="text-zinc-900 text-sm">{{ version }}</div>
         <div class="flex space-x-2 items-center text-zinc-900">
-        <a :href="github">
+        <a :href="publicConfig.github" target="_blank">
           <Icon class="w-5 h-5 shrink-0 fill-current" name="mdi:github" />
         </a>
-        <a :href="discord">
+        <a :href="publicConfig.discord" target="_blank">
           <Icon class="w-5 h-5 shrink-0 fill-current" name="ic:sharp-discord" />
         </a>
-        <a :href="twitter">
+        <a :href="publicConfig.twitter" target="_blank">
           <Icon class="w-4 h-4 shrink-0 fill-current" name="pajamas:twitter" />
         </a>
       </div>
