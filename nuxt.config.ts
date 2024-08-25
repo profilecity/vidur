@@ -54,6 +54,10 @@ export default defineNuxtConfig({
     },
     public: {
       origin: 'http://localhost:3001',
+      github: 'https://github.com/profilecity/vidur',
+      discord: 'https://discord.gg/9ms5uYF8xF',
+      twitter: 'https://x.com/profilecityhq',
+      version: 'v0.0.1'
     },
   },
   compatibilityDate: '2024-07-31',
