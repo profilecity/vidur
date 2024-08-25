@@ -57,5 +57,5 @@ const publicConfig = useRuntimeConfig().public;
       </div>
     </div>
   </div>
-  </div>
+</div>
 </template>
