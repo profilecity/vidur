@@ -2,12 +2,7 @@
 const careerSiteSettings = usePublicCareerSiteSettings();
 const logoURL = computed(() => useRemoteAsset(careerSiteSettings.value.logo).url);
 
-const config = useRuntimeConfig();
-const github = config.public.github as string;
-const discord = config.public.discord as string;
-const twitter = config.public.twitter as string;
-const version = config.public.version as string;
-
+const publicConfig = useRuntimeConfig().public;
 </script>
 
 <template>
