@@ -43,7 +43,7 @@ const publicConfig = useRuntimeConfig().public;
         <InputButton size="sm">Upgrade Now</InputButton>
       </div>
       <div class="flex justify-between mt-4">
-        <div class="text-zinc-900 text-sm">{{ version }}</div>
+        <div class="text-zinc-900 text-sm">{{ publicConfig.version }}</div>
         <div class="flex space-x-2 items-center text-zinc-900">
         <a :href="publicConfig.github" target="_blank">
           <Icon class="w-5 h-5 shrink-0 fill-current" name="mdi:github" />
