@@ -57,7 +57,7 @@ export default defineNuxtConfig({
       github: 'https://github.com/profilecity/vidur',
       discord: 'https://discord.gg/9ms5uYF8xF',
       twitter: 'https://x.com/profilecityhq',
-      version: 'v.0.0.1'
+      version: 'v0.0.1'
     },
   },
   compatibilityDate: '2024-07-31',
