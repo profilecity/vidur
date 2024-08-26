@@ -41,60 +41,16 @@ useSeoMeta({
   twitterDescription: description,
   twitterCreator: generalSettings.value?.seo.twitter,
 })
-
-const logoURL = useRemoteAsset(generalSettings.value.careerSite.logo).url;
 </script>
 
 <template>
-  <main class="grow">
-    <div class="h-56 bg-zinc-200">
-      <img class="object-cover h-full w-full" src="/company-bg.png" width="2560" height="440"
-        alt="Company background" />
-    </div>
-    <!-- Header -->
-    <header class="text-center bg-white pb-6 border-b border-zinc-100">
-      <div class="px-4 sm:px-6 lg:px-8 w-full">
-        <div class="max-w-3xl mx-auto">
-
-          <!-- Avatar -->
-          <div class="-mt-12 mb-6">
-            <div class="inline-flex -ml-1 -mt-1 sm:mb-0 p-2 bg-zinc-600/30 rounded-2xl backdrop-blur-sm">
-              <img class="w-24 rounded-2xl border border-zinc-600" :src="logoURL" alt="Avatar" />
-            </div>
-          </div>
-
-          <!-- Company name and info -->
-          <div class="mb-4">
-            <h2 class="text-2xl text-zinc-800 font-bold mb-2">{{ generalSettings.careerSite.name }}</h2>
-            <p>{{ generalSettings.careerSite.bio }}</p>
-          </div>
-          <!-- Meta -->
-          <div class="inline-flex flex-wrap justify-center sm:justify-start space-x-4">
-            <div class="flex items-center" v-if="generalSettings.careerSite.location">
-              <Icon class="w-4 h-4 fill-current shrink-0 text-zinc-400" name="grommet-icons:location" />
-              <span class="text-sm font-medium whitespace-nowrap text-zinc-400 ml-1">
-                {{ generalSettings.careerSite.location }}
-              </span>
-            </div>
-            <div v-for="link in (generalSettings.careerSite.links.slice(0, 3))" :key="link.href"
-              class="flex items-center" v-if="generalSettings.careerSite.links">
-              <Icon name="tdesign:link" class="w-4 h-4 fill-current shrink-0 text-zinc-400" />
-              <a class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1"
-                :href="link.href">{{ link.title }}</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full">
-      <div class="max-w-3xl mx-auto">
-        <h3 class="text-xl leading-snug text-zinc-800 font-bold mb-6">
-          Open Positions at {{ generalSettings.careerSite.name }}
-        </h3>
-        <div class="space-y-2" v-if="postings">
-          <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />
-        </div>
-      </div>
+  <main class="grow w-full lg:w-2/3 mx-auto mt-20 p-2">
+    <SiteHeader />
+    <h3 class="text-lg leading-snug text-zinc-600 font-bold mt-8 mb-2">
+      Open Positions
+    </h3>
+    <div class="space-y-2" v-if="postings">
+      <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />
     </div>
   </main>
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">

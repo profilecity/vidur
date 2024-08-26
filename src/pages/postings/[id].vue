@@ -11,9 +11,10 @@ const {
 } = usePublicPosting(id);
 
 const careerSite = usePublicCareerSiteSettings();
+const companyLogo = useRemoteAsset(careerSite.value.logo).url;
 
 useHead({
-  title: () => `${posting.value?.title} | ${careerSite.value.name}`,
+  title: () => `${posting.value?.title + " | " || ""}${careerSite.value.name}`,
 })
 
 const tags = computed<string[]>(() => {
@@ -38,6 +39,10 @@ const apply = async () => {
   } finally {
     isApplying.value = false;
   }
+}
+
+if (route.query.fromOnboard) {
+  apply();
 }
 
 </script>
@@ -68,7 +73,7 @@ const apply = async () => {
           <div class="bg-white p-5 rounded-2xl border border-zinc-200 mb-6 lg:hidden">
             <div class="text-center mb-6">
               <div class="inline-flex mb-3">
-                <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Nirvana Labs" />
+                <img class="w-16 h-16 rounded-full" :src="companyLogo" width="64" height="64" :alt="`${careerSite.name}'s logo'`" />
               </div>
               <div class="text-lg font-bold text-zinc-800 mb-1">{{ careerSite.name }}</div>
             </div>
@@ -106,7 +111,7 @@ const apply = async () => {
           <div class="bg-white p-5 rounded-2xl border border-zinc-200 lg:w-72 xl:w-80">
             <div class="text-center mb-6">
               <div class="inline-flex mb-3">
-                <img class="w-16 h-16 rounded-full" src="/company-logo.png" width="64" height="64" alt="Company 01" />
+                <img class="w-16 h-16 rounded-full" :src="companyLogo" width="64" height="64" :alt="`${careerSite.name}'s logo'`" />
               </div>
               <div class="text-lg font-bold text-zinc-800 mb-1">{{ careerSite.name }}</div>
             </div>
@@ -116,18 +121,14 @@ const apply = async () => {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-
               <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
                 Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </InputButton>
             </div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   </main>
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
@@ -141,7 +142,3 @@ const apply = async () => {
     </div>
   </div>
 </template>
-
-<style>
-@import 'quill/dist/quill.snow.css';
-</style>
