@@ -17,10 +17,11 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const postings = await database
+  const postings = (await database
     .select()
     .from(jobPostingsTable)
-    .where(and(eq(jobPostingsTable.isPublished, true), eq(jobPostingsTable.id, query.id)));
+    // @ts-expect-error (totalApplicants removed)
+    .where(and(eq(jobPostingsTable.isPublished, true), eq(jobPostingsTable.id, query.id)))).map(p => { delete p.totalApplicants; return p; });
 
   if (!(Array.isArray(postings) && postings.length == 1)) {
     throw createError({
