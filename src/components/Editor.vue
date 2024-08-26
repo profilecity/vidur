@@ -94,6 +94,30 @@ onUnmounted(() => {
   border: 0px !important;
 }
 
+.ql-editor {
+  @apply !text-base
+}
+
+.ql-editor > h1, h2 {
+  @apply text-zinc-600 font-noto
+}
+
+.ql-editor > h3, h4, h5, h6, ol, p, ul {
+  @apply text-zinc-700 font-lato
+}
+
+.ql-editor > h1 {
+  @apply text-2xl
+}
+
+.ql-editor > h2 {
+  @apply !text-xl
+}
+
+.ql-editor > h3 {
+  @apply !text-base
+}
+
 .ql-e-blank {
   padding: 0% !important;
   border: 0px !important;
