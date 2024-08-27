@@ -5,7 +5,7 @@ const logoURL = useRemoteAsset(site.value.logo).url;
 </script>
 
 <template>
-  <header class="flex flex-col lg:flex-row space-x-3 items-center text-center">
+  <header class="flex flex-col lg:flex-row space-x-3 items-center text-center lg:text-left">
     <div class="p-1 bg-zinc-400/30 rounded-2xl backdrop-blur-sm">
       <img class="w-20 rounded-2xl border border-zinc-600" :src="logoURL" :alt="`${site.name}'s Avatar`" />
     </div>
