@@ -41,7 +41,7 @@ import { useVModel } from "@vueuse/core";
 import type Quill from 'quill';
 
 const props = withDefaults(defineProps<{
-  modelValue: string;
+  modelValue?: string;
   placeholder?: string;
   id?: string;
   readOnly?: boolean;
