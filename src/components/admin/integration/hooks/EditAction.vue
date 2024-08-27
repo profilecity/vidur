@@ -6,7 +6,7 @@ defineProps<{
 </script>
 
 <template>
-  <Modal title="Update Hook">
+  <Modal title="Update Hook" description="Changes take effect immediatly. Previous system will stop receiving events.">
     <template #input="{ open }">
       <InputButton variant="outline" size="icon" @click="open">
         <Icon name="iconamoon:edit" />
