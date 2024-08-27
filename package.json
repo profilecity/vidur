@@ -20,7 +20,7 @@
     "@types/quill": "^2.0.14",
     "@vee-validate/nuxt": "^4.13.1",
     "@vee-validate/zod": "^4.13.1",
-    "@vueuse/core": "^11.0.1",
+    "@vueuse/core": "^11.0.3",
     "class-variance-authority": "^0.7.0",
     "drizzle-kit": "^0.24.0",
     "drizzle-orm": "^0.33.0",
