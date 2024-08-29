@@ -1,9 +1,8 @@
 import { Driver as UnstorageDriver } from 'unstorage';
 import fsLite from 'unstorage/drivers/fs';
 import { s3Driver } from '@profilecity/unstorage-s3-driver';
-import { BLOB_STORAGE_KEY } from '../utils/storage';
 
-export default defineNitroPlugin(() => {
+export async function configureStorage() {
   const storage = useStorage();
 
   const config = useRuntimeConfig().storage;
@@ -39,4 +38,4 @@ export default defineNitroPlugin(() => {
   console.log(`Mounting ${config.engine} driver.`);
 
   storage.mount(BLOB_STORAGE_KEY, driver);
-})
+}
