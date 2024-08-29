@@ -1,5 +1,5 @@
 import { randomUUID } from "uncrypto";
-import { SeedPayload } from "../tasks/seed-database";
+import { seedDatabase, SeedPayload } from "../utils/tasks/seed-database";
 
 export default defineNitroPlugin(async () => {
   const startKey = randomUUID();
@@ -8,5 +8,5 @@ export default defineNitroPlugin(async () => {
     startKey,
   }
 
-  runTask('seed-database', { payload });
+  await seedDatabase(payload)
 })
