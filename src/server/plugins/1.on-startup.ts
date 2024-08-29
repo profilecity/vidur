@@ -11,4 +11,5 @@ export default defineNitroPlugin(async () => {
   await seedDatabase(payload)
   await configureStorage();
   await configureCache();
+  await logFirstAccessKeyIfPresent();
 })
