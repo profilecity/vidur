@@ -18,9 +18,7 @@ export default defineNuxtPlugin(async () => {
 
   const publicGeneralSettings = useState<GeneralSettings>('public-general-settings');
   try {
-    const publicGeneralSettingsResponse = await useAsyncData('public-general-settings-fetch', () =>
-      $fetch('/api/public/settings'),
-    );
+    const publicGeneralSettingsResponse = await useFetch('/api/public/settings');
     if (!publicGeneralSettingsResponse.data.value) {
       throw new Error('Invalid response ' + publicGeneralSettingsResponse.data.value);
     }
