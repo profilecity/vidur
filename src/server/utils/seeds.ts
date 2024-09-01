@@ -1,5 +1,4 @@
 import { metaDataTable } from '../db/schema';
-import type { SeedFn } from '../tasks/seed-database';
 
 /**
  * Seed 1
