@@ -11,3 +11,10 @@ export type Tab = {
   icon: string;
   url: string;
 }
+
+export type Step = {
+  step: number;
+  title?: string;
+  description?: string;
+  icon: string;
+}
