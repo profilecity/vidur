@@ -1,20 +1,68 @@
+<script setup lang="ts">
+const { steps, currentStep, goToNextStep } = useOnboardingSteps();
+const { key, finishOnboarding } = useOnboarding();
+const logoId = ref('');
+const orgName = ref('');
+
+const step0Completed = (verifiedKey: string) => {
+  key.value = verifiedKey;
+  goToNextStep();
+};
+
+const step1Completed = (savedLogoId: string) => {
+  logoId.value = savedLogoId;
+  goToNextStep();
+};
+
+const settingUpCareerSite = ref(false);
+const errorSettingUpCareerSite = ref(false);
+const step2Completed = async (savedOrgName: string) => {
+  orgName.value = savedOrgName;
+  goToNextStep();
+  try {
+    settingUpCareerSite.value = true;
+    await finishOnboarding();
+  } catch (e) {
+    console.error('Error setting up career site', e);
+    errorSettingUpCareerSite.value = true;
+  } finally {
+    settingUpCareerSite.value = false;
+  }
+};
+</script>
+
 <template>
-  <section class="flex items-center justify-center min-h-screen">
-    <div class="max-w-sm mx-auto w-full text-center">
-      <div class="justify-center flex"><img src="/vidur-logo.svg" class="h-5" /></div>
-      <h4 class="text-md text-zinc-400 mt-2 mb-6">The only Recruiting Software you will ever need.</h4>
-      <!-- Form -->
-      <form class="justify-center mt-10">
-        <div class="space-y-2 text-center">
-          <label class="text-sm text-zinc-800" for="one-time-key">To get started, enter the One-Time setup
-              code.</label>
-            <input id="one-time-key" name="one-time-key" class="form-input w-full" type="text"
-              placeholder="vidur-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" />
+  <OnboardingKeyInput v-if="currentStep == 0" @done="step0Completed" />
+  <main v-else>
+    <div class="justify-center flex mt-12"><img src="/vidur-logo.svg" class="h-8" /></div>
+    <h4 class="text-sm text-zinc-600 mt-2 mb-6 text-center">The only recruiting software you will ever need.</h4>
+    <section class="w-full mt-12">
+      <InputStep class="mx-auto" :steps :step="currentStep" />
+    </section>
+    <section class="w-full mt-16 flex items-center">
+      <OnboardingLogoUpload class="w-1/2 mx-auto" v-if="currentStep == 1" @done="step1Completed" />
+      <OnboardingCareerSiteConfig
+        class="w-1/2 mx-auto"
+        :logo="logoId"
+        v-else-if="currentStep == 2"
+        @done="step2Completed"
+      />
+      <div class="w-1/2 mx-auto" v-if="currentStep == 3">
+        <div class="text-center">
+          <div class="text-2xl text-zinc-700 font-noto" v-if="settingUpCareerSite">
+            Setting up the career site. <br />
+            <Icon name="svg-spinners:blocks-shuffle-3" class="w-12 h-12 mt-10" />
+          </div>
+          <div v-else-if="!errorSettingUpCareerSite">
+            <Icon name="line-md:circle-twotone-to-confirm-circle-twotone-transition" class="w-32 h-32"/>
+            <h1 class="text-2xl font-noto text-zinc-800 font-bold mb-8">Nice to have you, {{ orgName }}. 🙌</h1>
+            <InputButton as="a" href="/admin">Go to admin console</InputButton>
+          </div>
+          <div class="text-2xl text-red-600 font-noto" v-else>
+            Something went wrong!<br />There was an error setting up the career site.
+          </div>
         </div>
-        <div class="flex justify-center mt-6">
-          <InputButton as="NuxtLink" to="/onboarding/step-1">Verify</InputButton>
-        </div>
-      </form>
-    </div>
-  </section>
+      </div>
+    </section>
+  </main>
 </template>

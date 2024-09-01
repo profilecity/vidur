@@ -30,7 +30,7 @@ services:
       NUXT_DB_USER: ${NUXT_DB_USER:-postgres}
       NUXT_DB_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
       NUXT_DB_DATABASE: ${NUXT_DB_DATABASE:-vidur}
-      NUXT_BYPASS_ADMIN: ${NUXT_BYPASS_ADMIN:-true}
+      NUXT_BYPASS_ADMIN: ${NUXT_BYPASS_ADMIN:-false}
     ports:
       - "3001:3001"
     depends_on:
