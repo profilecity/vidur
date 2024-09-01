@@ -1,7 +1,3 @@
-> ##  🚧 WIP<br>
-> ### This project is under active development and might include breaking changes.
-> See open issues to become an early contributor.
-
 <p align="center">
   <a href="https://github.com/nirvanaOSS/vidur">
    <img src="./header.png" alt="Logo">
