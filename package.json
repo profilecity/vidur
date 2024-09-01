@@ -1,5 +1,7 @@
 {
-  "name": "nuxt-app",
+  "name": "vidur",
+  "description": "A truely composable, open source, recruiting software.",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,7 +12,8 @@
     "postinstall": "nuxt prepare",
     "migration:generate": "drizzle-kit generate",
     "migration:apply": "drizzle-kit migrate",
-    "drizzle:update": "drizzle-kit up"
+    "drizzle:update": "drizzle-kit up",
+    "release": "changelogen --release && git push --follow-tags"
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
@@ -40,6 +43,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/pg": "^8.11.6"
+    "@types/pg": "^8.11.6",
+    "changelogen": "^0.5.5"
   }
 }
