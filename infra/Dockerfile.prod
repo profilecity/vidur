@@ -1,20 +1,29 @@
-# Stage 1: Build stage
-FROM node:18.20-alpine AS builder
+ARG NODE_VERSION=22.7
 
-WORKDIR /app
+# Build stage
+FROM node:${NODE_VERSION}-slim AS build
 
-COPY package.json yarn.lock ./
+WORKDIR /build-space
+
+COPY ./package.json /build-space/
+COPY ./yarn.lock /build-space/
+
 RUN yarn install
 
-COPY . .
+COPY . ./
 
-# Stage 2: Production stage
-FROM node:18.20-alpine
+RUN yarn build
 
+# Production stage
+FROM node:${NODE_VERSION}-alpine
 WORKDIR /app
 
-COPY --from=builder /app /app
+COPY --from=build /build-space/.output ./
 
-EXPOSE 3001
+ENV HOST=0.0.0.0
+ENV NODE_ENV=production
+ENV PORT=80
 
-CMD ["sh", "-c", "yarn migration:apply && yarn dev"]
+EXPOSE 80
+
+CMD ["node", "/app/server/index.mjs"]
