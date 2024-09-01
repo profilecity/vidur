@@ -3,7 +3,7 @@ import type { SelectableOption } from "~/types/general";
 import { useVModel } from "@vueuse/core";
 
 const props = defineProps<{
-  modelValue: SelectableOption['id'];
+  modelValue?: SelectableOption['id'];
   title: string;
   options: SelectableOption[];
 }>();

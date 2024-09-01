@@ -11,7 +11,7 @@ const COMPANY_SIZE_OPTIONS = [
 import { useVModel } from "@vueuse/core";
 
 const props = defineProps<{
-  modelValue: number;
+  modelValue?: number;
 }>();
 
 const emit = defineEmits<{
