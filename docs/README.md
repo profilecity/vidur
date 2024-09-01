@@ -44,7 +44,7 @@ yarn dev              # Finally, start the dev server.
 
 **Or simply use Docker**
 ```bash
-docker compose --profile dev up 
+docker compose up 
 ```
 
 This command starts the `db` and `app` services using the `dev` profile. It runs PostgreSQL as `database` and the app as `vidur_app`.

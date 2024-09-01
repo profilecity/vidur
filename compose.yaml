@@ -13,8 +13,6 @@ services:
       - "5432:5432"
     volumes:
       - vidur_data:/var/lib/postgresql/data
-    profiles:
-      - dev
 
   app:
     build:
@@ -39,30 +37,6 @@ services:
       - .:/app
       - /app/node_modules
       - static_data:/tmp/vidur-jobs-dev
-    profiles:
-      - dev
-
-  app-prod:
-    build:
-      context: .
-      dockerfile: infra/Dockerfile.prod
-    container_name: vidur_app_prod
-    env_file:
-      - .env
-    environment:
-      PORT: ${PORT:-3001}
-      NUXT_DB_HOST: ${NUXT_DB_HOST:-db}
-      NUXT_DB_PORT: ${NUXT_DB_PORT:-5432}
-      NUXT_DB_USER: ${NUXT_DB_USER:-postgres}
-      NUXT_DB_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
-      NUXT_DB_DATABASE: ${NUXT_DB_DATABASE:-vidur}
-      NUXT_BYPASS_ADMIN: ${NUXT_BYPASS_ADMIN:-true}
-    ports:
-      - "3001:3001"
-    volumes:
-      - static_data:/tmp/vidur-jobs-dev
-    profiles:
-      - prod
 
 volumes:
   vidur_data:
