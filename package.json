@@ -49,6 +49,5 @@
     "husky": "^9.1.5",
     "prettier": "^3.3.3",
     "changelogen": "^0.5.5"
- 
   }
 }
