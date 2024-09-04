@@ -3,7 +3,6 @@
   "description": "A truely composable, open source, recruiting software.",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -13,7 +12,10 @@
     "migration:generate": "drizzle-kit generate",
     "migration:apply": "drizzle-kit migrate",
     "drizzle:update": "drizzle-kit up",
-    "release": "changelogen --release && git push --follow-tags"
+    "release": "changelogen --release && git push --follow-tags",
+    "lint-staged": "lint-staged",
+    "format": "prettier --write .",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
@@ -44,6 +46,14 @@
   },
   "devDependencies": {
     "@types/pg": "^8.11.6",
-    "changelogen": "^0.5.5"
+    "changelogen": "^0.5.5",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "prettier --write"
+    ]
   }
 }
