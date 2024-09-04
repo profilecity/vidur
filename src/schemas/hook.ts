@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const createHookSchema = z.object({
   url: z.string().url().max(255).min(1),

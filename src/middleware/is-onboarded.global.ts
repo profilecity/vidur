@@ -10,17 +10,17 @@ export default defineNuxtRouteMiddleware((to) => {
   const onboardingStatus = useOnboardingStatus();
   if (to.path.startsWith('/onboarding')) {
     if (onboardingStatus.value) {
-      return navigateTo("/");
+      return navigateTo('/');
     }
     return;
-  };
+  }
   if (!onboardingStatus.value) {
     const auth = useAuth();
     const { redirectToLogin } = useSafeRedirectToLogin();
-    
+
     if (!auth.isSignedIn) {
       return redirectToLogin(to.fullPath);
     }
-    return navigateTo("/onboarding");
+    return navigateTo('/onboarding');
   }
-})
+});

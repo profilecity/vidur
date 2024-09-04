@@ -2,13 +2,13 @@
 definePageMeta({
   layout: 'admin',
   middleware: 'admin-auth',
-})
+});
 
 useHead({
-  title: 'Settings | Admin Panel'
-})
+  title: 'Settings | Admin Panel',
+});
 
-const { activeTab } = useTabGroup('settings')
+const { activeTab } = useTabGroup('settings');
 </script>
 
 <template>

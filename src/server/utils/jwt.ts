@@ -10,7 +10,7 @@ if (IS_DEV) {
 
 export async function getToken(
   event: H3Event,
-  options: { useTokenFromHeader?: boolean } = { useTokenFromHeader: false },
+  options: { useTokenFromHeader?: boolean } = { useTokenFromHeader: false }
 ): Promise<string> {
   let accessToken: string;
 
@@ -66,9 +66,9 @@ export async function decodeAndValidate(jwToken: string): Promise<any> {
         if (!kid) {
           callback(
             new Error(
-              'No kid found for provided header ' + JSON.stringify(header),
+              'No kid found for provided header ' + JSON.stringify(header)
             ),
-            undefined,
+            undefined
           );
           return;
         }
@@ -82,7 +82,7 @@ export async function decodeAndValidate(jwToken: string): Promise<any> {
           return;
         }
         resolve(payload);
-      },
+      }
     );
   });
 }

@@ -1,7 +1,7 @@
-import { jobPostingsTable } from "../../db/schema";
-import authenticateAdminRequest from "../../utils/admin";
-import { and, eq, or } from "drizzle-orm";
-import { listJobPostingsFilterSchema } from "~/schemas/posting";
+import { jobPostingsTable } from '../../db/schema';
+import authenticateAdminRequest from '../../utils/admin';
+import { and, eq, or } from 'drizzle-orm';
+import { listJobPostingsFilterSchema } from '~/schemas/posting';
 
 export default defineEventHandler(async (event) => {
   const database = await useDatabase();
@@ -35,6 +35,5 @@ export default defineEventHandler(async (event) => {
     .select()
     .from(jobPostingsTable)
     .where(conditions.length ? and(...conditions) : undefined)
-    .orderBy(jobPostingsTable.createdAt)
-    ;
+    .orderBy(jobPostingsTable.createdAt);
 });

@@ -14,7 +14,7 @@ export default defineTask<boolean>({
     if (!bearerToken) {
       console.error(
         'hooks:application-create',
-        'bearer token missing from payload. aborting as failure...',
+        'bearer token missing from payload. aborting as failure...'
       );
       return { result: false };
     }
@@ -27,7 +27,7 @@ export default defineTask<boolean>({
       if (IS_DEV) {
         console.log(
           'hooks:application-create',
-          'no-hooks-found. aborting as success...',
+          'no-hooks-found. aborting as success...'
         );
       }
       return { result: true };
@@ -47,7 +47,7 @@ export default defineTask<boolean>({
       console.error(
         'hooks:application-create',
         'no applicant found. applicant id',
-        applicantId,
+        applicantId
       );
       return { result: false };
     }
@@ -66,14 +66,14 @@ export default defineTask<boolean>({
       console.error(
         'hooks:application-create',
         'no posting found. posting id',
-        postingId,
+        postingId
       );
       return { result: false };
     }
 
     const posting = jobPostingsResult[0];
 
-    const hookIds = hooks.map(h => h.id);
+    const hookIds = hooks.map((h) => h.id);
 
     for (let index = 0; index < hooks.length; index++) {
       const hook = hooks[index];
@@ -86,7 +86,7 @@ export default defineTask<boolean>({
           'applicantId',
           applicantId,
           'postingId',
-          postingId,
+          postingId
         );
       }
 
@@ -108,13 +108,16 @@ export default defineTask<boolean>({
           applicantId,
           'postingId',
           postingId,
-          IS_DEV ? e : undefined,
+          IS_DEV ? e : undefined
         );
       });
     }
-    
+
     const lastExecutedAt = new Date();
-    await db.update(hooksTable).set({ lastExecutedAt }).where(inArray(hooksTable.id, hookIds));
+    await db
+      .update(hooksTable)
+      .set({ lastExecutedAt })
+      .where(inArray(hooksTable.id, hookIds));
 
     return { result: true };
   },

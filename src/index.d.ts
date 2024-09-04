@@ -1,4 +1,4 @@
-import type { Driver } from "unstorage";
+import type { Driver } from 'unstorage';
 
 declare module 'nuxt/schema' {
   interface RuntimeConfig {
@@ -13,7 +13,7 @@ declare module 'nuxt/schema' {
       };
       local?: {
         baseDir: string;
-      }
+      };
     };
     db: {
       host: string;
@@ -21,7 +21,7 @@ declare module 'nuxt/schema' {
       user: string;
       password: string;
       database: string;
-    }
+    };
   }
 }
 

@@ -6,7 +6,9 @@ export default defineEventHandler(async (event) => {
 
   const db = await useDatabase();
 
-  const postings = await db.select({ id: jobPostingsTable.id, title: jobPostingsTable.title }).from(jobPostingsTable);
+  const postings = await db
+    .select({ id: jobPostingsTable.id, title: jobPostingsTable.title })
+    .from(jobPostingsTable);
 
   if (IS_DEV) {
     console.log('[/api/postings] found', postings.length, 'postings');

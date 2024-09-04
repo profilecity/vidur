@@ -11,7 +11,9 @@ export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
   const query = await getValidatedQuery(event, settingsLookupSchema.parse);
-  const queries = query.config ? [query.config] : ['seoConfig', 'careerSiteConfig'];
+  const queries = query.config
+    ? [query.config]
+    : ['seoConfig', 'careerSiteConfig'];
 
   const settings: GeneralSettings = {
     careerSite: {},

@@ -9,7 +9,14 @@ export default defineNuxtConfig({
   routeRules: {
     '/admin/*': { ssr: false },
   },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-icon', '@vee-validate/nuxt', '@nuxtjs/google-fonts', 'nuxt-cropper', 'radix-vue/nuxt'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'nuxt-icon',
+    '@vee-validate/nuxt',
+    '@nuxtjs/google-fonts',
+    'nuxt-cropper',
+    'radix-vue/nuxt',
+  ],
   googleFonts: {
     families: {
       'Noto+Sans': [400, 500, 600, 700],
@@ -57,7 +64,7 @@ export default defineNuxtConfig({
       github: 'https://github.com/profilecity/vidur',
       discord: 'https://discord.gg/9ms5uYF8xF',
       twitter: 'https://x.com/profilecityhq',
-      version: 'v0.0.1'
+      version: 'v0.0.1',
     },
   },
   compatibilityDate: '2024-07-31',

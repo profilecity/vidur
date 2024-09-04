@@ -1,8 +1,6 @@
 # Changelog
 
-
 ## v0.1.0
-
 
 ### 🚀 Enhancements
 
@@ -54,11 +52,11 @@
 - **ui:** Button component ([93cefd7](https://github.com/profilecity/vidur/commit/93cefd7))
 - **ui:** Switch component ([1f1c384](https://github.com/profilecity/vidur/commit/1f1c384))
 - **ui:** Common tab-based routing ([4819bdf](https://github.com/profilecity/vidur/commit/4819bdf))
-- **settings:** ⚠️  Rename organizationSettings to careerSite. ([fca5906](https://github.com/profilecity/vidur/commit/fca5906))
+- **settings:** ⚠️ Rename organizationSettings to careerSite. ([fca5906](https://github.com/profilecity/vidur/commit/fca5906))
 - **ui:** Add loading indicator ([7d90050](https://github.com/profilecity/vidur/commit/7d90050))
 - **ui:** Only allow desktop access for admin panel ([8a4e3b9](https://github.com/profilecity/vidur/commit/8a4e3b9))
 - **ui:** Stepper component ([ab64ed6](https://github.com/profilecity/vidur/commit/ab64ed6))
-- ⚠️  Onboarding sequence ([abca6bb](https://github.com/profilecity/vidur/commit/abca6bb))
+- ⚠️ Onboarding sequence ([abca6bb](https://github.com/profilecity/vidur/commit/abca6bb))
 
 ### 🔥 Performance
 
@@ -248,8 +246,8 @@
 
 #### ⚠️ Breaking Changes
 
-- **settings:** ⚠️  Rename organizationSettings to careerSite. ([fca5906](https://github.com/profilecity/vidur/commit/fca5906))
-- ⚠️  Onboarding sequence ([abca6bb](https://github.com/profilecity/vidur/commit/abca6bb))
+- **settings:** ⚠️ Rename organizationSettings to careerSite. ([fca5906](https://github.com/profilecity/vidur/commit/fca5906))
+- ⚠️ Onboarding sequence ([abca6bb](https://github.com/profilecity/vidur/commit/abca6bb))
 
 ### ❤️ Contributors
 
@@ -267,4 +265,3 @@
 - Pushkar Mishra ([@Pushkarm029](http://github.com/Pushkarm029))
 - Aman Desai ([@amandesai01](http://github.com/amandesai01))
 - Dev Shailesh Shah ([@devshahofficial](http://github.com/devshahofficial))
-

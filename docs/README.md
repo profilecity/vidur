@@ -27,11 +27,13 @@
 </p>
 
 # Recruiting OS for forward thinking companies
-Vidur is an open-source, next-gen Recruiting OS. Its intuitive and modern interface combines advanced candidate profiles, team workspace, plugins,  one-click apply features, and a lot more enabling forward-thinking companies to efficiently manage their recruitment processes from start to finish.
+
+Vidur is an open-source, next-gen Recruiting OS. Its intuitive and modern interface combines advanced candidate profiles, team workspace, plugins, one-click apply features, and a lot more enabling forward-thinking companies to efficiently manage their recruitment processes from start to finish.
 
 ![Collage Image](asset/collage.png)
 
 ## Development Setup
+
 ```sh
 # Requirements: A PostgreSQL instance up-and-running.
 # Clone the repo and cd into the folder.
@@ -43,18 +45,22 @@ yarn dev              # Finally, start the dev server.
 ```
 
 **Or simply use Docker**
+
 ```bash
-docker compose up 
+docker compose up
 ```
 
 This command starts the `db` and `app` services using the `dev` profile. It runs PostgreSQL as `database` and the app as `vidur_app`.
 
 ## Contributing
+
 There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
 
 ## Staying ahead
+
 Star Vidur on GitHub and be instantly notified of new releases.
 ![Star Image](asset/star-repo.gif)
 
 ## Security disclosure
+
 To protect your privacy, please avoid posting security issues on GitHub. Instead, send your questions to team@vidurjobs.xyz and we will provide you with a more detailed answer.

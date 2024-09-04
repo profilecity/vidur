@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useVModel } from "@vueuse/core";
+import { useVModel } from '@vueuse/core';
 
 const props = defineProps<{
   id: string;
@@ -14,13 +14,20 @@ const props = defineProps<{
   label?: string;
 }>();
 
-const model = useVModel(props, "modelValue")
+const model = useVModel(props, 'modelValue');
 </script>
 
 <template>
   <fieldset>
     <InputLabel :label-class :label :error :id />
-    <input class="input-css" :type="typeOverride || 'text'" :class="inputClass" v-model="model" :placeholder :id>
+    <input
+      class="input-css"
+      :type="typeOverride || 'text'"
+      :class="inputClass"
+      v-model="model"
+      :placeholder
+      :id
+    />
   </fieldset>
 </template>
 

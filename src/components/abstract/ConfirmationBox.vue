@@ -1,33 +1,36 @@
 <script setup lang="ts">
 // TODO: Add CSS styling for box type (danger | warning | default).
-const props = withDefaults(defineProps<{
-  title?: string;
-  content?: string;
-  type?: 'destructive' | 'default';
-  closeIsCancel?: boolean;
-  confirmLabel?: string;
-  cancelLabel?: string;
-}>(), {
-  type: 'default',
-  closeIsCancel: true,
-  confirmLabel: 'Agree',
-  cancelLabel: 'Cancel'
-});
+const props = withDefaults(
+  defineProps<{
+    title?: string;
+    content?: string;
+    type?: 'destructive' | 'default';
+    closeIsCancel?: boolean;
+    confirmLabel?: string;
+    cancelLabel?: string;
+  }>(),
+  {
+    type: 'default',
+    closeIsCancel: true,
+    confirmLabel: 'Agree',
+    cancelLabel: 'Cancel',
+  }
+);
 
 const emit = defineEmits<{
-  confirm: [],
-  cancel: [],
-}>()
+  confirm: [];
+  cancel: [];
+}>();
 
 const confirm = (closeModalFn: () => void) => {
   closeModalFn();
   emit('confirm');
-}
+};
 
 const cancel = (closeModalFn: () => void) => {
   closeModalFn();
   emit('cancel');
-}
+};
 </script>
 <template>
   <Modal :title="title" :description="content">

@@ -17,7 +17,9 @@ const whitlistedColorsForDynamicContent = [
   'pink',
   'rose',
 ];
-const whitelistedBgClasses = whitlistedColorsForDynamicContent.map((c) => `bg-${c}-200`);
+const whitelistedBgClasses = whitlistedColorsForDynamicContent.map(
+  (c) => `bg-${c}-200`
+);
 
 module.exports = {
   safelist: ['font-noto', 'font-lato', ...whitelistedBgClasses],

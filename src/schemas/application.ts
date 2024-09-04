@@ -6,4 +6,4 @@ export const applicationCreateSchema = z.object({
 
 export const applicationsLookupSchema = z.object({
   postingIds: z.array(z.string().uuid()),
-})
+});

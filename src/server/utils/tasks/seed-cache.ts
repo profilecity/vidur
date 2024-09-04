@@ -1,6 +1,6 @@
-import { inArray } from "drizzle-orm";
-import { GeneralSettings } from "~/schemas/setting";
-import { metaDataTable } from "~/server/db/schema";
+import { inArray } from 'drizzle-orm';
+import { GeneralSettings } from '~/schemas/setting';
+import { metaDataTable } from '~/server/db/schema';
 
 export async function seedCache() {
   console.log('Seeding Cache');
@@ -10,7 +10,13 @@ export async function seedCache() {
   const metadataEntries = await db
     .select()
     .from(metaDataTable)
-    .where(inArray(metaDataTable.key, ['seoConfig', 'careerSiteConfig', 'firstSetupAccessKey']));
+    .where(
+      inArray(metaDataTable.key, [
+        'seoConfig',
+        'careerSiteConfig',
+        'firstSetupAccessKey',
+      ])
+    );
 
   const settings: GeneralSettings = {
     careerSite: {},

@@ -1,4 +1,4 @@
-import type { Step } from "~/types/general";
+import type { Step } from '~/types/general';
 
 const steps: Step[] = [
   {
@@ -21,20 +21,20 @@ const steps: Step[] = [
 export function useOnboardingSteps() {
   const currentStep = ref(0);
   const goToNextStep = () => currentStep.value++;
-  return { currentStep, goToNextStep, steps }
+  return { currentStep, goToNextStep, steps };
 }
 
 export function useOnboarding() {
-  const key = ref("");
+  const key = ref('');
   const finishOnboarding = async () => {
     if (!key.value) return;
-    await $fetch("/api/onboarding", {
-      method: "POST",
+    await $fetch('/api/onboarding', {
+      method: 'POST',
       body: {
         key: key.value,
-      }
-    })
-  }
+      },
+    });
+  };
 
   return { key, finishOnboarding };
 }

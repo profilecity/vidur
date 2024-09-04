@@ -18,12 +18,14 @@ const props = withDefaults(
   }>(),
   {
     allowManualTrigger: false,
-  },
+  }
 );
 
 if (props.allowManualTrigger) {
   // TODO: implement allow manual trigger.
-  console.warn("<InputStep/>: allowManualTrigger is not implemented yet, and won't take effect.");
+  console.warn(
+    "<InputStep/>: allowManualTrigger is not implemented yet, and won't take effect."
+  );
 }
 </script>
 
@@ -55,7 +57,10 @@ if (props.allowManualTrigger) {
         <StepperTitle class="font-medium font-noto text-xs" v-if="item.title">
           {{ item.title }}
         </StepperTitle>
-        <StepperDescription class="hidden sm:block text-xs" v-if="item.description">
+        <StepperDescription
+          class="hidden sm:block text-xs"
+          v-if="item.description"
+        >
           {{ item.description }}
         </StepperDescription>
       </div>

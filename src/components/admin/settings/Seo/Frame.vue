@@ -6,7 +6,8 @@ const emits = defineEmits<{
 }>();
 
 const generalSettings = useGeneralSettings();
-const { updateGeneralSettings, generalSettings: generalSettingsPublic } = usePublicGeneralSettings();
+const { updateGeneralSettings, generalSettings: generalSettingsPublic } =
+  usePublicGeneralSettings();
 
 // Define form schema and use it in the form handling
 const formSchema = toTypedSchema(seoConfigSchema);
@@ -34,8 +35,11 @@ stopWatching = watchEffect(() => {
 });
 
 const isSubmitting = ref(false);
-const onSubmit = handleSubmit(async values => {
-  const updatedSettings = { seo: values, careerSite: generalSettingsPublic.value.careerSite };
+const onSubmit = handleSubmit(async (values) => {
+  const updatedSettings = {
+    seo: values,
+    careerSite: generalSettingsPublic.value.careerSite,
+  };
   try {
     isSubmitting.value = true;
     await $fetch('/api/settings/general', {
@@ -45,7 +49,7 @@ const onSubmit = handleSubmit(async values => {
     updateGeneralSettings(updatedSettings);
     emits('saved');
   } catch (error) {
-    console.error("Error saving settings", error);
+    console.error('Error saving settings', error);
   } finally {
     isSubmitting.value = false;
   }
@@ -60,16 +64,37 @@ const onSubmit = handleSubmit(async values => {
       </InputButton>
     </template>
     <template #content>
-      <form class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4" @submit="onSubmit">
+      <form
+        class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4"
+        @submit="onSubmit"
+      >
         <div class="md:flex gap-4 items-center mt-5">
-          <InputText class="w-full md:w-1/2" placeholder="Big Space Career Site" v-model="title" id="seo-title"
-            :error="errors['title']" label="Website Title" />
-          <InputText class="w-full md:w-1/2" placeholder="Big Space Career Site Decrition" v-model="description"
-            id="seo-description" :error="errors['description']" label="Website Description" />
+          <InputText
+            class="w-full md:w-1/2"
+            placeholder="Big Space Career Site"
+            v-model="title"
+            id="seo-title"
+            :error="errors['title']"
+            label="Website Title"
+          />
+          <InputText
+            class="w-full md:w-1/2"
+            placeholder="Big Space Career Site Decrition"
+            v-model="description"
+            id="seo-description"
+            :error="errors['description']"
+            label="Website Description"
+          />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
-          <InputText class="w-full md:w-1/2" placeholder="big_space_tech" v-model="twitter" id="seo-twitter"
-            :error="errors['twitter']" label="Twitter Handle (without @)" />
+          <InputText
+            class="w-full md:w-1/2"
+            placeholder="big_space_tech"
+            v-model="twitter"
+            id="seo-twitter"
+            :error="errors['twitter']"
+            label="Twitter Handle (without @)"
+          />
         </div>
       </form>
     </template>

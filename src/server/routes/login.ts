@@ -1,4 +1,7 @@
-import { generateRandomString, getChallengeFromVerifier } from '~/utils/oauth-support';
+import {
+  generateRandomString,
+  getChallengeFromVerifier,
+} from '~/utils/oauth-support';
 import authenticateRequest from '../utils/auth';
 import {
   sendRedirectToLoginPage,
@@ -19,11 +22,11 @@ export default defineEventHandler(async (event) => {
     return sendRedirectToNextPage(event);
   } catch (error) {
     if (IS_DEV) {
-      console.error("Error authenticating request", error);
+      console.error('Error authenticating request', error);
     }
     // @ts-expect-error Throw error if issue other than 401.
     if (!error.statusCode || error.statusCode !== 401) {
-      console.error("Error while introspecting token.", error);
+      console.error('Error while introspecting token.', error);
       throw createError({
         statusCode: 500,
         message: 'Error extracting token',
@@ -50,7 +53,7 @@ export default defineEventHandler(async (event) => {
     ) {
       // State mismatch.
       if (IS_DEV) {
-        console.error("State mismatch.");
+        console.error('State mismatch.');
       }
       return sendRedirectToLoginPage(event);
     }
@@ -70,21 +73,21 @@ export default defineEventHandler(async (event) => {
     formData.append('code', code);
 
     try {
-      const response = await $fetch<AccessToken>("/oauth2/token", {
+      const response = await $fetch<AccessToken>('/oauth2/token', {
         method: 'POST',
         baseURL: runtimeConfig.services.atlas,
         body: formData,
       });
 
       if (!(response && response.access_token)) {
-        throw new Error("Invalid response data: " + response);
+        throw new Error('Invalid response data: ' + response);
       }
 
-      setCookie(event, "oauth_access_token", response.access_token);
+      setCookie(event, 'oauth_access_token', response.access_token);
 
       return sendRedirectToNextPage(event);
     } catch (error) {
-      console.error("Error fetching access token.", error);
+      console.error('Error fetching access token.', error);
       return sendRedirect(event, '/');
     }
   } else {
@@ -98,9 +101,9 @@ export default defineEventHandler(async (event) => {
 
     const oauthParams = new URLSearchParams({
       client_id: runtimeConfig.oauth.clientId,
-      redirect_uri: runtimeConfig.public.origin + "/login",
+      redirect_uri: runtimeConfig.public.origin + '/login',
       response_type: 'code',
-      scope: "openid",
+      scope: 'openid',
       state: oauthState,
       code_challenge_method: 'S256',
       code_challenge: codeVerifierChallenge,
@@ -108,6 +111,9 @@ export default defineEventHandler(async (event) => {
 
     const urlParams = oauthParams.toString();
 
-    return sendRedirect(event, `${runtimeConfig.services.atlas}/oauth2/authorize?${urlParams}`);
+    return sendRedirect(
+      event,
+      `${runtimeConfig.services.atlas}/oauth2/authorize?${urlParams}`
+    );
   }
 });

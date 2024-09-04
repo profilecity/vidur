@@ -10,5 +10,5 @@ export function sendRedirectToNextPage(event: H3Event) {
 }
 
 export function sendRedirectToLoginPage(event: H3Event) {
-  return sendRedirect(event, "/login");
+  return sendRedirect(event, '/login');
 }

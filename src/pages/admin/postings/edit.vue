@@ -1,5 +1,8 @@
 <script setup lang="ts">
-import { createJobPostingSchema, updateJobPostingSchema } from '~/schemas/posting';
+import {
+  createJobPostingSchema,
+  updateJobPostingSchema,
+} from '~/schemas/posting';
 import type { JobPosting } from '~/server/db/schema';
 
 definePageMeta({
@@ -17,7 +20,9 @@ const isUpdating = !!postingId;
 let posting: JobPosting = null;
 
 if (isUpdating) {
-  posting = (await useRequestFetch()('/api/posting', { query: { id: postingId } }))[0] as unknown as JobPosting;
+  posting = (
+    await useRequestFetch()('/api/posting', { query: { id: postingId } })
+  )[0] as unknown as JobPosting;
   if (!posting) {
     throw createError({
       statusCode: 404,
@@ -30,7 +35,9 @@ useHead({
   title: `${isUpdating ? 'Edit - ' : 'New Posting'} ${(isUpdating && posting.title) || ''}`,
 });
 
-const formSchema = toTypedSchema(isUpdating ? updateJobPostingSchema : createJobPostingSchema);
+const formSchema = toTypedSchema(
+  isUpdating ? updateJobPostingSchema : createJobPostingSchema
+);
 const { handleSubmit, errors, defineField, errorBag } = useForm({
   validationSchema: formSchema,
 });
@@ -100,13 +107,18 @@ const onDelete = async () => {
 <template>
   <div class="w-full max-w-9xl mx-auto">
     <!-- Page header -->
-    <div class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white">
+    <div
+      class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white"
+    >
       <!-- Left: Title -->
       <div class="mb-4 sm:mb-0">
-        <h2 class="text-md md:text-lg text-zinc-800 font-bold flex items-center">
-          <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />{{
-            isUpdating ? posting.title : 'New Posting'
-          }}
+        <h2
+          class="text-md md:text-lg text-zinc-800 font-bold flex items-center"
+        >
+          <Icon
+            class="w-5 h-5 shrink-0 fill-current mr-2"
+            name="iconamoon:edit"
+          />{{ isUpdating ? posting.title : 'New Posting' }}
         </h2>
       </div>
       <!-- Right: Actions -->
@@ -118,7 +130,12 @@ const onDelete = async () => {
           v-if="isUpdating"
         >
           <template #input="{ open }">
-            <InputButton variant="destructive" size="icon" @click="open" :disabled="isSubmitting">
+            <InputButton
+              variant="destructive"
+              size="icon"
+              @click="open"
+              :disabled="isSubmitting"
+            >
               <Icon name="material-symbols:delete-outline" class="h-4 w-4" />
             </InputButton>
           </template>
@@ -169,8 +186,13 @@ const onDelete = async () => {
             v-model="tagsCSV"
           />
           <div class="mt-4">
-            <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
-            <Editor placeholder="We are looking for someone who can..." v-model="contents" />
+            <label class="block text-sm font-medium mb-1" for="jobdescription"
+              >Job Description</label
+            >
+            <Editor
+              placeholder="We are looking for someone who can..."
+              v-model="contents"
+            />
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>

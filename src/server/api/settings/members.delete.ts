@@ -10,5 +10,8 @@ export default defineEventHandler(async (event) => {
 
   const db = await useDatabase();
 
-  await db.update(usersTable).set({ isAdmin: false }).where(eq(usersTable.id, request.id));
+  await db
+    .update(usersTable)
+    .set({ isAdmin: false })
+    .where(eq(usersTable.id, request.id));
 });

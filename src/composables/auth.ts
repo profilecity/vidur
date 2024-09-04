@@ -21,8 +21,8 @@ export function useSafeRedirectToLogin() {
     }
     nextURLCookie.value = nextURL;
 
-    return navigateTo("/login", { external: true });
-  }
+    return navigateTo('/login', { external: true });
+  };
 
   return { redirectToLogin };
 }

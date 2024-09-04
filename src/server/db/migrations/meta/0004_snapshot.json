@@ -70,13 +70,9 @@
         "job_postings_owner_id_users_id_fk": {
           "name": "job_postings_owner_id_users_id_fk",
           "tableFrom": "job_postings",
-          "columnsFrom": [
-            "owner_id"
-          ],
+          "columnsFrom": ["owner_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "set null"
         }
@@ -119,26 +115,18 @@
         "posting_applicants_owner_id_users_id_fk": {
           "name": "posting_applicants_owner_id_users_id_fk",
           "tableFrom": "posting_applicants",
-          "columnsFrom": [
-            "owner_id"
-          ],
+          "columnsFrom": ["owner_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "set null"
         },
         "posting_applicants_job_id_job_postings_id_fk": {
           "name": "posting_applicants_job_id_job_postings_id_fk",
           "tableFrom": "posting_applicants",
-          "columnsFrom": [
-            "job_id"
-          ],
+          "columnsFrom": ["job_id"],
           "tableTo": "job_postings",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "cascade"
         }
@@ -174,13 +162,9 @@
         "user_handles_user_id_users_id_fk": {
           "name": "user_handles_user_id_users_id_fk",
           "tableFrom": "user_handles",
-          "columnsFrom": [
-            "user_id"
-          ],
+          "columnsFrom": ["user_id"],
           "tableTo": "users",
-          "columnsTo": [
-            "id"
-          ],
+          "columnsTo": ["id"],
           "onUpdate": "no action",
           "onDelete": "cascade"
         }
@@ -249,9 +233,7 @@
       "uniqueConstraints": {
         "users_email_unique": {
           "name": "users_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "nullsNotDistinct": false
         }
       }

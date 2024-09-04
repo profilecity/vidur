@@ -16,7 +16,9 @@ const emits = defineEmits<{
 
 const isUpdating = !!props.hook;
 
-const formSchema = toTypedSchema(isUpdating ? updateHookSchema : createHookSchema);
+const formSchema = toTypedSchema(
+  isUpdating ? updateHookSchema : createHookSchema
+);
 
 const { handleSubmit, errors, defineField, handleReset } = useForm({
   validationSchema: formSchema,

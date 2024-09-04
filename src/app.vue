@@ -1,14 +1,14 @@
 <script setup lang="ts">
 useHead({
   bodyAttrs: {
-    class: 'font-lato'
-  }
-})
+    class: 'font-lato',
+  },
+});
 </script>
 
 <template>
-  <NuxtLoadingIndicator/>
+  <NuxtLoadingIndicator />
   <NuxtLayout>
-    <NuxtPage/>
+    <NuxtPage />
   </NuxtLayout>
 </template>

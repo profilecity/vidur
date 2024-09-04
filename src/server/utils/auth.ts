@@ -1,6 +1,6 @@
-import { H3Event } from "h3";
-import type { User } from "../db/schema";
-import { getToken } from "./jwt";
+import { H3Event } from 'h3';
+import type { User } from '../db/schema';
+import { getToken } from './jwt';
 
 export type Credentials = {
   token: string;
@@ -10,11 +10,11 @@ export type Credentials = {
 export default async function authenticateRequest(
   event: H3Event,
   options: { useTokenFromHeader?: boolean } = { useTokenFromHeader: false }
-): Promise<{user: User, accessToken: string}> {
+): Promise<{ user: User; accessToken: string }> {
   const config = useRuntimeConfig();
 
   if (!config.services.profileCity) {
-    throw new Error("profileCity service URL is required to authenticate");
+    throw new Error('profileCity service URL is required to authenticate');
   }
 
   const accessToken = await getToken(event, options);
@@ -27,29 +27,29 @@ export default async function authenticateRequest(
   } catch (error: any) {
     throw createError({
       statusCode: 401,
-      message: "Error decoding JWT, most likely expired",
+      message: 'Error decoding JWT, most likely expired',
     });
   }
   if (!verifiedDetails) {
     throw createError({
       statusCode: 401,
-      message: "Invalid Details from Token",
+      message: 'Invalid Details from Token',
     });
   }
   try {
     user = await getOrCreateUser(verifiedDetails, accessToken);
   } catch (e: any) {
-    console.error("Error while fetching session", e);
+    console.error('Error while fetching session', e);
     throw createError({
       statusCode: 401,
-      message: "Error fetching token",
+      message: 'Error fetching token',
     });
   }
 
   if (!user) {
     throw createError({
       statusCode: 400,
-      message: "Bad Request: Invalid User",
+      message: 'Bad Request: Invalid User',
     });
   }
   return {

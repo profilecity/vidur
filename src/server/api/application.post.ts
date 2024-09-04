@@ -21,8 +21,8 @@ export default defineEventHandler(async (event) => {
         .where(
           and(
             eq(jobPostingsTable.id, body.postingId),
-            eq(jobPostingsTable.isPublished, true),
-          ),
+            eq(jobPostingsTable.isPublished, true)
+          )
         )
     )[0].count == 1;
 
@@ -44,8 +44,8 @@ export default defineEventHandler(async (event) => {
         .where(
           and(
             eq(postingApplicantsTable.postingId, body.postingId),
-            eq(postingApplicantsTable.candidateId, session.user.id),
-          ),
+            eq(postingApplicantsTable.candidateId, session.user.id)
+          )
         )
     )[0].count == 1;
 
@@ -55,7 +55,7 @@ export default defineEventHandler(async (event) => {
         'user already applied. userId',
         session.user.id,
         'applying to',
-        body.postingId,
+        body.postingId
       );
     }
     throw createError({
@@ -96,7 +96,7 @@ export default defineEventHandler(async (event) => {
       'user',
       session.user.id,
       "'s application successful for",
-      body.postingId,
+      body.postingId
     );
   }
 });

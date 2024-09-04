@@ -31,26 +31,33 @@
           <button class="ql-clean"></button>
         </span>
       </div>
-      <div class="bg-white rounded-b-xl border p-4" :class="readOnly ? 'ql-e-blank' : ''" :id="editorId"></div>
+      <div
+        class="bg-white rounded-b-xl border p-4"
+        :class="readOnly ? 'ql-e-blank' : ''"
+        :id="editorId"
+      ></div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useVModel } from "@vueuse/core";
+import { useVModel } from '@vueuse/core';
 import type Quill from 'quill';
 
-const props = withDefaults(defineProps<{
-  modelValue?: string | null;
-  placeholder?: string;
-  id?: string;
-  readOnly?: boolean;
-}>(), {
-  id: 'vidur-editor',
-  readOnly: false,
-});
+const props = withDefaults(
+  defineProps<{
+    modelValue?: string | null;
+    placeholder?: string;
+    id?: string;
+    readOnly?: boolean;
+  }>(),
+  {
+    id: 'vidur-editor',
+    readOnly: false,
+  }
+);
 const emit = defineEmits<{
-  'update:modelValue': [],
+  'update:modelValue': [];
 }>();
 
 const editorContent = useVModel(props, 'modelValue', emit);
@@ -95,27 +102,34 @@ onUnmounted(() => {
 }
 
 .ql-editor {
-  @apply !text-base
+  @apply !text-base;
 }
 
-.ql-editor > h1, h2 {
-  @apply text-zinc-600 font-noto
+.ql-editor > h1,
+h2 {
+  @apply text-zinc-600 font-noto;
 }
 
-.ql-editor > h3, h4, h5, h6, ol, p, ul {
-  @apply text-zinc-700 font-lato
+.ql-editor > h3,
+h4,
+h5,
+h6,
+ol,
+p,
+ul {
+  @apply text-zinc-700 font-lato;
 }
 
 .ql-editor > h1 {
-  @apply text-2xl
+  @apply text-2xl;
 }
 
 .ql-editor > h2 {
-  @apply !text-xl
+  @apply !text-xl;
 }
 
 .ql-editor > h3 {
-  @apply !text-base
+  @apply !text-base;
 }
 
 .ql-e-blank {

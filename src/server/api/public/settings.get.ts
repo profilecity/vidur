@@ -8,10 +8,12 @@ const settingsLookupSchema = z.object({
 
 export default defineEventHandler(async (event) => {
   const query = await getValidatedQuery(event, settingsLookupSchema.parse);
-  const queries = query.config ? [query.config] : ['seoConfig', 'careerSiteConfig'];
+  const queries = query.config
+    ? [query.config]
+    : ['seoConfig', 'careerSiteConfig'];
 
   if (IS_DEV) {
-    console.log("fetching public settings. queries:", queries);
+    console.log('fetching public settings. queries:', queries);
   }
 
   const settings: GeneralSettings = {

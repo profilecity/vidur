@@ -6,7 +6,8 @@
           Launching Soon 🚀
         </h2>
         <h4 class="text-md text-zinc-500 mb-2">
-          Plugins will allow you to seamlessly add or build your own functionalities.
+          Plugins will allow you to seamlessly add or build your own
+          functionalities.
         </h4>
       </div>
     </template>

@@ -6,7 +6,8 @@ const emits = defineEmits<{
 }>();
 
 const generalSettings = useGeneralSettings();
-const { updateGeneralSettings, generalSettings: generalSettingsPublic } = usePublicGeneralSettings();
+const { updateGeneralSettings, generalSettings: generalSettingsPublic } =
+  usePublicGeneralSettings();
 
 // Define form schema and use it in the form handling
 const formSchema = toTypedSchema(careerSiteConfigSchema);
@@ -33,11 +34,15 @@ overviewSocials.value = [];
 overviewCompanySize.value = 0;
 
 const removeFeaturedLink = (index: number) => {
-  links.value = links.value?.filter((_, originalIndex) => originalIndex != index);
+  links.value = links.value?.filter(
+    (_, originalIndex) => originalIndex != index
+  );
 };
 
 const removeSocialHandle = (index: number) => {
-  overviewSocials.value = overviewSocials.value?.filter((_, originalIndex) => originalIndex != index);
+  overviewSocials.value = overviewSocials.value?.filter(
+    (_, originalIndex) => originalIndex != index
+  );
 };
 
 // Initialize fields with data from settings
@@ -65,7 +70,10 @@ const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async (values) => {
   try {
     isSubmitting.value = true;
-    const updatedSettings = { careerSite: values, seo: generalSettingsPublic.value.seo };
+    const updatedSettings = {
+      careerSite: values,
+      seo: generalSettingsPublic.value.seo,
+    };
     await $fetch('/api/settings/general', {
       method: 'PUT',
       body: updatedSettings,
@@ -93,13 +101,24 @@ const logoUpdated = (id: string) => {
 <template>
   <FrameTabbed tab-group="settings">
     <template #action>
-      <InputButton @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
+      <InputButton @click="onSubmit" :disabled="isSubmitting">
+        Save
+      </InputButton>
     </template>
     <template #content>
-      <form class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4" @submit="onSubmit">
+      <form
+        class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4"
+        @submit="onSubmit"
+      >
         <div class="flex items-end">
           <div class="mr-4">
-            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="logoURL" width="80" height="80" alt="User upload" />
+            <img
+              class="w-16 h-16 md:w-20 md:h-20 rounded-xl"
+              :src="logoURL"
+              width="80"
+              height="80"
+              alt="User upload"
+            />
           </div>
           <AdminSettingsGeneralUpdateOrgLogo @update="logoUpdated" />
         </div>
@@ -130,7 +149,11 @@ const logoUpdated = (id: string) => {
           label="Bio"
         />
         <div class="w-full mt-5">
-          <InputLabel label="Description" id="organization-description" :error="errors['description']" />
+          <InputLabel
+            label="Description"
+            id="organization-description"
+            :error="errors['description']"
+          />
           <Editor
             id="organization-description"
             placeholder="We started as a group of mad scientists, curious about space..."
@@ -138,27 +161,54 @@ const logoUpdated = (id: string) => {
           />
         </div>
         <div class="w-full mt-8">
-          <InputLabel label="Featured Links" id="featued-links" :error="errors['links']" />
-          <div v-for="(link, index) in links" :key="index" class="flex space-x-2 mb-2 w-full items-center">
-            <InputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
+          <InputLabel
+            label="Featured Links"
+            id="featued-links"
+            :error="errors['links']"
+          />
+          <div
+            v-for="(link, index) in links"
+            :key="index"
+            class="flex space-x-2 mb-2 w-full items-center"
+          >
+            <InputText
+              v-model="link.title"
+              :id="`link-title-${index}`"
+              placeholder="Mars Mission Docs"
+            />
             <InputText
               v-model="link.href"
               :id="`link-url-${index}`"
               placeholder="https://big-space-tech.com/mission/mars"
               type-override="url"
             />
-            <InputButton variant="destructive" size="icon" @click="removeFeaturedLink(index)">
+            <InputButton
+              variant="destructive"
+              size="icon"
+              @click="removeFeaturedLink(index)"
+            >
               <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
             </InputButton>
           </div>
-          <InputButton variant="secondary" @click="links?.push({ title: '', href: '' })">
+          <InputButton
+            variant="secondary"
+            @click="links?.push({ title: '', href: '' })"
+          >
             <Icon name="mdi:plus" class="w-5 h-5" />
             Add Link
           </InputButton>
         </div>
         <div class="w-full mt-8">
-          <InputLabel label="Social Handles" id="social-handles" :error="errors[`overview.socials`]" />
-          <div v-for="(social, index) in overviewSocials" :key="index" class="flex space-x-2 mb-2 w-full items-center">
+          <InputLabel
+            label="Social Handles"
+            id="social-handles"
+            :error="errors[`overview.socials`]"
+          />
+          <div
+            v-for="(social, index) in overviewSocials"
+            :key="index"
+            class="flex space-x-2 mb-2 w-full items-center"
+          >
             <AbstractSocialSelector v-model="social.handle" />
             <InputText
               class="w-2/3 md:w-1/3"
@@ -167,18 +217,29 @@ const logoUpdated = (id: string) => {
               placeholder="https://social-handle.com/@big-space-tech"
               type-override="url"
             />
-            <InputButton variant="destructive" size="icon" @click="removeSocialHandle(index)">
+            <InputButton
+              variant="destructive"
+              size="icon"
+              @click="removeSocialHandle(index)"
+            >
               <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
             </InputButton>
           </div>
-          <InputButton variant="secondary" @click="overviewSocials?.push({ handle: '', href: '' })">
+          <InputButton
+            variant="secondary"
+            @click="overviewSocials?.push({ handle: '', href: '' })"
+          >
             <Icon name="mdi:plus" class="w-5 h-5" />
             Add Social
           </InputButton>
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <div>
-            <InputLabel label="Company Size" :error="errors['overview.companySize']" id="company-size" />
+            <InputLabel
+              label="Company Size"
+              :error="errors['overview.companySize']"
+              id="company-size"
+            />
             <AbstractCompanySizeSelector v-model="overviewCompanySize" />
           </div>
           <InputText

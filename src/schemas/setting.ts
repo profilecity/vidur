@@ -20,7 +20,7 @@ export const careerSiteConfigSchema = z.object({
       z.object({
         handle: z.string().max(24),
         href: z.string().url(),
-      }),
+      })
     ),
     companySize: z.number().max(5).min(0).optional(), // [1-10, 10-50, 50-200, 200-1k, 1k-5k, 5k+]
     totalRaised: z.string().max(20).optional(),
@@ -30,7 +30,7 @@ export const careerSiteConfigSchema = z.object({
     z.object({
       title: z.string().max(24),
       href: z.string().url(),
-    }),
+    })
   ),
 });
 

@@ -13,9 +13,11 @@ export async function useDatabase() {
 
   client = new pg.Client({
     ...config.db,
-    ssl: IS_DEV ? false : {
-      rejectUnauthorized: false, // TODO: fix this.
-    }
+    ssl: IS_DEV
+      ? false
+      : {
+          rejectUnauthorized: false, // TODO: fix this.
+        },
   });
   await client.connect();
 

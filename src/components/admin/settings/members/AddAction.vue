@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { User } from "~/server/db/schema";
-import { watchDebounced } from "@vueuse/core";
+import type { User } from '~/server/db/schema';
+import { watchDebounced } from '@vueuse/core';
 
 const { addMember, isSubmitting } = await useMembers();
 
@@ -14,25 +14,29 @@ const submit = async (id: string, closeFn: () => void) => {
   if (success) {
     closeFn();
   }
-}
+};
 
-const userSearchQuery = ref<string>("");
+const userSearchQuery = ref<string>('');
 const fetchingUserSuggestions = ref(false);
 
-watchDebounced(userSearchQuery, async (q) => {
-  try {
-    fetchingUserSuggestions.value = true;
-    suggestedUsers.value = await $fetch<User[]>("/api/user/lookup", {
-      query: {
-        q,
-      }
-    })
-  } catch (error) {
-    console.error("error fetching user suggestions", error);
-  } finally {
-    fetchingUserSuggestions.value = false;
-  }
-}, { debounce: 500, maxWait: 1000 },)
+watchDebounced(
+  userSearchQuery,
+  async (q) => {
+    try {
+      fetchingUserSuggestions.value = true;
+      suggestedUsers.value = await $fetch<User[]>('/api/user/lookup', {
+        query: {
+          q,
+        },
+      });
+    } catch (error) {
+      console.error('error fetching user suggestions', error);
+    } finally {
+      fetchingUserSuggestions.value = false;
+    }
+  },
+  { debounce: 500, maxWait: 1000 }
+);
 </script>
 <template>
   <Modal title="Add Member">
@@ -44,29 +48,60 @@ watchDebounced(userSearchQuery, async (q) => {
     </template>
     <template #content="{ close }">
       <form>
-        <input type="text" class="input-custom" placeholder="Start searching to add members" v-model="userSearchQuery" :disabled="isSubmitting" />
-        <div class="flex flex-col space-y-3 overflow-y-scroll no-scrollbar h-64 mt-3"
-          v-if="suggestedUsers && suggestedUsers.length > 0">
-          <div class="flex w-full justify-between p-2 border rounded-lg" v-for="user in suggestedUsers" :key="user.id">
+        <input
+          type="text"
+          class="input-custom"
+          placeholder="Start searching to add members"
+          v-model="userSearchQuery"
+          :disabled="isSubmitting"
+        />
+        <div
+          class="flex flex-col space-y-3 overflow-y-scroll no-scrollbar h-64 mt-3"
+          v-if="suggestedUsers && suggestedUsers.length > 0"
+        >
+          <div
+            class="flex w-full justify-between p-2 border rounded-lg"
+            v-for="user in suggestedUsers"
+            :key="user.id"
+          >
             <div class="flex space-x-1 items-center">
-              <img :src="user.picture" v-if="user.picture" class="w-10 h-10 rounded-full">
+              <img
+                :src="user.picture"
+                v-if="user.picture"
+                class="w-10 h-10 rounded-full"
+              />
               <div class="flex flex-col text-sm">
-                <span class="font-bold">{{ user.firstName }} {{ user.lastName }}</span>
+                <span class="font-bold"
+                  >{{ user.firstName }} {{ user.lastName }}</span
+                >
                 <span>{{ user.email }}</span>
               </div>
             </div>
-            <InputButton size="sm" variant="outline" @click="submit(user.id, close)" :disabled="isSubmitting">Add</InputButton>
+            <InputButton
+              size="sm"
+              variant="outline"
+              @click="submit(user.id, close)"
+              :disabled="isSubmitting"
+              >Add</InputButton
+            >
           </div>
         </div>
         <div class="h-64 flex w-full justify-center items-center" v-else>
-          <span class="text-center" v-if="userSearchQuery && !fetchingUserSuggestions">
-            <span class="font-bold">No User Found</span><br>
-            <span class="text-xs">User has to login atleast once to be added.</span>
+          <span
+            class="text-center"
+            v-if="userSearchQuery && !fetchingUserSuggestions"
+          >
+            <span class="font-bold">No User Found</span><br />
+            <span class="text-xs"
+              >User has to login atleast once to be added.</span
+            >
           </span>
           <span class="text-center" v-else-if="!userSearchQuery">
-            <span class="font-bold">Start typing to see suggestions.</span><br>
+            <span class="font-bold">Start typing to see suggestions.</span
+            ><br />
             <span class="text-xs">
-              Any user added will be able to see / create job postings and see / manage all the applicants.
+              Any user added will be able to see / create job postings and see /
+              manage all the applicants.
             </span>
           </span>
         </div>

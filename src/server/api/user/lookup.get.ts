@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const { q } = getQuery(event) as { q: string };
 
   if (IS_DEV) {
-    console.log("lookup user query", q);
+    console.log('lookup user query', q);
   }
 
   if (!q) {
@@ -24,9 +24,13 @@ export default defineEventHandler(async (event) => {
     .from(usersTable)
     .where(
       and(
-        or(ilike(usersTable.firstName, looseQ), ilike(usersTable.lastName, looseQ), ilike(usersTable.email, looseQ)),
-        eq(usersTable.isAdmin, false), // Only lookup for non-admins;
-      ),
+        or(
+          ilike(usersTable.firstName, looseQ),
+          ilike(usersTable.lastName, looseQ),
+          ilike(usersTable.email, looseQ)
+        ),
+        eq(usersTable.isAdmin, false) // Only lookup for non-admins;
+      )
     );
 
   if (IS_DEV) {

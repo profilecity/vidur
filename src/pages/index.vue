@@ -2,8 +2,8 @@
 const { data: postings } = await usePublicPostings();
 const { generalSettings } = usePublicGeneralSettings();
 
-let title: string = "Careers"; // TODO: need better defaults (this will hardly be the case);
-let description: string = "Career Site"; // TODO: need better defaults (this will hardly be the case);
+let title: string = 'Careers'; // TODO: need better defaults (this will hardly be the case);
+let description: string = 'Career Site'; // TODO: need better defaults (this will hardly be the case);
 if (generalSettings.value) {
   const seoTitle = generalSettings.value.seo.title;
   const generalName = generalSettings.value.careerSite.name;
@@ -14,7 +14,7 @@ if (generalSettings.value) {
   if (seoTitle) {
     title = seoTitle;
   } else if (generalName) {
-    title = `Careers @ ${generalName}`
+    title = `Careers @ ${generalName}`;
   }
   if (seoDescription) {
     description = seoDescription;
@@ -25,7 +25,7 @@ if (generalSettings.value) {
 
 useHead({
   title: title,
-})
+});
 
 useSeoMeta({
   title: title,
@@ -40,7 +40,7 @@ useSeoMeta({
   twitterTitle: title,
   twitterDescription: description,
   twitterCreator: generalSettings.value?.seo.twitter,
-})
+});
 </script>
 
 <template>
@@ -50,13 +50,19 @@ useSeoMeta({
       Open Positions
     </h3>
     <div class="space-y-2" v-if="postings">
-      <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />
+      <PostingCard
+        v-for="posting in postings"
+        :key="posting.id"
+        :posting="posting"
+      />
     </div>
   </main>
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
     <div class="relative z-50">
       <a href="https://www.vidurjobs.xyz">
-        <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
+        <div
+          class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md"
+        >
           <p class="mr-2">Powered By</p>
           <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
         </div>

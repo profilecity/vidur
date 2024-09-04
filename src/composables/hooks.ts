@@ -2,10 +2,13 @@ import type { z } from 'zod';
 import type { createHookSchema, updateHookSchema } from '~/schemas/hook';
 import type { Hook } from '~/server/db/schema';
 
-type SaveOrUpdateInput = z.infer<typeof updateHookSchema> | z.infer<typeof createHookSchema>;
+type SaveOrUpdateInput =
+  | z.infer<typeof updateHookSchema>
+  | z.infer<typeof createHookSchema>;
 
 const useHooksState = () => useState<Hook[]>('integration-hooks', () => []);
-const useHooksFetchedState = () => useState<boolean>('integration-hooks-first-fetch', () => false);
+const useHooksFetchedState = () =>
+  useState<boolean>('integration-hooks-first-fetch', () => false);
 
 export async function useHooks() {
   const hooks = useHooksState();
@@ -16,7 +19,9 @@ export async function useHooks() {
     default: () => [],
   });
 
-  const setHooks = (h: Hook[]) => { hooks.value = [...h] };
+  const setHooks = (h: Hook[]) => {
+    hooks.value = [...h];
+  };
   watch(hooksApiCall.data, setHooks);
 
   if (!hooksFetched.value) {
@@ -28,22 +33,23 @@ export async function useHooks() {
 
   const isSubmitting = ref(false);
 
-  const makeSaveOrUpdateHook = (method: 'POST' | 'PUT') => async (body: SaveOrUpdateInput) => {
-    try {
-      isSubmitting.value = true;
-      await $fetch<Hook>('/api/hook', {
-        method,
-        body,
-      });
-      refreshHooks();
-      return true;
-    } catch (e) {
-      console.error(e);
-      return false;
-    } finally {
-      isSubmitting.value = false;
-    }
-  };
+  const makeSaveOrUpdateHook =
+    (method: 'POST' | 'PUT') => async (body: SaveOrUpdateInput) => {
+      try {
+        isSubmitting.value = true;
+        await $fetch<Hook>('/api/hook', {
+          method,
+          body,
+        });
+        refreshHooks();
+        return true;
+      } catch (e) {
+        console.error(e);
+        return false;
+      } finally {
+        isSubmitting.value = false;
+      }
+    };
   const saveHook = makeSaveOrUpdateHook('POST');
   const updateHook = makeSaveOrUpdateHook('PUT');
 

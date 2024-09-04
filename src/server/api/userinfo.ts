@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
       profile: {
         ...profile,
         isAdmin: profile.isAdmin || bypassAdmin,
-      }
+      },
     };
 
     return session;

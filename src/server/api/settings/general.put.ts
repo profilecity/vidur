@@ -11,7 +11,10 @@ export default defineEventHandler(async (event) => {
     console.log('updating settings');
   }
 
-  const settingsUpdateRequest = await readValidatedBody(event, generalSettingsSchema.parse);
+  const settingsUpdateRequest = await readValidatedBody(
+    event,
+    generalSettingsSchema.parse
+  );
 
   const db = await useDatabase();
 
@@ -30,7 +33,10 @@ export default defineEventHandler(async (event) => {
         .update(metaDataTable)
         .set({ value: careerSiteString, updatedAt: new Date() })
         .where(eq(metaDataTable.key, 'careerSiteConfig'));
-      settings_memoryStorage.setItem('careerSiteConfig', settingsUpdateRequest.careerSite);
+      settings_memoryStorage.setItem(
+        'careerSiteConfig',
+        settingsUpdateRequest.careerSite
+      );
     }
   });
 });

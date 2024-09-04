@@ -15,7 +15,7 @@ export function useTrix() {
     ],
   });
 
-  const input = ref("");
+  const input = ref('');
 
   return { input };
 }

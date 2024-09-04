@@ -1,9 +1,8 @@
-import authenticateAdminRequest from "../../utils/admin";
-import { createJobPostingSchema } from "~/schemas/posting";
-import { jobPostingsTable } from "../../db/schema";
+import authenticateAdminRequest from '../../utils/admin';
+import { createJobPostingSchema } from '~/schemas/posting';
+import { jobPostingsTable } from '../../db/schema';
 
 export default defineEventHandler(async (event) => {
-
   const session = await authenticateAdminRequest(event);
   const jobPostingRequest = await readValidatedBody(
     event,
@@ -11,7 +10,7 @@ export default defineEventHandler(async (event) => {
   );
 
   if (IS_DEV) {
-    console.log("creating posting", jobPostingRequest);
+    console.log('creating posting', jobPostingRequest);
   }
 
   const database = await useDatabase();

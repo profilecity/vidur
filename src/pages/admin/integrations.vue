@@ -2,13 +2,13 @@
 definePageMeta({
   layout: 'admin',
   middleware: 'admin-auth',
-})
+});
 
 useHead({
-  title: 'Integrations | Admin Panel'
-})
+  title: 'Integrations | Admin Panel',
+});
 
-const { activeTab } = useTabGroup("integration");
+const { activeTab } = useTabGroup('integration');
 </script>
 
 <template>

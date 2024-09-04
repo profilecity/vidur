@@ -6,17 +6,17 @@ const emits = defineEmits<{
 const saveImage = async (croppedBlob: Blob, closeFn: () => void) => {
   try {
     const formData = new FormData();
-    formData.append("asset", croppedBlob);
+    formData.append('asset', croppedBlob);
     const response = await $fetch('/api/asset', {
       method: 'PUT',
-      body: formData,  
-    })
+      body: formData,
+    });
     closeFn();
-    emits("update", response.id);
+    emits('update', response.id);
   } catch (error) {
-    console.error("Error uploading logo", error);
+    console.error('Error uploading logo', error);
   }
-}
+};
 </script>
 
 <template>
@@ -27,7 +27,7 @@ const saveImage = async (croppedBlob: Blob, closeFn: () => void) => {
       </InputButton>
     </template>
     <template #content="{ close }">
-      <ImageCropperWrapper @on-crop="(blob: Blob) => saveImage(blob, close)"/>
+      <ImageCropperWrapper @on-crop="(blob: Blob) => saveImage(blob, close)" />
     </template>
   </Modal>
 </template>

@@ -35,5 +35,8 @@ export function usePublicPosting(id: string) {
 
 export function useApplicationStatus(postingId: string) {
   const auth = useAuth();
-  return useFetch('/api/application-status', { query: { postingId }, immediate: auth.isSignedIn.value });
+  return useFetch('/api/application-status', {
+    query: { postingId },
+    immediate: auth.isSignedIn.value,
+  });
 }
