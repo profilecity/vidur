@@ -1,11 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  future: {
+    compatibilityVersion: 4,
+  },
   nitro: {
     experimental: {
       tasks: true,
     },
   },
-  srcDir: 'src/',
   routeRules: {
     '/admin/*': { ssr: false },
   },
