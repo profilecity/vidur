@@ -16,8 +16,8 @@
     "lint-staged": "lint-staged",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky",
-    "type:check": "npx nuxi typecheck"
+    "type:check": "npx nuxi typecheck",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
