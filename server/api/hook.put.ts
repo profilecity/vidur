@@ -15,11 +15,8 @@ export default defineEventHandler(async (event) => {
     updatedAt: new Date(),
   };
 
-  const updateResult = await db
+  await db
     .update(hooksTable)
     .set(updateQuery)
-    .where(eq(hooksTable.id, body.id))
-    .returning();
-
-  return updateResult[0];
+    .where(eq(hooksTable.id, body.id));
 });
