@@ -15,7 +15,8 @@
     "release": "changelogen --release && git push --follow-tags",
     "lint-staged": "lint-staged",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
