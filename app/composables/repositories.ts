@@ -92,6 +92,7 @@ export async function useObjectRepository<
   };
 
   if (!firstFetched.value) {
+    firstFetched.value = true;
     await fetchExecute();
     setFetchData();
   }
