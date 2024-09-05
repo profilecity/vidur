@@ -29,7 +29,7 @@ const clearAction = () => {
   <Dropdown :title="title" :close-on-esc="true">
     <template #input="{ open }">
       <slot name="input" :open="open">
-        <InputButton variant="secondary" @click="open">
+        <InputButton variant="secondary" @click.prevent="open">
           <span class="mr-2">{{ title }}</span>
           <Icon name="octicon:filter-16" class="w-4 h-4 fill-current" />
           <span
@@ -58,10 +58,12 @@ const clearAction = () => {
       <div
         class="p-2 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between"
       >
-        <InputButton variant="secondary" size="sm" @click="clearAction">
+        <InputButton variant="secondary" size="sm" @click.prevent="clearAction">
           Clear
         </InputButton>
-        <InputButton size="sm" @click="confirm(close)"> Select </InputButton>
+        <InputButton size="sm" @click.prevent="confirm(close)">
+          Select
+        </InputButton>
       </div>
     </template>
   </Dropdown>
