@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const props = defineProps<{
-  applicant?: Applicant;
+  applicant: Applicant;
   application: Application;
 }>();
 
-const user = props.applicant?.user;
+const user = props.applicant.user;
 </script>
 
 <template>

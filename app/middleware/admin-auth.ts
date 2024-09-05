@@ -1,13 +1,12 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  const auth = useAuth();
+  const { profile, isSignedIn } = useAuth();
   const { redirectToLogin } = useSafeRedirectToLogin();
 
-  if (!auth.isSignedIn.value) {
+  if (!isSignedIn.value) {
     return redirectToLogin(to.fullPath);
   }
 
-  const session = auth.user;
-  if (!session.value?.profile.isAdmin) {
+  if (!profile.value.isAdmin) {
     return navigateTo('/');
   }
 });

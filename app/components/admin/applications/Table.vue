@@ -14,7 +14,7 @@ defineProps<{
           class="my-2"
           v-for="application in applications"
           :key="application.id"
-          :applicant="applicants[application.candidateId]"
+          :applicant="applicants[application.candidateId]!"
           :application="application"
         />
       </div>

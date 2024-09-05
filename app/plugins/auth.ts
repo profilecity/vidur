@@ -1,15 +1,22 @@
 import type { Session } from '~~/shared/types/profile-types';
 
 export default defineNuxtPlugin(async () => {
-  const user: Ref<Session | null> = useState('oauth_user', () => null);
+  const session = useSessionState();
   const requestFetch = useRequestFetch();
   try {
-    const res = await useAsyncData('oauth-sess-fetch', () =>
+    const res = await useAsyncData<Session>('oauth-sess-fetch', () =>
       requestFetch('/api/userinfo')
     );
-    user.value = res.data.value;
+    const fetchedSession = res.data.value;
+    if (!fetchedSession) {
+      throw new Error('Empty session received');
+    }
+    session.value = fetchedSession;
   } catch (e) {
     console.error('Error fetching user.', e);
-    user.value = null;
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Unable to setup session. Try again later',
+    });
   }
 });

@@ -1,11 +1,11 @@
-import type { Session } from '~~/shared/types/profile-types';
-
 export function useAuth() {
-  const user: Ref<Session | null> = useState('oauth_user', () => null);
-  const isSignedIn = computed(() => !!user.value);
+  const session = useSessionState();
+  const isSignedIn = computed(() => !!session.value.profile);
+  const profile = computed(() => session.value.profile);
 
   return {
-    user,
+    session,
+    profile,
     isSignedIn,
   };
 }

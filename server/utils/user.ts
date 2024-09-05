@@ -90,12 +90,17 @@ export async function getOrCreateUser(
         .returning()
     )[0];
 
+    if (!user) throw new Error('User object not returned');
+
+    const userId = user.id;
     const handles: UserHandle[] = Object.keys(userBasicProfile.handles).map(
       (key) => {
+        const value = userBasicProfile.handles[key];
+        if (!value) throw new Error('Value of handle not found for key ' + key);
         return {
           key,
-          value: userBasicProfile.handles[key],
-          userId: user.id,
+          value,
+          userId,
         };
       }
     );

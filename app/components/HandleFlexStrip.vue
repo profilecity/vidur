@@ -1,17 +1,19 @@
 <script setup lang="ts">
 const props = defineProps<{
-  handles?: Applicant['handles'];
+  handles: Applicant['handles'];
 }>();
 
-const handles: Record<string, string> = {};
+const handlesByIcon: Record<string, string> = {};
 
 const getHandleIcon = (handle: string) => {
   return getAllHandles().find((h) => h.id == handle)?.icon;
 };
 
-props.handles?.forEach((h) => {
-  if (!getHandleIcon(h.key)) return; // Only add supported handles;
-  handles[h.key] = h.value;
+props.handles.forEach((h) => {
+  const handleIcon = getHandleIcon(h.key);
+  const handleValue = h.value;
+  if (!handleIcon || !handleValue) return; // Only add supported handles;
+  handlesByIcon[handleIcon] = handleValue;
 });
 </script>
 
@@ -19,15 +21,10 @@ props.handles?.forEach((h) => {
   <div class="flex w-full justify-start space-x-2">
     <a
       target="_blank"
-      :href="handles[handle]"
-      v-for="handle in Object.keys(handles)"
-      v-if="getHandleIcon(handle)"
+      :href="handlesByIcon[handleIcon]"
+      v-for="handleIcon in Object.keys(handlesByIcon)"
     >
-      <Icon
-        size="20"
-        class="text-zinc-900 fill-current"
-        :name="getHandleIcon(handle)"
-      />
+      <Icon size="20" class="text-zinc-900" :name="handleIcon" />
     </a>
   </div>
 </template>
