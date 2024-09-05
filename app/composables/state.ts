@@ -9,10 +9,15 @@ export function useHooksState() {
   return useObjectState<Hook[]>('integration-hooks', () => []);
 }
 
-function useObjectState<T>(key: string, initFn?: () => T) {
+export function useObjectState<T>(key: string, initFn?: () => T) {
   const data = useState<T>(key, initFn);
   const firstFetched = useState<boolean>(`${key}-first-fetch`, () => false);
   const fetching = useState<boolean>(`${key}-fetching`);
+  const changing = useState<boolean>(`${key}-changing`);
 
-  return { data, firstFetched, fetching };
+  const setData = (d: T) => {
+    data.value = d;
+  };
+
+  return { data, setData, firstFetched, fetching, changing };
 }
