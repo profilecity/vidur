@@ -106,17 +106,12 @@ const logoUpdated = (id: string) => {
       </InputButton>
     </template>
     <template #content>
-      <form
-        class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4"
-        @submit="onSubmit"
-      >
+      <form class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4">
         <div class="flex items-end">
           <div class="mr-4">
             <img
               class="w-16 h-16 md:w-20 md:h-20 rounded-xl"
               :src="logoURL"
-              width="80"
-              height="80"
               alt="User upload"
             />
           </div>
