@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { hooks } = await useHooks();
+const { data: hooks } = await useHooksRepository();
 const showEmptyState = computed(() => hooks.value.length == 0);
 </script>
 

@@ -3,7 +3,7 @@ import type { Hook } from '~~/server/db/schema';
 
 import { createHookSchema, updateHookSchema } from '~~/shared/schemas/hook';
 
-const { saveHook, updateHook, isSubmitting } = await useHooks();
+const { postData, updateData, changing } = await useHooksRepository();
 
 const props = defineProps<{
   hook?: Hook;
@@ -40,9 +40,9 @@ const onSubmit = handleSubmit(async (values) => {
   let success;
 
   if (isUpdating) {
-    success = await updateHook(values);
+    success = await updateData(values);
   } else {
-    success = await saveHook(values);
+    success = await postData(values);
   }
 
   if (!success) return;
@@ -85,7 +85,7 @@ defineExpose({
       type-override="url"
       v-model="url"
     />
-    <InputButton :disabled="isSubmitting" type="submit">
+    <InputButton :loading="changing" type="submit">
       {{ isUpdating ? 'Save' : 'Create' }}
     </InputButton>
   </form>

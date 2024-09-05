@@ -5,85 +5,25 @@ import type {
 } from '~~/shared/schemas/hook';
 import type { Hook } from '~~/server/db/schema';
 
-type SaveOrUpdateInput =
-  | z.infer<typeof updateHookSchema>
-  | z.infer<typeof createHookSchema>;
+type UpdateHook = z.infer<typeof updateHookSchema>;
+type CreateHook = z.infer<typeof createHookSchema>;
+type DeleteHook = { id: string };
 
-const useHooksState = () => useState<Hook[]>('integration-hooks', () => []);
-const useHooksFetchedState = () =>
-  useState<boolean>('integration-hooks-first-fetch', () => false);
-
-export async function useHooks() {
-  const hooks = useHooksState();
-  const hooksFetched = useHooksFetchedState();
-
-  const hooksApiCall = useFetch<Hook[]>('/api/hooks', {
-    immediate: false,
-    default: () => [],
+export function useHooksRepository() {
+  return useObjectRepository<
+    Hook[],
+    never,
+    any,
+    UpdateHook,
+    any,
+    CreateHook,
+    DeleteHook
+  >({
+    key: 'integration-hooks',
+    fetchURL: '/api/hooks',
+    postURL: '/api/hook',
+    updateURL: '/api/hook',
+    deleteURL: '/api/hook',
+    initFn: () => [],
   });
-
-  const setHooks = (h: Hook[]) => {
-    hooks.value = [...h];
-  };
-  watch(hooksApiCall.data, setHooks);
-
-  if (!hooksFetched.value) {
-    await hooksApiCall.execute().then(() => setHooks(hooksApiCall.data.value));
-    hooksFetched.value = true;
-  }
-
-  const refreshHooks = hooksApiCall.refresh;
-
-  const isSubmitting = ref(false);
-
-  const makeSaveOrUpdateHook =
-    (method: 'POST' | 'PUT') => async (body: SaveOrUpdateInput) => {
-      try {
-        isSubmitting.value = true;
-        await $fetch<Hook>('/api/hook', {
-          method,
-          body,
-        });
-        refreshHooks();
-        return true;
-      } catch (e) {
-        console.error(e);
-        return false;
-      } finally {
-        isSubmitting.value = false;
-      }
-    };
-  const saveHook = makeSaveOrUpdateHook('POST');
-  const updateHook = makeSaveOrUpdateHook('PUT');
-
-  const deleteHook = async (id: string) => {
-    if (!isSubmitting) {
-      throw new Error('cannot delete when updating');
-    }
-    try {
-      isSubmitting.value = true;
-      await $fetch<Hook>('/api/hook', {
-        method: 'DELETE',
-        query: {
-          id,
-        },
-      });
-      refreshHooks();
-      return true;
-    } catch (e) {
-      console.error(e);
-      return false;
-    } finally {
-      isSubmitting.value = false;
-    }
-  };
-
-  return {
-    hooks,
-    isSubmitting,
-
-    saveHook,
-    updateHook,
-    deleteHook,
-  };
 }

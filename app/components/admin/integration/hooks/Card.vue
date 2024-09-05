@@ -5,10 +5,10 @@ const props = defineProps<{
   hook: Hook;
 }>();
 
-const { deleteHook } = await useHooks();
+const { deleteData: deleteHook } = await useHooksRepository();
 
 const onDelete = () => {
-  deleteHook(props.hook.id);
+  deleteHook({ id: props.hook.id });
 };
 </script>
 
