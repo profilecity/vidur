@@ -26,5 +26,8 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Type check
+        run: yarn run type:check
+
       - name: Check code style
         run: yarn run format:check

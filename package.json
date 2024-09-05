@@ -16,7 +16,8 @@
     "lint-staged": "lint-staged",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "type:check": "npx nuxi typecheck"
   },
   "dependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
@@ -50,7 +51,9 @@
     "changelogen": "^0.5.5",
     "husky": "^9.1.5",
     "lint-staged": "^15.2.10",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "vue-tsc": "^2.1.6"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
