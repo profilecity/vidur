@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { members } = await useMembers();
+const { data } = await useMembersRepository();
 </script>
 
 <template>
@@ -10,7 +10,7 @@ const { members } = await useMembers();
     <template #content>
       <section class="grid grid-cols-12 gap-6 mt-4 px-4">
         <AdminSettingsMembersCard
-          v-for="member in members"
+          v-for="member in data"
           :key="member.id"
           :member="member"
         />

@@ -5,64 +5,27 @@ import type {
 } from '~~/shared/schemas/setting';
 import type { User } from '~~/server/db/schema';
 
-type AddOrRemoveMember =
-  | z.infer<typeof addMemberSchema>
-  | z.infer<typeof removeMemberSchema>;
+type CreateMember = z.infer<typeof addMemberSchema>;
+type RemoveMember = z.infer<typeof removeMemberSchema>;
 
-const useMembersState = () => useState<User[]>('settings-members', () => []);
-const useMembersFetchedState = () =>
-  useState<boolean>('settings-members-first-fetch', () => false);
+export function useMembersState() {
+  return useObjectState('settings-members');
+}
 
-export async function useMembers() {
-  const members = useMembersState();
-  const membersFetched = useMembersFetchedState();
-
-  const membersApiCall = useFetch<User[]>('/api/settings/members', {
-    immediate: false,
-    default: () => [],
+export async function useMembersRepository() {
+  return useObjectRepository<
+    User[],
+    never,
+    never,
+    never,
+    CreateMember,
+    never,
+    RemoveMember
+  >({
+    key: 'settings-members',
+    fetchURL: '/api/settings/members',
+    postURL: '/api/settings/members',
+    deleteURL: '/api/settings/members',
+    initFn: () => [],
   });
-
-  const setMembers = (m: User[]) => {
-    members.value = [...m];
-  };
-  watch(membersApiCall.data, setMembers);
-
-  if (!membersFetched.value) {
-    await membersApiCall
-      .execute()
-      .then(() => setMembers(membersApiCall.data.value));
-    membersFetched.value = true;
-  }
-
-  const refereshMembers = membersApiCall.refresh;
-
-  const isSubmitting = ref(false);
-
-  const makeAddOrRemoveMember =
-    (method: 'POST' | 'DELETE') => async (body: AddOrRemoveMember) => {
-      try {
-        isSubmitting.value = true;
-        await $fetch<User>('/api/settings/members', {
-          method,
-          body,
-        });
-        refereshMembers();
-        return true;
-      } catch (e) {
-        console.error(e);
-        return false;
-      } finally {
-        isSubmitting.value = false;
-      }
-    };
-  const addMember = makeAddOrRemoveMember('POST');
-  const removeMember = makeAddOrRemoveMember('DELETE');
-
-  return {
-    members,
-    isSubmitting,
-
-    addMember,
-    removeMember,
-  };
 }

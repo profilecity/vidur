@@ -2,14 +2,14 @@
 import type { User } from '~~/server/db/schema';
 import { watchDebounced } from '@vueuse/core';
 
-const { addMember, isSubmitting } = await useMembers();
+const { postData, changing } = await useMembersRepository();
 
 const suggestedUsers = ref<User[]>();
 
 const submit = async (id: string, closeFn: () => void) => {
   let success = false;
   if (id) {
-    success = await addMember({ id });
+    success = await postData({ id });
   }
   if (success) {
     closeFn();
@@ -53,7 +53,7 @@ watchDebounced(
           class="input-custom"
           placeholder="Start searching to add members"
           v-model="userSearchQuery"
-          :disabled="isSubmitting"
+          :disabled="changing"
         />
         <div
           class="flex flex-col space-y-3 overflow-y-scroll no-scrollbar h-64 mt-3"
@@ -81,7 +81,7 @@ watchDebounced(
               size="sm"
               variant="outline"
               @click="submit(user.id, close)"
-              :disabled="isSubmitting"
+              :loading="changing"
               >Add</InputButton
             >
           </div>

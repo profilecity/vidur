@@ -5,11 +5,11 @@ const props = defineProps<{
   member: User;
 }>();
 
-const { removeMember } = await useMembers();
+const { deleteData } = await useMembersRepository();
 const { profile } = useAuth();
 
 const onRemove = () => {
-  removeMember({ id: props.member.id });
+  deleteData({ id: props.member.id });
 };
 </script>
 
