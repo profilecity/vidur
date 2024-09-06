@@ -47,6 +47,7 @@ export type LookupRepositoryOptions<T, FQ extends RecordAny = RecordAny> = {
   updateURL?: string;
   deleteURL?: string;
   initFn?: () => T;
+  immediate?: boolean;
 };
 
 /**
@@ -68,6 +69,8 @@ export async function useObjectRepository<
 >(
   options: LookupRepositoryOptions<T, FQ>
 ): Promise<LookupRepository<T, UB, UQ, PB, PQ, DQ>> {
+  const immediate =
+    typeof options.immediate === 'undefined' ? true : options.immediate;
   const { data, setData, firstFetched, fetching, changing } = useObjectState(
     options.key,
     options.initFn
@@ -91,7 +94,7 @@ export async function useObjectRepository<
     setFetchData();
   };
 
-  if (!firstFetched.value) {
+  if (!firstFetched.value && immediate) {
     firstFetched.value = true;
     await fetchExecute();
     setFetchData();

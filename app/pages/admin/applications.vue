@@ -16,8 +16,11 @@ const selectedPostings = ref<string[]>([]);
 const postingsById = ref<Record<string, string>>({}); // id <> title;
 
 const { applicants, applications, fetch: fetchApplicants } = useApplications();
-const { data: postings } =
-  useFetch<{ id: string; title: string }[]>('/api/postings');
+const { data: postings, refresh } = await usePostingsLiteRepository({
+  immediate: false,
+});
+
+onMounted(refresh);
 
 if (postingIdsQuery) {
   try {

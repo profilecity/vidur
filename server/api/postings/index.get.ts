@@ -1,18 +1,41 @@
-import { jobPostingsTable } from '~~/server/db/schema';
-import authenticateAdminRequest from '~~/server/utils/admin';
+import { jobPostingsTable } from '../../db/schema';
+import authenticateAdminRequest from '../../utils/admin';
+import { and, eq, getTableColumns, or } from 'drizzle-orm';
+import { listJobPostingsFilterSchema } from '~~/shared/schemas/posting';
 
 export default defineEventHandler(async (event) => {
-  await authenticateAdminRequest(event);
+  const database = await useDatabase();
 
-  const db = await useDatabase();
+  const session = await authenticateAdminRequest(event);
+  const q = await getValidatedQuery(event, listJobPostingsFilterSchema.parse);
 
-  const postings = await db
-    .select({ id: jobPostingsTable.id, title: jobPostingsTable.title })
-    .from(jobPostingsTable);
+  const { contents, ...columns } = getTableColumns(jobPostingsTable);
 
-  if (IS_DEV) {
-    console.log('[/api/postings] found', postings.length, 'postings');
+  const conditions = [];
+
+  if (q && q.id) {
+    conditions.push(eq(jobPostingsTable.id, q.id));
+  } else if (q && q.ownerId) {
+    // If owner specified, just return published postings.
+    conditions.push(
+      and(
+        eq(jobPostingsTable.owner, q.ownerId),
+        eq(jobPostingsTable.isPublished, true)
+      )
+    );
+  } else {
+    // If owner not specified, just return published postings + postings by admin himself
+    conditions.push(
+      or(
+        eq(jobPostingsTable.isPublished, true),
+        eq(jobPostingsTable.owner, session.user.id)
+      )
+    );
   }
 
-  return postings;
+  return database
+    .select(columns)
+    .from(jobPostingsTable)
+    .where(conditions.length ? and(...conditions) : undefined)
+    .orderBy(jobPostingsTable.createdAt);
 });

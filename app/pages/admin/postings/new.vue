@@ -1,56 +1,46 @@
 <script setup lang="ts">
-import { updateJobPostingSchema } from '~~/shared/schemas/posting';
+import { createJobPostingSchema } from '~~/shared/schemas/posting';
 
 definePageMeta({
   layout: 'admin',
   middleware: 'admin-auth',
 });
 
-const route = useRoute();
-
-if (!route.query.id) {
-  await navigateTo('/admin/postings/new');
-}
+useHead({
+  title: 'New Posting',
+});
 
 const { refresh } = await usePostingsRepository();
 
-const q = { id: route.query.id as string };
-const { data, updateData, deleteData, changing } =
-  await usePostingRepository(q);
-
-useHead({
-  title: `Edit - ${data.value.title}`,
-});
-
-const formSchema = toTypedSchema(updateJobPostingSchema);
+const formSchema = toTypedSchema(createJobPostingSchema);
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: formSchema,
 });
-
-const [id] = defineField('id');
 
 const [title] = defineField('title');
 const [contents] = defineField('contents');
 const [tagsCSV] = defineField('tagsCSV');
 const [isPublished] = defineField('isPublished');
 
-id.value = data.value.id;
-title.value = data.value.title;
-contents.value = data.value.contents || undefined;
-tagsCSV.value = data.value.tagsCSV || undefined;
-isPublished.value = data.value.isPublished;
+const isSubmitting = ref(false);
 
 const onSubmit = handleSubmit(async (values) => {
-  await updateData(values);
-  refresh();
-  await navigateTo('/admin/postings');
+  try {
+    isSubmitting.value = true;
+    await $fetch('/api/posting', {
+      method: 'POST',
+      body: {
+        ...values,
+      },
+    });
+    refresh();
+    await navigateTo('/admin/postings');
+  } catch (e) {
+    console.error(e);
+  } finally {
+    isSubmitting.value = false;
+  }
 });
-
-const onDelete = async () => {
-  await deleteData(q);
-  refresh();
-  await navigateTo('/admin/postings');
-};
 </script>
 
 <template>
@@ -67,28 +57,11 @@ const onDelete = async () => {
           <Icon
             class="w-5 h-5 shrink-0 fill-current mr-2"
             name="iconamoon:edit"
-          />
-          {{ data.title }}
+          />New Posting
         </h2>
       </div>
       <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
-        <AbstractConfirmationBox
-          title="Delete Posting?"
-          content="You won't be able to undo this action. You will loose access to applicant list."
-          @confirm="onDelete"
-        >
-          <template #input="{ open }">
-            <InputButton
-              variant="destructive"
-              size="icon"
-              @click="open"
-              :disabled="changing"
-            >
-              <Icon name="material-symbols:delete-outline" class="h-4 w-4" />
-            </InputButton>
-          </template>
-        </AbstractConfirmationBox>
         <InputSwitch label="Publish?" v-model="isPublished" />
         <AbstractConfirmationBox
           title="Save Posting?"
@@ -96,7 +69,7 @@ const onDelete = async () => {
           @confirm="onSubmit"
         >
           <template #input="{ open }">
-            <InputButton :disabled="changing" @click="open">
+            <InputButton :disabled="isSubmitting" @click="open">
               <div class="flex spece-x-2 items-center">
                 <Icon name="lets-icons:save" class="w-3 h-3 mr-1" />
                 <span>Save</span>
@@ -113,7 +86,7 @@ const onDelete = async () => {
           <InputText
             placeholder="Senior Software Engineer"
             label="Title"
-            :disabled="changing"
+            :disabled="isSubmitting"
             :error="errors.title"
             v-model="title"
           />
@@ -121,7 +94,7 @@ const onDelete = async () => {
             class="mt-4"
             placeholder="Remote, Full Time, San Fransisco"
             label="Tags (CSV)"
-            :disabled="changing"
+            :disabled="isSubmitting"
             v-model="tagsCSV"
           />
           <div class="mt-4">

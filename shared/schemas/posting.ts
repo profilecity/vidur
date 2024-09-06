@@ -7,6 +7,10 @@ export const listJobPostingsFilterSchema = z
   })
   .optional();
 
+export const fetchJobPostingFilterSchema = z.object({
+  id: z.string().uuid(),
+});
+
 export const createJobPostingSchema = z.object({
   title: z.string().min(1).max(150),
   contents: z.string().optional(),
