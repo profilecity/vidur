@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/admin/*': { ssr: false },
+    '/admin/**': { ssr: false },
   },
   modules: [
     '@nuxtjs/tailwindcss',
