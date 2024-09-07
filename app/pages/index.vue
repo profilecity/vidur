@@ -1,26 +1,19 @@
 <script setup lang="ts">
-const { data: postings } = await usePublicPostings();
-const { generalSettings } = usePublicGeneralSettings();
+const { data: postings } = await usePublicPostingsRepository();
+const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
+const { data: seoConfig } = useSeoConfigObjectState();
 
 let title: string = 'Careers'; // TODO: need better defaults (this will hardly be the case);
 let description: string = 'Career Site'; // TODO: need better defaults (this will hardly be the case);
-if (generalSettings.value) {
-  const seoTitle = generalSettings.value.seo.title;
-  const generalName = generalSettings.value.careerSite.name;
-
-  const seoDescription = generalSettings.value.seo.description;
-  const generalBio = generalSettings.value.careerSite.bio;
-
-  if (seoTitle) {
-    title = seoTitle;
-  } else if (generalName) {
-    title = `Careers @ ${generalName}`;
-  }
-  if (seoDescription) {
-    description = seoDescription;
-  } else if (generalBio) {
-    description = generalBio;
-  }
+if (seoConfig.value.title) {
+  title = seoConfig.value.title;
+} else if (careerSiteConfig.value.name) {
+  title = `Careers @ ${careerSiteConfig.value.name}`;
+}
+if (seoConfig.value.description) {
+  description = seoConfig.value.description;
+} else if (careerSiteConfig.value.bio) {
+  description = careerSiteConfig.value.bio;
 }
 
 useHead({
@@ -39,7 +32,7 @@ useSeoMeta({
   twitterCard: 'summary',
   twitterTitle: title,
   twitterDescription: description,
-  twitterCreator: generalSettings.value?.seo.twitter,
+  twitterCreator: seoConfig.value.twitter,
 });
 </script>
 

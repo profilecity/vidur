@@ -6,11 +6,12 @@ const { data: applicationStatus, refresh: refreshApplicationStatus } =
   useApplicationStatus(id);
 const { data: posting } = usePublicPosting(id);
 
-const careerSite = usePublicCareerSiteSettings();
-const companyLogo = useRemoteAsset(careerSite.value.logo).url;
+const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
+const companyLogo = useRemoteAsset(careerSiteConfig.value.logo).url;
 
 useHead({
-  title: () => `${posting.value?.title + ' | ' || ''}${careerSite.value.name}`,
+  title: () =>
+    `${posting.value?.title + ' | ' || ''}${careerSiteConfig.value.name}`,
 });
 
 const tags = computed<string[]>(() => {
@@ -86,11 +87,11 @@ if (route.query.fromOnboard) {
                   :src="companyLogo"
                   width="64"
                   height="64"
-                  :alt="`${careerSite.name}'s logo'`"
+                  :alt="`${careerSiteConfig.name}'s logo'`"
                 />
               </div>
               <div class="text-lg font-bold text-zinc-800 mb-1">
-                {{ careerSite.name }}
+                {{ careerSiteConfig.name }}
               </div>
             </div>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-2">
@@ -142,11 +143,11 @@ if (route.query.fromOnboard) {
                   :src="companyLogo"
                   width="64"
                   height="64"
-                  :alt="`${careerSite.name}'s logo'`"
+                  :alt="`${careerSiteConfig.name}'s logo'`"
                 />
               </div>
               <div class="text-lg font-bold text-zinc-800 mb-1">
-                {{ careerSite.name }}
+                {{ careerSiteConfig.name }}
               </div>
             </div>
             <div class="space-y-2">

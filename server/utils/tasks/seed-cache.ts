@@ -1,6 +1,6 @@
 import { desc, inArray } from 'drizzle-orm';
-import type { GeneralSettings } from '~~/shared/schemas/setting';
 import { jobPostingsTable, metaDataTable } from '~~/server/db/schema';
+import type { CareerSiteConfig, SEOConfig } from '~~/shared/schemas/setting';
 
 export async function seedCache() {
   console.log('Seeding Cache');
@@ -26,10 +26,10 @@ export async function seedCache() {
       .orderBy(desc(jobPostingsTable.createdAt))
   ).map((p) => ({ ...p, totalApplicants: -1 }));
 
-  const settings: GeneralSettings = {
+  const settings = {
     careerSite: {},
     seo: {},
-  } as GeneralSettings; // Ignore validation errors here.
+  } as { careerSite: CareerSiteConfig; seo: SEOConfig }; // Ignore validation errors here.
 
   let firstSetupAccessKey: string | null = null;
 

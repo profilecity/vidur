@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { seoConfigSchema } from '~~/shared/schemas/setting';
 
-const emits = defineEmits<{
-  saved: [];
-}>();
-
-const generalSettings = useGeneralSettings();
-const { updateGeneralSettings, generalSettings: generalSettingsPublic } =
-  usePublicGeneralSettings();
+const { data, setData } = useSeoConfigObjectState();
 
 // Define form schema and use it in the form handling
 const formSchema = toTypedSchema(seoConfigSchema);
@@ -21,33 +15,19 @@ const [description] = defineField('description');
 const [twitter] = defineField('twitter');
 
 // Initialize fields with data from settings
-let stopWatching: () => void;
-stopWatching = watchEffect(() => {
-  if (generalSettings.data.value) {
-    const gs = generalSettings.data.value;
-
-    title.value = gs.seo.title;
-    description.value = gs.seo.description;
-    twitter.value = gs.seo.twitter;
-
-    stopWatching && stopWatching();
-  }
-});
+title.value = data.value.title;
+description.value = data.value.description;
+twitter.value = data.value.twitter;
 
 const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async (values) => {
-  const updatedSettings = {
-    seo: values,
-    careerSite: generalSettingsPublic.value.careerSite,
-  };
   try {
     isSubmitting.value = true;
-    await $fetch('/api/settings/general', {
+    await $fetch('/api/settings/seo', {
       method: 'PUT',
-      body: updatedSettings,
+      body: values,
     });
-    updateGeneralSettings(updatedSettings);
-    emits('saved');
+    setData(values);
   } catch (error) {
     console.error('Error saving settings', error);
   } finally {

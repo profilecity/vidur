@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const careerSiteSettings = usePublicCareerSiteSettings();
-const logoURL = computed(
-  () => useRemoteAsset(careerSiteSettings.value.logo).url
-);
+const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
+const logoURL = computed(() => useRemoteAsset(careerSiteConfig.value.logo).url);
 
 const publicConfig = useRuntimeConfig().public;
 </script>
@@ -20,7 +18,7 @@ const publicConfig = useRuntimeConfig().public;
           alt="avatar"
         />
         <span class="font-bold ml-2 truncate font-noto">{{
-          careerSiteSettings.name
+          careerSiteConfig.name
         }}</span>
       </div>
       <!-- Home -->

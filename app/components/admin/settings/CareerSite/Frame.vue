@@ -1,13 +1,7 @@
 <script setup lang="ts">
 import { careerSiteConfigSchema } from '~~/shared/schemas/setting';
 
-const emits = defineEmits<{
-  saved: [];
-}>();
-
-const generalSettings = useGeneralSettings();
-const { updateGeneralSettings, generalSettings: generalSettingsPublic } =
-  usePublicGeneralSettings();
+const { data, setData } = useCareerSiteConfigObjectState();
 
 // Define form schema and use it in the form handling
 const formSchema = toTypedSchema(careerSiteConfigSchema);
@@ -46,40 +40,26 @@ const removeSocialHandle = (index: number) => {
 };
 
 // Initialize fields with data from settings
-let stopWatching: () => void;
-stopWatching = watchEffect(() => {
-  if (generalSettings.data.value) {
-    const gs = generalSettings.data.value;
-
-    name.value = gs.careerSite.name;
-    bio.value = gs.careerSite.bio;
-    description.value = gs.careerSite.description;
-    location.value = gs.careerSite.location;
-    links.value = gs.careerSite.links;
-    logo.value = gs.careerSite.logo;
-    overviewSocials.value = gs.careerSite.overview.socials;
-    overviewCompanySize.value = gs.careerSite.overview.companySize;
-    overviewTotalRaised.value = gs.careerSite.overview.totalRaised;
-    overviewMarkets.value = gs.careerSite.overview.markets;
-
-    stopWatching && stopWatching();
-  }
-});
+name.value = data.value.name;
+bio.value = data.value.bio;
+description.value = data.value.description;
+location.value = data.value.location;
+links.value = data.value.links;
+logo.value = data.value.logo;
+overviewSocials.value = data.value.overview.socials;
+overviewCompanySize.value = data.value.overview.companySize;
+overviewTotalRaised.value = data.value.overview.totalRaised;
+overviewMarkets.value = data.value.overview.markets;
 
 const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async (values) => {
   try {
     isSubmitting.value = true;
-    const updatedSettings = {
-      careerSite: values,
-      seo: generalSettingsPublic.value.seo,
-    };
-    await $fetch('/api/settings/general', {
+    await $fetch('/api/settings/career-site', {
       method: 'PUT',
-      body: updatedSettings,
+      body: values,
     });
-    updateGeneralSettings(updatedSettings);
-    emits('saved');
+    setData(values);
   } catch (error) {
     console.error('Error saving settings', error);
   } finally {
