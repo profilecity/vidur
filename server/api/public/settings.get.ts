@@ -1,45 +1,25 @@
-import { z } from 'zod';
-import { type GeneralSettings } from '~~/shared/schemas/setting';
+import {
+  type SEOConfig,
+  type CareerSiteConfig,
+} from '~~/shared/schemas/setting';
 import { settings_memoryStorage } from '~~/server/utils/storage';
 
-const settingsLookupSchema = z.object({
-  config: z.enum(['seoConfig', 'careerSiteConfig']).optional(),
-});
-
-export default defineEventHandler(async (event) => {
-  const query = await getValidatedQuery(event, settingsLookupSchema.parse);
-  const queries = query.config
-    ? [query.config]
-    : ['seoConfig', 'careerSiteConfig'];
-
+export default defineEventHandler(async () => {
   if (IS_DEV) {
-    console.log('fetching public settings. queries:', queries);
+    console.log('fetching public settings');
   }
 
-  const settings: GeneralSettings = {
+  const settings = {
     careerSite: {},
     seo: {},
-  } as GeneralSettings; // Ignore validation errors here.
+  } as { careerSite: CareerSiteConfig; seo: SEOConfig };
 
-  for (let index = 0; index < queries.length; index++) {
-    const query = queries[index];
-    let value: any;
-    switch (query) {
-      case 'seoConfig':
-        value = await settings_memoryStorage.getItem(query);
-        settings.seo = value as GeneralSettings['seo'];
-        break;
-      case 'careerSiteConfig':
-        value = await settings_memoryStorage.getItem(query);
-        settings.careerSite = value as GeneralSettings['careerSite'];
-        break;
-      default:
-        throw createError({
-          statusCode: 404,
-          statusMessage: `no config with key ${query} found`,
-        });
-    }
-  }
+  settings.seo = (await settings_memoryStorage.getItem(
+    'seoConfig'
+  )) as SEOConfig;
+  settings.careerSite = (await settings_memoryStorage.getItem(
+    'careerSiteConfig'
+  )) as CareerSiteConfig;
 
   return settings;
 });

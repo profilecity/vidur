@@ -34,14 +34,7 @@ export const careerSiteConfigSchema = z.object({
   ),
 });
 
-export type careerSiteConfig = z.infer<typeof careerSiteConfigSchema>;
-
-export const generalSettingsSchema = z.object({
-  careerSite: careerSiteConfigSchema,
-  seo: seoConfigSchema,
-});
-
-export type GeneralSettings = z.infer<typeof generalSettingsSchema>;
+export type CareerSiteConfig = z.infer<typeof careerSiteConfigSchema>;
 
 export const addMemberSchema = z.object({
   id: z.string().uuid(),
