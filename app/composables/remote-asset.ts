@@ -4,7 +4,3 @@ export function useRemoteAsset(slug: string) {
 
   return { url };
 }
-
-export function useOnboardingStatus() {
-  return useOnboardingStatusState();
-}

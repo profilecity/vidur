@@ -38,3 +38,7 @@ export function useOnboarding() {
 
   return { key, finishOnboarding };
 }
+
+export function useOnboardingStatus() {
+  return useOnboardingStatusState();
+}
