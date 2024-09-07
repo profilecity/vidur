@@ -45,6 +45,22 @@ export function usePostingsRepository() {
   });
 }
 
+export function usePublicPostingsRepository() {
+  return useObjectRepository<
+    Postings,
+    never,
+    never,
+    never,
+    never,
+    never,
+    never
+  >({
+    key: 'postings',
+    fetchURL: '/api/public/postings',
+    initFn: () => [],
+  });
+}
+
 export type CreatePostingSchema = z.infer<typeof createJobPostingSchema>;
 export type UpdatePostingSchema = z.infer<typeof updateJobPostingSchema>;
 export type FetchPostingSchema = z.infer<typeof fetchJobPostingFilterSchema>;
@@ -65,5 +81,21 @@ export function usePostingRepository(query: FetchPostingSchema) {
     postURL: '/api/posting',
     updateURL: '/api/posting',
     deleteURL: '/api/posting',
+  });
+}
+
+export function usePublicPostingRepository(query: FetchPostingSchema) {
+  return useObjectRepository<
+    JobPosting,
+    FetchPostingSchema,
+    never,
+    never,
+    never,
+    never,
+    never
+  >({
+    key: `${query.id}-public-posting`,
+    fetchURL: '/api/public/posting',
+    fetchQuery: query,
   });
 }

@@ -4,7 +4,7 @@ const id = route.params.id as string;
 
 const { data: applicationStatus, refresh: refreshApplicationStatus } =
   useApplicationStatus(id);
-const { data: posting } = usePublicPosting(id);
+const { data: posting } = await usePublicPostingRepository({ id });
 
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
 const companyLogo = useRemoteAsset(careerSiteConfig.value.logo).url;
