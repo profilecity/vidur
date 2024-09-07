@@ -1,6 +1,6 @@
 import authenticateAdminRequest from '../../utils/admin';
 import { createJobPostingSchema } from '~~/shared/schemas/posting';
-import { jobPostingsTable } from '../../db/schema';
+import { type JobPosting, jobPostingsTable } from '../../db/schema';
 
 export default defineEventHandler(async (event) => {
   const session = await authenticateAdminRequest(event);
@@ -15,10 +15,16 @@ export default defineEventHandler(async (event) => {
 
   const database = await useDatabase();
 
-  return (
+  const newPosting = (
     await database
       .insert(jobPostingsTable)
       .values({ ...jobPostingRequest, owner: session.user.id })
       .returning()
-  )[0];
+  )[0] as JobPosting;
+
+  const postings =
+    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+
+  postings.unshift(newPosting);
+  await general_memoryStorage.setItem('postings', postings);
 });

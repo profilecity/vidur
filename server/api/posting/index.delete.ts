@@ -1,11 +1,10 @@
 import { eq } from 'drizzle-orm';
-import { jobPostingsTable } from '../../db/schema';
+import { type JobPosting, jobPostingsTable } from '../../db/schema';
 import authenticateAdminRequest from '../../utils/admin';
 import { deleteJobPostingSchema } from '~~/shared/schemas/posting';
 
 export default defineEventHandler(async (event) => {
-  const session = await authenticateAdminRequest(event);
-
+  await authenticateAdminRequest(event);
   const q = await getValidatedQuery(event, deleteJobPostingSchema.parse);
 
   const jobPostingId = q.id;
@@ -17,11 +16,20 @@ export default defineEventHandler(async (event) => {
     .where(eq(jobPostingsTable.id, jobPostingId))
     .returning({ id: jobPostingsTable.id });
 
-  if (!(Array.isArray(jobPostingsResult) && jobPostingsResult.length == 1)) {
+  if (jobPostingsResult.length == 0) {
     throw createError({
-      statusCode: 400,
-      message:
-        'Invalid posting id. Contact support if you think this is a mistake.',
+      statusCode: 404,
+      statusMessage: 'Job posting not found',
     });
   }
+
+  const deletedPostingId = jobPostingsResult[0]?.id;
+
+  const postings =
+    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+
+  await general_memoryStorage.setItem(
+    'postings',
+    postings.filter((p) => p.id !== deletedPostingId)
+  );
 });

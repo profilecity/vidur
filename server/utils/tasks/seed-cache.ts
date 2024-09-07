@@ -1,6 +1,6 @@
-import { inArray } from 'drizzle-orm';
+import { desc, inArray } from 'drizzle-orm';
 import type { GeneralSettings } from '~~/shared/schemas/setting';
-import { metaDataTable } from '~~/server/db/schema';
+import { jobPostingsTable, metaDataTable } from '~~/server/db/schema';
 
 export async function seedCache() {
   console.log('Seeding Cache');
@@ -17,6 +17,14 @@ export async function seedCache() {
         'firstSetupAccessKey',
       ])
     );
+
+  // Do not save totalApplicants in cache
+  const jobPostings = (
+    await db
+      .select()
+      .from(jobPostingsTable)
+      .orderBy(desc(jobPostingsTable.createdAt))
+  ).map((p) => ({ ...p, totalApplicants: -1 }));
 
   const settings: GeneralSettings = {
     careerSite: {},
@@ -40,6 +48,7 @@ export async function seedCache() {
     settings_memoryStorage.setItem('seoConfig', settings.seo),
     general_memoryStorage.setItem('firstSetupAccessKey', firstSetupAccessKey),
     general_memoryStorage.setItem('remoteAssetBase', remoteAssetBase),
+    general_memoryStorage.setItem('postings', jobPostings),
   ]);
 
   return { result: true };

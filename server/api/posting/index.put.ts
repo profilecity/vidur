@@ -1,4 +1,4 @@
-import { jobPostingsTable } from '../../db/schema';
+import { type JobPosting, jobPostingsTable } from '../../db/schema';
 import authenticateAdminRequest from '../../utils/admin';
 import { eq } from 'drizzle-orm';
 import { updateJobPostingSchema } from '~~/shared/schemas/posting';
@@ -18,11 +18,22 @@ export default defineEventHandler(async (event) => {
     updatedAt: new Date(),
   };
 
-  const updatedJobPosting = await database
-    .update(jobPostingsTable)
-    .set(updateQuery)
-    .where(eq(jobPostingsTable.id, q.id))
-    .returning();
+  const updatedJobPosting = (
+    await database
+      .update(jobPostingsTable)
+      .set(updateQuery)
+      .where(eq(jobPostingsTable.id, q.id))
+      .returning()
+  )[0] as JobPosting;
 
-  return updatedJobPosting;
+  const postings =
+    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+
+  await general_memoryStorage.setItem(
+    'postings',
+    postings.map((p) => {
+      if (p.id == updatedJobPosting.id) return updatedJobPosting;
+      return p;
+    })
+  );
 });

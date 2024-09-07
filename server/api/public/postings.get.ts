@@ -1,22 +1,19 @@
-import { eq, getTableColumns } from 'drizzle-orm';
-import { type JobPosting, jobPostingsTable } from '~~/server/db/schema';
+import { type JobPosting } from '~~/server/db/schema';
 
 export default defineEventHandler(async (_) => {
-  const database = await useDatabase();
-
-  const { contents, owner, isPublished, totalApplicants, ...requiredColumns } =
-    getTableColumns(jobPostingsTable);
-
-  const postings = await database
-    .select({
-      ...requiredColumns,
-    })
-    .from(jobPostingsTable)
-    .where(eq(jobPostingsTable.isPublished, true));
+  const postings = (
+    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || []
+  )
+    .filter((p) => p.isPublished)
+    .map((p) => ({
+      ...p,
+      contents: null,
+      owner: null,
+    }));
 
   if (IS_DEV) {
     console.log('[PUBLIC] postings page found', postings.length, 'postings.');
   }
 
-  return postings as JobPosting[];
+  return postings;
 });
