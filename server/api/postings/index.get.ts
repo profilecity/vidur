@@ -1,41 +1,33 @@
-import { jobPostingsTable } from '../../db/schema';
+import { type JobPosting, jobPostingsTable } from '../../db/schema';
 import authenticateAdminRequest from '../../utils/admin';
-import { and, eq, getTableColumns, or } from 'drizzle-orm';
-import { listJobPostingsFilterSchema } from '~~/shared/schemas/posting';
+import { desc } from 'drizzle-orm';
 
+/**
+ * DB lookup for totalApplicants and cache lookup for everything else.
+ */
 export default defineEventHandler(async (event) => {
+  await authenticateAdminRequest(event);
+
   const database = await useDatabase();
 
-  const session = await authenticateAdminRequest(event);
-  const q = await getValidatedQuery(event, listJobPostingsFilterSchema.parse);
-
-  const { contents, ...columns } = getTableColumns(jobPostingsTable);
-
-  const conditions = [];
-
-  if (q && q.id) {
-    conditions.push(eq(jobPostingsTable.id, q.id));
-  } else if (q && q.ownerId) {
-    // If owner specified, just return published postings.
-    conditions.push(
-      and(
-        eq(jobPostingsTable.owner, q.ownerId),
-        eq(jobPostingsTable.isPublished, true)
-      )
-    );
-  } else {
-    // If owner not specified, just return published postings + postings by admin himself
-    conditions.push(
-      or(
-        eq(jobPostingsTable.isPublished, true),
-        eq(jobPostingsTable.owner, session.user.id)
-      )
-    );
-  }
-
-  return database
-    .select(columns)
+  const totalApplicantsRecord = await database
+    .select({
+      id: jobPostingsTable.id,
+      totalApplicants: jobPostingsTable.totalApplicants,
+    })
     .from(jobPostingsTable)
-    .where(conditions.length ? and(...conditions) : undefined)
-    .orderBy(jobPostingsTable.createdAt);
+    .orderBy(desc(jobPostingsTable.createdAt));
+
+  const totalApplicantsById: Record<string, number> = {};
+  totalApplicantsRecord.forEach(
+    (tar) => (totalApplicantsById[tar.id] = tar.totalApplicants)
+  );
+
+  const postings =
+    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  return postings.map((p) => ({
+    ...p,
+    contents: null,
+    totalApplicants: totalApplicantsById[p.id] || 0,
+  }));
 });
