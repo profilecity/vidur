@@ -12,20 +12,12 @@ const { handleSubmit, errors, defineField } = useForm({
 // Career Site Fields
 const [name] = defineField('name');
 const [bio] = defineField('bio');
-const [description] = defineField('description');
 const [location] = defineField('location');
 const [links] = defineField('links');
 const [logo] = defineField('logo');
-const [overviewSocials] = defineField('overview.socials');
-const [overviewCompanySize] = defineField('overview.companySize');
-const [overviewTotalRaised] = defineField('overview.totalRaised');
-const [overviewMarkets] = defineField('overview.markets');
 
 // Initialise fields to prevent type-errors.
 links.value = [];
-description.value = '';
-overviewSocials.value = [];
-overviewCompanySize.value = 0;
 
 const removeFeaturedLink = (index: number) => {
   links.value = links.value?.filter(
@@ -33,23 +25,12 @@ const removeFeaturedLink = (index: number) => {
   );
 };
 
-const removeSocialHandle = (index: number) => {
-  overviewSocials.value = overviewSocials.value?.filter(
-    (_, originalIndex) => originalIndex != index
-  );
-};
-
 // Initialize fields with data from settings
 name.value = data.value.name;
 bio.value = data.value.bio;
-description.value = data.value.description;
 location.value = data.value.location;
 links.value = data.value.links;
 logo.value = data.value.logo;
-overviewSocials.value = data.value.overview.socials;
-overviewCompanySize.value = data.value.overview.companySize;
-overviewTotalRaised.value = data.value.overview.totalRaised;
-overviewMarkets.value = data.value.overview.markets;
 
 const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async (values) => {
@@ -123,18 +104,6 @@ const logoUpdated = (id: string) => {
           :error="errors['bio']"
           label="Bio"
         />
-        <div class="w-full mt-5">
-          <InputLabel
-            label="Description"
-            id="organization-description"
-            :error="errors['description']"
-          />
-          <Editor
-            id="organization-description"
-            placeholder="We started as a group of mad scientists, curious about space..."
-            v-model="description"
-          />
-        </div>
         <div class="w-full mt-8">
           <InputLabel
             label="Featured Links"
@@ -167,70 +136,11 @@ const logoUpdated = (id: string) => {
           </div>
           <InputButton
             variant="secondary"
-            @click="links?.push({ title: '', href: '' })"
+            @click.prevent="links?.push({ title: '', href: '' })"
           >
             <Icon name="mdi:plus" class="w-5 h-5" />
             Add Link
           </InputButton>
-        </div>
-        <div class="w-full mt-8">
-          <InputLabel
-            label="Social Handles"
-            id="social-handles"
-            :error="errors[`overview.socials`]"
-          />
-          <div
-            v-for="(social, index) in overviewSocials"
-            :key="index"
-            class="flex space-x-2 mb-2 w-full items-center"
-          >
-            <AbstractSocialSelector v-model="social.handle" />
-            <InputText
-              class="w-2/3 md:w-1/3"
-              v-model="social.href"
-              :id="`social-url-${index}`"
-              placeholder="https://social-handle.com/@big-space-tech"
-              type-override="url"
-            />
-            <InputButton
-              variant="destructive"
-              size="icon"
-              @click="removeSocialHandle(index)"
-            >
-              <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
-            </InputButton>
-          </div>
-          <InputButton
-            variant="secondary"
-            @click="overviewSocials?.push({ handle: '', href: '' })"
-          >
-            <Icon name="mdi:plus" class="w-5 h-5" />
-            Add Social
-          </InputButton>
-        </div>
-        <div class="md:flex gap-4 items-center mt-5">
-          <div>
-            <InputLabel
-              label="Company Size"
-              :error="errors['overview.companySize']"
-              id="company-size"
-            />
-            <AbstractCompanySizeSelector v-model="overviewCompanySize" />
-          </div>
-          <InputText
-            v-model="overviewTotalRaised"
-            id="organization-overview-total-raised"
-            placeholder="$220k Pre Seed"
-            label="Total Raised"
-            :error="errors['overview.totalRaised']"
-          />
-          <InputText
-            v-model="overviewMarkets"
-            id="organization-overview-markets"
-            placeholder="Space Tech, Inter-galactic Wars"
-            label="Markets(CSV)"
-            :error="errors['overview.markets']"
-          />
         </div>
       </form>
     </template>
