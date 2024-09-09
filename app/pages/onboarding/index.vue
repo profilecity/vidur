@@ -1,4 +1,12 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: 'auth',
+});
+
+useHead({
+  title: 'Setup your career site',
+});
+
 const { steps, currentStep, goToNextStep } = useOnboardingSteps();
 const { key, finishOnboarding } = useOnboarding();
 const logoId = ref('');
