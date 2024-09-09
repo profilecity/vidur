@@ -2,3 +2,5 @@ node_modules/
 dist/
 .nuxt/
 .output/
+
+CHANGELOG.md
