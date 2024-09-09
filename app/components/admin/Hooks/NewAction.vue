@@ -21,7 +21,7 @@ withDefaults(
       </InputButton>
     </template>
     <template #content="{ close }">
-      <AdminIntegrationHooksForm @created="close" />
+      <AdminHooksForm @created="close" />
     </template>
   </Modal>
 </template>

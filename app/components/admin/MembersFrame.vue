@@ -5,11 +5,11 @@ const { data } = await useMembersRepository();
 <template>
   <FrameTabbed tab-group="settings">
     <template #action>
-      <AdminSettingsMembersAddAction />
+      <AdminMembersAddAction />
     </template>
     <template #content>
       <section class="grid grid-cols-12 gap-6 mt-4 px-4">
-        <AdminSettingsMembersCard
+        <AdminMemberCard
           v-for="member in data"
           :key="member.id"
           :member="member"

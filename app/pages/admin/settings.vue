@@ -12,7 +12,7 @@ const { activeTab } = useTabGroup('settings');
 </script>
 
 <template>
-  <LazyAdminSettingsCareerSiteFrame v-if="activeTab.id == 'career-site'" />
-  <LazyAdminSettingsSeoFrame v-else-if="activeTab.id == 'seo'" />
-  <LazyAdminSettingsMembersFrame v-else-if="activeTab.id == 'members'" />
+  <LazyAdminCareerSiteFrame v-if="activeTab.id == 'career-site'" />
+  <LazyAdminSeoFrame v-else-if="activeTab.id == 'seo'" />
+  <LazyAdminMembersFrame v-else-if="activeTab.id == 'members'" />
 </template>

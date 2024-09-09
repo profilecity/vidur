@@ -30,7 +30,11 @@ if (props.allowManualTrigger) {
 </script>
 
 <template>
-  <StepperRoot class="flex gap-2 w-full max-w-[32rem]" :model-value="step">
+  <StepperRoot
+    class="flex gap-2 w-full max-w-[32rem]"
+    :model-value="step"
+    data-orientation="vertical"
+  >
     <StepperItem
       v-for="item in props.steps"
       :key="item.step"

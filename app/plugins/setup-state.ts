@@ -17,8 +17,6 @@ export default defineNuxtPlugin(async () => {
     onboardingStatus.value = pubicConfig.onboardingStatus;
     careerSiteConfigObjectState.setData(pubicConfig.settings.careerSite);
     seoConfigObjectState.setData(pubicConfig.settings.seo);
-
-    console.log(pubicConfig);
   } catch (error) {
     console.error('error fetching remote-asset-config', error);
   }

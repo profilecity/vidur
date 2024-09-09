@@ -16,7 +16,7 @@ defineProps<{
       </InputButton>
     </template>
     <template #content="{ close }">
-      <AdminIntegrationHooksForm @updated="close" :hook="hook" />
+      <AdminHooksForm @updated="close" :hook="hook" />
     </template>
   </Modal>
 </template>

@@ -69,7 +69,7 @@ const onDelete = () => {
                 </InputButton>
               </template>
             </AbstractConfirmationBox>
-            <AdminIntegrationHooksEditAction :hook="hook" />
+            <AdminHooksEditAction :hook="hook" />
           </div>
         </div>
       </footer>

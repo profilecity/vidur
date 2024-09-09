@@ -12,12 +12,12 @@ const { activeTab, tabs } = useTabGroup(props.tabGroup);
       <TabbedPane :active-tab="activeTab" :tabs="tabs" />
       <div class="flex w-full items-center justify-between mt-4 mb-2">
         <div class="flex-col">
-          <span class="flex text-xl font-bold text-zinc-900 font-noto">{{
-            activeTab.title
-          }}</span>
-          <span class="flex text-sm text-zinc-600">{{
-            activeTab.description
-          }}</span>
+          <span class="flex text-xl font-bold text-zinc-900 font-noto">
+            {{ activeTab.title }}
+          </span>
+          <span class="flex text-sm text-zinc-600">
+            {{ activeTab.description }}
+          </span>
         </div>
         <slot name="action" />
       </div>

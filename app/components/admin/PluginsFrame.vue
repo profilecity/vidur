@@ -1,7 +1,7 @@
 <template>
   <FrameTabbed tab-group="integration">
     <template #content>
-      <div class="px-4">
+      <div class="p-4">
         <h2 class="text-lg text-zinc-800 font-bold font-noto">
           Launching Soon 🚀
         </h2>

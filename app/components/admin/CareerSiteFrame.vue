@@ -16,8 +16,12 @@ const [location] = defineField('location');
 const [links] = defineField('links');
 const [logo] = defineField('logo');
 
+// Future Fields
+const [overviewSocials] = defineField('overview.socials');
+
 // Initialise fields to prevent type-errors.
 links.value = [];
+overviewSocials.value = []; // Future Field.
 
 const removeFeaturedLink = (index: number) => {
   links.value = links.value?.filter(
@@ -76,7 +80,7 @@ const logoUpdated = (id: string) => {
               alt="User upload"
             />
           </div>
-          <AdminSettingsGeneralUpdateOrgLogo @update="logoUpdated" />
+          <AdminUpdateOrgLogo @update="logoUpdated" />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
           <InputText

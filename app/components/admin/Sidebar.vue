@@ -7,7 +7,7 @@ const publicConfig = useRuntimeConfig().public;
 
 <template>
   <div
-    class="flex fixed top-0 left-0 flex-col px-4 py-6 border-b md:border-b-0 md:border-r border-zinc-200 max-w-60 h-screen"
+    class="flex fixed top-0 left-0 flex-col px-4 py-6 md:border-r border-zinc-200 h-screen"
   >
     <div class="flex flex-col">
       <!-- Company Profile -->
@@ -17,33 +17,22 @@ const publicConfig = useRuntimeConfig().public;
           :src="logoURL"
           alt="avatar"
         />
-        <span class="font-bold ml-2 truncate font-noto">{{
-          careerSiteConfig.name
-        }}</span>
+        <span class="font-semibold ml-2 truncate font-noto overflow-hidden">
+          {{ careerSiteConfig.name }}
+        </span>
       </div>
-      <!-- Home -->
-      <div class="text-xs text-zinc-500 mb-2 mt-6">Home</div>
+      <div class="text-xs text-zinc-500 mb-2 mt-6">Menu</div>
       <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
         <AdminSidebarLink
           to="/admin/dashboard"
           icon="iconoir:home-simple"
-          label="Dashboard"
-        />
-        <AdminSidebarLink
-          to="/admin/postings"
-          icon="iconoir:add-circle"
-          label="Postings"
+          label="Home"
         />
         <AdminSidebarLink
           to="/admin/applications"
           icon="iconoir:user-badge-check"
           label="Applications"
         />
-      </ul>
-
-      <!-- Tools -->
-      <div class="text-xs text-zinc-500 mb-2 mt-4">Tools</div>
-      <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
         <AdminSidebarLink
           to="/admin/integrations"
           icon="hugeicons:connect"
@@ -59,7 +48,7 @@ const publicConfig = useRuntimeConfig().public;
 
     <!-- Discord -->
     <div class="mt-auto">
-      <div class="p-2 border border-zinc-200 rounded-xl">
+      <!-- <div class="p-2 border border-zinc-200 rounded-xl">
         <div class="flex items-center space-x-2">
           <img src="/vidur-logo.svg" class="w-14" />
           <div
@@ -72,7 +61,7 @@ const publicConfig = useRuntimeConfig().public;
           Get access to AI powered profiles and People's Search.
         </div>
         <InputButton size="sm">Upgrade Now</InputButton>
-      </div>
+      </div> -->
       <div class="flex justify-between mt-4">
         <div class="text-zinc-900 text-sm">{{ publicConfig.version }}</div>
         <div class="flex space-x-2 items-center text-zinc-900">

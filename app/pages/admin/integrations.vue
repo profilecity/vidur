@@ -12,6 +12,6 @@ const { activeTab } = useTabGroup('integration');
 </script>
 
 <template>
-  <AdminIntegrationHooksFrame v-if="activeTab.id == 'hooks'" />
-  <AdminIntegrationPluginsFrame v-else-if="activeTab.id == 'plugins'" />
+  <AdminHooksFrame v-if="activeTab.id == 'hooks'" />
+  <AdminPluginsFrame v-else-if="activeTab.id == 'plugins'" />
 </template>

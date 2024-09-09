@@ -17,7 +17,7 @@
               aria-hidden="true"
             ></div>
             <div
-              class="absolute left-0 rounded-full bg-zinc-600"
+              class="absolute left-0 rounded-full bg-zinc-800"
               aria-hidden="true"
             >
               <Icon
@@ -38,7 +38,7 @@
               aria-hidden="true"
             ></div>
             <div
-              class="absolute left-0 rounded-full bg-zinc-600"
+              class="absolute left-0 rounded-full bg-zinc-800"
               aria-hidden="true"
             >
               <Icon
@@ -63,7 +63,7 @@
         <li class="relative py-2">
           <div class="flex items-center mb-1">
             <div
-              class="absolute left-0 rounded-full bg-zinc-600"
+              class="absolute left-0 rounded-full bg-zinc-800"
               aria-hidden="true"
             >
               <Icon
@@ -76,6 +76,6 @@
         </li>
       </ul>
     </div>
-    <AdminIntegrationHooksNewAction input-label="Create First Hook" />
+    <AdminHooksNewAction input-label="Create First Hook" />
   </div>
 </template>

@@ -5,14 +5,15 @@ const integrationTabs = [
     id: 'hooks',
     title: 'Hooks',
     description:
-      'Use hooks to send events to other services. Authenticate via JWKs-RSA key from documentation',
+      'Use hooks to send events to other services. Authenticate via JWKs-RSA key from documentation.',
     icon: 'ph:link',
     url: '/admin/integrations?tab=hooks',
   },
   {
     id: 'plugins',
     title: 'Plugins',
-    description: 'Install plusing as',
+    description:
+      'Install plugins to extend functionality and build custom features.',
     icon: 'mingcute:plugin-2-line',
     url: '/admin/integrations?tab=plugins',
   },
