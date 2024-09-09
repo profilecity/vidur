@@ -1,5 +1,72 @@
 # Changelog
 
+## v0.2.0
+
+[compare changes](https://github.com/profilecity/vidur/compare/v0.1.0...v0.2.0)
+
+### 🚀 Enhancements
+
+- **infra:** ⚠️  Remove docker prod file from compose ([d240025](https://github.com/profilecity/vidur/commit/d240025))
+- **infra:** ⚠️  Revamp docker file ([da1d815](https://github.com/profilecity/vidur/commit/da1d815))
+- New crud abstraction ([836ff06](https://github.com/profilecity/vidur/commit/836ff06))
+- **ci:** Code style and type check in `Node.js CI` environment ([#120](https://github.com/profilecity/vidur/pull/120))
+- **settings:** ⚠️  Settings now config + merged with public settings ([6a23af9](https://github.com/profilecity/vidur/commit/6a23af9))
+
+### 🔥 Performance
+
+- Stop from saving settings on every click ([4e02d11](https://github.com/profilecity/vidur/commit/4e02d11))
+- **posting:** Serve postings from cache ([#124](https://github.com/profilecity/vidur/pull/124))
+
+### 🩹 Fixes
+
+- Typings ([802bfcb](https://github.com/profilecity/vidur/commit/802bfcb))
+- **api:** ⚠️  Hooks now returned ordered based on created TS ([e4cd46e](https://github.com/profilecity/vidur/commit/e4cd46e))
+- **api:** ⚠️  Hooks update no longer returns new hook ([4368797](https://github.com/profilecity/vidur/commit/4368797))
+- First fetch updated ([2c342f5](https://github.com/profilecity/vidur/commit/2c342f5))
+- Db and schema path for migration ([#123](https://github.com/profilecity/vidur/pull/123))
+- **rendering:** ⚠️  Nested admin pages now render clientside ([52ec789](https://github.com/profilecity/vidur/commit/52ec789))
+- ⚠️  Remove unused params ([9d70463](https://github.com/profilecity/vidur/commit/9d70463))
+
+### 📖 Documentation
+
+- Remove dev warning ([5c1fb92](https://github.com/profilecity/vidur/commit/5c1fb92))
+
+### 🏡 Chore
+
+- Remove deprecated assets ([f883b82](https://github.com/profilecity/vidur/commit/f883b82))
+- **format:** ⚠️  Enhance code style with prettier and husky ([#108](https://github.com/profilecity/vidur/pull/108))
+- **format:** Format as per new rules ([bab0860](https://github.com/profilecity/vidur/commit/bab0860))
+- **deps-dev:** Bump @types/pg from 8.11.6 to 8.11.8 ([#114](https://github.com/profilecity/vidur/pull/114))
+- **format:** Restructure for nuxt4 ([1458041](https://github.com/profilecity/vidur/commit/1458041))
+- **refactor:** Simplify hooks using new abstraction ([9514ede](https://github.com/profilecity/vidur/commit/9514ede))
+- Prevent on button clicks ([8cdc5b4](https://github.com/profilecity/vidur/commit/8cdc5b4))
+- **refactor:** Members use repository ([df5c7fc](https://github.com/profilecity/vidur/commit/df5c7fc))
+- **refactor:** Update dataflow for postings ([662d0b2](https://github.com/profilecity/vidur/commit/662d0b2))
+- **infra:** Update `.dockerignore` ([#121](https://github.com/profilecity/vidur/pull/121))
+- **api:** ⚠️  Dedupe career site and seo settings ([6009934](https://github.com/profilecity/vidur/commit/6009934))
+- **refactor:** Use repository for public posting ([68db41f](https://github.com/profilecity/vidur/commit/68db41f))
+- Remove / rearrange composables ([5d2195e](https://github.com/profilecity/vidur/commit/5d2195e))
+- **refactor:** Reorg components to top level and remove nesting ([7eb40ff](https://github.com/profilecity/vidur/commit/7eb40ff))
+- **format:** Update formatting to width 120 for better component HTML ([e8daca8](https://github.com/profilecity/vidur/commit/e8daca8))
+
+#### ⚠️ Breaking Changes
+
+- **infra:** ⚠️  Remove docker prod file from compose ([d240025](https://github.com/profilecity/vidur/commit/d240025))
+- **infra:** ⚠️  Revamp docker file ([da1d815](https://github.com/profilecity/vidur/commit/da1d815))
+- **settings:** ⚠️  Settings now config + merged with public settings ([6a23af9](https://github.com/profilecity/vidur/commit/6a23af9))
+- **api:** ⚠️  Hooks now returned ordered based on created TS ([e4cd46e](https://github.com/profilecity/vidur/commit/e4cd46e))
+- **api:** ⚠️  Hooks update no longer returns new hook ([4368797](https://github.com/profilecity/vidur/commit/4368797))
+- **rendering:** ⚠️  Nested admin pages now render clientside ([52ec789](https://github.com/profilecity/vidur/commit/52ec789))
+- ⚠️  Remove unused params ([9d70463](https://github.com/profilecity/vidur/commit/9d70463))
+- **format:** ⚠️  Enhance code style with prettier and husky ([#108](https://github.com/profilecity/vidur/pull/108))
+- **api:** ⚠️  Dedupe career site and seo settings ([6009934](https://github.com/profilecity/vidur/commit/6009934))
+
+### ❤️ Contributors
+
+- Amandesai01 <amandesai01@gmail.com>
+- Aman Desai ([@amandesai01](http://github.com/amandesai01))
+- Shivam Sharma ([@shivam-sharma7](http://github.com/shivam-sharma7))
+
 ## v0.1.0
 
 ### 🚀 Enhancements
