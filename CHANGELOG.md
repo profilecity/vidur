@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.3.0
+
+[compare changes](https://github.com/profilecity/vidur/compare/v0.2.0...v0.3.0)
+
+### 🩹 Fixes
+
+- **onboarding:** ⚠️  Add auth ([6f61c19](https://github.com/profilecity/vidur/commit/6f61c19))
+- **auth:** ⚠️  Silently ignore auth to support unauthenticated pages ([a9d3690](https://github.com/profilecity/vidur/commit/a9d3690))
+
+### 🏡 Chore
+
+- **bin:** Script to publish docker images correctly ([8ec097d](https://github.com/profilecity/vidur/commit/8ec097d))
+- **format:** Ignore changelog ([15a83fa](https://github.com/profilecity/vidur/commit/15a83fa))
+
+#### ⚠️ Breaking Changes
+
+- **onboarding:** ⚠️  Add auth ([6f61c19](https://github.com/profilecity/vidur/commit/6f61c19))
+- **auth:** ⚠️  Silently ignore auth to support unauthenticated pages ([a9d3690](https://github.com/profilecity/vidur/commit/a9d3690))
+
+### ❤️ Contributors
+
+- Amandesai01 <amandesai01@gmail.com>
+
 ## v0.2.0
 
 [compare changes](https://github.com/profilecity/vidur/compare/v0.1.0...v0.2.0)
