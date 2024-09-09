@@ -47,12 +47,8 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <form>
-    <div class="text-xl font-noto font-bold text-center">
-      Configure Career Site
-    </div>
-    <div class="text-zinc-600 text-center text-sm">
-      You can change this later
-    </div>
+    <div class="text-xl font-noto font-bold text-center">Configure Career Site</div>
+    <div class="text-zinc-600 text-center text-sm">You can change this later</div>
     <div class="flex space-x-2 mt-6">
       <InputText
         class="w-full md:w-1/2"
@@ -79,8 +75,6 @@ const onSubmit = handleSubmit(async (values) => {
       :error="errors['bio']"
       label="Bio"
     />
-    <InputButton class="mt-3" @click="onSubmit" :disabled="isSubmitting">
-      Save
-    </InputButton>
+    <InputButton class="mt-3" @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
   </form>
 </template>

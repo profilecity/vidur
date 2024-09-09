@@ -1,13 +1,5 @@
 import { sql } from 'drizzle-orm';
-import {
-  boolean,
-  integer,
-  pgTable,
-  text,
-  timestamp,
-  uuid,
-  varchar,
-} from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 
 const defaultUuidPkField = () =>
   uuid('id')

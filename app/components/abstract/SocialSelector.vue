@@ -21,9 +21,5 @@ const selectedHandle = useVModel(props, 'modelValue', emit);
 </script>
 
 <template>
-  <AbstractDropdownSingleSelect
-    title="Select Platform"
-    :options="HANDLE_OPTIONS"
-    v-model="selectedHandle"
-  />
+  <AbstractDropdownSingleSelect title="Select Platform" :options="HANDLE_OPTIONS" v-model="selectedHandle" />
 </template>

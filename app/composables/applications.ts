@@ -22,27 +22,20 @@ export function useApplications() {
   const applicants = ref<Applicants>({});
   const applications = ref<Applications>({});
 
-  const applicantsApiCall = useFetch<ApplicationsGetReponse>(
-    '/api/applications',
-    {
-      query: computed(() => ({
-        postingIds: postingIds.value.join(','),
-      })),
-      onResponse: (ctx) => {
-        if (ctx.error) {
-          console.error(
-            'Error fetching applications for postingIds',
-            postingIds,
-            applicantsApiCall.error.value
-          );
-        }
-        const applicantsResponse = ctx.response._data as ApplicationsGetReponse;
-        applications.value = applicantsResponse.applications;
-        applicants.value = applicantsResponse.applicants;
-      },
-      immediate: false,
-    }
-  );
+  const applicantsApiCall = useFetch<ApplicationsGetReponse>('/api/applications', {
+    query: computed(() => ({
+      postingIds: postingIds.value.join(','),
+    })),
+    onResponse: (ctx) => {
+      if (ctx.error) {
+        console.error('Error fetching applications for postingIds', postingIds, applicantsApiCall.error.value);
+      }
+      const applicantsResponse = ctx.response._data as ApplicationsGetReponse;
+      applications.value = applicantsResponse.applications;
+      applicants.value = applicantsResponse.applicants;
+    },
+    immediate: false,
+  });
 
   const fetch = (ids: string[]) => {
     if (ids.length == 0) return;

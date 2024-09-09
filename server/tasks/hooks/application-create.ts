@@ -12,10 +12,7 @@ export default defineTask<boolean>({
     const bearerToken = payload.bearerToken as string;
 
     if (!bearerToken) {
-      console.error(
-        'hooks:application-create',
-        'bearer token missing from payload. aborting as failure...'
-      );
+      console.error('hooks:application-create', 'bearer token missing from payload. aborting as failure...');
       return { result: false };
     }
 
@@ -25,10 +22,7 @@ export default defineTask<boolean>({
 
     if (hooks.length == 0) {
       if (IS_DEV) {
-        console.log(
-          'hooks:application-create',
-          'no-hooks-found. aborting as success...'
-        );
+        console.log('hooks:application-create', 'no-hooks-found. aborting as success...');
       }
       return { result: true };
     }
@@ -44,11 +38,7 @@ export default defineTask<boolean>({
       .where(eq(usersTable.id, applicantId));
 
     if (!(Array.isArray(applicantResult) && applicantResult.length == 1)) {
-      console.error(
-        'hooks:application-create',
-        'no applicant found. applicant id',
-        applicantId
-      );
+      console.error('hooks:application-create', 'no applicant found. applicant id', applicantId);
       return { result: false };
     }
 
@@ -63,11 +53,7 @@ export default defineTask<boolean>({
       .where(eq(jobPostingsTable.id, postingId));
 
     if (!(Array.isArray(applicantResult) && applicantResult.length == 1)) {
-      console.error(
-        'hooks:application-create',
-        'no posting found. posting id',
-        postingId
-      );
+      console.error('hooks:application-create', 'no posting found. posting id', postingId);
       return { result: false };
     }
 
@@ -116,10 +102,7 @@ export default defineTask<boolean>({
     }
 
     const lastExecutedAt = new Date();
-    await db
-      .update(hooksTable)
-      .set({ lastExecutedAt })
-      .where(inArray(hooksTable.id, hookIds));
+    await db.update(hooksTable).set({ lastExecutedAt }).where(inArray(hooksTable.id, hookIds));
 
     return { result: true };
   },

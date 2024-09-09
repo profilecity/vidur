@@ -10,8 +10,7 @@ export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
   const q = await getValidatedQuery(event, fetchJobPostingFilterSchema.parse);
 
-  const postings =
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
 
   const posting = postings.find((p) => p.id === q.id);
 

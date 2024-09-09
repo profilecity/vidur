@@ -24,9 +24,7 @@ const user = props.applicant.user;
           />
         </div>
         <div class="font-medium text-zinc-800">
-          <span class="font-bold">{{
-            user.firstName + ' ' + user.lastName
-          }}</span
+          <span class="font-bold">{{ user.firstName + ' ' + user.lastName }}</span
           ><br />
           <span class="text-zinc-700">{{ user.email }}</span>
         </div>

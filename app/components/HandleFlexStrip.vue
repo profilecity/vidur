@@ -19,11 +19,7 @@ props.handles.forEach((h) => {
 
 <template>
   <div class="flex w-full justify-start space-x-2">
-    <a
-      target="_blank"
-      :href="handlesByIcon[handleIcon]"
-      v-for="handleIcon in Object.keys(handlesByIcon)"
-    >
+    <a target="_blank" :href="handlesByIcon[handleIcon]" v-for="handleIcon in Object.keys(handlesByIcon)">
       <Icon size="20" class="text-zinc-900" :name="handleIcon" />
     </a>
   </div>

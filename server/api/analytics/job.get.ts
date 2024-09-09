@@ -7,9 +7,5 @@ export default defineEventHandler(async (event) => {
 
   const db = await useDatabase();
 
-  return db
-    .select()
-    .from(jobPostingsTable)
-    .where(eq(jobPostingsTable.isPublished, true))
-    .limit(3);
+  return db.select().from(jobPostingsTable).where(eq(jobPostingsTable.isPublished, true)).limit(3);
 });

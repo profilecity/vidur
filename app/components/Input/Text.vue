@@ -20,14 +20,7 @@ const model = useVModel(props, 'modelValue');
 <template>
   <fieldset>
     <InputLabel :label-class :label :error :id />
-    <input
-      class="input-css"
-      :type="typeOverride || 'text'"
-      :class="inputClass"
-      v-model="model"
-      :placeholder
-      :id
-    />
+    <input class="input-css" :type="typeOverride || 'text'" :class="inputClass" v-model="model" :placeholder :id />
   </fieldset>
 </template>
 

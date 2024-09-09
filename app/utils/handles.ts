@@ -12,8 +12,7 @@ const handles: Handle[] = [
   {
     id: 'github',
     name: 'GitHub',
-    description:
-      'GitHub is a web-based handle for version control and collaboration in software development.',
+    description: 'GitHub is a web-based handle for version control and collaboration in software development.',
     logo: '/assets/handles/gh-logo.png',
     icon: 'mdi:github',
     cover: '/assets/handles/gh-cover.jpeg',
@@ -28,8 +27,7 @@ const handles: Handle[] = [
   {
     id: 'stackoverflow',
     name: 'Stack Overflow',
-    description:
-      'Stack Overflow empowers the world to develop technology through collective knowledge.',
+    description: 'Stack Overflow empowers the world to develop technology through collective knowledge.',
     logo: '/assets/handles/stackoverflow-logo.png',
     icon: 'mdi:stackoverflow',
     cover: '/assets/handles/stackoverflow-cover.png',
@@ -64,8 +62,7 @@ const handles: Handle[] = [
   {
     id: 'dribble',
     name: 'Dribble',
-    description:
-      'Dribbble is the world’s leading community for creatives to share, grow, and get hired.',
+    description: 'Dribbble is the world’s leading community for creatives to share, grow, and get hired.',
     logo: '/assets/handles/dribble-logo.jpeg',
     icon: 'mdi:dribbble',
     cover: '/assets/handles/dribble-cover.jpeg',
@@ -138,8 +135,7 @@ const handles: Handle[] = [
   {
     id: 'producthunt',
     name: 'Product Hunt',
-    description:
-      'Product Hunt is a curation of the best new products, every day.',
+    description: 'Product Hunt is a curation of the best new products, every day.',
     logo: '/assets/handles/producthunt-logo.jpeg',
     icon: 'tabler:brand-producthunt',
     cover: '/assets/handles/producthunt-cover.jpeg',

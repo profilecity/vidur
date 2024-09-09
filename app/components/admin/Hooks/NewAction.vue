@@ -10,10 +10,7 @@ withDefaults(
 </script>
 
 <template>
-  <Modal
-    title="Create New hook"
-    description="Hooks allow you to send events to external systems securely."
-  >
+  <Modal title="Create New hook" description="Hooks allow you to send events to external systems securely.">
     <template #input="{ open }">
       <InputButton @click="open">
         <span>{{ inputLabel }}</span>

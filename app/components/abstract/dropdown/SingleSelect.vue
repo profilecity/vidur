@@ -29,16 +29,8 @@ const setSelectedOption = (id: SelectableOption['id'], closeFn: () => void) => {
   <Dropdown :title="title" :close-on-esc="true">
     <template #input="{ open }">
       <slot name="input" :open="open">
-        <InputButton
-          variant="outline"
-          @click.prevent="open"
-          v-if="selectedOption"
-        >
-          <Icon
-            :name="selectedOption.logo"
-            class="w-4 h-4 fill-current mr-2"
-            v-if="selectedOption.logo"
-          />
+        <InputButton variant="outline" @click.prevent="open" v-if="selectedOption">
+          <Icon :name="selectedOption.logo" class="w-4 h-4 fill-current mr-2" v-if="selectedOption.logo" />
           <span>{{ selectedOption.title }}</span>
         </InputButton>
         <InputButton variant="outline" @click="open" v-else>
@@ -50,15 +42,8 @@ const setSelectedOption = (id: SelectableOption['id'], closeFn: () => void) => {
     <template #content="{ close }">
       <ul class="mb-4">
         <li v-for="option in options" :key="option.id">
-          <InputButton
-            variant="ghost"
-            @click.prevent="setSelectedOption(option.id, close)"
-          >
-            <Icon
-              :name="option.logo"
-              class="w-4 h-4 fill-current mr-2"
-              v-if="option.logo"
-            />
+          <InputButton variant="ghost" @click.prevent="setSelectedOption(option.id, close)">
+            <Icon :name="option.logo" class="w-4 h-4 fill-current mr-2" v-if="option.logo" />
             <span>{{ option.title }}</span>
           </InputButton>
         </li>

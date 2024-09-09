@@ -7,9 +7,7 @@ export default defineNuxtPlugin(async () => {
   try {
     const publicConfigRequest = await useFetch('/api/public/config');
     if (!publicConfigRequest.data.value) {
-      throw new Error(
-        'config not received in response ' + publicConfigRequest.data.value
-      );
+      throw new Error('config not received in response ' + publicConfigRequest.data.value);
     }
     const pubicConfig = publicConfigRequest.data.value;
 

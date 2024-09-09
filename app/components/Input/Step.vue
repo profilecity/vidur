@@ -23,18 +23,12 @@ const props = withDefaults(
 
 if (props.allowManualTrigger) {
   // TODO: implement allow manual trigger.
-  console.warn(
-    "<InputStep/>: allowManualTrigger is not implemented yet, and won't take effect."
-  );
+  console.warn("<InputStep/>: allowManualTrigger is not implemented yet, and won't take effect.");
 }
 </script>
 
 <template>
-  <StepperRoot
-    class="flex gap-2 w-full max-w-[32rem]"
-    :model-value="step"
-    data-orientation="vertical"
-  >
+  <StepperRoot class="flex gap-2 w-full max-w-[32rem]" :model-value="step" data-orientation="vertical">
     <StepperItem
       v-for="item in props.steps"
       :key="item.step"
@@ -61,10 +55,7 @@ if (props.allowManualTrigger) {
         <StepperTitle class="font-medium font-noto text-xs" v-if="item.title">
           {{ item.title }}
         </StepperTitle>
-        <StepperDescription
-          class="hidden sm:block text-xs"
-          v-if="item.description"
-        >
+        <StepperDescription class="hidden sm:block text-xs" v-if="item.description">
           {{ item.description }}
         </StepperDescription>
       </div>

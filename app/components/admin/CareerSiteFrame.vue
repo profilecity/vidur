@@ -24,9 +24,7 @@ links.value = [];
 overviewSocials.value = []; // Future Field.
 
 const removeFeaturedLink = (index: number) => {
-  links.value = links.value?.filter(
-    (_, originalIndex) => originalIndex != index
-  );
+  links.value = links.value?.filter((_, originalIndex) => originalIndex != index);
 };
 
 // Initialize fields with data from settings
@@ -66,19 +64,13 @@ const logoUpdated = (id: string) => {
 <template>
   <FrameTabbed tab-group="settings">
     <template #action>
-      <InputButton @click="onSubmit" :disabled="isSubmitting">
-        Save
-      </InputButton>
+      <InputButton @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
     </template>
     <template #content>
       <form class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4">
         <div class="flex items-end">
           <div class="mr-4">
-            <img
-              class="w-16 h-16 md:w-20 md:h-20 rounded-xl"
-              :src="logoURL"
-              alt="User upload"
-            />
+            <img class="w-16 h-16 md:w-20 md:h-20 rounded-xl" :src="logoURL" alt="User upload" />
           </div>
           <AdminUpdateOrgLogo @update="logoUpdated" />
         </div>
@@ -109,39 +101,20 @@ const logoUpdated = (id: string) => {
           label="Bio"
         />
         <div class="w-full mt-8">
-          <InputLabel
-            label="Featured Links"
-            id="featued-links"
-            :error="errors['links']"
-          />
-          <div
-            v-for="(link, index) in links"
-            :key="index"
-            class="flex space-x-2 mb-2 w-full items-center"
-          >
-            <InputText
-              v-model="link.title"
-              :id="`link-title-${index}`"
-              placeholder="Mars Mission Docs"
-            />
+          <InputLabel label="Featured Links" id="featued-links" :error="errors['links']" />
+          <div v-for="(link, index) in links" :key="index" class="flex space-x-2 mb-2 w-full items-center">
+            <InputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
             <InputText
               v-model="link.href"
               :id="`link-url-${index}`"
               placeholder="https://big-space-tech.com/mission/mars"
               type-override="url"
             />
-            <InputButton
-              variant="destructive"
-              size="icon"
-              @click="removeFeaturedLink(index)"
-            >
+            <InputButton variant="destructive" size="icon" @click="removeFeaturedLink(index)">
               <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
             </InputButton>
           </div>
-          <InputButton
-            variant="secondary"
-            @click.prevent="links?.push({ title: '', href: '' })"
-          >
+          <InputButton variant="secondary" @click.prevent="links?.push({ title: '', href: '' })">
             <Icon name="mdi:plus" class="w-5 h-5" />
             Add Link
           </InputButton>

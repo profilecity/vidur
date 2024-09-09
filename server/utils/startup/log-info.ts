@@ -1,7 +1,5 @@
 export async function logFirstAccessKeyIfPresent() {
-  const firstSetupAccessKey = await general_memoryStorage.getItem(
-    'firstSetupAccessKey'
-  );
+  const firstSetupAccessKey = await general_memoryStorage.getItem('firstSetupAccessKey');
 
   if (IS_DEV) {
     console.log('Checking if access key present');

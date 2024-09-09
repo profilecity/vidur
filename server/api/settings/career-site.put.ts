@@ -11,10 +11,7 @@ export default defineEventHandler(async (event) => {
     console.log('updating careerSiteConfig');
   }
 
-  const settingsUpdateRequest = await readValidatedBody(
-    event,
-    careerSiteConfigSchema.parse
-  );
+  const settingsUpdateRequest = await readValidatedBody(event, careerSiteConfigSchema.parse);
 
   const db = await useDatabase();
 
@@ -23,8 +20,5 @@ export default defineEventHandler(async (event) => {
     .update(metaDataTable)
     .set({ value: careerSiteString, updatedAt: new Date() })
     .where(eq(metaDataTable.key, 'careerSiteConfig'));
-  await settings_memoryStorage.setItem(
-    'careerSiteConfig',
-    settingsUpdateRequest
-  );
+  await settings_memoryStorage.setItem('careerSiteConfig', settingsUpdateRequest);
 });

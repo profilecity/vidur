@@ -8,8 +8,7 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-zinc-900 text-white hover:bg-zinc-800',
         destructive: 'bg-red-600 text-white hover:bg-red-500',
-        outline:
-          'border border-zinc-300 bg-transparent hover:bg-zinc-100 text-zinc-900',
+        outline: 'border border-zinc-300 bg-transparent hover:bg-zinc-100 text-zinc-900',
         ghost: 'text-zinc-500 hover:text-zinc-900 bg-transparent',
         secondary: 'bg-zinc-200 text-zinc-900 hover:bg-zinc-300',
       },
@@ -45,10 +44,7 @@ const props = withDefaults(
 </script>
 
 <template>
-  <NuxtLink
-    :class="cn(buttonVariants({ variant, size }), $attrs.class ?? '')"
-    v-if="props.as == 'NuxtLink'"
-  >
+  <NuxtLink :class="cn(buttonVariants({ variant, size }), $attrs.class ?? '')" v-if="props.as == 'NuxtLink'">
     <slot />
   </NuxtLink>
   <component

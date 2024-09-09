@@ -64,12 +64,7 @@ export async function decodeAndValidate(jwToken: string): Promise<any> {
       async (header, callback) => {
         const kid = header.kid;
         if (!kid) {
-          callback(
-            new Error(
-              'No kid found for provided header ' + JSON.stringify(header)
-            ),
-            undefined
-          );
+          callback(new Error('No kid found for provided header ' + JSON.stringify(header)), undefined);
           return;
         }
         const key = await jwksClient?.getSigningKey(kid);

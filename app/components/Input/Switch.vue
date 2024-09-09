@@ -12,14 +12,8 @@ const switchState = useVModel(props, 'modelValue');
 </script>
 
 <template>
-  <div
-    class="flex gap-2 items-center bg-zinc-100 p-1 rounded-md border border-zinc-200"
-  >
-    <label
-      class="font-noto text-sm leading-none select-none"
-      :for="id"
-      v-if="label"
-    >
+  <div class="flex gap-2 items-center bg-zinc-100 p-1 rounded-md border border-zinc-200">
+    <label class="font-noto text-sm leading-none select-none" :for="id" v-if="label">
       {{ label }}
     </label>
     <SwitchRoot

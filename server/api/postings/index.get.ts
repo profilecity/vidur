@@ -19,12 +19,9 @@ export default defineEventHandler(async (event) => {
     .orderBy(desc(jobPostingsTable.createdAt));
 
   const totalApplicantsById: Record<string, number> = {};
-  totalApplicantsRecord.forEach(
-    (tar) => (totalApplicantsById[tar.id] = tar.totalApplicants)
-  );
+  totalApplicantsRecord.forEach((tar) => (totalApplicantsById[tar.id] = tar.totalApplicants));
 
-  const postings =
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
   return postings.map((p) => ({
     ...p,
     contents: null,

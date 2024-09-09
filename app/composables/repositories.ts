@@ -66,15 +66,9 @@ export async function useObjectRepository<
   PB extends RecordAny = RecordAny,
   PQ extends RecordAny = RecordAny,
   DQ extends RecordAny = RecordAny,
->(
-  options: LookupRepositoryOptions<T, FQ>
-): Promise<LookupRepository<T, UB, UQ, PB, PQ, DQ>> {
-  const immediate =
-    typeof options.immediate === 'undefined' ? true : options.immediate;
-  const { data, setData, firstFetched, fetching, changing } = useObjectState(
-    options.key,
-    options.initFn
-  );
+>(options: LookupRepositoryOptions<T, FQ>): Promise<LookupRepository<T, UB, UQ, PB, PQ, DQ>> {
+  const immediate = typeof options.immediate === 'undefined' ? true : options.immediate;
+  const { data, setData, firstFetched, fetching, changing } = useObjectState(options.key, options.initFn);
 
   const {
     data: fetchData,
@@ -100,29 +94,11 @@ export async function useObjectRepository<
     setFetchData();
   }
 
-  const updateData: ChangeFn<UB, UQ> = makeChangeFn(
-    'put',
-    changing,
-    options.key,
-    refresh,
-    options.updateURL
-  );
+  const updateData: ChangeFn<UB, UQ> = makeChangeFn('put', changing, options.key, refresh, options.updateURL);
 
-  const postData: ChangeFn<PB, PQ> = makeChangeFn(
-    'post',
-    changing,
-    options.key,
-    refresh,
-    options.postURL
-  );
+  const postData: ChangeFn<PB, PQ> = makeChangeFn('post', changing, options.key, refresh, options.postURL);
 
-  const deleteData: ChangeFnQ<DQ> = makeChangeFnQ(
-    'delete',
-    changing,
-    options.key,
-    refresh,
-    options.deleteURL
-  );
+  const deleteData: ChangeFnQ<DQ> = makeChangeFnQ('delete', changing, options.key, refresh, options.deleteURL);
 
   return {
     data,
@@ -151,10 +127,7 @@ function makeChangeFnQ<Q extends RecordAny = RecordAny>(
   };
 }
 
-function makeChangeFn<
-  B extends RecordAny = RecordAny,
-  Q extends RecordAny = RecordAny,
->(
+function makeChangeFn<B extends RecordAny = RecordAny, Q extends RecordAny = RecordAny>(
   method: 'put' | 'post' | 'delete',
   changing: Ref<boolean>,
   key: string,

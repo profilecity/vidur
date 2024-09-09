@@ -1,7 +1,4 @@
-import {
-  type SEOConfig,
-  type CareerSiteConfig,
-} from '~~/shared/schemas/setting';
+import { type SEOConfig, type CareerSiteConfig } from '~~/shared/schemas/setting';
 import { settings_memoryStorage } from '~~/server/utils/storage';
 
 export default defineEventHandler(async () => {
@@ -14,12 +11,8 @@ export default defineEventHandler(async () => {
     seo: {},
   } as { careerSite: CareerSiteConfig; seo: SEOConfig };
 
-  settings.seo = (await settings_memoryStorage.getItem(
-    'seoConfig'
-  )) as SEOConfig;
-  settings.careerSite = (await settings_memoryStorage.getItem(
-    'careerSiteConfig'
-  )) as CareerSiteConfig;
+  settings.seo = (await settings_memoryStorage.getItem('seoConfig')) as SEOConfig;
+  settings.careerSite = (await settings_memoryStorage.getItem('careerSiteConfig')) as CareerSiteConfig;
 
   return settings;
 });

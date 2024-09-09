@@ -11,10 +11,7 @@ export default defineEventHandler(async (event) => {
     console.log('updating seoConfig');
   }
 
-  const settingsUpdateRequest = await readValidatedBody(
-    event,
-    seoConfigSchema.parse
-  );
+  const settingsUpdateRequest = await readValidatedBody(event, seoConfigSchema.parse);
 
   const db = await useDatabase();
 

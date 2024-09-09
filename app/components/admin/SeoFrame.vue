@@ -39,15 +39,10 @@ const onSubmit = handleSubmit(async (values) => {
 <template>
   <FrameTabbed tab-group="settings">
     <template #action>
-      <InputButton @click="onSubmit" :disabled="isSubmitting">
-        Save
-      </InputButton>
+      <InputButton @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
     </template>
     <template #content>
-      <form
-        class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4"
-        @submit="onSubmit"
-      >
+      <form class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4" @submit="onSubmit">
         <div class="md:flex gap-4 items-center mt-5">
           <InputText
             class="w-full md:w-1/2"

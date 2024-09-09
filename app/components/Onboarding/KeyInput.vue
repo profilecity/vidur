@@ -11,13 +11,10 @@ const verify = async () => {
   if (!key.value) return;
   try {
     isVerifying.value = true;
-    const response = await $fetch<{ result: boolean }>(
-      '/api/onboarding/validate-key',
-      {
-        method: 'POST',
-        body: { key: key.value },
-      }
-    );
+    const response = await $fetch<{ result: boolean }>('/api/onboarding/validate-key', {
+      method: 'POST',
+      body: { key: key.value },
+    });
     if (response.result) {
       emits('done', key.value);
     } else {
@@ -37,9 +34,7 @@ const verify = async () => {
       <div class="justify-center flex">
         <img src="/vidur-logo.svg" class="h-5" />
       </div>
-      <h4 class="text-md text-zinc-600 mt-2 mb-6">
-        The only recruiting software you will ever need.
-      </h4>
+      <h4 class="text-md text-zinc-600 mt-2 mb-6">The only recruiting software you will ever need.</h4>
       <!-- Form -->
       <form class="justify-center mt-10">
         <InputText
@@ -55,12 +50,7 @@ const verify = async () => {
         />
         <span class="text-sm font-bold text-rose-500">{{ error }}</span>
         <div class="flex justify-center mt-6">
-          <InputButton
-            @click.prevent="verify"
-            :loading="isVerifying"
-            spinner-class="h-6"
-            >Verify</InputButton
-          >
+          <InputButton @click.prevent="verify" :loading="isVerifying" spinner-class="h-6">Verify</InputButton>
         </div>
       </form>
     </div>

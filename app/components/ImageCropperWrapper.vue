@@ -2,8 +2,7 @@
 import { useDropZone } from '@vueuse/core';
 
 const cropperRef = ref();
-const { crop, reset, croppedBlob, croppedBlobURL, loadImageFromFile, blobURL } =
-  useImageCropper(cropperRef);
+const { crop, reset, croppedBlob, croppedBlobURL, loadImageFromFile, blobURL } = useImageCropper(cropperRef);
 
 const emits = defineEmits<{
   onCrop: [Blob]; // croppedBlob
@@ -47,24 +46,15 @@ const save = () => {
 
 <template>
   <div class="max-w-xl" v-if="selectedFile && !croppedBlob">
-    <image-cropper
-      ref="cropperRef"
-      :src="blobURL"
-      :stencil-props="{ aspectRatio }"
-    />
+    <image-cropper ref="cropperRef" :src="blobURL" :stencil-props="{ aspectRatio }" />
     <div class="flex w-full justify-end items-center space-x-1 mt-2">
-      <InputButton variant="secondary" @click="selectedFile = null"
-        >Reset</InputButton
-      >
+      <InputButton variant="secondary" @click="selectedFile = null">Reset</InputButton>
       <InputButton @click="crop">Crop</InputButton>
     </div>
   </div>
   <div class="max-w-xl" v-else-if="selectedFile && croppedBlob">
     <div class="flex w-full items-center justify-center">
-      <img
-        :src="croppedBlobURL"
-        class="w-64 h-64 border border-zinc-700 rounded-xl"
-      />
+      <img :src="croppedBlobURL" class="w-64 h-64 border border-zinc-700 rounded-xl" />
     </div>
     <div class="flex w-full justify-end items-center space-x-1 mt-2">
       <InputButton variant="secondary" @click="reset">Reset</InputButton>
@@ -81,9 +71,7 @@ const save = () => {
           <Icon name="mage:image-upload" class="w-6 h-6 text-gray-600" /><br />
           Drop image to Attach, or
           <span class="text-blue-600 underline">browse</span><br />
-          <span class="text-xs text-gray-400"
-            >Supported Formats: png, jpeg or gif</span
-          >
+          <span class="text-xs text-gray-400">Supported Formats: png, jpeg or gif</span>
         </span>
       </span>
       <input

@@ -25,8 +25,7 @@ export default defineEventHandler(async (event) => {
 
   const deletedPostingId = jobPostingsResult[0]?.id;
 
-  const postings =
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
 
   await general_memoryStorage.setItem(
     'postings',

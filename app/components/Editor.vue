@@ -31,11 +31,7 @@
           <button class="ql-clean"></button>
         </span>
       </div>
-      <div
-        class="bg-white rounded-b-xl border p-4"
-        :class="readOnly ? 'ql-e-blank' : ''"
-        :id="editorId"
-      ></div>
+      <div class="bg-white rounded-b-xl border p-4" :class="readOnly ? 'ql-e-blank' : ''" :id="editorId"></div>
     </div>
   </div>
 </template>

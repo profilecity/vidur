@@ -2,16 +2,14 @@
 const route = useRoute();
 const id = route.params.id as string;
 
-const { data: applicationStatus, refresh: refreshApplicationStatus } =
-  useApplicationStatus(id);
+const { data: applicationStatus, refresh: refreshApplicationStatus } = useApplicationStatus(id);
 const { data: posting } = await usePublicPostingRepository({ id });
 
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
 const companyLogo = useRemoteAsset(careerSiteConfig.value.logo).url;
 
 useHead({
-  title: () =>
-    `${posting.value?.title + ' | ' || ''}${careerSiteConfig.value.name}`,
+  title: () => `${posting.value?.title + ' | ' || ''}${careerSiteConfig.value.name}`,
 });
 
 const tags = computed<string[]>(() => {
@@ -24,10 +22,7 @@ const tags = computed<string[]>(() => {
 const isApplying = ref(false);
 const apply = async () => {
   if (!route.query.fromOnboard) {
-    await navigateTo(
-      'https://connect.profilecity.xyz?callback=' + window.location.href,
-      { external: true }
-    );
+    await navigateTo('https://connect.profilecity.xyz?callback=' + window.location.href, { external: true });
     return;
   }
   try {
@@ -53,23 +48,16 @@ if (route.query.fromOnboard) {
   <main class="grow" v-if="posting">
     <div class="px-4 sm:px-6 lg:px-8 py-8 w-full">
       <!-- Page content -->
-      <div
-        class="max-w-5xl mx-auto flex flex-col lg:flex-row lg:space-x-8 xl:space-x-16"
-      >
+      <div class="max-w-5xl mx-auto flex flex-col lg:flex-row lg:space-x-8 xl:space-x-16">
         <!-- Content -->
         <div class="w-full">
           <div class="mb-6">
             <InputButton as="NuxtLink" variant="outline" to="/">
-              <Icon
-                class="fill-current text-zinc-500 mr-2"
-                name="mdi:arrow-left"
-              />
+              <Icon class="fill-current text-zinc-500 mr-2" name="mdi:arrow-left" />
               <span>Back To Jobs</span>
             </InputButton>
           </div>
-          <div class="text-sm text-zinc-500 italic mb-2">
-            Posted {{ formatDate(new Date(posting.updatedAt)) }}
-          </div>
+          <div class="text-sm text-zinc-500 italic mb-2">Posted {{ formatDate(new Date(posting.updatedAt)) }}</div>
           <header class="mb-4">
             <!-- Title -->
             <h1 class="text-2xl md:text-3xl text-zinc-800 font-bold">
@@ -77,9 +65,7 @@ if (route.query.fromOnboard) {
             </h1>
           </header>
           <!-- Company information (mobile) -->
-          <div
-            class="bg-white p-5 rounded-2xl border border-zinc-200 mb-6 lg:hidden"
-          >
+          <div class="bg-white p-5 rounded-2xl border border-zinc-200 mb-6 lg:hidden">
             <div class="text-center mb-6">
               <div class="inline-flex mb-3">
                 <img
@@ -102,12 +88,7 @@ if (route.query.fromOnboard) {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <InputButton
-                class="w-full"
-                @click="apply"
-                :disabled="isApplying"
-                v-else
-              >
+              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
                 Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </InputButton>
@@ -133,9 +114,7 @@ if (route.query.fromOnboard) {
         <!-- Sidebar -->
         <div class="hidden lg:block space-y-4">
           <!-- Company information (desktop) -->
-          <div
-            class="bg-white p-5 rounded-2xl border border-zinc-200 lg:w-72 xl:w-80"
-          >
+          <div class="bg-white p-5 rounded-2xl border border-zinc-200 lg:w-72 xl:w-80">
             <div class="text-center mb-6">
               <div class="inline-flex mb-3">
                 <img
@@ -158,12 +137,7 @@ if (route.query.fromOnboard) {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <InputButton
-                class="w-full"
-                @click="apply"
-                :disabled="isApplying"
-                v-else
-              >
+              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
                 Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
               </InputButton>
@@ -176,9 +150,7 @@ if (route.query.fromOnboard) {
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
     <div class="relative z-50">
       <a href="https://www.vidurjobs.xyz">
-        <div
-          class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md"
-        >
+        <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
           <p class="mr-2">Powered By</p>
           <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
         </div>

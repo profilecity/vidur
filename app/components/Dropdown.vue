@@ -55,20 +55,12 @@ if (props.closeOnEsc) {
       <div
         v-if="isDropdownOpen"
         class="origin-top-right z-10 absolute top-full left-0 right-auto min-w-56 bg-white border border-slate-200 pt-1.5 rounded-xl shadow-sm overflow-hidden mt-1"
-        :class="
-          align === 'right'
-            ? 'md:left-auto md:right-0'
-            : 'md:left-0 md:right-auto'
-        "
+        :class="align === 'right' ? 'md:left-auto md:right-0' : 'md:left-0 md:right-auto'"
       >
         <div ref="dropdownRef">
-          <div
-            class="flex w-full justify-between text-slate-400 pb-2 px-3 items-center"
-          >
+          <div class="flex w-full justify-between text-slate-400 pb-2 px-3 items-center">
             <div class="text-xs uppercase">{{ title }}</div>
-            <InputButton variant="ghost" size="icon-xs" @click="close"
-              ><Icon name="ion:close"
-            /></InputButton>
+            <InputButton variant="ghost" size="icon-xs" @click="close"><Icon name="ion:close" /></InputButton>
           </div>
           <slot name="content" :close="close" />
         </div>

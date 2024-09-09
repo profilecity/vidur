@@ -18,12 +18,7 @@ export default defineEventHandler(async (event) => {
       await database
         .select({ count: count() })
         .from(jobPostingsTable)
-        .where(
-          and(
-            eq(jobPostingsTable.id, body.postingId),
-            eq(jobPostingsTable.isPublished, true)
-          )
-        )
+        .where(and(eq(jobPostingsTable.id, body.postingId), eq(jobPostingsTable.isPublished, true)))
     )[0]?.count || 0) == 1;
 
   if (!postingExistsAndIsPublished) {
@@ -51,12 +46,7 @@ export default defineEventHandler(async (event) => {
 
   if (userAlreadyApplied) {
     if (IS_DEV) {
-      console.log(
-        'user already applied. userId',
-        session.user.id,
-        'applying to',
-        body.postingId
-      );
+      console.log('user already applied. userId', session.user.id, 'applying to', body.postingId);
     }
     throw createError({
       statusCode: 400,
@@ -92,11 +82,6 @@ export default defineEventHandler(async (event) => {
   });
 
   if (IS_DEV) {
-    console.log(
-      'user',
-      session.user.id,
-      "'s application successful for",
-      body.postingId
-    );
+    console.log('user', session.user.id, "'s application successful for", body.postingId);
   }
 });

@@ -6,43 +6,21 @@ const publicConfig = useRuntimeConfig().public;
 </script>
 
 <template>
-  <div
-    class="flex fixed top-0 left-0 flex-col px-4 py-6 md:border-r border-zinc-200 h-screen"
-  >
+  <div class="flex fixed top-0 left-0 flex-col px-4 py-6 md:border-r border-zinc-200 h-screen">
     <div class="flex flex-col">
       <!-- Company Profile -->
       <div class="flex items-center">
-        <img
-          class="rounded-lg w-8 border border-zinc-200"
-          :src="logoURL"
-          alt="avatar"
-        />
+        <img class="rounded-lg w-8 border border-zinc-200" :src="logoURL" alt="avatar" />
         <span class="font-semibold ml-2 truncate font-noto overflow-hidden">
           {{ careerSiteConfig.name }}
         </span>
       </div>
       <div class="text-xs text-zinc-500 mb-2 mt-6">Menu</div>
       <ul class="flex flex-nowrap md:block mr-3 md:mr-0">
-        <AdminSidebarLink
-          to="/admin/dashboard"
-          icon="iconoir:home-simple"
-          label="Home"
-        />
-        <AdminSidebarLink
-          to="/admin/applications"
-          icon="iconoir:user-badge-check"
-          label="Applications"
-        />
-        <AdminSidebarLink
-          to="/admin/integrations"
-          icon="hugeicons:connect"
-          label="Integrations"
-        />
-        <AdminSidebarLink
-          to="/admin/settings"
-          icon="iconoir:settings"
-          label="Settings"
-        />
+        <AdminSidebarLink to="/admin/dashboard" icon="iconoir:home-simple" label="Home" />
+        <AdminSidebarLink to="/admin/applications" icon="iconoir:user-badge-check" label="Applications" />
+        <AdminSidebarLink to="/admin/integrations" icon="hugeicons:connect" label="Integrations" />
+        <AdminSidebarLink to="/admin/settings" icon="iconoir:settings" label="Settings" />
       </ul>
     </div>
 
@@ -69,16 +47,10 @@ const publicConfig = useRuntimeConfig().public;
             <Icon class="w-5 h-5 shrink-0 fill-current" name="mdi:github" />
           </a>
           <a :href="publicConfig.discord" target="_blank">
-            <Icon
-              class="w-5 h-5 shrink-0 fill-current"
-              name="ic:sharp-discord"
-            />
+            <Icon class="w-5 h-5 shrink-0 fill-current" name="ic:sharp-discord" />
           </a>
           <a :href="publicConfig.twitter" target="_blank">
-            <Icon
-              class="w-4 h-4 shrink-0 fill-current"
-              name="pajamas:twitter"
-            />
+            <Icon class="w-4 h-4 shrink-0 fill-current" name="pajamas:twitter" />
           </a>
         </div>
       </div>

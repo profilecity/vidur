@@ -1,9 +1,7 @@
 import { type JobPosting } from '~~/server/db/schema';
 
 export default defineEventHandler(async (_) => {
-  const postings = (
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || []
-  )
+  const postings = ((await general_memoryStorage.getItem<JobPosting[]>('postings')) || [])
     .filter((p) => p.isPublished)
     .map((p) => ({
       ...p,

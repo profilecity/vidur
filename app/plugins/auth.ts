@@ -4,9 +4,7 @@ export default defineNuxtPlugin(async () => {
   const session = useSessionState();
   const requestFetch = useRequestFetch();
   try {
-    const res = await useAsyncData<Session>('oauth-sess-fetch', () =>
-      requestFetch('/api/userinfo')
-    );
+    const res = await useAsyncData<Session>('oauth-sess-fetch', () => requestFetch('/api/userinfo'));
     const fetchedSession = res.data.value;
     if (!fetchedSession) {
       throw new Error('Empty session received');

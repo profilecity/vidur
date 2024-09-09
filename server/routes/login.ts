@@ -1,12 +1,6 @@
-import {
-  generateRandomString,
-  getChallengeFromVerifier,
-} from '~/utils/oauth-support';
+import { generateRandomString, getChallengeFromVerifier } from '~/utils/oauth-support';
 import authenticateRequest from '../utils/auth';
-import {
-  sendRedirectToLoginPage,
-  sendRedirectToNextPage,
-} from '../utils/redirect';
+import { sendRedirectToLoginPage, sendRedirectToNextPage } from '../utils/redirect';
 
 interface AccessToken {
   access_token: string;
@@ -47,10 +41,7 @@ export default defineEventHandler(async (event) => {
     const stateFromQuery = query.state;
     const stateFromCookie = getCookie(event, 'oauth_state');
 
-    if (
-      !(stateFromQuery || stateFromCookie) ||
-      stateFromCookie !== stateFromQuery
-    ) {
+    if (!(stateFromQuery || stateFromCookie) || stateFromCookie !== stateFromQuery) {
       // State mismatch.
       if (IS_DEV) {
         console.error('State mismatch.');
@@ -111,9 +102,6 @@ export default defineEventHandler(async (event) => {
 
     const urlParams = oauthParams.toString();
 
-    return sendRedirect(
-      event,
-      `${runtimeConfig.services.atlas}/oauth2/authorize?${urlParams}`
-    );
+    return sendRedirect(event, `${runtimeConfig.services.atlas}/oauth2/authorize?${urlParams}`);
   }
 });

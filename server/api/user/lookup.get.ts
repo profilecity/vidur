@@ -24,11 +24,7 @@ export default defineEventHandler(async (event) => {
     .from(usersTable)
     .where(
       and(
-        or(
-          ilike(usersTable.firstName, looseQ),
-          ilike(usersTable.lastName, looseQ),
-          ilike(usersTable.email, looseQ)
-        ),
+        or(ilike(usersTable.firstName, looseQ), ilike(usersTable.lastName, looseQ), ilike(usersTable.email, looseQ)),
         eq(usersTable.isAdmin, false) // Only lookup for non-admins;
       )
     );

@@ -46,18 +46,11 @@ const onSubmit = handleSubmit(async (values) => {
 <template>
   <div class="w-full max-w-9xl mx-auto">
     <!-- Page header -->
-    <div
-      class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white"
-    >
+    <div class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white">
       <!-- Left: Title -->
       <div class="mb-4 sm:mb-0">
-        <h2
-          class="text-md md:text-lg text-zinc-800 font-bold flex items-center"
-        >
-          <Icon
-            class="w-5 h-5 shrink-0 fill-current mr-2"
-            name="iconamoon:edit"
-          />New Posting
+        <h2 class="text-md md:text-lg text-zinc-800 font-bold flex items-center">
+          <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />New Posting
         </h2>
       </div>
       <!-- Right: Actions -->
@@ -98,13 +91,8 @@ const onSubmit = handleSubmit(async (values) => {
             v-model="tagsCSV"
           />
           <div class="mt-4">
-            <label class="block text-sm font-medium mb-1" for="jobdescription"
-              >Job Description</label
-            >
-            <Editor
-              placeholder="We are looking for someone who can..."
-              v-model="contents"
-            />
+            <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
+            <Editor placeholder="We are looking for someone who can..." v-model="contents" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>

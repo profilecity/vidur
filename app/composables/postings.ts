@@ -9,18 +9,8 @@ import type {
 
 export type PostingLite = { id: string; title: string };
 export type PostingsLite = PostingLite[];
-export function usePostingsLiteRepository(
-  options: { immediate?: boolean } = { immediate: true }
-) {
-  return useObjectRepository<
-    PostingsLite,
-    never,
-    never,
-    never,
-    never,
-    never,
-    never
-  >({
+export function usePostingsLiteRepository(options: { immediate?: boolean } = { immediate: true }) {
+  return useObjectRepository<PostingsLite, never, never, never, never, never, never>({
     key: 'postings-lite',
     fetchURL: '/api/postings/lite',
     initFn: () => [],
@@ -30,15 +20,7 @@ export function usePostingsLiteRepository(
 
 export type Postings = JobPosting[];
 export function usePostingsRepository() {
-  return useObjectRepository<
-    Postings,
-    never,
-    never,
-    never,
-    never,
-    never,
-    never
-  >({
+  return useObjectRepository<Postings, never, never, never, never, never, never>({
     key: 'postings',
     fetchURL: '/api/postings',
     initFn: () => [],
@@ -46,15 +28,7 @@ export function usePostingsRepository() {
 }
 
 export function usePublicPostingsRepository() {
-  return useObjectRepository<
-    Postings,
-    never,
-    never,
-    never,
-    never,
-    never,
-    never
-  >({
+  return useObjectRepository<Postings, never, never, never, never, never, never>({
     key: 'postings',
     fetchURL: '/api/public/postings',
     initFn: () => [],
@@ -85,15 +59,7 @@ export function usePostingRepository(query: FetchPostingSchema) {
 }
 
 export function usePublicPostingRepository(query: FetchPostingSchema) {
-  return useObjectRepository<
-    JobPosting,
-    FetchPostingSchema,
-    never,
-    never,
-    never,
-    never,
-    never
-  >({
+  return useObjectRepository<JobPosting, FetchPostingSchema, never, never, never, never, never>({
     key: `${query.id}-public-posting`,
     fetchURL: '/api/public/posting',
     fetchQuery: query,

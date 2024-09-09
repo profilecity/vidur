@@ -1,7 +1,4 @@
-import {
-  type CareerSiteConfig,
-  type SEOConfig,
-} from '~~/shared/schemas/setting';
+import { type CareerSiteConfig, type SEOConfig } from '~~/shared/schemas/setting';
 import type { Session } from '~~/shared/types/profile-types';
 
 export function useSessionState() {

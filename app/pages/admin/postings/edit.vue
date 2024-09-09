@@ -15,8 +15,7 @@ if (!route.query.id) {
 const { refresh } = await usePostingsRepository();
 
 const q = { id: route.query.id as string };
-const { data, updateData, deleteData, changing } =
-  await usePostingRepository(q);
+const { data, updateData, deleteData, changing } = await usePostingRepository(q);
 
 useHead({
   title: `Edit - ${data.value.title}`,
@@ -56,18 +55,11 @@ const onDelete = async () => {
 <template>
   <div class="w-full max-w-9xl mx-auto">
     <!-- Page header -->
-    <div
-      class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white"
-    >
+    <div class="flex flex-col md:flex-row justify-between items-center mb-4 border-b border-zinc-200 p-4 bg-white">
       <!-- Left: Title -->
       <div class="mb-4 sm:mb-0">
-        <h2
-          class="text-md md:text-lg text-zinc-800 font-bold flex items-center"
-        >
-          <Icon
-            class="w-5 h-5 shrink-0 fill-current mr-2"
-            name="iconamoon:edit"
-          />
+        <h2 class="text-md md:text-lg text-zinc-800 font-bold flex items-center">
+          <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />
           {{ data.title }}
         </h2>
       </div>
@@ -79,12 +71,7 @@ const onDelete = async () => {
           @confirm="onDelete"
         >
           <template #input="{ open }">
-            <InputButton
-              variant="destructive"
-              size="icon"
-              @click="open"
-              :disabled="changing"
-            >
+            <InputButton variant="destructive" size="icon" @click="open" :disabled="changing">
               <Icon name="material-symbols:delete-outline" class="h-4 w-4" />
             </InputButton>
           </template>
@@ -125,13 +112,8 @@ const onDelete = async () => {
             v-model="tagsCSV"
           />
           <div class="mt-4">
-            <label class="block text-sm font-medium mb-1" for="jobdescription"
-              >Job Description</label
-            >
-            <Editor
-              placeholder="We are looking for someone who can..."
-              v-model="contents"
-            />
+            <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
+            <Editor placeholder="We are looking for someone who can..." v-model="contents" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
         </div>

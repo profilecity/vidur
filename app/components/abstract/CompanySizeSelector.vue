@@ -22,9 +22,5 @@ const selectedOption = useVModel(props, 'modelValue', emit);
 </script>
 
 <template>
-  <AbstractDropdownSingleSelect
-    title="Select Company Size"
-    :options="COMPANY_SIZE_OPTIONS"
-    v-model="selectedOption"
-  />
+  <AbstractDropdownSingleSelect title="Select Company Size" :options="COMPANY_SIZE_OPTIONS" v-model="selectedOption" />
 </template>

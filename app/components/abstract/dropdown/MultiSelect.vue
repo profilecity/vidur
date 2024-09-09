@@ -45,25 +45,14 @@ const clearAction = () => {
       <ul class="mb-4">
         <li class="py-1 px-3" v-for="option in options" :key="option.id">
           <label class="flex items-center">
-            <input
-              type="checkbox"
-              class="form-checkbox"
-              :value="option.id"
-              v-model="selectionTracker"
-            />
+            <input type="checkbox" class="form-checkbox" :value="option.id" v-model="selectionTracker" />
             <span class="text-sm font-medium ml-2">{{ option.title }}</span>
           </label>
         </li>
       </ul>
-      <div
-        class="p-2 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between"
-      >
-        <InputButton variant="secondary" size="sm" @click.prevent="clearAction">
-          Clear
-        </InputButton>
-        <InputButton size="sm" @click.prevent="confirm(close)">
-          Select
-        </InputButton>
+      <div class="p-2 border-t border-zinc-200 bg-zinc-50 flex items-center justify-between">
+        <InputButton variant="secondary" size="sm" @click.prevent="clearAction"> Clear </InputButton>
+        <InputButton size="sm" @click.prevent="confirm(close)"> Select </InputButton>
       </div>
     </template>
   </Dropdown>

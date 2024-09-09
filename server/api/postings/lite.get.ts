@@ -4,8 +4,7 @@ import authenticateAdminRequest from '~~/server/utils/admin';
 export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
-  const postings =
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
 
   if (IS_DEV) {
     console.log('[/api/postings/lite] found', postings.length, 'postings');

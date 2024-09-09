@@ -4,16 +4,14 @@ const integrationTabs = [
   {
     id: 'hooks',
     title: 'Hooks',
-    description:
-      'Use hooks to send events to other services. Authenticate via JWKs-RSA key from documentation.',
+    description: 'Use hooks to send events to other services. Authenticate via JWKs-RSA key from documentation.',
     icon: 'ph:link',
     url: '/admin/integrations?tab=hooks',
   },
   {
     id: 'plugins',
     title: 'Plugins',
-    description:
-      'Install plugins to extend functionality and build custom features.',
+    description: 'Install plugins to extend functionality and build custom features.',
     icon: 'mingcute:plugin-2-line',
     url: '/admin/integrations?tab=plugins',
   },
@@ -30,8 +28,7 @@ const settingsTabs = [
   {
     id: 'seo',
     title: 'SEO',
-    description:
-      'These settings help your website rank better and enable better device previews.',
+    description: 'These settings help your website rank better and enable better device previews.',
     icon: 'codicon:settings',
     url: '/admin/settings?tab=seo',
   },
@@ -58,10 +55,7 @@ export function useTabGroup(tabGroup: TabGroup, defaultIndex: number = 0) {
   }
 
   const route = useRoute();
-  const activeTab = computed<Tab>(
-    () =>
-      (tabs.find((t) => t.id == route.query.tab) || tabs[defaultIndex]) as Tab
-  );
+  const activeTab = computed<Tab>(() => (tabs.find((t) => t.id == route.query.tab) || tabs[defaultIndex]) as Tab);
 
   return { tabs, activeTab };
 }

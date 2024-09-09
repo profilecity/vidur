@@ -20,8 +20,7 @@ export default defineEventHandler(async (event) => {
   if (!(Array.isArray(hooksDeleteResult) && hooksDeleteResult.length == 1)) {
     throw createError({
       statusCode: 400,
-      message:
-        'Invalid hook id. Contact support if you think this is a mistake.',
+      message: 'Invalid hook id. Contact support if you think this is a mistake.',
     });
   }
 });

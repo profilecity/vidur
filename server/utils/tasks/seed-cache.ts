@@ -10,21 +10,13 @@ export async function seedCache() {
   const metadataEntries = await db
     .select()
     .from(metaDataTable)
-    .where(
-      inArray(metaDataTable.key, [
-        'seoConfig',
-        'careerSiteConfig',
-        'firstSetupAccessKey',
-      ])
-    );
+    .where(inArray(metaDataTable.key, ['seoConfig', 'careerSiteConfig', 'firstSetupAccessKey']));
 
   // Do not save totalApplicants in cache
-  const jobPostings = (
-    await db
-      .select()
-      .from(jobPostingsTable)
-      .orderBy(desc(jobPostingsTable.createdAt))
-  ).map((p) => ({ ...p, totalApplicants: -1 }));
+  const jobPostings = (await db.select().from(jobPostingsTable).orderBy(desc(jobPostingsTable.createdAt))).map((p) => ({
+    ...p,
+    totalApplicants: -1,
+  }));
 
   const settings = {
     careerSite: {},

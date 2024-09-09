@@ -4,10 +4,7 @@ import { type JobPosting, jobPostingsTable } from '../../db/schema';
 
 export default defineEventHandler(async (event) => {
   const session = await authenticateAdminRequest(event);
-  const jobPostingRequest = await readValidatedBody(
-    event,
-    createJobPostingSchema.parse
-  );
+  const jobPostingRequest = await readValidatedBody(event, createJobPostingSchema.parse);
 
   if (IS_DEV) {
     console.log('creating posting', jobPostingRequest);
@@ -22,8 +19,7 @@ export default defineEventHandler(async (event) => {
       .returning()
   )[0] as JobPosting;
 
-  const postings =
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
 
   postings.unshift(newPosting);
   await general_memoryStorage.setItem('postings', postings);

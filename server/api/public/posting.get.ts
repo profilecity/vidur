@@ -14,9 +14,7 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const postings = (
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || []
-  )
+  const postings = ((await general_memoryStorage.getItem<JobPosting[]>('postings')) || [])
     .filter((p) => p.id === query.id && p.isPublished)
     .map((p) => {
       return {
@@ -33,12 +31,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (IS_DEV) {
-    console.log(
-      '[PUBLIC] postings page found',
-      postings.length,
-      'postings with id',
-      query.id
-    );
+    console.log('[PUBLIC] postings page found', postings.length, 'postings with id', query.id);
   }
 
   return postings[0];

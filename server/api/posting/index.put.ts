@@ -19,15 +19,10 @@ export default defineEventHandler(async (event) => {
   };
 
   const updatedJobPosting = (
-    await database
-      .update(jobPostingsTable)
-      .set(updateQuery)
-      .where(eq(jobPostingsTable.id, q.id))
-      .returning()
+    await database.update(jobPostingsTable).set(updateQuery).where(eq(jobPostingsTable.id, q.id)).returning()
   )[0] as JobPosting;
 
-  const postings =
-    (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
 
   await general_memoryStorage.setItem(
     'postings',
