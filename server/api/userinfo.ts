@@ -14,7 +14,8 @@ export default defineEventHandler(async (event) => {
 
     return session;
   } catch (e) {
-    if (IS_DEV) {
+    // @ts-expect-error
+    if (e.statusCode !== 401) {
       console.error(e);
     }
     throw e;

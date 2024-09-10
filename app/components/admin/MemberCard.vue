@@ -29,7 +29,7 @@ const onRemove = () => {
         title="Remove Member?"
         confirmLabel="Remove"
         content="Member's access will be immediatly disabled. No actions performed by member will be reverted."
-        v-if="profile.id != member.id"
+        v-if="profile?.id != member.id"
       >
         <template #input="{ open }">
           <InputButton variant="destructive" size="icon" @click="open">

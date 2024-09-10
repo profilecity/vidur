@@ -6,7 +6,7 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return redirectToLogin(to.fullPath);
   }
 
-  if (!profile.value.isAdmin) {
+  if (!profile.value?.isAdmin) {
     return navigateTo('/');
   }
 });

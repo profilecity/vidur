@@ -1,7 +1,7 @@
 export function useAuth() {
   const session = useSessionState();
-  const isSignedIn = computed(() => !!session.value.profile);
-  const profile = computed(() => session.value.profile);
+  const isSignedIn = computed(() => !!session.value?.profile);
+  const profile = computed(() => session.value?.profile);
 
   return {
     session,

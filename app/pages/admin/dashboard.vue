@@ -15,7 +15,7 @@ const { profile } = useAuth();
 <template>
   <div class="w-full max-w-9xl mx-auto">
     <section class="sticky top-0 bg-white p-4 border-b border-zinc-200">
-      <div class="text-xl font-bold text-zinc-900 font-noto">👋🏽 Hello, {{ profile.firstName }}</div>
+      <div class="text-xl font-bold text-zinc-900 font-noto">👋🏽 Hello, {{ profile?.firstName }}</div>
       <div class="text-sm text-zinc-500">Track your hiring activities. You are almost there!</div>
       <div class="flex items-center mt-4">
         <InputButton as="NuxtLink" variant="secondary" to="/admin/postings/new">
