@@ -15,9 +15,6 @@ export default defineEventHandler(async (event) => {
     await authenticateRequest(event);
     return sendRedirectToNextPage(event);
   } catch (error) {
-    if (IS_DEV) {
-      console.error('Error authenticating request', error);
-    }
     // @ts-expect-error Throw error if issue other than 401.
     if (!error.statusCode || error.statusCode !== 401) {
       console.error('Error while introspecting token.', error);
