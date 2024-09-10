@@ -21,7 +21,7 @@
 
 <p align="center">
    <a href="https://x.com/profilecityhq"><img src="https://img.shields.io/twitter/follow/profilecityhq" alt="Follow Us on X"></a>
-   <a href="https://discord.gg/9ms5uYF8xF"><img src="https://img.shields.io/badge/Discord%20-%20Join%20the%20Community%20-%20%235865F2" alt="Join the Community"></a>
+   <a href="https://discord.com/invite/cRaukv9dJ2"><img src="https://img.shields.io/badge/Discord%20-%20Join%20the%20Community%20-%20%235865F2" alt="Join the Community"></a>
    <a href="https://www.linkedin.com/company/profilecity"><img src="https://img.shields.io/badge/LinkedIn%20-%20The%20Nirvana%20Labs%20-%20%230E92D5" alt="Follow Us on LinkedIn"></a>
    <a href="https://www.producthunt.com/products/vidur"><img src="https://img.shields.io/badge/Product%20Hunt%20-%20Vidur%20-%20%23DA552F" alt="Product Hunt"></a>
 </p>
