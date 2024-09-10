@@ -31,10 +31,9 @@ const isSubmitting = ref(false);
 const onSubmit = handleSubmit(async (values) => {
   try {
     isSubmitting.value = true;
-    const updatedSettings = { careerSite: values, seo: {} };
-    await $fetch('/api/settings/general', {
+    await $fetch('/api/settings/career-site', {
       method: 'PUT',
-      body: updatedSettings,
+      body: values,
     });
     emits('done', values.name);
   } catch (error) {
