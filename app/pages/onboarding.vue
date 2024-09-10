@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: 'auth',
-});
-
 useHead({
   title: 'Setup your career site',
 });
