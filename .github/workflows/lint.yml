@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: yarn --frozen-lockfile
 
-      - name: Checking code style
+      - name: Check Code Style
         run: yarn run format:check
 
       - name: Type checking
