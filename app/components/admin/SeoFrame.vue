@@ -54,7 +54,7 @@ const onSubmit = handleSubmit(async (values) => {
           />
           <InputText
             class="w-full md:w-1/2"
-            placeholder="Big Space Career Site Decrition"
+            placeholder="Big Space Career Site Description"
             v-model="description"
             id="seo-description"
             :error="errors['description']"
