@@ -1,7 +1,7 @@
 {
   "name": "vidur",
   "description": "A truely composable, open source, recruiting software.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "repository": "https://github.com/profilecity/vidur",
   "private": true,
   "scripts": {

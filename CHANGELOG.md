@@ -1,5 +1,33 @@
 # Changelog
 
+## v0.4.0
+
+[compare changes](https://github.com/profilecity/vidur/compare/v0.3.0...v0.4.0)
+
+### 🩹 Fixes
+
+- **auth:** Fix no session bug ([8dac2bb](https://github.com/profilecity/vidur/commit/8dac2bb))
+- **applicant:** Fix auth state to auto apply ([6331318](https://github.com/profilecity/vidur/commit/6331318))
+- **auth:** ⚠️  Refine auth / delte cookies when auth fails ([5e0fb0d](https://github.com/profilecity/vidur/commit/5e0fb0d))
+- Career site settings endpoint update ([2e9c195](https://github.com/profilecity/vidur/commit/2e9c195))
+
+### 🏡 Chore
+
+- **dev:** Remove unnecessary error warning ([fbfba03](https://github.com/profilecity/vidur/commit/fbfba03))
+- **restructure:** Bring onboarding page to top level ([925e7fc](https://github.com/profilecity/vidur/commit/925e7fc))
+- **fix:** Add auth to onboarding page ([cb7ac70](https://github.com/profilecity/vidur/commit/cb7ac70))
+- **ci:** Install deps from lockfile ([#127](https://github.com/profilecity/vidur/pull/127))
+- **deps-dev:** Bump typescript from 5.5.4 to 5.6.2 ([#128](https://github.com/profilecity/vidur/pull/128))
+
+#### ⚠️ Breaking Changes
+
+- **auth:** ⚠️  Refine auth / delte cookies when auth fails ([5e0fb0d](https://github.com/profilecity/vidur/commit/5e0fb0d))
+
+### ❤️ Contributors
+
+- Shivam Sharma ([@shivam-sharma7](http://github.com/shivam-sharma7))
+- Amandesai01 <amandesai01@gmail.com>
+
 ## v0.3.0
 
 [compare changes](https://github.com/profilecity/vidur/compare/v0.2.0...v0.3.0)
