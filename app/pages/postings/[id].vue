@@ -2,6 +2,9 @@
 const route = useRoute();
 const id = route.params.id as string;
 
+const { isSignedIn } = useAuth();
+const { redirectToLogin } = useSafeRedirectToLogin();
+
 const { data: applicationStatus, refresh: refreshApplicationStatus } = useApplicationStatus(id);
 const { data: posting } = await usePublicPostingRepository({ id });
 
@@ -26,6 +29,10 @@ const apply = async () => {
     return;
   }
   try {
+    if (!isSignedIn.value) {
+      await redirectToLogin(route.fullPath);
+      return;
+    }
     isApplying.value = true;
     await $fetch('/api/application', {
       method: 'POST',
