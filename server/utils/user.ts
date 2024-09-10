@@ -50,7 +50,11 @@ export async function getOrCreateUser(verifiedDetails: { email: string }, token:
       console.log(userBasicProfile);
     }
   } catch (e: any) {
-    console.error('Error fetching `basic-profile`', e);
+    if (e.statusCode !== 401) console.error('Error fetching `basic-profile`', e);
+    throw createError({
+      statusCode: 401,
+      statusMessage: 'Unable to use existing token, expired maybe',
+    });
   }
 
   if (userBasicProfile == null) {
