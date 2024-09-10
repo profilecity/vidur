@@ -17,17 +17,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Use Node.js
+      - name: Set up Node.js 20
         uses: actions/setup-node@v4
         with:
           node-version: '20'
           cache: 'yarn'
+          cache-dependency-path: 'yarn.lock'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn --frozen-lockfile
 
-      - name: Check code style
+      - name: Check Code Style
         run: yarn run format:check
 
-      - name: Type check
+      - name: Check Types
         run: yarn run type:check
