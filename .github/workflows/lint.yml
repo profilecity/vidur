@@ -25,7 +25,7 @@ jobs:
           cache-dependency-path: 'yarn.lock'
 
       - name: Install dependencies
-        run: yarn --frozen-lockfile # Install dependencies from lockfile without updating it (faster)
+        run: yarn --frozen-lockfile
 
       - name: Checking code style
         run: yarn run format:check
