@@ -3,7 +3,7 @@
    <img src="./header.png" alt="Logo">
   </a>
 
-<h1 align="center">Vidur (powered by ProfileCity)</h3>
+<h2 align="center">Vidur (powered by ProfileCity)</h3>
 
 <p align="center">
     Host career sites, streamline candidate shortlisting, manage recruiting workflows, build and integrate 3rd-party hiring plugins, all while scaling effortlessly with open-source.
@@ -73,10 +73,20 @@ You can also pull the latest Docker image from [here](https://hub.docker.com/r/p
 ## Contributing
 There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## Staying ahead
 Star Vidur on GitHub and be instantly notified of new releases.
 ![Star Image](asset/star-repo.gif)
 
 ## Security disclosure
-
 To protect your privacy, please avoid posting security issues on GitHub. Instead, send your questions to teams@profilecity.xyz and we will provide you with a more detailed answer.
