@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/nirvanaOSS/vidur">
+  <a href="https://github.com/profilecity/vidur">
    <img src="./header.png" alt="Logo">
   </a>
 
@@ -24,7 +24,29 @@
    <a href="https://www.producthunt.com/products/vidur"><img src="https://img.shields.io/badge/Product%20Hunt%20-%20Vidur%20-%20%23DA552F" alt="Product Hunt"></a>
 </p>
 
-Vidur is an open-source, next-gen Recruiting OS. Its intuitive and modern interface combines advanced candidate profiles, team workspace, plugins, one-click apply features, and a lot more enabling forward-thinking companies to efficiently manage their recruitment processes from start to finish.
+Vidur is an open-source, modern recruiting software designed to make hiring faster, smarter, better, and more customizable. The software scales with the company's hiring needs. You can start with a simple career site and expand to creating custom recruiting workflows using plugins as modular building blocks.
+
+This design ensures transparency, efficiency, and ease of use. With Vidur, you can - 
+1. Create and manage your own career sites to showcase job openings and attract candidates.
+
+<img src="./asset/features/feature-1.png" alt="feature-01" width="600"/>
+
+2. Add and build plugins to extend Vidur’s functionality and connect with other tools you use.
+
+<img src="./asset/features/feature-2.png" alt="feature-02" width="600"/>
+
+3. Allow candidates to apply for jobs with just one click, simplifying the application process.
+
+<img src="./asset/features/feature-3.png" alt="feature-03" width="600"/>
+
+4. Easily manage candidate profiles and shortlist the most suitable candidates for each position.
+
+<img src="./asset/features/feature-4.png" alt="feature-04" width="600"/>
+
+5. Add as many team members as needed without restrictions, so everyone can collaborate effectively.
+
+<img src="./asset/features/feature-5.png" alt="feature-05" width="600"/>
+
 
 
 ## Getting Started
@@ -71,7 +93,7 @@ You can also pull the latest Docker image from [here](https://hub.docker.com/r/p
 
 
 ## Contributing
-There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
+We welcome contributions from the community! Check out our [contribution guide](./CONTRIBUTING.md) to get involved and help us make Vidur even better.
 
 ## Contributors
 
@@ -85,7 +107,8 @@ There are several ways to start contributing to Vidur. See [contribution guide](
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Staying ahead
-Star Vidur on GitHub and be instantly notified of new releases.
+Star Vidur on GitHub and set the repo on a watch to be instantly notified of new releases.
+
 ![Star Image](asset/star-repo.gif)
 
 ## Security disclosure
