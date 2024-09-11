@@ -26,28 +26,22 @@
 
 Vidur is an open-source, modern recruiting software designed to make hiring faster, smarter, better, and more customizable. The software scales with the company's hiring needs. You can start with a simple career site and expand to creating custom recruiting workflows using plugins as modular building blocks.
 
-This design ensures transparency, efficiency, and ease of use. With Vidur, you can - 
+![banner](banner.png)
+
+This design ensures transparency, efficiency, and ease of use. With Vidur v1.0, you can - 
 1. Create and manage your own career sites to showcase job openings and attract candidates.
-
-<img src="./asset/features/feature-1.png" alt="feature-01" width="600"/>
-
 2. Add and build plugins to extend Vidur’s functionality and connect with other tools you use.
-
-<img src="./asset/features/feature-2.png" alt="feature-02" width="600"/>
-
 3. Allow candidates to apply for jobs with just one click, simplifying the application process.
-
-<img src="./asset/features/feature-3.png" alt="feature-03" width="600"/>
-
 4. Easily manage candidate profiles and shortlist the most suitable candidates for each position.
-
-<img src="./asset/features/feature-4.png" alt="feature-04" width="600"/>
-
 5. Add as many team members as needed without restrictions, so everyone can collaborate effectively.
 
-<img src="./asset/features/feature-5.png" alt="feature-05" width="600"/>
+## How Vidur Works
+- **Free and Open-Source:** Vidur is free to use with the option to self-host or opt for managed services.
+- **Customizable Plugins:** Create unlimited plugins and extensions tailored to your hiring needs.
+- **Unlimited Team Members:** Invite your entire team with no additional costs.
+- **Zero-Cost Deployment:** Deploy Vidur on your servers at zero cost. To activate the career site for production, visit [here](https://tally.so/r/nGD0GO).
 
-
+You can also schedule a quick call with the team [here](https://calendly.com/0xdevshah).
 
 ## Getting Started
 To get up and running with Vidur, follow these steps:
@@ -96,6 +90,7 @@ You can also pull the latest Docker image from [here](https://hub.docker.com/r/p
 We welcome contributions from the community! Check out our [contribution guide](./CONTRIBUTING.md) to get involved and help us make Vidur even better.
 
 ## Contributors
+Vidur wouldn’t be possible without the support and contributions from our amazing community. A special thank you to all our contributors who have helped make Vidur better. You can find a list of our contributors -
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -106,6 +101,12 @@ We welcome contributions from the community! Check out our [contribution guide](
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+## Roadmap
+We believe in transparency and collaboration, which is why we've open-sourced our [Roadmap](https://github.com/orgs/profilecity/projects/5). You can view our planned features, ongoing projects, and future updates on our Roadmap. We welcome feedback and suggestions from the community to help shape the future of Vidur.
+
+## Release Notes
+Stay up-to-date with the latest improvements, bug fixes, and new features by checking our [Release Notes](https://github.com/profilecity/vidur/releases). Each release note provides detailed information about the changes and updates made in every version of Vidur.
+
 ## Staying ahead
 Star Vidur on GitHub and set the repo on a watch to be instantly notified of new releases.
 
@@ -113,3 +114,6 @@ Star Vidur on GitHub and set the repo on a watch to be instantly notified of new
 
 ## Security disclosure
 To protect your privacy, please avoid posting security issues on GitHub. Instead, send your questions to teams@profilecity.xyz and we will provide you with a more detailed answer.
+
+## Contact
+For any questions or support inquiries, please contact us at teams@profilecity.xyz, raise a query on the Discord server or create an issue on our GitHub repository.
