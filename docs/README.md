@@ -3,14 +3,11 @@
    <img src="./header.png" alt="Logo">
   </a>
 
-  <h3 align="center">Vidur (powered by ProfileCity)</h3>
+<h1 align="center">Vidur (powered by ProfileCity)</h3>
 
-  <p align="center">
-    The open-source next-gen Recruiting OS.
-    <br />
-    <a href="https://www.profilecity.xyz/vidur"><strong>Learn more »</strong></a>
-    <br />
-    <br />
+<p align="center">
+    Host career sites, streamline candidate shortlisting, manage recruiting workflows, build and integrate 3rd-party hiring plugins, all while scaling effortlessly with open-source.
+    <br /><br />
     <a href="https://discord.gg/9ms5uYF8xF">Discord</a>
     ·
     <a href="https://www.profilecity.xyz/vidur">Website</a>
@@ -20,47 +17,66 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/profilecity/vidur/"><img src="https://img.shields.io/github/stars/profilecity/vidur?style=social" alt="Github Issues"></a>
    <a href="https://x.com/profilecityhq"><img src="https://img.shields.io/twitter/follow/profilecityhq" alt="Follow Us on X"></a>
    <a href="https://discord.com/invite/cRaukv9dJ2"><img src="https://img.shields.io/badge/Discord%20-%20Join%20the%20Community%20-%20%235865F2" alt="Join the Community"></a>
-   <a href="https://www.linkedin.com/company/profilecity"><img src="https://img.shields.io/badge/LinkedIn%20-%20The%20Nirvana%20Labs%20-%20%230E92D5" alt="Follow Us on LinkedIn"></a>
+   <a href="https://www.linkedin.com/company/profilecity"><img src="https://img.shields.io/badge/LinkedIn-Profilecity-blue" alt="Follow Us on LinkedIn"></a>
    <a href="https://www.producthunt.com/products/vidur"><img src="https://img.shields.io/badge/Product%20Hunt%20-%20Vidur%20-%20%23DA552F" alt="Product Hunt"></a>
 </p>
 
-# Recruiting OS for forward thinking companies
-
 Vidur is an open-source, next-gen Recruiting OS. Its intuitive and modern interface combines advanced candidate profiles, team workspace, plugins, one-click apply features, and a lot more enabling forward-thinking companies to efficiently manage their recruitment processes from start to finish.
 
-![Collage Image](asset/collage.png)
 
-## Development Setup
+## Getting Started
+To get up and running with Vidur, follow these steps:
 
-```sh
-# Requirements: A PostgreSQL instance up-and-running.
-# Clone the repo and cd into the folder.
-npm i -g yarn         # install yarn package manager, if you don't have already.
-yarn                  # install all the dependencies
-cp .env.example .env  # Create env file and fill the fields. (DO NOT CHANGE PORT)
-yarn migration:apply  # Create database schema.
-yarn dev              # Finally, start the dev server.
+### Local Setup
+1. **Ensure PostgreSQL is Installed** Make sure you have a PostgreSQL instance running. If you need help setting it up, refer to the [PostgreSQL documentation](https://www.postgresql.org/docs/).
+2. **Clone the Repository**
+```bash
+git clone https://github.com/your-repo/vidur.git
+cd vidur
+```
+3. **Install Dependencies** Install Yarn if you haven't already:
+```bash
+npm i -g yarn
+
+# Install all project dependencies
+yarn
+```
+4. **Configure Environment Variables** Create a `.env` file from the example template:
+```bash
+cp .env.example .env
+
+# Fill in the required fields in the .env file. Do not change the PORT value.
 ```
 
-**Or simply use Docker**
-
+5. **Set Up the Database** Apply the database schema:
 ```bash
+yarn migration:apply
+```
+6.  **Start the Development Server** Run the development server:
+```bash
+yarn dev
+```
+
+### Using Docker
+If you prefer using Docker, you can quickly set up Vidur with Docker Compose:
+```bash 
 docker compose up
 ```
+This command starts both the `db` and `app` services using the `dev` profile, running PostgreSQL as `database` and the app as `vidur_app`.
 
-This command starts the `db` and `app` services using the `dev` profile. It runs PostgreSQL as `database` and the app as `vidur_app`.
+You can also pull the latest Docker image from [here](https://hub.docker.com/r/profilecity/vidur/tags).
+
 
 ## Contributing
-
 There are several ways to start contributing to Vidur. See [contribution guide](./CONTRIBUTING.md) to get started.
 
 ## Staying ahead
-
 Star Vidur on GitHub and be instantly notified of new releases.
 ![Star Image](asset/star-repo.gif)
 
 ## Security disclosure
 
-To protect your privacy, please avoid posting security issues on GitHub. Instead, send your questions to team@vidurjobs.xyz and we will provide you with a more detailed answer.
+To protect your privacy, please avoid posting security issues on GitHub. Instead, send your questions to teams@profilecity.xyz and we will provide you with a more detailed answer.
