@@ -66,6 +66,7 @@ export default defineNuxtConfig({
       github: 'https://github.com/profilecity/vidur',
       discord: 'https://discord.gg/9ms5uYF8xF',
       twitter: 'https://x.com/profilecityhq',
+      vidur: 'https://profilecity.xyz/vidur',
       version: 'v0.0.1',
     },
   },

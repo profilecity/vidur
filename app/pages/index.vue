@@ -3,6 +3,8 @@ const { data: postings } = await usePublicPostingsRepository();
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
 const { data: seoConfig } = useSeoConfigObjectState();
 
+const publicConfig = useRuntimeConfig().public;
+
 let title: string = 'Careers'; // TODO: need better defaults (this will hardly be the case);
 let description: string = 'Career Site'; // TODO: need better defaults (this will hardly be the case);
 if (seoConfig.value.title) {
@@ -46,7 +48,7 @@ useSeoMeta({
   </main>
   <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
     <div class="relative z-50">
-      <a href="https://www.vidurjobs.xyz">
+      <a :href="publicConfig.vidur">
         <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
           <p class="mr-2">Powered By</p>
           <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
