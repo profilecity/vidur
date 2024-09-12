@@ -1,10 +1,12 @@
 import { sql } from 'drizzle-orm';
-import { boolean, integer, pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, text, timestamp, uuid, varchar, smallint, serial } from 'drizzle-orm/pg-core';
 
 const defaultUuidPkField = () =>
   uuid('id')
     .primaryKey()
     .$default(() => sql`gen_random_uuid()`);
+
+const defaultSerialPkField = () => serial('id').primaryKey();
 
 //---------------**************----------------
 
@@ -70,6 +72,16 @@ export const postingApplicantsTable = pgTable('posting_applicants', {
 });
 
 export type PostingApplication = typeof postingApplicantsTable.$inferSelect;
+
+//---------------**************----------------
+
+export const reviewTagsTable = pgTable('review_tags', {
+  id: defaultSerialPkField(),
+  title: varchar('title', { length: 8 }).notNull(),
+  parent: smallint('parent').notNull(),
+});
+
+export type ReviewTag = typeof reviewTagsTable.$inferSelect;
 
 //---------------**************----------------
 
