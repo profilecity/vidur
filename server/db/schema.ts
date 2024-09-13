@@ -48,8 +48,8 @@ export const jobPostingsTable = pgTable('job_postings', {
   }),
   isPublished: boolean('is_published').default(false).notNull(),
   totalApplicants: integer('total_applicants').default(0).notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow().notNull(),
 });
 
 export type JobPosting = typeof jobPostingsTable.$inferSelect;
