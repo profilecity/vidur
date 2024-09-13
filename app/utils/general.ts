@@ -29,8 +29,7 @@ export const sleep = (ms: number) => {
 
 export function timeAgo(date: Date) {
   const now = new Date();
-  const postedDate = new Date(date.toISOString().replace('Z', '')).getTime();
-  const seconds = Math.floor((now.getTime() - postedDate) / 1000);
+  const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
   let interval = Math.floor(seconds / 31536000);
   if (interval >= 1) {
