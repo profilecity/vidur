@@ -77,7 +77,7 @@ export type PostingApplication = typeof postingApplicantsTable.$inferSelect;
 
 export const reviewTagsTable = pgTable('review_tags', {
   id: defaultSerialPkField(),
-  title: varchar('title', { length: 8 }).notNull(),
+  title: varchar('title', { length: 32 }).notNull(),
   parent: smallint('parent').notNull(),
 });
 

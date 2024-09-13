@@ -1,4 +1,4 @@
-import { metaDataTable } from '../db/schema';
+import { metaDataTable, reviewTagsTable } from '../db/schema';
 
 /**
  * Seed 1
@@ -34,4 +34,21 @@ const seed2: SeedFn = async (ctx, payload) => {
   ]);
 };
 
-export const seeds = [seed1, seed2];
+/**
+ * Seeds 3
+ * (Initialise review tags)
+ */
+
+const seed3: SeedFn = async (ctx, _) => {
+  const db = ctx.db;
+
+  await db.insert(reviewTagsTable).values([
+    { title: 'Approved', parent: 4 },
+    { title: 'Shortlisted', parent: 3 },
+    { title: 'Rejected', parent: 2 },
+    { title: 'Deferred', parent: 1 },
+    { title: 'Pending', parent: 0 },
+  ]);
+};
+
+export const seeds = [seed1, seed2, seed3];
