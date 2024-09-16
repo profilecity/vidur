@@ -12,9 +12,7 @@ export async function seedCache() {
     .from(metaDataTable)
     .where(inArray(metaDataTable.key, ['seoConfig', 'careerSiteConfig', 'firstSetupAccessKey']));
 
-  //getting the review tags from the reviewTagsTable
   const reviewTags = await db.select().from(reviewTagsTable);
-  console.log(reviewTags); //debug to check the reviewtags response
 
   // Do not save totalApplicants in cache
   const jobPostings = (await db.select().from(jobPostingsTable).orderBy(desc(jobPostingsTable.createdAt))).map((p) => ({
@@ -45,7 +43,7 @@ export async function seedCache() {
     general_memoryStorage.setItem('firstSetupAccessKey', firstSetupAccessKey),
     general_memoryStorage.setItem('remoteAssetBase', remoteAssetBase),
     general_memoryStorage.setItem('postings', jobPostings),
-    general_memoryStorage.setItem('reviewTags', reviewTags), //setting the reviewTags to general_memorystorage
+    general_memoryStorage.setItem('reviewTags', reviewTags),
   ]);
 
   return { result: true };
