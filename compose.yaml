@@ -36,7 +36,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-      - static_data:/tmp/vidur-jobs-dev
+      - static_data:/var/lib/vidur/data
 
 volumes:
   vidur_data:

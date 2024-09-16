@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     storage: {
       engine: 'local',
       local: {
-        baseDir: '/tmp/vidur-jobs-dev',
+        baseDir: '/var/lib/vidur/data',
       },
       s3: {
         accessKeyId: '',
