@@ -1,5 +1,5 @@
 import { desc, inArray } from 'drizzle-orm';
-import { jobPostingsTable, reviewTagsTable, metaDataTable } from '~~/server/db/schema'; //import the review tags table from schema
+import { jobPostingsTable, reviewTagsTable, metaDataTable } from '~~/server/db/schema';
 import type { CareerSiteConfig, SEOConfig } from '~~/shared/schemas/setting';
 
 export async function seedCache() {
