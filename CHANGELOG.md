@@ -1,5 +1,36 @@
 # Changelog
 
+## v1.0.0
+
+[compare changes](https://github.com/profilecity/vidur/compare/v0.4.0...v1.0.0)
+
+### 🚀 Enhancements
+
+- **db:** Preferred review tags table ([#144](https://github.com/profilecity/vidur/pull/144))
+- **seeds:** Insert default tags into review tags table ([#153](https://github.com/profilecity/vidur/pull/153))
+- **ui:** Slot of sublabel text ([4a19028](https://github.com/profilecity/vidur/commit/4a19028))
+
+### 🩹 Fixes
+
+- **typo:** Description ([#143](https://github.com/profilecity/vidur/pull/143))
+- **ui:** Timezone display as per UTC ([#155](https://github.com/profilecity/vidur/pull/155))
+- **storage:** ⚠️  Data now stored in var for longer lifespan ([d491b71](https://github.com/profilecity/vidur/commit/d491b71))
+
+### 🏡 Chore
+
+- Update Vidur link ([#149](https://github.com/profilecity/vidur/pull/149))
+- **settings:** Clarify link limit ([592b1fe](https://github.com/profilecity/vidur/commit/592b1fe))
+
+#### ⚠️ Breaking Changes
+
+- **storage:** ⚠️  Data now stored in var for longer lifespan ([d491b71](https://github.com/profilecity/vidur/commit/d491b71))
+
+### ❤️ Contributors
+
+- Amandesai01 <amandesai01@gmail.com>
+- HemalDesai ([@HemalDesai](http://github.com/HemalDesai))
+- Shivam Sharma ([@shivam-sharma7](http://github.com/shivam-sharma7))
+
 ## v0.4.0
 
 [compare changes](https://github.com/profilecity/vidur/compare/v0.3.0...v0.4.0)
