@@ -101,7 +101,12 @@ const logoUpdated = (id: string) => {
           label="Bio"
         />
         <div class="w-full mt-8">
-          <InputLabel label="Featured Links" id="featued-links" :error="errors['links']" />
+          <InputLabel
+            label="Featured Links"
+            id="featued-links"
+            :error="errors['links']"
+            sublabel="Only first 3 links will be displayed in header."
+          />
           <div v-for="(link, index) in links" :key="index" class="flex space-x-2 mb-2 w-full items-center">
             <InputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
             <InputText
