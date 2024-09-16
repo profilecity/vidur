@@ -1,5 +1,5 @@
 import { desc, inArray } from 'drizzle-orm';
-import { jobPostingsTable, metaDataTable } from '~~/server/db/schema';
+import { jobPostingsTable, reviewTagsTable, metaDataTable } from '~~/server/db/schema'; //import the review tags table from schema
 import type { CareerSiteConfig, SEOConfig } from '~~/shared/schemas/setting';
 
 export async function seedCache() {
@@ -11,6 +11,10 @@ export async function seedCache() {
     .select()
     .from(metaDataTable)
     .where(inArray(metaDataTable.key, ['seoConfig', 'careerSiteConfig', 'firstSetupAccessKey']));
+
+  //getting the review tags from the reviewTagsTable
+  const reviewTags = await db.select().from(reviewTagsTable);
+  console.log(reviewTags); //debug to check the reviewtags response
 
   // Do not save totalApplicants in cache
   const jobPostings = (await db.select().from(jobPostingsTable).orderBy(desc(jobPostingsTable.createdAt))).map((p) => ({
@@ -41,6 +45,7 @@ export async function seedCache() {
     general_memoryStorage.setItem('firstSetupAccessKey', firstSetupAccessKey),
     general_memoryStorage.setItem('remoteAssetBase', remoteAssetBase),
     general_memoryStorage.setItem('postings', jobPostings),
+    general_memoryStorage.setItem('reviewTags', reviewTags), //setting the reviewTags to general_memorystorage
   ]);
 
   return { result: true };
