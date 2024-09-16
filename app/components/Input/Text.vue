@@ -12,6 +12,7 @@ const props = defineProps<{
 
   error?: string;
   label?: string;
+  sublabel?: string;
 }>();
 
 const model = useVModel(props, 'modelValue');
@@ -19,7 +20,7 @@ const model = useVModel(props, 'modelValue');
 
 <template>
   <fieldset>
-    <InputLabel :label-class :label :error :id />
+    <InputLabel :label-class :label :error :id :sublabel />
     <input class="input-css" :type="typeOverride || 'text'" :class="inputClass" v-model="model" :placeholder :id />
   </fieldset>
 </template>
