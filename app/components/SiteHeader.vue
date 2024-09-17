@@ -30,7 +30,12 @@ const logoURL = useRemoteAsset(careerSiteConfig.value.logo).url;
           v-if="careerSiteConfig.links"
         >
           <Icon name="tdesign:link" class="w-4 h-4 fill-current shrink-0" />
-          <a class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1" :href="link.href">
+          <a
+            class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1"
+            :href="link.href"
+            target="_blank"
+            rel="noreferrer"
+          >
             {{ link.title }}
           </a>
         </div>
