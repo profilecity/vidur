@@ -48,7 +48,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/pg": "^8.11.8",
+    "@types/pg": "^8.11.10",
     "changelogen": "^0.5.5",
     "husky": "^9.1.5",
     "lint-staged": "^15.2.10",
