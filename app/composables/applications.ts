@@ -7,6 +7,8 @@ export type Application = {
   id: string;
   candidateId: string;
   postingId: string;
+  status: number;
+  statusType: number;
 };
 export type Applications = Record<string, Application[]>; // postingId <> applications
 
