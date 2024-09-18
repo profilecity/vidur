@@ -71,6 +71,13 @@
       "when": 1726223608639,
       "tag": "0009_luxuriant_purifiers",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1726641900159,
+      "tag": "0010_amused_hairball",
+      "breakpoints": true
     }
   ]
 }

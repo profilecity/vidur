@@ -68,6 +68,8 @@ export const postingApplicantsTable = pgTable('posting_applicants', {
       onDelete: 'cascade',
     })
     .notNull(),
+  status: integer('status_id').default(-1),
+  statusType: smallint('status_type').default(0),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
