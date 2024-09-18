@@ -34,7 +34,6 @@ const logoURL = useRemoteAsset(careerSiteConfig.value.logo).url;
             class="text-sm font-medium whitespace-nowrap text-blue-500 hover:text-blue-600 ml-1"
             :href="link.href"
             target="_blank"
-            rel="noreferrer"
           >
             {{ link.title }}
           </a>
