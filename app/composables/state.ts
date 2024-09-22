@@ -13,6 +13,10 @@ export function useOnboardingStatusState() {
   return useState<boolean>('onboarding-status', () => false);
 }
 
+export function usePositionState() {
+  return useState<number>('totalPositions', () => 0);
+}
+
 export function useCareerSiteConfigObjectState() {
   return useObjectState<CareerSiteConfig>('career-site-config');
 }

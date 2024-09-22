@@ -3,6 +3,7 @@ export default defineNuxtPlugin(async () => {
   const onboardingStatus = useOnboardingStatusState();
   const careerSiteConfigObjectState = useCareerSiteConfigObjectState();
   const seoConfigObjectState = useSeoConfigObjectState();
+  const totalPositionsState = usePositionState();
 
   try {
     const publicConfigRequest = await useFetch('/api/public/config');
@@ -13,6 +14,7 @@ export default defineNuxtPlugin(async () => {
 
     remoteAssetBase.value = pubicConfig.remoteAssetBase;
     onboardingStatus.value = pubicConfig.onboardingStatus;
+    totalPositionsState.value = pubicConfig.totalPositions;
     careerSiteConfigObjectState.setData(pubicConfig.settings.careerSite);
     seoConfigObjectState.setData(pubicConfig.settings.seo);
   } catch (error) {
