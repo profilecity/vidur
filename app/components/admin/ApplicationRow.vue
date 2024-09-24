@@ -5,6 +5,8 @@ const props = defineProps<{
 }>();
 
 const user = props.applicant.user;
+const resume = props.applicant.handles.find((h) => h.key == 'resume')?.value;
+const isResumeAvailable = Boolean(resume);
 </script>
 
 <template>
@@ -39,12 +41,7 @@ const user = props.applicant.user;
           {{ timeAgo(new Date(application.createdAt)) }}
         </div>
       </div>
-      <InputButton
-        variant="secondary"
-        as="a"
-        target="_blank"
-        :href="props.applicant.handles.find((h) => h.key == 'resume')?.value"
-      >
+      <InputButton variant="secondary" as="a" target="_blank" :href="resume" :disabled="!isResumeAvailable">
         View Resume
       </InputButton>
     </div>
