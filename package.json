@@ -37,7 +37,7 @@
     "nuxt": "^3.13.1",
     "nuxt-cropper": "^0.0.4",
     "nuxt-icon": "^0.6.10",
-    "pg": "^8.12.0",
+    "pg": "^8.13.0",
     "quill": "^2.0.2",
     "radix-vue": "^1.9.5",
     "tailwind-merge": "^2.5.2",
