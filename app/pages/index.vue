@@ -42,8 +42,8 @@ useSeoMeta({
   <main class="grow w-full lg:w-2/3 mx-auto mt-20 p-2">
     <SiteHeader />
     <h3 class="text-lg leading-snug text-zinc-600 font-bold mt-8 mb-2">
-      Open Positions
-      <span class="text-sm text-zinc-500 before:content-['('] after:content-[')']">>{{ totalPositions }}</span>
+      Open Applicants
+      <span class="text-sm text-zinc-500 before:content-['('] after:content-[')']">{{ totalPositions }}</span>
     </h3>
     <div class="space-y-2" v-if="postings">
       <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />
