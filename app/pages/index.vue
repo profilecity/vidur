@@ -2,7 +2,7 @@
 const { data: postings } = await usePublicPostingsRepository();
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
 const { data: seoConfig } = useSeoConfigObjectState();
-
+const totalActivePostings = useTotalActivePostingsState();
 const publicConfig = useRuntimeConfig().public;
 
 let title: string = 'Careers'; // TODO: need better defaults (this will hardly be the case);
@@ -41,7 +41,10 @@ useSeoMeta({
 <template>
   <main class="grow w-full lg:w-2/3 mx-auto mt-20 p-2">
     <SiteHeader />
-    <h3 class="text-lg leading-snug text-zinc-600 font-bold mt-8 mb-2">Open Positions</h3>
+    <h3 class="text-lg leading-snug text-zinc-600 font-bold mt-8 mb-2">
+      Open Positions
+      <UiTag>{{ totalActivePostings }}</UiTag>
+    </h3>
     <div class="space-y-2" v-if="postings">
       <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />
     </div>

@@ -1,4 +1,4 @@
-import { desc, inArray } from 'drizzle-orm';
+import { desc, inArray, eq, count } from 'drizzle-orm';
 import { jobPostingsTable, reviewTagsTable, metaDataTable } from '~~/server/db/schema';
 import type { CareerSiteConfig, SEOConfig } from '~~/shared/schemas/setting';
 
@@ -19,6 +19,14 @@ export async function seedCache() {
     ...p,
     totalApplicants: -1,
   }));
+
+  const totalActivePostings =
+    (
+      await db
+        .select({ count: count(jobPostingsTable.id) })
+        .from(jobPostingsTable)
+        .where(eq(jobPostingsTable.isPublished, true))
+    )[0]?.count || 0;
 
   const settings = {
     careerSite: {},
@@ -44,6 +52,7 @@ export async function seedCache() {
     general_memoryStorage.setItem('remoteAssetBase', remoteAssetBase),
     general_memoryStorage.setItem('postings', jobPostings),
     general_memoryStorage.setItem('reviewTags', reviewTags),
+    general_memoryStorage.setItem('totalActivePostings', totalActivePostings),
   ]);
 
   return { result: true };
