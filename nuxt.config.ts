@@ -1,3 +1,13 @@
+import pkgJson from './package.json';
+
+const composeVersion = () => {
+  if (!pkgJson || !pkgJson.version) {
+    return 'Unknown Version';
+  } else {
+    return `v${pkgJson.version}`;
+  }
+};
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   future: {
@@ -67,7 +77,7 @@ export default defineNuxtConfig({
       discord: 'https://discord.gg/9ms5uYF8xF',
       twitter: 'https://x.com/profilecityhq',
       vidur: 'https://profilecity.xyz/vidur',
-      version: 'v0.0.1',
+      version: composeVersion(),
     },
   },
   compatibilityDate: '2024-07-31',
