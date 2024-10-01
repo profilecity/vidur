@@ -14,7 +14,7 @@ export function useOnboardingStatusState() {
 }
 
 export function useTotalActivePostingsState() {
-  return useState<number>('totalPositions', () => 0);
+  return useState<number>('total-active-postings', () => 0);
 }
 
 export function useCareerSiteConfigObjectState() {
