@@ -20,12 +20,13 @@ export async function seedCache() {
     totalApplicants: -1,
   }));
 
-  const totalActivePostings = (
-    await db
-      .select({ count: count(jobPostingsTable.id) })
-      .from(jobPostingsTable)
-      .where(eq(jobPostingsTable.isPublished, true))
-  )[0].count;
+  const totalActivePostings =
+    (
+      await db
+        .select({ count: count(jobPostingsTable.id) })
+        .from(jobPostingsTable)
+        .where(eq(jobPostingsTable.isPublished, true))
+    )[0]?.count || 0;
 
   const settings = {
     careerSite: {},
