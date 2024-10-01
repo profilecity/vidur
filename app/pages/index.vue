@@ -2,7 +2,7 @@
 const { data: postings } = await usePublicPostingsRepository();
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
 const { data: seoConfig } = useSeoConfigObjectState();
-const totalPositions = usePositionState();
+const totalPositions = useTotalPositionsState();
 const publicConfig = useRuntimeConfig().public;
 
 let title: string = 'Careers'; // TODO: need better defaults (this will hardly be the case);

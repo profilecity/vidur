@@ -13,7 +13,7 @@ export function useOnboardingStatusState() {
   return useState<boolean>('onboarding-status', () => false);
 }
 
-export function usePositionState() {
+export function useTotalPositionsState() {
   return useState<number>('totalPositions', () => 0);
 }
 

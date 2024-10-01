@@ -3,7 +3,7 @@ export default defineNuxtPlugin(async () => {
   const onboardingStatus = useOnboardingStatusState();
   const careerSiteConfigObjectState = useCareerSiteConfigObjectState();
   const seoConfigObjectState = useSeoConfigObjectState();
-  const totalPositionsState = usePositionState();
+  const totalPositionsState = useTotalPositionsState();
 
   try {
     const publicConfigRequest = await useFetch('/api/public/config');
