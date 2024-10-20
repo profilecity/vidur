@@ -24,6 +24,7 @@ export const updateJobPostingSchema = z.object({
   contents: z.string().optional(),
   tagsCSV: z.string().optional(),
   isPublished: z.boolean(),
+  isExpired: z.boolean().optional(),
 });
 
 export const deleteJobPostingSchema = z.object({

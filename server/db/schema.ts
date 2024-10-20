@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm';
-import { boolean, integer, pgTable, text, timestamp, uuid, varchar, smallint, serial } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, text, timestamp, uuid, varchar, smallint, serial, date } from 'drizzle-orm/pg-core';
 
 const defaultUuidPkField = () =>
   uuid('id')
@@ -48,6 +48,8 @@ export const jobPostingsTable = pgTable('job_postings', {
   }),
   isPublished: boolean('is_published').default(false).notNull(),
   totalApplicants: integer('total_applicants').default(0).notNull(),
+  isExpired: boolean('is_expired').default(false).notNull(),
+  validTill: date('valid_till', { mode: 'date' }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
