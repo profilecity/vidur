@@ -12,4 +12,5 @@ export default defineNitroPlugin(async () => {
   await configureStorage();
   await configureCache();
   await logFirstAccessKeyIfPresent();
+  await replayCron();
 });
