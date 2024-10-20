@@ -32,25 +32,18 @@ const [title] = defineField('title');
 const [contents] = defineField('contents');
 const [tagsCSV] = defineField('tagsCSV');
 const [isPublished] = defineField('isPublished');
-const [isExpired] = defineField('isExpired');
 
 id.value = data.value.id;
 title.value = data.value.title;
 contents.value = data.value.contents || undefined;
 tagsCSV.value = data.value.tagsCSV || undefined;
 isPublished.value = data.value.isPublished;
-isExpired.value = data.value.isExpired;
 
 const onSubmit = handleSubmit(async (values) => {
   await updateData(values);
   refresh();
   await navigateTo('/admin/postings');
 });
-
-const onExpire = async () => {
-  isExpired.value = true;
-  await onSubmit();
-};
 
 const onDelete = async () => {
   await deleteData(q);
@@ -72,18 +65,6 @@ const onDelete = async () => {
       </div>
       <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
-        <AbstractConfirmationBox
-          title="Expire Posting?"
-          content="Postings once expired can not be activated again. Posting won't be disaplayed on career page."
-          @confirm="onExpire"
-        >
-          <template #input="{ open }">
-            <InputButton variant="outline" class="text-red-400 space-x-1" @click="open" :disabled="changing">
-              <Icon name="pajamas:expire" class="w-3 h-3" />
-              <span>Expire</span>
-            </InputButton>
-          </template>
-        </AbstractConfirmationBox>
         <AbstractConfirmationBox
           title="Delete Posting?"
           content="You won't be able to undo this action. You will loose access to applicant list."
