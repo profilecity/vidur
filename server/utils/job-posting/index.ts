@@ -1,5 +1,5 @@
 import { and, eq, lte } from 'drizzle-orm';
-import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { jobPostingsTable } from '~~/server/db/schema';
 
 export async function expireJobPostings(db: NodePgDatabase) {

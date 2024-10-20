@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
       .select({ isExpired: jobPostingsTable.isExpired })
       .from(jobPostingsTable)
       .where(eq(jobPostingsTable.id, q.id))
-  )[0].isExpired;
+  )[0]?.isExpired;
 
   if (isPostingAlreadyExpired) {
     throw createError({
