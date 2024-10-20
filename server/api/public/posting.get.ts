@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const postings = ((await general_memoryStorage.getItem<JobPosting[]>('postings')) || [])
-    .filter((p) => p.id === query.id && p.isPublished)
+    .filter((p) => p.id === query.id && p.isPublished && !p.isExpired)
     .map((p) => {
       return {
         ...p,
