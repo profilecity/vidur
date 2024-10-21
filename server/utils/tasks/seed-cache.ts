@@ -1,4 +1,4 @@
-import { desc, inArray, eq, count } from 'drizzle-orm';
+import { desc, inArray, eq, count, and } from 'drizzle-orm';
 import { jobPostingsTable, reviewTagsTable, metaDataTable } from '~~/server/db/schema';
 import type { CareerSiteConfig, SEOConfig } from '~~/shared/schemas/setting';
 
@@ -25,7 +25,7 @@ export async function seedCache() {
       await db
         .select({ count: count(jobPostingsTable.id) })
         .from(jobPostingsTable)
-        .where(eq(jobPostingsTable.isPublished, true))
+        .where(and(eq(jobPostingsTable.isPublished, true), eq(jobPostingsTable.isExpired, false)))
     )[0]?.count || 0;
 
   const settings = {

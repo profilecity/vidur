@@ -8,6 +8,11 @@ const composeVersion = () => {
   }
 };
 
+const cronSchedule: Record<string, string[]> = {
+  // Every day, at 00:00.
+  '0 0 * * *': ['cron:expire-postings'],
+};
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   future: {
@@ -17,6 +22,7 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
+    scheduledTasks: cronSchedule,
   },
   routeRules: {
     '/admin/**': { ssr: false },

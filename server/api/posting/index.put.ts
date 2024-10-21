@@ -13,6 +13,20 @@ export default defineEventHandler(async (event) => {
     console.log('updating posting id', q.id);
   }
 
+  const isPostingAlreadyExpired = (
+    await database
+      .select({ isExpired: jobPostingsTable.isExpired })
+      .from(jobPostingsTable)
+      .where(eq(jobPostingsTable.id, q.id))
+  )[0]?.isExpired;
+
+  if (isPostingAlreadyExpired) {
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Expired postings cannot be updated.',
+    });
+  }
+
   const updateQuery = {
     ...q,
     updatedAt: new Date(),
@@ -23,12 +37,15 @@ export default defineEventHandler(async (event) => {
   )[0] as JobPosting;
 
   const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
+  const updatedPostings = postings.map((p) => {
+    if (p.id == updatedJobPosting.id) return updatedJobPosting;
+    return p;
+  });
+
+  await general_memoryStorage.setItem('postings', updatedPostings);
 
   await general_memoryStorage.setItem(
-    'postings',
-    postings.map((p) => {
-      if (p.id == updatedJobPosting.id) return updatedJobPosting;
-      return p;
-    })
+    'totalActivePostings',
+    updatedPostings.filter((p) => !p.isExpired && p.isPublished).length
   );
 });

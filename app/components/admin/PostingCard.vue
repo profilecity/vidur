@@ -46,8 +46,14 @@ if (props.posting && props.posting.tagsCSV) {
         <div class="text-sm font-medium text-gray-500 mb-2">Created {{ timeAgo(new Date(posting.createdAt)) }}</div>
         <div class="flex justify-between items-center">
           <div
+            class="text-xs font-medium rounded-lg text-center px-2.5 py-1 bg-red-100 text-red-700"
+            v-if="posting.isExpired"
+          >
+            Expired
+          </div>
+          <div
             class="text-xs font-medium rounded-lg text-center px-2.5 py-1 bg-green-100 text-green-700"
-            v-if="posting.isPublished"
+            v-else-if="posting.isPublished"
           >
             Published
           </div>
