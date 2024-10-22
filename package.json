@@ -21,6 +21,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@internationalized/date": "^3.5.6",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/tailwindcss": "6.12.1",
     "@profilecity/unstorage-s3-driver": "^0.0.3",

@@ -6,6 +6,11 @@ export default defineEventHandler(async (event) => {
   const session = await authenticateAdminRequest(event);
   const jobPostingRequest = await readValidatedBody(event, createJobPostingSchema.parse);
 
+  const jobPostingDTO: typeof jobPostingsTable.$inferInsert = {
+    ...jobPostingRequest,
+    validTill: jobPostingRequest.validTill ? new Date(jobPostingRequest.validTill) : undefined,
+  };
+
   if (IS_DEV) {
     console.log('creating posting', jobPostingRequest);
   }
@@ -15,7 +20,7 @@ export default defineEventHandler(async (event) => {
   const newPosting = (
     await database
       .insert(jobPostingsTable)
-      .values({ ...jobPostingRequest, owner: session.user.id })
+      .values({ ...jobPostingDTO, owner: session.user.id })
       .returning()
   )[0] as JobPosting;
 

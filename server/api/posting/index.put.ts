@@ -27,9 +27,10 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  const updateQuery = {
+  const updateQuery: typeof jobPostingsTable.$inferInsert = {
     ...q,
     updatedAt: new Date(),
+    validTill: q.validTill ? new Date(q.validTill) : undefined,
   };
 
   const updatedJobPosting = (

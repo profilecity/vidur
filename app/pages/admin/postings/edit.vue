@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CalendarDate } from '@internationalized/date';
 import { updateJobPostingSchema } from '~~/shared/schemas/posting';
 
 definePageMeta({
@@ -26,18 +27,29 @@ const { handleSubmit, errors, defineField } = useForm({
   validationSchema: formSchema,
 });
 
+const validTillCalendarDate = ref<CalendarDate>();
+
 const [id] = defineField('id');
 
+// Declare form fields
 const [title] = defineField('title');
 const [contents] = defineField('contents');
 const [tagsCSV] = defineField('tagsCSV');
 const [isPublished] = defineField('isPublished');
+const [validTill] = defineField('validTill');
 
+// Initialise form fields
 id.value = data.value.id;
 title.value = data.value.title;
 contents.value = data.value.contents || undefined;
 tagsCSV.value = data.value.tagsCSV || undefined;
 isPublished.value = data.value.isPublished;
+validTill.value = (data.value.validTill as string | null) || undefined;
+
+// Initialise Extra Refs
+if (validTill.value) {
+  validTillCalendarDate.value = dateToCalendarDate(new Date(validTill.value));
+}
 
 const onSubmit = handleSubmit(async (values) => {
   await updateData(values);
@@ -50,6 +62,11 @@ const onDelete = async () => {
   refresh();
   await navigateTo('/admin/postings');
 };
+
+watch(validTillCalendarDate, (calendarDate) => {
+  if (!calendarDate) return;
+  validTill.value = calendarDateToDate(calendarDate).toISOString();
+});
 </script>
 
 <template>
@@ -65,6 +82,7 @@ const onDelete = async () => {
       </div>
       <!-- Right: Actions -->
       <div class="flex items-center space-x-3">
+        <InputDatePicker label="Expiry Date" v-model="validTillCalendarDate" />
         <AbstractConfirmationBox
           title="Delete Posting?"
           content="You won't be able to undo this action. You will loose access to applicant list."

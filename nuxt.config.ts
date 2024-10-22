@@ -42,6 +42,9 @@ export default defineNuxtConfig({
     },
     useStylesheet: true,
   },
+  imports: {
+    dirs: ['composables/**/*.ts'],
+  },
   devtools: { enabled: true },
   /**
    * Sensible defaults, overriden by env vars.

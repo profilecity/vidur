@@ -16,6 +16,7 @@ export const createJobPostingSchema = z.object({
   contents: z.string().optional(),
   tagsCSV: z.string().optional(),
   isPublished: z.boolean(),
+  validTill: z.string().optional(), // Ideally it is a date field, but gets converted to string due to stringification.
 });
 
 export const updateJobPostingSchema = z.object({
@@ -24,6 +25,7 @@ export const updateJobPostingSchema = z.object({
   contents: z.string().optional(),
   tagsCSV: z.string().optional(),
   isPublished: z.boolean(),
+  validTill: z.string().optional(), // Ideally it is a date field, but gets converted to string due to stringification.
 });
 
 export const deleteJobPostingSchema = z.object({
