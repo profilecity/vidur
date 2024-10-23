@@ -1,5 +1,50 @@
 # Changelog
 
+## v1.1.0
+
+[compare changes](https://github.com/profilecity/vidur/compare/v1.0.0...v1.1.0)
+
+### 🚀 Enhancements
+
+- **api:** Review tags ([#159](https://github.com/profilecity/vidur/pull/159))
+- **db:** Extend applications table with review tag ([#156](https://github.com/profilecity/vidur/pull/156))
+- **career-page:** Show total postings ([#172](https://github.com/profilecity/vidur/pull/172))
+- **postings:** Ability to expire postings ([#184](https://github.com/profilecity/vidur/pull/184))
+- **posting:** Date-picker for expiry ([d6c1564](https://github.com/profilecity/vidur/commit/d6c1564))
+
+### 🩹 Fixes
+
+- **ux:** Open links in new tab ([#167](https://github.com/profilecity/vidur/pull/167))
+- **applicants:** Disable resume button when unavailable ([#178](https://github.com/profilecity/vidur/pull/178))
+- **runtime:** Inject correct version ([#171](https://github.com/profilecity/vidur/pull/171))
+- **ui:** Allow disabling DatePicker and Switch ([ace1777](https://github.com/profilecity/vidur/commit/ace1777))
+- **posting:** Disable editing for expired postings ([b8c698a](https://github.com/profilecity/vidur/commit/b8c698a))
+- **ui:** Move to tiptap for better editor ([#187](https://github.com/profilecity/vidur/pull/187))
+- **ui:** Job description label ([78e3945](https://github.com/profilecity/vidur/commit/78e3945))
+- **apply:** Defer applying till status received ([0f64cdb](https://github.com/profilecity/vidur/commit/0f64cdb))
+- **apply:** Stop user from applying to expired jobs ([d11845c](https://github.com/profilecity/vidur/commit/d11845c))
+- **apply:** Login state issue ([07dbe80](https://github.com/profilecity/vidur/commit/07dbe80))
+
+### 📖 Documentation
+
+- **readme:** Update for v1 ([#145](https://github.com/profilecity/vidur/pull/145))
+
+### 🏡 Chore
+
+- **infra:** Update `.dockerignore` ([#168](https://github.com/profilecity/vidur/pull/168))
+- **deps-dev:** Bump @types/pg from 8.11.8 to 8.11.10 ([#166](https://github.com/profilecity/vidur/pull/166))
+- **deps-dev:** Bump husky from 9.1.5 to 9.1.6 ([#165](https://github.com/profilecity/vidur/pull/165))
+- **deps-dev:** Bump changelogen from 0.5.5 to 0.5.7 ([#181](https://github.com/profilecity/vidur/pull/181))
+
+### ❤️ Contributors
+
+- Amandesai01 <amandesai01@gmail.com>
+- Aman Desai ([@amandesai01](http://github.com/amandesai01))
+- Karthik8239 ([@karthik8239](http://github.com/karthik8239))
+- Suryansh Soni ([@suryanshsoni120](http://github.com/suryanshsoni120))
+- Shivam Sharma ([@shivam-sharma7](http://github.com/shivam-sharma7))
+- Dev Shailesh Shah ([@devshahofficial](http://github.com/devshahofficial))
+
 ## v1.0.0
 
 [compare changes](https://github.com/profilecity/vidur/compare/v0.4.0...v1.0.0)
