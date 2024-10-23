@@ -5,7 +5,7 @@ const id = route.params.id as string;
 const { isSignedIn } = useAuth();
 const { redirectToLogin } = useSafeRedirectToLogin();
 
-const { data: applicationStatus, refresh: refreshApplicationStatus } = useApplicationStatus(id);
+const { data: applicationStatus, refresh: refreshApplicationStatus, status } = useApplicationStatus(id);
 const { data: posting } = await usePublicPostingRepository({ id });
 
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
@@ -47,7 +47,11 @@ const apply = async () => {
 };
 
 if (route.query.fromOnboard) {
-  apply();
+  watch(status, (s) => {
+    if (s == 'success' && (!applicationStatus.value || !applicationStatus.value.userAlreadyApplied)) {
+      apply();
+    }
+  });
 }
 </script>
 
