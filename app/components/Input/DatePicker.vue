@@ -27,6 +27,7 @@ const props = withDefaults(
   defineProps<{
     modelValue?: CalendarDate;
     label?: string;
+    disabled?: boolean;
   }>(),
   {
     label: 'Pick a date',
@@ -56,7 +57,7 @@ const onSelect = () => {
 <template>
   <div class="flex items-center border p-1 rounded-lg space-x-2">
     <!-- @vue-expect-error -->
-    <DatePickerRoot id="date-field" :is-date-disabled v-model:open="open" v-model:model-value="dateModel">
+    <DatePickerRoot id="date-field" :is-date-disabled v-model:open="open" v-model:model-value="dateModel" :disabled>
       <DatePickerField class="flex items-center space-x-2 text-zinc-800 border border-transparent">
         <div class="flex flex-col">
           <Label class="text-sm text-zinc-800 font-bold" for="date-field">{{ props.label }}</Label>
