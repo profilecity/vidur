@@ -140,7 +140,7 @@ const disableFields = computed(() => changing.value || isExpired.value);
             v-model="tagsCSV"
           />
           <div class="mt-4">
-            <label class="block text-sm font-medium mb-1" for="jobdescription">Job Description</label>
+            <InputLabel label="Job Description" />
             <Editor placeholder="We are looking for someone who can..." v-model="contents" :read-only="disableFields" />
             <div class="text-xs mt-1 text-rose-500">{{ errors.contents }}</div>
           </div>
