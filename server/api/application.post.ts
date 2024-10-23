@@ -18,7 +18,13 @@ export default defineEventHandler(async (event) => {
       await database
         .select({ count: count() })
         .from(jobPostingsTable)
-        .where(and(eq(jobPostingsTable.id, body.postingId), eq(jobPostingsTable.isPublished, true)))
+        .where(
+          and(
+            eq(jobPostingsTable.id, body.postingId),
+            eq(jobPostingsTable.isPublished, true),
+            eq(jobPostingsTable.isExpired, false)
+          )
+        )
     )[0]?.count || 0) == 1;
 
   if (!postingExistsAndIsPublished) {
