@@ -29,10 +29,6 @@ const apply = async () => {
     return;
   }
   try {
-    if (!isSignedIn.value) {
-      await redirectToLogin(route.fullPath);
-      return;
-    }
     isApplying.value = true;
     await $fetch('/api/application', {
       method: 'POST',
@@ -46,13 +42,18 @@ const apply = async () => {
   }
 };
 
-if (route.query.fromOnboard) {
-  watch(status, (s) => {
-    if (s == 'success' && (!applicationStatus.value || !applicationStatus.value.userAlreadyApplied)) {
-      apply();
+onMounted(async () => {
+  if (route.query.fromOnboard) {
+    if (!isSignedIn.value) {
+      await redirectToLogin(route.fullPath);
     }
-  });
-}
+    watch(status, (s) => {
+      if (s == 'success' && (!applicationStatus.value || !applicationStatus.value.userAlreadyApplied)) {
+        apply();
+      }
+    });
+  }
+});
 </script>
 
 <template>
