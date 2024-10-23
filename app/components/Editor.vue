@@ -1,44 +1,24 @@
-<template>
-  <div id="snow-wrapper">
-    <div id="snow-container">
-      <div class="toolbar bg-white rounded-t-xl mt-2" v-if="!readOnly">
-        <span class="ql-formats">
-          <select class="ql-header" defaultValue="3">
-            <option value="1">Heading</option>
-            <option value="2">Subheading</option>
-            <option value="3">Normal</option>
-          </select>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-bold"></button>
-          <button class="ql-italic"></button>
-          <button class="ql-underline"></button>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-list" value="ordered"></button>
-          <button class="ql-list" value="bullet"></button>
-          <select class="ql-align" defaultValue="false">
-            <option label="left"></option>
-            <option label="center" value="center"></option>
-            <option label="right" value="right"></option>
-            <option label="justify" value="justify"></option>
-          </select>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-link"></button>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-clean"></button>
-        </span>
-      </div>
-      <div class="bg-white rounded-b-xl border p-4" :class="readOnly ? 'ql-e-blank' : ''" :id="editorId"></div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
+import {
+  ToolbarRoot,
+  ToolbarSeparator,
+  ToolbarToggleGroup,
+  ToolbarToggleItem,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuRoot,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from 'radix-vue';
+import { Editor, EditorContent } from '@tiptap/vue-3';
+import { mergeAttributes } from '@tiptap/core';
+import StarterKit from '@tiptap/starter-kit';
+import TextAlign from '@tiptap/extension-text-align';
+import Heading from '@tiptap/extension-heading';
 import { useVModel } from '@vueuse/core';
-import type Quill from 'quill';
 
 const props = withDefaults(
   defineProps<{
@@ -57,79 +37,270 @@ const emit = defineEmits<{
 }>();
 
 const editorContent = useVModel(props, 'modelValue', emit);
-const editorId = props.id;
-let editorInstance: Quill | null;
 
-onMounted(async () => {
-  const QuillEditor = (await import('quill')).default;
-
-  editorInstance = new QuillEditor(`#${editorId}`, {
-    bounds: '#snow-container .ql-container',
-    modules: {
-      // syntax: true, TODO: ref: https://quilljs.com/docs/modules/syntax
-      toolbar: props.readOnly ? false : '#snow-container .toolbar',
+const editor = shallowRef<Editor>();
+onMounted(() => {
+  editor.value = new Editor({
+    editable: !props.readOnly,
+    content: editorContent.value,
+    extensions: [
+      StarterKit.configure({
+        bold: {
+          HTMLAttributes: {
+            class: 'font-bold',
+          },
+        },
+        italic: {
+          HTMLAttributes: {
+            class: 'italic',
+          },
+        },
+        bulletList: {
+          HTMLAttributes: {
+            class: 'list-disc pl-6',
+          },
+        },
+        orderedList: {
+          HTMLAttributes: {
+            class: 'list-decimal pl-6',
+          },
+        },
+        heading: false,
+      }),
+      TextAlign.configure({ types: ['heading', 'paragraph'] }),
+      Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }).extend({
+        levels: [1, 2, 3, 4, 5, 6],
+        renderHTML({ node, HTMLAttributes }) {
+          const level = this.options.levels.includes(node.attrs.level) ? node.attrs.level : this.options.levels[0];
+          const classes = {
+            1: 'text-4xl',
+            2: 'text-2xl',
+            3: 'text-xl',
+            4: 'text-lg',
+            5: 'text-md',
+            6: 'text-base',
+          };
+          return [
+            `h${level}`,
+            mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+              class: `${classes[level as 1 | 2 | 3 | 4 | 5 | 6]}`,
+            }),
+            0,
+          ];
+        },
+      }),
+    ],
+    editorProps: {
+      attributes: {
+        class: 'px-2 pb-2 focus:outline-none',
+      },
     },
-    placeholder: props.placeholder,
-    theme: 'snow',
-    readOnly: props.readOnly,
-  });
-
-  if (editorContent.value) {
-    editorInstance.root.innerHTML = editorContent.value;
-  }
-
-  editorInstance.on('text-change', () => {
-    if (!editorInstance) return;
-    editorContent.value = editorInstance.root.innerHTML;
+    onUpdate(p) {
+      const html = p.editor.getHTML();
+      editorContent.value = html;
+    },
   });
 });
 
-onUnmounted(() => {
-  editorInstance = null;
+watch(
+  () => props.modelValue,
+  (value) => {
+    if (!editor.value) return;
+    const contentValue = value || '';
+    const isSame = editor.value.getHTML() === value;
+    if (!isSame) editor.value.commands.setContent(contentValue, false);
+  }
+);
+
+onBeforeUnmount(() => {
+  editor.value?.destroy();
+  editor.value = undefined;
+});
+
+const toggleAlignmentSingle = ref('left');
+const toggleStateFontStyle = ref<string[]>([]);
+const toggleListSingle = ref('');
+
+const toggleState = ref(false);
+const selectedH = ref('6');
+
+watchEffect(() => {
+  if (editor.value) {
+    const editorValue = editor.value;
+
+    toggleStateFontStyle.value = [];
+    const styleChecks = ['bold', 'italic', 'strike'];
+    for (let index = 0; index < styleChecks.length; index++) {
+      const activeCheck = styleChecks[index] as string;
+      if (editorValue.isActive(activeCheck)) {
+        toggleStateFontStyle.value.push(activeCheck);
+      }
+    }
+
+    toggleListSingle.value = '';
+    const listChecks = ['orderedList', 'bulletList'];
+    for (let index = 0; index < listChecks.length; index++) {
+      const activeCheck = listChecks[index] as string;
+      if (editorValue.isActive(activeCheck)) {
+        toggleListSingle.value = activeCheck;
+        break;
+      }
+    }
+
+    toggleAlignmentSingle.value = 'left';
+    const alignmentChecks = ['left', 'center', 'right', 'justify'];
+    for (let index = 0; index < alignmentChecks.length; index++) {
+      const activeCheck = alignmentChecks[index] as string;
+      if (editorValue.isActive({ textAlign: activeCheck })) {
+        toggleAlignmentSingle.value = activeCheck;
+        break;
+      }
+    }
+
+    selectedH.value = '6';
+    const heightChecks = [1, 2, 3, 4, 5, 6];
+    for (let index = 0; index < heightChecks.length; index++) {
+      const activeCheck = heightChecks[index] as number;
+      if (editorValue.isActive('heading', { level: activeCheck })) {
+        selectedH.value = activeCheck.toString();
+        break;
+      }
+    }
+  }
 });
 </script>
 
-<style>
-@import 'quill/dist/quill.snow.css';
+<template>
+  <section>
+    <ToolbarRoot
+      class="flex p-1 w-full max-w-screen !min-w-max rounded-t-lg bg-white border-t border-x"
+      aria-label="Formatting options"
+      v-if="editor && !readOnly"
+    >
+      <ToolbarToggleGroup v-model="toggleStateFontStyle" type="multiple" aria-label="Text formatting">
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="bold"
+          aria-label="Bold"
+          @click.prevent="editor.chain().focus().toggleBold().run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="radix-icons:font-bold" />
+        </ToolbarToggleItem>
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="italic"
+          aria-label="Italic"
+          @click.prevent="editor.chain().focus().toggleItalic().run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="radix-icons:font-italic" />
+        </ToolbarToggleItem>
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="strike"
+          aria-label="Strike through"
+          @click.prevent="editor.chain().focus().toggleStrike().run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="radix-icons:strikethrough" />
+        </ToolbarToggleItem>
+      </ToolbarToggleGroup>
+      <ToolbarSeparator class="w-[1px] bg-zinc-200 mx-[10px]" />
+      <DropdownMenuRoot v-model:open="toggleState">
+        <DropdownMenuTrigger class="toggle-ui" aria-label="Customise options">
+          <Icon name="proicons:text-line-height" />
+        </DropdownMenuTrigger>
 
-.ql-editor {
-  padding: 0% !important;
-  border: 0px !important;
-}
+        <DropdownMenuPortal>
+          <DropdownMenuContent
+            class="min-w-24 outline-none bg-white rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] data-[side=bottom]:animate-slideUpAndFade"
+            :side-offset="5"
+          >
+            <DropdownMenuLabel class="text-xs text-zinc-700">Heading Size </DropdownMenuLabel>
+            <DropdownMenuSeparator class="h-[1px] bg-zinc-200 m-[5px]" />
+            <DropdownMenuRadioGroup v-model="selectedH">
+              <DropdownMenuRadioItem
+                class="rounded h-6 px-1 text-sm hover:bg-zinc-200"
+                :class="selectedH == i.toString() ? 'bg-zinc-200' : ''"
+                v-for="i in 6"
+                :value="i.toString()"
+                @click.prevent="
+                  editor
+                    .chain()
+                    .focus()
+                    .toggleHeading({ level: i as 1 | 2 | 3 | 4 | 5 | 6 })
+                    .run()
+                "
+              >
+                H{{ i }}
+              </DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+          </DropdownMenuContent>
+        </DropdownMenuPortal>
+      </DropdownMenuRoot>
+      <ToolbarSeparator class="w-[1px] bg-zinc-200 mx-[10px]" />
+      <ToolbarToggleGroup v-model="toggleListSingle" type="single" aria-label="List">
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="bulletList"
+          aria-label="Bullet List"
+          @click.prevent="editor.chain().focus().toggleBulletList().run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="tabler:list" />
+        </ToolbarToggleItem>
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="orderedList"
+          aria-label="Ordered List"
+          @click.prevent="editor.chain().focus().toggleOrderedList().run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="mingcute:list-ordered-line" />
+        </ToolbarToggleItem>
+      </ToolbarToggleGroup>
+      <ToolbarSeparator class="w-[1px] bg-zinc-200 mx-[10px]" />
+      <ToolbarToggleGroup v-model="toggleAlignmentSingle" type="single" aria-label="Text Alignment">
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="left"
+          aria-label="Left Aligned"
+          @click.prevent="editor.chain().focus().setTextAlign('left').run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="radix-icons:text-align-left" />
+        </ToolbarToggleItem>
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="center"
+          aria-label="Center Aligned"
+          @click.prevent="editor.chain().focus().setTextAlign('center').run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="radix-icons:text-align-center" />
+        </ToolbarToggleItem>
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="right"
+          aria-label="Right Aligned"
+          @click.prevent="editor.chain().focus().setTextAlign('right').run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="radix-icons:text-align-right" />
+        </ToolbarToggleItem>
+        <ToolbarToggleItem
+          class="toggle-ui"
+          value="justify"
+          aria-label="Justify Aligned"
+          @click.prevent="editor.chain().focus().setTextAlign('justify').run()"
+        >
+          <Icon class="w-[19px] h-[19px]" name="radix-icons:text-align-justify" />
+        </ToolbarToggleItem>
+      </ToolbarToggleGroup>
+    </ToolbarRoot>
+    <EditorContent
+      :class="readOnly ? '' : 'border-b border-x rounded-b-lg bg-white p-1'"
+      :editor
+      :disabled="readOnly"
+    />
+  </section>
+</template>
 
-.ql-editor {
-  @apply !text-base;
-}
-
-.ql-editor > h1,
-h2 {
-  @apply text-zinc-600 font-noto;
-}
-
-.ql-editor > h3,
-h4,
-h5,
-h6,
-ol,
-p,
-ul {
-  @apply text-zinc-700 font-lato;
-}
-
-.ql-editor > h1 {
-  @apply text-2xl;
-}
-
-.ql-editor > h2 {
-  @apply !text-xl;
-}
-
-.ql-editor > h3 {
-  @apply !text-base;
-}
-
-.ql-e-blank {
-  padding: 0% !important;
-  border: 0px !important;
+<style scoped>
+.toggle-ui {
+  @apply border border-transparent text-zinc-900 h-7 px-1 rounded inline-flex leading-none items-center justify-center bg-white ml-0.5 outline-none hover:border-zinc-200 first:ml-0 data-[state=on]:bg-zinc-200;
 }
 </style>
