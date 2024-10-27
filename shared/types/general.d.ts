@@ -6,6 +6,7 @@ export type SelectableOption = {
   id: string | number;
   title: string;
   logo?: string;
+  logoClass?: string;
 };
 
 export type Tab = {
