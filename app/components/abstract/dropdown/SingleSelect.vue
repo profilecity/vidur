@@ -6,6 +6,7 @@ const props = defineProps<{
   modelValue?: SelectableOption['id'];
   title: string;
   options: SelectableOption[];
+  onlySelectedLogo?: boolean;
 }>();
 
 const emits = defineEmits<{
@@ -14,7 +15,7 @@ const emits = defineEmits<{
 
 const selectedOptionId = useVModel(props, 'modelValue', emits);
 const selectedOption = computed(() => {
-  if (selectedOptionId.value) {
+  if (selectedOptionId.value !== undefined) {
     return props.options.find((o) => o.id === selectedOptionId.value);
   }
 });
@@ -29,16 +30,16 @@ const setSelectedOption = (id: SelectableOption['id'], closeFn: () => void) => {
   <Dropdown :title="title" :close-on-esc="true">
     <template #input="{ open }">
       <slot name="input" :open="open">
-        <InputButton variant="outline" @click.prevent="open" v-if="selectedOption">
+        <InputButton class="space-x-2" variant="outline" @click.prevent="open" v-if="selectedOption !== undefined">
           <Icon
             :name="selectedOption.logo"
-            class="w-4 h-4 fill-current mr-2"
+            class="w-4 h-4 fill-current"
             :class="selectedOption.logoClass"
             v-if="selectedOption.logo"
           />
-          <span>{{ selectedOption.title }}</span>
+          <span v-if="!onlySelectedLogo">{{ selectedOption.title }}</span>
         </InputButton>
-        <InputButton variant="outline" @click="open" v-else>
+        <InputButton class="space-x-2" variant="outline" @click="open" v-else>
           <Icon name="octicon:filter-16" class="w-4 h-4 fill-current" />
           <span class="mr-2">{{ title }}</span>
         </InputButton>
@@ -48,12 +49,7 @@ const setSelectedOption = (id: SelectableOption['id'], closeFn: () => void) => {
       <ul class="mb-4">
         <li v-for="option in options" :key="option.id">
           <InputButton variant="ghost" @click.prevent="setSelectedOption(option.id, close)">
-            <Icon
-              :name="option.logo"
-              class="w-4 h-4 fill-current mr-2"
-              :class="selectedOption?.logoClass"
-              v-if="option.logo"
-            />
+            <Icon :name="option.logo" class="w-4 h-4 fill-current mr-2" :class="option?.logoClass" v-if="option.logo" />
             <span>{{ option.title }}</span>
           </InputButton>
         </li>
