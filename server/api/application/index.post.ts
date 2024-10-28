@@ -1,7 +1,7 @@
 import { applicationCreateSchema } from '~~/shared/schemas/application';
-import authenticateRequest from '../utils/auth';
 import { and, count, eq, sql } from 'drizzle-orm';
-import { jobPostingsTable, postingApplicantsTable } from '../db/schema';
+import authenticateRequest from '~~/server/utils/auth';
+import { jobPostingsTable, postingApplicantsTable } from '~~/server/db/schema';
 
 export default defineEventHandler(async (event) => {
   const session = await authenticateRequest(event);
