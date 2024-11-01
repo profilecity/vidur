@@ -21,6 +21,6 @@ export async function useDatabase() {
   });
   await client.connect();
 
-  drizzleInstance = drizzle(client);
+  drizzleInstance = drizzle(client, { casing: 'snake_case' });
   return drizzleInstance;
 }

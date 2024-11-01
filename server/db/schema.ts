@@ -12,14 +12,14 @@ const defaultSerialPkField = () => serial('id').primaryKey();
 
 export const usersTable = pgTable('users', {
   id: defaultUuidPkField(),
-  firstName: varchar('first_name', { length: 50 }),
-  lastName: varchar('last_name', { length: 50 }),
+  firstName: varchar({ length: 50 }),
+  lastName: varchar({ length: 50 }),
   picture: text('picture'),
   email: varchar('email', { length: 255 }).unique().notNull(),
   permission: integer('permission').default(0).notNull(),
-  top5SkillsCSV: text('top_5_skills_csv'),
+  top5SkillsCSV: text(),
 
-  isAdmin: boolean('is_admin').default(false).notNull(),
+  isAdmin: boolean().default(false).notNull(),
 });
 
 export type User = typeof usersTable.$inferSelect;
@@ -27,7 +27,7 @@ export type User = typeof usersTable.$inferSelect;
 //---------------**************----------------
 
 export const userHandlesTable = pgTable('user_handles', {
-  userId: uuid('user_id').references(() => usersTable.id, {
+  userId: uuid().references(() => usersTable.id, {
     onDelete: 'cascade',
   }),
   key: varchar('key', { length: 15 }).notNull(),
@@ -42,16 +42,16 @@ export const jobPostingsTable = pgTable('job_postings', {
   id: defaultUuidPkField(),
   title: varchar('title', { length: 150 }).notNull(),
   contents: text('contents'),
-  tagsCSV: text('tags_csv'),
-  owner: uuid('owner_id').references(() => usersTable.id, {
+  tagsCSV: text(),
+  owner: uuid().references(() => usersTable.id, {
     onDelete: 'set null',
   }),
-  isPublished: boolean('is_published').default(false).notNull(),
-  totalApplicants: integer('total_applicants').default(0).notNull(),
-  isExpired: boolean('is_expired').default(false).notNull(),
-  validTill: date('valid_till', { mode: 'date' }),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  isPublished: boolean().default(false).notNull(),
+  totalApplicants: integer().default(0).notNull(),
+  isExpired: boolean().default(false).notNull(),
+  validTill: date({ mode: 'date' }),
+  createdAt: timestamp().defaultNow().notNull(),
+  updatedAt: timestamp().defaultNow().notNull(),
 });
 
 export type JobPosting = typeof jobPostingsTable.$inferSelect;
@@ -60,19 +60,19 @@ export type JobPosting = typeof jobPostingsTable.$inferSelect;
 
 export const postingApplicantsTable = pgTable('posting_applicants', {
   id: defaultUuidPkField(),
-  candidateId: uuid('owner_id')
+  candidateId: uuid()
     .references(() => usersTable.id, {
       onDelete: 'cascade',
     })
     .notNull(),
-  postingId: uuid('job_id')
+  postingId: uuid()
     .references(() => jobPostingsTable.id, {
       onDelete: 'cascade',
     })
     .notNull(),
-  status: integer('status_id').default(-1),
-  statusType: smallint('status_type').default(0),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
+  status: integer().default(-1),
+  statusType: smallint().default(0),
+  createdAt: timestamp().defaultNow().notNull(),
 });
 
 export type PostingApplication = typeof postingApplicantsTable.$inferSelect;
@@ -94,9 +94,9 @@ export const hooksTable = pgTable('hooks', {
   title: varchar('title', { length: 40 }).notNull(),
   url: varchar('url', { length: 255 }).notNull(),
   prefs: integer('prefs').default(0).notNull(),
-  lastExecutedAt: timestamp('last_executed_at'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  lastExecutedAt: timestamp(),
+  createdAt: timestamp().defaultNow().notNull(),
+  updatedAt: timestamp().defaultNow().notNull(),
 });
 
 export type Hook = typeof hooksTable.$inferSelect;
@@ -106,8 +106,8 @@ export type Hook = typeof hooksTable.$inferSelect;
 export const metaDataTable = pgTable('metadata_entries', {
   key: varchar('key', { length: 48 }).primaryKey().notNull(),
   value: text('value'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  createdAt: timestamp().defaultNow().notNull(),
+  updatedAt: timestamp().defaultNow().notNull(),
 });
 
 export type MetadataEntry = typeof metaDataTable.$inferSelect;

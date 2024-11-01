@@ -12,4 +12,5 @@ export default {
     database: process.env.NUXT_DB_DATABASE!,
     ssl: false,
   },
+  casing: 'snake_case',
 } satisfies Config;
