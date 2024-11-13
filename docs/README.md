@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> Vidur development is in the early stages. Track progress via [GitHub issues](https://github.com/profilecity/vidur/issues).<br><br>
+> Hosting Vidur is not recommended for now due to planned re-organization in Authentication and Profile services.<br>
+> Vidur is targeted to be made more standalone, with a more open licence.
+
 <p align="center">
   <a href="https://github.com/profilecity/vidur">
    <img src="./header.png" alt="Logo">
