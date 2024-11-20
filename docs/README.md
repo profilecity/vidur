@@ -60,7 +60,7 @@ To get up and running with Vidur, follow these steps:
 2. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-repo/vidur.git
+git clone https://github.com/profilecity/vidur.git
 cd vidur
 ```
 
