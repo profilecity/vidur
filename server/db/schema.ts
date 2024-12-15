@@ -20,36 +20,17 @@ const defaultUuidPkField = () =>
 
 const defaultSerialPkField = () => serial('id').primaryKey();
 
-const baseUserFields = () => ({
+//---------------**************----------------
+
+export const usersTable = pgTable('users', {
   id: defaultUuidPkField(),
   firstName: varchar('first_name', { length: 50 }).notNull(),
   lastName: varchar('last_name', { length: 50 }),
   picture: text('picture'),
   email: varchar('email', { length: 255 }).unique().notNull(),
   password: char('password', { length: 133 }).notNull(), // length of adonis scrypt output
-});
-
-export type BaseUserFields = {
-  id: string;
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string | null;
-};
-
-//---------------**************----------------
-
-export const adminsTable = pgTable('admins', {
-  ...baseUserFields(),
+  isAdmin: boolean('is_admin').default(false).notNull(),
   permission: integer('permission').default(0).notNull(),
-});
-
-export type Admin = typeof adminsTable.$inferSelect;
-
-//---------------**************----------------
-
-export const usersTable = pgTable('users', {
-  ...baseUserFields(),
 });
 
 export type User = typeof usersTable.$inferSelect;
@@ -61,7 +42,7 @@ export const jobPostingsTable = pgTable('job_postings', {
   title: varchar('title', { length: 150 }).notNull(),
   contents: text('contents'),
   tagsCSV: text('tags_csv'),
-  owner: uuid('owner_id').references(() => adminsTable.id, {
+  owner: uuid('owner_id').references(() => usersTable.id, {
     onDelete: 'set null',
   }),
   isPublished: boolean('is_published').default(false).notNull(),

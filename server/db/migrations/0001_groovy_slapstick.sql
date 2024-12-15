@@ -1,1 +1,0 @@
-ALTER TABLE "job_postings" ADD COLUMN "tags_csv" text;

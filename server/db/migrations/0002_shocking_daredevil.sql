@@ -1,1 +1,0 @@
-ALTER TABLE "admins" DROP COLUMN IF EXISTS "password";

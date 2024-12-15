@@ -10,7 +10,7 @@ const [email] = defineField('email');
 const [password] = defineField('password');
 
 const submit = handleSubmit(async (validatedData) => {
-  await $fetch('/api/admin/login', {
+  await $fetch('/api/login', {
     method: 'POST',
     body: validatedData,
   });

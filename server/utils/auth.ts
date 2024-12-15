@@ -1,6 +1,6 @@
 import { H3Event } from 'h3';
 import type { User } from '../db/schema';
-import { getToken } from './jwt';
+import { UserRole } from '~~/shared/types/profile-types';
 
 export type Credentials = {
   token: string;
@@ -13,4 +13,11 @@ export default async function authenticateRequest(
 ): Promise<{ user: User }> {
   // @ts-ignore
   return { user: null };
+}
+
+export function getRole(user: Partial<User>): UserRole {
+  if (user.isAdmin) {
+    return 'admin';
+  }
+  return 'user';
 }

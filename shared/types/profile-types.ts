@@ -1,22 +1,15 @@
-export type Profile = {
+export type User = {
   id: string;
   firstName: string | null;
   lastName: string | null;
   picture: string | null;
   email: string;
-  top5SkillsCSV: string | null;
   isAdmin: boolean;
 };
 
-export type Session = {
-  profile: Profile;
-};
+export type UserRole = 'admin' | 'user';
 
-export type BasicProfile = {
-  id: string;
-  profile: Omit<Profile, 'id'>;
-  handles: Record<string, string>;
-  resume: {
-    top5Skills: string[];
-  };
+export type Session = {
+  user: User;
+  role: UserRole;
 };

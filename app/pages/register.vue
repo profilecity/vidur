@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { loginSchema } from '~~/shared/schemas/authentication';
+import { registerSchema } from '~~/shared/schemas/authentication';
 
-const formSchema = toTypedSchema(loginSchema);
+const formSchema = toTypedSchema(registerSchema);
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: formSchema,
 });
@@ -12,7 +12,7 @@ const [email] = defineField('email');
 const [password] = defineField('password');
 
 const submit = handleSubmit(async (validatedData) => {
-  await $fetch('/api/admin/register', {
+  await $fetch('/api/register', {
     method: 'POST',
     body: validatedData,
   });
@@ -25,7 +25,7 @@ const submit = handleSubmit(async (validatedData) => {
       <div class="flex flex-col space-y-2 w-1/3 border border-zinc-300 p-12 rounded-xl">
         <div class="flex justify-center">
           <InputLabel class="text-center" label-class="text-xl !font-bold" label="Register" />
-          <div class="ml-5 mr-5">|</div>
+          <div class="mx-5">|</div>
           <img src="/vidur-small.svg" class="h-8" />
         </div>
         <InputLabel
@@ -46,11 +46,11 @@ const submit = handleSubmit(async (validatedData) => {
           v-model="password"
           :error="errors['password']"
         />
-        <InputButton @click="submit">Login</InputButton>
+        <InputButton @click="submit">Register</InputButton>
 
         <div class="text-center">
           <span class="text-sm text-zinc-600">Have an account? </span>
-          <NuxtLink to="/login" class="text-sm text-primary">login</NuxtLink>
+          <NuxtLink to="/login" class="text-sm text-primary">Login</NuxtLink>
         </div>
       </div>
     </div>
