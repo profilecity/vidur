@@ -1,5 +1,17 @@
 import { sql } from 'drizzle-orm';
-import { boolean, integer, pgTable, text, timestamp, uuid, varchar, smallint, serial, date } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+  varchar,
+  smallint,
+  serial,
+  date,
+  char,
+} from 'drizzle-orm/pg-core';
 
 const defaultUuidPkField = () =>
   uuid('id')
@@ -8,18 +20,35 @@ const defaultUuidPkField = () =>
 
 const defaultSerialPkField = () => serial('id').primaryKey();
 
+const baseUserFields = () => ({
+  id: defaultUuidPkField(),
+  firstName: varchar('first_name', { length: 50 }).notNull(),
+  lastName: varchar('last_name', { length: 50 }),
+  email: varchar('email', { length: 255 }).unique().notNull(),
+  password: char('password', { length: 133 }).notNull(), // length of adonis scrypt output
+});
+
+export type BaseUserFields = {
+  id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string | null;
+};
+
+//---------------**************----------------
+
+export const adminsTable = pgTable('admins', {
+  ...baseUserFields(),
+  permission: integer('permission').default(0).notNull(),
+});
+
+export type Admin = typeof adminsTable.$inferSelect;
+
 //---------------**************----------------
 
 export const usersTable = pgTable('users', {
-  id: defaultUuidPkField(),
-  firstName: varchar('first_name', { length: 50 }),
-  lastName: varchar('last_name', { length: 50 }),
-  picture: text('picture'),
-  email: varchar('email', { length: 255 }).unique().notNull(),
-  permission: integer('permission').default(0).notNull(),
-  top5SkillsCSV: text('top_5_skills_csv'),
-
-  isAdmin: boolean('is_admin').default(false).notNull(),
+  ...baseUserFields(),
 });
 
 export type User = typeof usersTable.$inferSelect;

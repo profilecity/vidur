@@ -34,6 +34,7 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-cropper',
     'radix-vue/nuxt',
+    'nuxt-auth-utils',
   ],
   googleFonts: {
     families: {

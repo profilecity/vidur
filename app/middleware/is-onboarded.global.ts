@@ -7,6 +7,7 @@
  *   - Else, navigate to onboarding page.
  */
 export default defineNuxtRouteMiddleware((to) => {
+  return;
   const onboardingStatus = useOnboardingStatus();
   const auth = useAuth();
   const { redirectToLogin } = useSafeRedirectToLogin();
