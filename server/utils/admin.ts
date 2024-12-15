@@ -11,12 +11,5 @@ export default async function authenticateAdminRequest(event: H3Event) {
     return session;
   }
 
-  if (!session.user.isAdmin) {
-    throw createError({
-      statusCode: 401,
-      message: 'User is not an admin',
-    });
-  }
-
   return session;
 }

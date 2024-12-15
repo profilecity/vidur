@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
 
   if (inputKey === actualKey) {
     const db = await useDatabase();
-    await db.update(usersTable).set({ isAdmin: true }).where(eq(usersTable.id, session.user.id));
+    // await db.update(usersTable).set({ isAdmin: true }).where(eq(usersTable.id, session.user.id));
     return {
       result: true,
     };

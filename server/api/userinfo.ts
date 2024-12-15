@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     const session = {
       profile: {
         ...profile,
-        isAdmin: profile.isAdmin || bypassAdmin,
+        isAdmin: bypassAdmin,
       },
     };
 

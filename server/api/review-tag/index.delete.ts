@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import { z } from 'zod';
-import { ReviewTag, reviewTagsTable } from '~~/server/db/schema';
+import { type ReviewTag, reviewTagsTable } from '~~/server/db/schema';
 import authenticateAdminRequest from '~~/server/utils/admin';
 import { deleteReviewTagSchema } from '~~/shared/schemas/review-tags';
 

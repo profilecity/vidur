@@ -1,6 +1,6 @@
-import { type User, type UserHandle } from '~~/server/db/schema';
+import { type User } from '~~/server/db/schema';
 
-export type Applicant = { user: User; handles: UserHandle[] };
+export type Applicant = { user: User };
 export type Applicants = Record<string, Applicant>; // applicantId <> applicant
 export type Application = {
   createdAt: Date;

@@ -24,13 +24,7 @@ export default defineEventHandler(async (event) => {
     totalActiveApplicants += p.totalApplicants;
   });
 
-  const totalApplicants =
-    (
-      await db
-        .select({ count: count() })
-        .from(usersTable)
-        .where(not(eq(usersTable.isAdmin, true)))
-    )[0]?.count || 0;
+  const totalApplicants = (await db.select({ count: count() }).from(usersTable))[0]?.count || 0;
 
   const stats = {
     totalActivePostings,

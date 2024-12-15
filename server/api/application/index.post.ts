@@ -83,7 +83,6 @@ export default defineEventHandler(async (event) => {
     payload: {
       applicantId: session.user.id,
       postingId: body.postingId,
-      bearerToken: session.accessToken,
     },
   });
 

@@ -1,3 +1,22 @@
+<script setup lang="ts">
+import { loginSchema } from '~~/shared/schemas/authentication';
+
+const formSchema = toTypedSchema(loginSchema);
+const { handleSubmit, errors, defineField } = useForm({
+  validationSchema: formSchema,
+});
+
+const [email] = defineField('email');
+const [password] = defineField('password');
+
+const submit = handleSubmit(async (validatedData) => {
+  await $fetch('/api/admin/login', {
+    method: 'POST',
+    body: validatedData,
+  });
+});
+</script>
+
 <template>
   <main class="w-full h-full">
     <div class="justify-center flex mt-12">
@@ -7,9 +26,15 @@
     <div class="flex w-full items-center justify-center h-[calc(100vh-160px)] border">
       <div class="flex flex-col space-y-2 w-1/3">
         <InputLabel class="text-center" label-class="text-xl font-mont" label="Login">Login</InputLabel>
-        <InputText class="w-full" placeholder="Email" />
-        <InputText class="w-full" placeholder="Password" type-override="password" />
-        <InputButton>Login</InputButton>
+        <InputText class="w-full" placeholder="Email" v-model="email" :error="errors['email']" />
+        <InputText
+          class="w-full"
+          placeholder="Password"
+          type-override="password"
+          v-model="password"
+          :error="errors['password']"
+        />
+        <InputButton @click="submit">Login</InputButton>
       </div>
     </div>
   </main>
