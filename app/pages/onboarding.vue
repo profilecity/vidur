@@ -7,20 +7,26 @@ const { steps, currentStep, goToNextStep } = useOnboardingSteps();
 const { key, finishOnboarding } = useOnboarding();
 const logoId = ref('');
 const orgName = ref('');
+const registrationNeeded = ref(true);
 
-const step0Completed = (verifiedKey: string) => {
+const step0Completed = (verifiedKey: string, registrationNeededRes: boolean) => {
   key.value = verifiedKey;
+  registrationNeeded.value = registrationNeededRes;
   goToNextStep();
 };
 
-const step1Completed = (savedLogoId: string) => {
+const step1Completed = () => {
+  goToNextStep();
+};
+
+const step2Completed = (savedLogoId: string) => {
   logoId.value = savedLogoId;
   goToNextStep();
 };
 
 const settingUpCareerSite = ref(false);
 const errorSettingUpCareerSite = ref(false);
-const step2Completed = async (savedOrgName: string) => {
+const step3Completed = async (savedOrgName: string) => {
   orgName.value = savedOrgName;
   goToNextStep();
   try {
@@ -46,14 +52,21 @@ const step2Completed = async (savedOrgName: string) => {
       <InputStep class="mx-auto" :steps :step="currentStep" />
     </section>
     <section class="w-full mt-16 flex items-center">
-      <OnboardingLogoUpload class="w-1/2 mx-auto" v-if="currentStep == 1" @done="step1Completed" />
+      <OnboardingRegister
+        class="w-1/3 mx-auto mt-12"
+        :register="registrationNeeded"
+        :onboarding-key="key"
+        v-if="currentStep == 1"
+        @done="step1Completed"
+      />
+      <OnboardingLogoUpload class="w-1/2 mx-auto" v-else-if="currentStep == 2" @done="step2Completed" />
       <OnboardingCareerSiteConfig
         class="w-1/2 mx-auto"
         :logo="logoId"
-        v-else-if="currentStep == 2"
-        @done="step2Completed"
+        v-else-if="currentStep == 3"
+        @done="step3Completed"
       />
-      <div class="w-1/2 mx-auto" v-if="currentStep == 3">
+      <div class="w-1/2 mx-auto" v-else-if="currentStep == 4">
         <div class="text-center">
           <div class="text-2xl text-zinc-700 font-noto" v-if="settingUpCareerSite">
             Setting up the career site. <br />

@@ -5,21 +5,21 @@ import { getRole } from '../utils/auth';
 
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, registerSchema.parse);
+
   const onboardingToken = getHeader(event, 'x-onboarding-token');
+  const actualOnboardingToken = await general_memoryStorage.getItem('firstSetupAccessKey');
 
   const db = await useDatabase();
 
-  const userAlreadyExist =
-    (await db.select({ count: count() }).from(usersTable).where(eq(usersTable.email, body.email)))[0]!.count === 1;
+  const users = await db.select({ id: usersTable.id }).from(usersTable).where(eq(usersTable.email, body.email));
+  const user = users && users.length === 1 ? users[0] : undefined;
 
-  if (userAlreadyExist) {
+  if (user) {
     throw createError({
       statusCode: 400,
-      message: 'Email taken',
+      message: 'Email is already taken',
     });
   }
-
-  const actualOnboardingToken = await general_memoryStorage.getItem('firstSetupAccessKey');
 
   let isAdmin = false;
   if (actualOnboardingToken && onboardingToken === actualOnboardingToken) {

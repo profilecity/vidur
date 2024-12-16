@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const emits = defineEmits<{
-  done: [string];
+  done: [string, boolean];
 }>();
 
 const key = ref('');
@@ -11,12 +11,12 @@ const verify = async () => {
   if (!key.value) return;
   try {
     isVerifying.value = true;
-    const response = await $fetch<{ result: boolean }>('/api/onboarding/validate-key', {
+    const response = await $fetch<{ result: boolean; registrationNeeded: boolean }>('/api/onboarding/validate-key', {
       method: 'POST',
       body: { key: key.value },
     });
     if (response.result) {
-      emits('done', key.value);
+      emits('done', key.value, response.registrationNeeded);
     } else {
       error.value = 'Invalid Key. Try again.';
     }

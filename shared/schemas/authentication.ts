@@ -10,7 +10,7 @@ export const passwordSchema = z
 
 export const loginSchema = z.object({
   email: z.string().email(),
-  password: passwordSchema,
+  password: z.string(),
 });
 
 export const registerSchema = z.object({
