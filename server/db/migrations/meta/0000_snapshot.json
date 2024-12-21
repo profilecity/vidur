@@ -66,9 +66,7 @@
         "admins_email_unique": {
           "name": "admins_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       }
     },
@@ -108,9 +106,7 @@
         "candidate_pool_email_unique": {
           "name": "candidate_pool_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       }
     },
@@ -251,12 +247,8 @@
           "name": "job_postings_owner_id_admins_id_fk",
           "tableFrom": "job_postings",
           "tableTo": "admins",
-          "columnsFrom": [
-            "owner_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["owner_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -350,12 +342,8 @@
           "name": "posting_applicants_candidate_id_candidate_pool_id_fk",
           "tableFrom": "posting_applicants",
           "tableTo": "candidate_pool",
-          "columnsFrom": [
-            "candidate_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["candidate_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -363,12 +351,8 @@
           "name": "posting_applicants_job_id_job_postings_id_fk",
           "tableFrom": "posting_applicants",
           "tableTo": "job_postings",
-          "columnsFrom": [
-            "job_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["job_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
