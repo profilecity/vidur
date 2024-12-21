@@ -1,5 +1,5 @@
 import { inArray } from 'drizzle-orm';
-import { postingApplicantsTable, type User, usersTable } from '../db/schema';
+import { postingApplicantsTable, type Candidate, candidatesTable } from '../db/schema';
 import authenticateAdminRequest from '../utils/admin';
 import { applicationsLookupSchema } from '~~/shared/schemas/application';
 
@@ -47,14 +47,17 @@ export default defineEventHandler(async (event) => {
 
   const applicantRecords =
     applicantIds.length > 0
-      ? await db.select({ user: usersTable }).from(usersTable).where(inArray(usersTable.id, applicantIds))
+      ? await db
+          .select({ candidate: candidatesTable })
+          .from(candidatesTable)
+          .where(inArray(candidatesTable.id, applicantIds))
       : [];
 
-  const applicants: Record<string, { user: User }> = {};
+  const applicants: Record<string, { candidate: Candidate }> = {};
 
   applicantRecords.forEach((a) => {
-    applicants[a.user.id] = {
-      user: a.user,
+    applicants[a.candidate.id] = {
+      candidate: a.candidate,
     };
   });
 

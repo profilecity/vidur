@@ -1,5 +1,5 @@
 import { eq, inArray } from 'drizzle-orm';
-import { hooksTable, jobPostingsTable, usersTable } from '~~/server/db/schema';
+import { hooksTable, jobPostingsTable, adminsTable } from '~~/server/db/schema';
 
 export default defineTask<boolean>({
   meta: {
@@ -29,13 +29,13 @@ export default defineTask<boolean>({
 
     const applicantResult = await db
       .select({
-        id: usersTable.id,
-        firstName: usersTable.firstName,
-        lastName: usersTable.lastName,
-        email: usersTable.email,
+        id: adminsTable.id,
+        firstName: adminsTable.firstName,
+        lastName: adminsTable.lastName,
+        email: adminsTable.email,
       })
-      .from(usersTable)
-      .where(eq(usersTable.id, applicantId));
+      .from(adminsTable)
+      .where(eq(adminsTable.id, applicantId));
 
     if (!(Array.isArray(applicantResult) && applicantResult.length == 1)) {
       console.error('hooks:application-create', 'no applicant found. applicant id', applicantId);

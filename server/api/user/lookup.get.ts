@@ -1,5 +1,5 @@
 import { and, eq, ilike, or } from 'drizzle-orm';
-import { usersTable } from '~~/server/db/schema';
+import { adminsTable } from '~~/server/db/schema';
 import authenticateAdminRequest from '~~/server/utils/admin';
 
 export default defineEventHandler(async (event) => {
@@ -21,9 +21,11 @@ export default defineEventHandler(async (event) => {
 
   const users = await db
     .select()
-    .from(usersTable)
+    .from(adminsTable)
     .where(
-      and(or(ilike(usersTable.firstName, looseQ), ilike(usersTable.lastName, looseQ), ilike(usersTable.email, looseQ)))
+      and(
+        or(ilike(adminsTable.firstName, looseQ), ilike(adminsTable.lastName, looseQ), ilike(adminsTable.email, looseQ))
+      )
     );
 
   if (IS_DEV) {

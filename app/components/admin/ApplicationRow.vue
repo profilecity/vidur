@@ -4,46 +4,29 @@ const props = defineProps<{
   application: Application;
 }>();
 
-const user = props.applicant.user;
-const resume = props.applicant.handles.find((h) => h.key == 'resume')?.value;
-const isResumeAvailable = Boolean(resume);
+const candidate = props.applicant.candidate;
 </script>
 
 <template>
   <div
     class="flex bg-white border border-zinc-200 rounded-xl items-center justify-between py-2 px-4"
-    v-if="props.applicant && user"
+    v-if="props.applicant && candidate"
   >
     <div class="flex">
-      <div class="flex items-center">
-        <div class="w-10 h-10 mr-2">
-          <img
-            class="rounded-xl"
-            :src="user.picture || undefined"
-            width="36"
-            height="36"
-            :alt="`${user.firstName}'s Profile Picture'`"
-          />
-        </div>
-        <div class="font-medium text-zinc-800">
-          <span class="font-bold">{{ user.firstName + ' ' + user.lastName }}</span
-          ><br />
-          <span class="text-zinc-700">{{ user.email }}</span>
-        </div>
+      <div class="font-medium text-zinc-800">
+        <span class="font-bold">
+          {{ candidate.firstName + ' ' + candidate.lastName }}
+        </span>
+        <br />
+        <span class="text-zinc-700">{{ candidate.email }}</span>
       </div>
     </div>
     <div class="flex items-center justify-between space-x-20">
-      <div class="whitespace-nowrap">
-        <HandleFlexStrip :handles="applicant.handles" />
-      </div>
       <div class="whitespace-nowrap">
         <div class="text-left">
           {{ timeAgo(new Date(application.createdAt)) }}
         </div>
       </div>
-      <InputButton variant="secondary" as="a" target="_blank" :href="resume" :disabled="!isResumeAvailable">
-        View Resume
-      </InputButton>
     </div>
   </div>
 </template>

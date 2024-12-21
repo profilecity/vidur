@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { User } from '~~/server/db/schema';
+import type { Admin } from '~~/server/db/schema';
 
 const props = defineProps<{
-  member: User;
+  member: Admin;
 }>();
 
 const { deleteData } = await useMembersRepository();
-const { profile } = useAuth();
+const { user: profile } = useUserSession();
 
 const onRemove = () => {
   deleteData({ id: props.member.id });

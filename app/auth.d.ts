@@ -1,10 +1,7 @@
-import type { BaseUserFields } from '~~/server/db/schema';
+import type { Admin } from '~~/server/db/schema';
 
 declare module '#auth-utils' {
-  interface User {
-    role: 'admin' | 'user';
-    id: string;
-  }
+  interface User extends Admin {}
 }
 
 export {};

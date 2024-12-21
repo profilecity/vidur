@@ -22,18 +22,18 @@ const defaultSerialPkField = () => serial('id').primaryKey();
 
 //---------------**************----------------
 
-export const usersTable = pgTable('users', {
+export const adminsTable = pgTable('admins', {
   id: defaultUuidPkField(),
   firstName: varchar('first_name', { length: 50 }).notNull(),
   lastName: varchar('last_name', { length: 50 }),
   picture: text('picture'),
   email: varchar('email', { length: 255 }).unique().notNull(),
   password: char('password', { length: 133 }).notNull(), // length of adonis scrypt output
-  isAdmin: boolean('is_admin').default(false).notNull(),
+  isDeleted: boolean('is_admin').default(false).notNull(),
   permission: integer('permission').default(0).notNull(),
 });
 
-export type User = typeof usersTable.$inferSelect;
+export type Admin = typeof adminsTable.$inferSelect;
 
 //---------------**************----------------
 
@@ -42,7 +42,7 @@ export const jobPostingsTable = pgTable('job_postings', {
   title: varchar('title', { length: 150 }).notNull(),
   contents: text('contents'),
   tagsCSV: text('tags_csv'),
-  owner: uuid('owner_id').references(() => usersTable.id, {
+  owner: uuid('owner_id').references(() => adminsTable.id, {
     onDelete: 'set null',
   }),
   isPublished: boolean('is_published').default(false).notNull(),
@@ -57,10 +57,21 @@ export type JobPosting = typeof jobPostingsTable.$inferSelect;
 
 //---------------**************----------------
 
+export const candidatesTable = pgTable('candidate_pool', {
+  id: defaultUuidPkField(),
+  firstName: varchar('first_name', { length: 50 }).notNull(),
+  lastName: varchar('last_name', { length: 50 }),
+  email: varchar('email', { length: 255 }).unique().notNull(),
+});
+
+export type Candidate = typeof candidatesTable.$inferSelect;
+
+//---------------**************----------------
+
 export const postingApplicantsTable = pgTable('posting_applicants', {
   id: defaultUuidPkField(),
-  candidateId: uuid('owner_id')
-    .references(() => usersTable.id, {
+  candidateId: uuid('candidate_id')
+    .references(() => candidatesTable.id, {
       onDelete: 'cascade',
     })
     .notNull(),

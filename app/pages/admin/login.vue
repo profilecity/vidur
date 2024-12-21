@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { loginSchema } from '~~/shared/schemas/authentication';
 
+const { loggedIn, fetch: loadSession } = useUserSession();
+const { redirectPostLogin } = useSafeRedirectToLogin(useRoute());
+
+if (loggedIn.value) {
+  console.log('Already logged in, sending back....');
+  redirectPostLogin();
+}
+
 const formSchema = toTypedSchema(loginSchema);
 const { handleSubmit, errors, defineField } = useForm({
   validationSchema: formSchema,
@@ -14,6 +22,8 @@ const submit = handleSubmit(async (validatedData) => {
     method: 'POST',
     body: validatedData,
   });
+  loadSession();
+  redirectPostLogin();
 });
 </script>
 

@@ -2,10 +2,6 @@
 const route = useRoute();
 const id = route.params.id as string;
 
-const { isSignedIn } = useAuth();
-const { redirectToLogin } = useSafeRedirectToLogin();
-
-const { data: applicationStatus, refresh: refreshApplicationStatus, status } = useApplicationStatus(id);
 const { data: posting } = await usePublicPostingRepository({ id });
 
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
@@ -23,37 +19,20 @@ const tags = computed<string[]>(() => {
 });
 
 const isApplying = ref(false);
+const appliedSuccessfully = ref(false);
 const apply = async () => {
-  if (!route.query.fromOnboard) {
-    await navigateTo('https://connect.profilecity.xyz?callback=' + window.location.href, { external: true });
-    return;
-  }
   try {
     isApplying.value = true;
     await $fetch('/api/application', {
       method: 'POST',
       body: { postingId: id },
     });
-    refreshApplicationStatus();
   } catch (e) {
     console.error('Error occured while applying', e);
   } finally {
     isApplying.value = false;
   }
 };
-
-onMounted(async () => {
-  if (route.query.fromOnboard) {
-    if (!isSignedIn.value) {
-      await redirectToLogin(route.fullPath);
-    }
-    watch(status, (s) => {
-      if (s == 'success' && (!applicationStatus.value || !applicationStatus.value.userAlreadyApplied)) {
-        apply();
-      }
-    });
-  }
-});
 </script>
 
 <template>
@@ -93,10 +72,7 @@ onMounted(async () => {
               </div>
             </div>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-2">
-              <div
-                class="flex w-full items-center justify-center text-green-500 space-x-2"
-                v-if="applicationStatus?.userAlreadyApplied"
-              >
+              <div class="flex w-full items-center justify-center text-green-500 space-x-2" v-if="appliedSuccessfully">
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
@@ -142,10 +118,7 @@ onMounted(async () => {
               </div>
             </div>
             <div class="space-y-2">
-              <div
-                class="flex w-full items-center justify-center text-green-500 space-x-2"
-                v-if="applicationStatus?.userAlreadyApplied"
-              >
+              <div class="flex w-full items-center justify-center text-green-500 space-x-2" v-if="appliedSuccessfully">
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>

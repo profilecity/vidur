@@ -3,7 +3,6 @@ import { createJobPostingSchema } from '~~/shared/schemas/posting';
 
 definePageMeta({
   layout: 'admin',
-  middleware: 'admin-auth',
 });
 
 useHead({

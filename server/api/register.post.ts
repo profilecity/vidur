@@ -1,17 +1,24 @@
 import { registerSchema } from '~~/shared/schemas/authentication';
-import { usersTable } from '../db/schema';
-import { count, eq } from 'drizzle-orm';
-import { getRole } from '../utils/auth';
+import { adminsTable } from '../db/schema';
+import { eq } from 'drizzle-orm';
 
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, registerSchema.parse);
 
-  const onboardingToken = getHeader(event, 'x-onboarding-token');
+  const onboardingToken = getHeader(event, 'X-Onboarding-Token');
+  if (!onboardingToken) {
+    console.log('Here 1');
+    throw createUnauthorisedError();
+  }
+
   const actualOnboardingToken = await general_memoryStorage.getItem('firstSetupAccessKey');
+  if (onboardingToken !== actualOnboardingToken) {
+    throw createUnauthorisedError();
+  }
 
   const db = await useDatabase();
 
-  const users = await db.select({ id: usersTable.id }).from(usersTable).where(eq(usersTable.email, body.email));
+  const users = await db.select({ id: adminsTable.id }).from(adminsTable).where(eq(adminsTable.email, body.email));
   const user = users && users.length === 1 ? users[0] : undefined;
 
   if (user) {
@@ -21,29 +28,20 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  let isAdmin = false;
-  if (actualOnboardingToken && onboardingToken === actualOnboardingToken) {
-    isAdmin = true;
-  }
-
   const insertedUsers = await db
-    .insert(usersTable)
+    .insert(adminsTable)
     .values({
       firstName: body.firstName,
       lastName: body.lastName,
       email: body.email,
       password: await hashPassword(body.password),
-      isAdmin,
     })
     .returning();
 
   if (insertedUsers && insertedUsers.length === 1) {
     const user = insertedUsers[0]!;
     await setUserSession(event, {
-      user: {
-        id: user.id,
-        role: getRole(user),
-      },
+      user,
     });
     return sendNoContent(event);
   }

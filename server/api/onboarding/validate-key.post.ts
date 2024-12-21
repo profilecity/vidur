@@ -1,5 +1,5 @@
-import { eq, count } from 'drizzle-orm';
-import { usersTable } from '~~/server/db/schema';
+import { count } from 'drizzle-orm';
+import { adminsTable } from '~~/server/db/schema';
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
@@ -14,8 +14,7 @@ export default defineEventHandler(async (event) => {
 
   if (inputKey === actualKey) {
     const db = await useDatabase();
-    const registrationNeeded =
-      (await db.select({ count: count() }).from(usersTable).where(eq(usersTable.isAdmin, true)))[0]!.count == 0;
+    const registrationNeeded = (await db.select({ count: count() }).from(adminsTable))[0]!.count == 0;
     return {
       result: true,
       registrationNeeded,
