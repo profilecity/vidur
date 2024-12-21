@@ -3,16 +3,21 @@ import type { Step } from '~~/shared/types/general';
 const steps: Step[] = [
   {
     step: 1,
+    title: 'Personal Details',
+    icon: 'mdi:user-outline',
+  },
+  {
+    step: 2,
     title: 'Logo',
     icon: 'octicon:upload-16',
   },
   {
-    step: 2,
+    step: 3,
     title: 'Career Site',
     icon: 'icon-park-outline:config',
   },
   {
-    step: 3,
+    step: 4,
     title: 'Done!',
     icon: 'mingcute:celebrate-line',
   },

@@ -4,7 +4,6 @@ import { updateJobPostingSchema } from '~~/shared/schemas/posting';
 
 definePageMeta({
   layout: 'admin',
-  middleware: 'admin-auth',
 });
 
 const route = useRoute();

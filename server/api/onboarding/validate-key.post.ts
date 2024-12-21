@@ -1,9 +1,7 @@
-import { eq } from 'drizzle-orm';
-import { usersTable } from '~~/server/db/schema';
-import authenticateRequest from '~~/server/utils/auth';
+import { count } from 'drizzle-orm';
+import { adminsTable } from '~~/server/db/schema';
 
 export default defineEventHandler(async (event) => {
-  const session = await authenticateRequest(event);
   const body = await readBody(event);
   if (!body.key) {
     return createError({
@@ -16,11 +14,12 @@ export default defineEventHandler(async (event) => {
 
   if (inputKey === actualKey) {
     const db = await useDatabase();
-    await db.update(usersTable).set({ isAdmin: true }).where(eq(usersTable.id, session.user.id));
+    const registrationNeeded = (await db.select({ count: count() }).from(adminsTable))[0]!.count == 0;
     return {
       result: true,
+      registrationNeeded,
     };
   }
 
-  return { result: false };
+  return { result: false, registrationNeeded: false };
 });

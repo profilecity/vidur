@@ -1,9 +1,4 @@
 import { type CareerSiteConfig, type SEOConfig } from '~~/shared/schemas/setting';
-import type { Session } from '~~/shared/types/profile-types';
-
-export function useSessionState() {
-  return useState<Session | null>('oauth_session');
-}
 
 export function useRemoteAssetBaseState() {
   return useState<string>('remote-asset-base-url');

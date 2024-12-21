@@ -1,6 +1,6 @@
-import { type User, type UserHandle } from '~~/server/db/schema';
+import { type Candidate } from '~~/server/db/schema';
 
-export type Applicant = { user: User; handles: UserHandle[] };
+export type Applicant = { candidate: Candidate };
 export type Applicants = Record<string, Applicant>; // applicantId <> applicant
 export type Application = {
   createdAt: Date;
@@ -54,12 +54,4 @@ export function useApplications() {
     applicants,
     applications,
   };
-}
-
-export function useApplicationStatus(postingId: string) {
-  const auth = useAuth();
-  return useFetch('/api/application-status', {
-    query: { postingId },
-    immediate: auth.isSignedIn.value,
-  });
 }

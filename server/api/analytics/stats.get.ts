@@ -1,5 +1,5 @@
 import { count, eq, not } from 'drizzle-orm';
-import { jobPostingsTable, usersTable } from '~~/server/db/schema';
+import { jobPostingsTable, adminsTable } from '~~/server/db/schema';
 import authenticateAdminRequest from '~~/server/utils/admin';
 
 export type Stats = {
@@ -24,13 +24,7 @@ export default defineEventHandler(async (event) => {
     totalActiveApplicants += p.totalApplicants;
   });
 
-  const totalApplicants =
-    (
-      await db
-        .select({ count: count() })
-        .from(usersTable)
-        .where(not(eq(usersTable.isAdmin, true)))
-    )[0]?.count || 0;
+  const totalApplicants = (await db.select({ count: count() }).from(adminsTable))[0]?.count || 0;
 
   const stats = {
     totalActivePostings,

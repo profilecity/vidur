@@ -1,7 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'admin',
-  middleware: 'admin-auth',
 });
 
 useHead({
@@ -9,7 +8,7 @@ useHead({
 });
 
 const { data: postings } = await usePostingsRepository();
-const { profile } = useAuth();
+const { user: profile } = useUserSession();
 </script>
 
 <template>

@@ -1,6 +1,5 @@
-import { eq } from 'drizzle-orm';
 import { addMemberSchema } from '~~/shared/schemas/setting';
-import { usersTable } from '~~/server/db/schema';
+import { adminsTable } from '~~/server/db/schema';
 import authenticateAdminRequest from '~~/server/utils/admin';
 
 export default defineEventHandler(async (event) => {
@@ -10,5 +9,5 @@ export default defineEventHandler(async (event) => {
 
   const db = await useDatabase();
 
-  await db.update(usersTable).set({ isAdmin: true }).where(eq(usersTable.id, request.id));
+  // await db.update(usersTable).set({ isAdmin: true }).where(eq(usersTable.id, request.id));
 });

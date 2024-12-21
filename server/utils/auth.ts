@@ -1,59 +1,42 @@
 import { H3Event } from 'h3';
-import type { User } from '../db/schema';
-import { getToken } from './jwt';
+import { adminsTable, type Admin } from '../db/schema';
+import { eq } from 'drizzle-orm';
 
 export type Credentials = {
   token: string;
   tokenType: string;
 };
 
-export default async function authenticateRequest(
-  event: H3Event,
-  options: { useTokenFromHeader?: boolean } = { useTokenFromHeader: false }
-): Promise<{ user: User; accessToken: string }> {
-  try {
-    const config = useRuntimeConfig();
+export function createUnauthorisedError() {
+  return createError({
+    statusCode: 401,
+    message: 'Session not authenticated',
+  });
+}
 
-    if (!config.services.profileCity) {
-      throw new Error('profileCity service URL is required to authenticate');
+export default async function authenticateRequest(event: H3Event): Promise<{ user: Admin }> {
+  const session = await getUserSession(event);
+
+  if (IS_DEV) {
+    console.log('Authenticating Admin', session.user!.id);
+  }
+
+  if (session && session.user) {
+    const db = await useDatabase();
+    const users = await db.select().from(adminsTable).where(eq(adminsTable.id, session.user.id));
+    if (!users || !users.length) {
+      throw createUnauthorisedError();
+    }
+    const user = users[0]!;
+
+    if (user.isDeleted) {
+      throw createUnauthorisedError();
     }
 
-    const accessToken = await getToken(event, options);
-
-    let user: User | null | undefined = null;
-
-    let verifiedDetails;
-    try {
-      verifiedDetails = await decodeAndValidate(accessToken);
-    } catch (error: any) {
-      throw createError({
-        statusCode: 401,
-        message: 'Error decoding JWT, most likely expired',
-      });
-    }
-    if (!verifiedDetails) {
-      throw createError({
-        statusCode: 401,
-        message: 'Invalid Details from Token',
-      });
-    }
-    user = await getOrCreateUser(verifiedDetails, accessToken);
-
-    if (!user) {
-      throw createError({
-        statusCode: 400,
-        message: 'Bad Request: Invalid User',
-      });
-    }
-    return {
-      user,
-      accessToken,
-    };
-  } catch (e) {
-    // @ts-expect-error
-    if (e.statusCode === 401) {
-      deleteCookie(event, 'oauth_access_token');
-    }
-    throw e;
+    // @ts-expect-error password deleted, but type says otherwise.
+    delete user.password;
+    return { user };
+  } else {
+    throw createUnauthorisedError();
   }
 }
