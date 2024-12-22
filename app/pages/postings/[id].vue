@@ -48,7 +48,7 @@ const apply = async () => {
               <span>Back To Jobs</span>
             </InputButton>
           </div>
-          <div class="text-sm text-zinc-500 italic mb-2">Posted {{ formatDate(new Date(posting.updatedAt)) }}</div>
+          <div class="text-sm text-zinc-500 italic mb-2">Posted {{ timeAgo(new Date(posting.updatedAt)) }}</div>
           <header class="mb-4">
             <!-- Title -->
             <h1 class="text-2xl md:text-3xl text-zinc-800 font-bold">
