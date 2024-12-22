@@ -17,7 +17,7 @@ defineProps<{
 
 <style scoped>
 .link {
-  @apply flex items-center px-2.5 py-2 rounded-xl whitespace-nowrap text-zinc-600 hover:bg-zinc-50 hover:border hover:border-zinc-100;
+  @apply flex items-center px-2.5 py-2 rounded-xl whitespace-nowrap text-zinc-600 hover:bg-zinc-50 hover:border-zinc-100;
 }
 
 .link-active {
