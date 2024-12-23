@@ -11,7 +11,11 @@ import {
   serial,
   date,
   char,
+  pgEnum,
+  json,
 } from 'drizzle-orm/pg-core';
+import { employmentTypeIds } from '../../shared/employment-types';
+import type { PostalAddressList, Salary } from '../../shared/types/posting-types';
 
 const defaultUuidPkField = () =>
   uuid('id')
@@ -19,6 +23,8 @@ const defaultUuidPkField = () =>
     .$default(() => sql`gen_random_uuid()`);
 
 const defaultSerialPkField = () => serial('id').primaryKey();
+
+export const employmentTypeEnum = pgEnum('employment_type', employmentTypeIds);
 
 //---------------**************----------------
 
@@ -42,15 +48,21 @@ export const jobPostingsTable = pgTable('job_postings', {
   title: varchar('title', { length: 150 }).notNull(),
   contents: text('contents'),
   tagsCSV: text('tags_csv'),
+
+  isPublished: boolean('is_published').default(false).notNull(),
+  validTill: date('valid_till', { mode: 'date' }),
+  employmentType: employmentTypeEnum('employment_type').default(employmentTypeIds[0]).notNull(),
+  jobLocations: json('job_locations').$type<PostalAddressList>(),
+  isRemote: boolean('is_remote').default(false).notNull(),
+  baseSalary: json('base_salary').$type<Salary>(),
+
+  totalApplicants: integer('total_applicants').default(0).notNull(),
+  isExpired: boolean('is_expired').default(false).notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
   owner: uuid('owner_id').references(() => adminsTable.id, {
     onDelete: 'set null',
   }),
-  isPublished: boolean('is_published').default(false).notNull(),
-  totalApplicants: integer('total_applicants').default(0).notNull(),
-  isExpired: boolean('is_expired').default(false).notNull(),
-  validTill: date('valid_till', { mode: 'date' }),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
 export type JobPosting = typeof jobPostingsTable.$inferSelect;
