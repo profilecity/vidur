@@ -8,7 +8,7 @@ export function useSafeRedirectToLogin(route: ReturnType<typeof useRoute>) {
     }
     nextURLCookie.value = nextURL;
 
-    return navigateTo('/login');
+    return navigateTo('/admin/login');
   };
 
   const redirectPostLogin = () => {
