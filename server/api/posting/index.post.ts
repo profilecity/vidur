@@ -26,6 +26,11 @@ export default defineEventHandler(async (event) => {
 
   const postings = (await general_memoryStorage.getItem<JobPosting[]>('postings')) || [];
 
+  if (jobPostingDTO.isPublished) {
+    const totalActivePostings = (await general_memoryStorage.getItem<number>('totalActivePostings')) || 0;
+    await general_memoryStorage.setItem<number>('totalActivePostings', totalActivePostings + 1);
+  }
+
   postings.unshift(newPosting);
   await general_memoryStorage.setItem('postings', postings);
 });
