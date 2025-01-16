@@ -52,11 +52,6 @@ const submit = handleSubmit(async (validatedData) => {
           :error="errors['password']"
         />
         <InputButton @click="submit">Login</InputButton>
-
-        <div class="text-center">
-          <span class="text-sm text-zinc-600">Don't have an account? </span>
-          <NuxtLink to="/register" class="text-sm text-primary">Register</NuxtLink>
-        </div>
       </div>
     </div>
   </main>

@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
 
   const onboardingToken = getHeader(event, 'X-Onboarding-Token');
   if (!onboardingToken) {
-    console.log('Here 1');
     throw createUnauthorisedError();
   }
 
