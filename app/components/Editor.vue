@@ -26,6 +26,7 @@ const props = withDefaults(
     placeholder?: string;
     id?: string;
     readOnly?: boolean;
+    editorClass?: string;
   }>(),
   {
     id: 'vidur-editor',
@@ -45,6 +46,11 @@ onMounted(() => {
     content: editorContent.value,
     extensions: [
       StarterKit.configure({
+        paragraph: {
+          HTMLAttributes: {
+            class: 'text-sm',
+          },
+        },
         bold: {
           HTMLAttributes: {
             class: 'font-bold',
@@ -78,7 +84,7 @@ onMounted(() => {
             3: 'text-xl',
             4: 'text-lg',
             5: 'text-md',
-            6: 'text-base',
+            6: 'text-sm',
           };
           return [
             `h${level}`,
@@ -292,7 +298,7 @@ watchEffect(() => {
       </ToolbarToggleGroup>
     </ToolbarRoot>
     <EditorContent
-      :class="readOnly ? '' : 'border-b border-x rounded-b-lg bg-white p-1'"
+      :class="{ 'border-b border-x rounded-b-lg bg-white p-1': !readOnly, [editorClass || '']: !!editorClass }"
       :editor
       :disabled="readOnly"
     />
