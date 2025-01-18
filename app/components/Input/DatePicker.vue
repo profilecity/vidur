@@ -52,83 +52,85 @@ const onSelect = () => {
   // @ts-expect-error
   selectedDate.value = dateModel.value;
 };
+
+const onClear = () => {
+  open.value = false;
+  selectedDate.value = undefined;
+};
 </script>
 
 <template>
-  <div class="flex items-center border p-1 rounded-lg space-x-2">
-    <!-- @vue-expect-error -->
-    <DatePickerRoot id="date-field" :is-date-disabled v-model:open="open" v-model:model-value="dateModel" :disabled>
-      <DatePickerField class="flex items-center space-x-2 text-zinc-800 border border-transparent">
-        <div class="flex flex-col">
-          <Label class="text-sm text-zinc-800 font-bold" for="date-field">{{ props.label }}</Label>
-          <span class="text-xs text-zinc-400" v-if="selectedDate">{{
-            `${selectedDate.month}/${selectedDate.day}/${selectedDate.year}`
-          }}</span>
-        </div>
-        <DatePickerTrigger
-          class="rounded-md text-lg focus:shadow-black flex items-center hover:bg-zinc-200 p-1 border"
-          @click="open = !open"
-        >
-          <Icon icon="radix-icons:calendar" class="w-5 h-5" />
-        </DatePickerTrigger>
-      </DatePickerField>
-
-      <DatePickerContent
-        :side-offset="2"
-        class="border shadow-md rounded-xl bg-white data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
+  <!-- @vue-expect-error -->
+  <DatePickerRoot id="date-field" :is-date-disabled v-model:open="open" v-model:model-value="dateModel" :disabled>
+    <DatePickerField class="flex items-center space-x-2 border border-transparent justify-start w-full">
+      <DatePickerTrigger
+        class="rounded-md text-lg focus:shadow-black flex items-center hover:bg-zinc-200 p-1 border"
+        @click="open = !open"
       >
-        <DatePickerArrow class="fill-white" />
-        <DatePickerCalendar v-slot="{ weekDays, grid }" class="p-4">
-          <DatePickerHeader class="flex items-center justify-between">
-            <DatePickerPrev
-              class="text-zinc-400 justify-center rounded-lg w-8 h-8 hover:border inline-flex items-center"
-            >
-              <Icon icon="radix-icons:chevron-left" class="w-6 h-6" />
-            </DatePickerPrev>
+        <Icon icon="radix-icons:calendar" class="w-5 h-5" />
+      </DatePickerTrigger>
+      <div class="flex flex-col text-sm">
+        <span v-if="selectedDate">
+          {{ `${selectedDate.month}/${selectedDate.day}/${selectedDate.year}` }}
+        </span>
+        <span v-else> Select a date </span>
+      </div>
+    </DatePickerField>
 
-            <DatePickerHeading class="text-black font-bold font-lato" />
-            <DatePickerNext
-              class="text-zinc-400 justify-center rounded-lg w-8 h-8 hover:border inline-flex items-center"
-            >
-              <Icon icon="radix-icons:chevron-right" class="w-6 h-6" />
-            </DatePickerNext>
-          </DatePickerHeader>
-          <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-            <DatePickerGrid
-              v-for="month in grid"
-              :key="month.value.toString()"
-              class="w-full border-collapse select-none space-y-1"
-            >
-              <DatePickerGridHead>
-                <DatePickerGridRow class="mb-1 flex w-full justify-between">
-                  <DatePickerHeadCell v-for="day in weekDays" :key="day" class="w-8 rounded-md text-xs text-green8">
-                    {{ day }}
-                  </DatePickerHeadCell>
-                </DatePickerGridRow>
-              </DatePickerGridHead>
-              <DatePickerGridBody>
-                <DatePickerGridRow
-                  v-for="(weekDates, index) in month.rows"
-                  :key="`weekDate-${index}`"
-                  class="flex w-full"
-                >
-                  <DatePickerCell v-for="weekDate in weekDates" :key="weekDate.toString()" :date="weekDate">
-                    <DatePickerCellTrigger
-                      :day="weekDate"
-                      :month="month.value"
-                      class="relative flex items-center justify-center whitespace-nowrap rounded-lg border text-sm font-normal text-zinc-700 w-8 h-8 outline-none hover:border-zinc-300 data-[selected]:bg-zinc-800 data-[selected]:font-medium data-[disabled]:text-zinc-300 data-[selected]:text-white data-[unavailable]:pointer-events-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-green9 data-[selected]:before:bg-white"
-                    />
-                  </DatePickerCell>
-                </DatePickerGridRow>
-              </DatePickerGridBody>
-            </DatePickerGrid>
-          </div>
-        </DatePickerCalendar>
-        <div class="flex justify-between items-center text-sm text-zinc-500 mb-2 px-4">
-          <span>{{ `${dateModel.month}/${dateModel.day}/${dateModel.year}` }}</span>
-          <InputButton :size="'sm'" @click.prevent="onSelect">Select</InputButton>
+    <DatePickerContent
+      :side-offset="2"
+      class="border shadow-md rounded-xl bg-white data-[state=open]:data-[side=top]:animate-slideDownAndFade data-[state=open]:data-[side=right]:animate-slideLeftAndFade data-[state=open]:data-[side=bottom]:animate-slideUpAndFade data-[state=open]:data-[side=left]:animate-slideRightAndFade"
+    >
+      <DatePickerArrow class="fill-white" />
+      <DatePickerCalendar v-slot="{ weekDays, grid }" class="p-4">
+        <DatePickerHeader class="flex items-center justify-between">
+          <DatePickerPrev class="text-zinc-400 justify-center rounded-lg w-8 h-8 hover:border inline-flex items-center">
+            <Icon icon="radix-icons:chevron-left" class="w-6 h-6" />
+          </DatePickerPrev>
+
+          <DatePickerHeading class="text-black font-bold font-lato" />
+          <DatePickerNext class="text-zinc-400 justify-center rounded-lg w-8 h-8 hover:border inline-flex items-center">
+            <Icon icon="radix-icons:chevron-right" class="w-6 h-6" />
+          </DatePickerNext>
+        </DatePickerHeader>
+        <div class="flex flex-col space-y-4 pt-4 sm:flex-row sm:space-x-4 sm:space-y-0">
+          <DatePickerGrid
+            v-for="month in grid"
+            :key="month.value.toString()"
+            class="w-full border-collapse select-none space-y-1"
+          >
+            <DatePickerGridHead>
+              <DatePickerGridRow class="mb-1 flex w-full justify-between">
+                <DatePickerHeadCell v-for="day in weekDays" :key="day" class="w-8 rounded-md text-xs text-green8">
+                  {{ day }}
+                </DatePickerHeadCell>
+              </DatePickerGridRow>
+            </DatePickerGridHead>
+            <DatePickerGridBody>
+              <DatePickerGridRow
+                v-for="(weekDates, index) in month.rows"
+                :key="`weekDate-${index}`"
+                class="flex w-full"
+              >
+                <DatePickerCell v-for="weekDate in weekDates" :key="weekDate.toString()" :date="weekDate">
+                  <DatePickerCellTrigger
+                    :day="weekDate"
+                    :month="month.value"
+                    class="relative flex items-center justify-center whitespace-nowrap rounded-lg border text-sm font-normal text-zinc-700 w-8 h-8 outline-none hover:border-zinc-300 data-[selected]:bg-zinc-800 data-[selected]:font-medium data-[disabled]:text-zinc-300 data-[selected]:text-white data-[unavailable]:pointer-events-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-green9 data-[selected]:before:bg-white"
+                  />
+                </DatePickerCell>
+              </DatePickerGridRow>
+            </DatePickerGridBody>
+          </DatePickerGrid>
         </div>
-      </DatePickerContent>
-    </DatePickerRoot>
-  </div>
+      </DatePickerCalendar>
+      <div class="flex justify-between items-center text-sm text-zinc-500 mb-2 px-4">
+        <span>{{ `${dateModel.month}/${dateModel.day}/${dateModel.year}` }}</span>
+        <div class="flex space-x-1">
+          <InputButton variant="secondary" size="sm" @click.prevent="onClear" v-if="selectedDate">Clear</InputButton>
+          <InputButton size="sm" @click.prevent="onSelect">Select</InputButton>
+        </div>
+      </div>
+    </DatePickerContent>
+  </DatePickerRoot>
 </template>
