@@ -42,7 +42,7 @@ const baseJobPostingCreateOrUpdateSchema = {
   tagsCSV: z.string().optional(),
   isPublished: z.boolean(),
   validTill: z.string().optional(), // Ideally it is a date field, but gets converted to string due to stringification.
-  employmentType: z.array(employmentTypeEnum),
+  employmentType: employmentTypeEnum,
   jobLocations: z.array(jobLocationSchema).optional(),
   isRemote: z.boolean(),
   baseSalary: baseSalarySchema.optional(),
