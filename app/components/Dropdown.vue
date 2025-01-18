@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * Legacy. Use new <InputDropdown/> instead
+ */
+
 import { onKeyStroke } from '@vueuse/core';
 
 const emit = defineEmits<{

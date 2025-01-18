@@ -17,10 +17,23 @@ const { user: profile } = useUserSession();
       <div class="text-xl font-bold text-zinc-900 font-noto">👋🏽 Hello, {{ profile?.firstName }}</div>
       <div class="text-sm text-zinc-500">Track your hiring activities. You are almost there!</div>
       <div class="flex items-center mt-4">
-        <InputButton as="NuxtLink" variant="secondary" to="/admin/postings/new">
-          <span class="mr-2">Create Posting</span>
-          <Icon name="ic:baseline-plus" class="w-4 h-4" />
-        </InputButton>
+        <Modal class-override="p-4" :full-screen="true">
+          <template #title-bar>
+            <div class="flex items-center space-x-2">
+              <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />
+              <span>New Posting</span>
+            </div>
+          </template>
+          <template #input="{ open }">
+            <InputButton variant="secondary" @click.stop="open">
+              <span class="mr-2">Create Posting</span>
+              <Icon name="ic:baseline-plus" class="w-4 h-4" />
+            </InputButton>
+          </template>
+          <template #content="{ close }">
+            <LazyAdminPostingForm @done="close" />
+          </template>
+        </Modal>
       </div>
     </section>
     <div class="mt-4">
