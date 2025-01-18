@@ -33,7 +33,7 @@
     "@tiptap/starter-kit": "^2.9.0",
     "@tiptap/vue-3": "^2.11.2",
     "@types/quill": "^2.0.14",
-    "@vee-validate/nuxt": "^4.15.0",
+    "@vee-validate/nuxt": "^4.13.1",
     "@vee-validate/zod": "^4.13.1",
     "@vueuse/core": "^11.1.0",
     "class-variance-authority": "^0.7.0",
