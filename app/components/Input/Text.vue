@@ -5,7 +5,7 @@ const props = defineProps<{
   id?: string;
   placeholder: string;
 
-  modelValue?: string | null;
+  modelValue?: string | number | null;
   inputClass?: string;
   labelClass?: string;
   typeOverride?: string;
@@ -16,13 +16,31 @@ const props = defineProps<{
 }>();
 
 const model = useVModel(props, 'modelValue');
+const localModel = ref<string>();
+
+watch(localModel, (v) => {
+  if (!v) return;
+  if (props.typeOverride && props.typeOverride === 'number') {
+    model.value = parseFloat(v);
+  } else {
+    model.value = v;
+  }
+});
 </script>
 
 <template>
-  <fieldset>
-    <InputLabel :label-class :label :error :id :sublabel />
-    <input class="input-css" :type="typeOverride || 'text'" :class="inputClass" v-model="model" :placeholder :id />
-  </fieldset>
+  <InputLabel :label-class :label :error :id :sublabel>
+    <template #input>
+      <input
+        class="input-css"
+        :type="typeOverride || 'text'"
+        :class="inputClass"
+        v-model="localModel"
+        :placeholder
+        :id
+      />
+    </template>
+  </InputLabel>
 </template>
 
 <style scoped>
