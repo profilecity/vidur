@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { CalendarDate } from '@internationalized/date';
 import { syncRef } from '@vueuse/core';
-import { employmentTypeIds } from '~~/shared/employment-types';
+import { employmentTypeIds, employmentTypes } from '~~/shared/employment-types';
 import { createJobPostingSchema, updateJobPostingSchema } from '~~/shared/schemas/posting';
+import type { SelectableOption } from '~~/shared/types/general';
 
 const props = defineProps<{
   id?: string;
@@ -36,6 +37,7 @@ const [isPublished] = defineField('isPublished');
 const [validTill] = defineField('validTill');
 const [isRemote] = defineField('isRemote');
 const [employmentType] = defineField('employmentType');
+const [baseSalary] = defineField('baseSalary');
 
 let onDelete = () => Promise.resolve();
 let onUpdate = () => Promise.resolve();
@@ -80,6 +82,7 @@ if (isEditing) {
   validTill.value = (data.value.validTill as string | null) || undefined;
   isRemote.value = data.value.isRemote || false;
   employmentType.value = data.value.employmentType || employmentTypeIds[0];
+  baseSalary.value = data.value.baseSalary || {};
 
   // Initialise Extra Refs
   if (validTill.value) {
@@ -101,6 +104,7 @@ if (isEditing) {
 } else {
   isRemote.value = false;
   employmentType.value = employmentTypeIds[0];
+  baseSalary.value = {};
 }
 
 const onSubmit = () => {
@@ -111,10 +115,22 @@ watch(validTillCalendarDate, (calendarDate) => {
   if (!calendarDate) return;
   validTill.value = calendarDateToDate(calendarDate).toISOString();
 });
+
+const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
+  id: e.id,
+  title: e.title,
+  description: e.description,
+}));
+
+defineExpose({
+  delete: onDelete,
+  submit: onSubmit,
+  isEditing: isEditing,
+});
 </script>
 
 <template>
-  <div class="w-full max-w-8xl mx-auto">
+  <div class="w-full h-full bg-zinc-100">
     <div
       class="flex justify-center items-center border-b border-zinc-200 bg-red-200 text-red-600 text-sm py-1"
       v-if="isExpired"
@@ -122,39 +138,8 @@ watch(validTillCalendarDate, (calendarDate) => {
       Posting has expired. Editing is disabled.
     </div>
     <!-- Input Section -->
-    <div class="flex w-full justify-end space-x-3 mt-2">
-      <AbstractConfirmationBox
-        title="Delete Posting?"
-        content="You won't be able to undo this action. You will loose access to applicant list."
-        @confirm="onDelete"
-        v-if="isEditing"
-      >
-        <template #input="{ open }">
-          <InputButton class="w-22" variant="destructive" @click="open" :disabled="disableFields">
-            <div class="flex items-center space-x-1 w-full">
-              <Icon name="material-symbols:delete-outline" class="h-4 w-4" />
-              <span>Delete</span>
-            </div>
-          </InputButton>
-        </template>
-      </AbstractConfirmationBox>
-      <AbstractConfirmationBox
-        title="Save Posting?"
-        content="Are you sure you want to save the changes?"
-        @confirm="onSubmit"
-      >
-        <template #input="{ open }">
-          <InputButton class="w-22" :disabled="disableFields" @click="open">
-            <div class="flex items-center space-x-1 w-full">
-              <Icon name="lets-icons:save" class="h-4 w-4" />
-              <span>Save</span>
-            </div>
-          </InputButton>
-        </template>
-      </AbstractConfirmationBox>
-    </div>
-    <form @submit="onSubmit" class="w-full flex items-start py-2 space-x-6">
-      <section class="flex flex-col w-2/3 space-y-3">
+    <form @submit="onSubmit" class="w-full flex items-start space-x-6 h-full">
+      <section class="flex flex-col w-2/3 space-y-3 px-4 pt-4 h-full">
         <InputText
           placeholder="Senior Software Engineer"
           label="Title"
@@ -179,10 +164,48 @@ watch(validTillCalendarDate, (calendarDate) => {
           </template>
         </InputLabel>
       </section>
-      <div class="flex flex-col items-start justify-start space-y-3 w-1/3">
+      <section class="flex flex-col items-start justify-start space-y-3 w-1/3 px-4 pt-4 border-l-2 h-full">
+        <div class="flex w-full justify-end space-x-3 px-4 pt-2">
+          <AbstractConfirmationBox
+            title="Delete Posting?"
+            content="You won't be able to undo this action. You will loose access to applicant list."
+            @confirm="onDelete"
+            v-if="isEditing"
+          >
+            <template #input="{ open }">
+              <InputButton class="w-22" variant="destructive" @click="open" :disabled="disableFields">
+                <div class="flex items-center space-x-1 w-full">
+                  <Icon name="material-symbols:delete-outline" class="h-4 w-4" />
+                  <span>Delete</span>
+                </div>
+              </InputButton>
+            </template>
+          </AbstractConfirmationBox>
+          <AbstractConfirmationBox
+            title="Save Posting?"
+            content="Are you sure you want to save the changes?"
+            @confirm="onSubmit"
+          >
+            <template #input="{ open }">
+              <InputButton class="w-22" :disabled="disableFields" @click="open">
+                <div class="flex items-center space-x-1 w-full">
+                  <Icon name="lets-icons:save" class="h-4 w-4" />
+                  <span>Save</span>
+                </div>
+              </InputButton>
+            </template>
+          </AbstractConfirmationBox>
+        </div>
+        <InputLabel label="Publish?">
+          <template #input>
+            <div class="border p-[7px] w-full rounded-lg bg-white">
+              <InputSwitch v-model="isPublished" :disabled="disableFields" />
+            </div>
+          </template>
+        </InputLabel>
         <InputLabel label="Expiry Date">
           <template #input>
-            <div class="border p-0.5 w-full rounded-lg">
+            <div class="border p-0.5 w-full rounded-lg bg-white">
               <InputDatePicker
                 class="w-full"
                 label="Expiry Date"
@@ -192,14 +215,56 @@ watch(validTillCalendarDate, (calendarDate) => {
             </div>
           </template>
         </InputLabel>
-        <InputLabel label="Publish?">
+        <InputLabel label="Is Remote?">
           <template #input>
-            <div class="border p-[7px] w-full rounded-lg">
-              <InputSwitch v-model="isPublished" :disabled="disableFields" />
+            <div class="border p-[7px] w-full rounded-lg bg-white">
+              <InputSwitch v-model="isRemote" :disabled="disableFields" />
             </div>
           </template>
         </InputLabel>
-      </div>
+        <InputLabel label="Employment Type">
+          <template #input>
+            <InputCombobox class="bg-white rounded-lg" :options="employmentTypeOptions" v-model="employmentType" />
+          </template>
+        </InputLabel>
+        <InputLabel label="Salary Details">
+          <template #input>
+            <div class="flex flex-col p-2 border rounded-lg space-y-2 bg-white">
+              <div class="flex w-full items-center space-x-2">
+                <InputLabel label="Unit">
+                  <template #input>
+                    <PickerSalaryUnit v-model="baseSalary!.unitText" />
+                  </template>
+                </InputLabel>
+                <InputLabel label="Currency">
+                  <template #input>
+                    <PickerCurrency v-model="baseSalary!.currency" />
+                  </template>
+                </InputLabel>
+              </div>
+              <InputLabel label="Range">
+                <template #input>
+                  <div class="flex w-full items-center space-x-2">
+                    <InputText
+                      class="w-1/2"
+                      type-override="number"
+                      v-model="baseSalary!.minValue"
+                      placeholder="Minimum"
+                    />
+                    <span class="text-xs text-zinc-600">to</span>
+                    <InputText
+                      class="w-1/2"
+                      type-override="number"
+                      v-model="baseSalary!.maxValue"
+                      placeholder="Maximum"
+                    />
+                  </div>
+                </template>
+              </InputLabel>
+            </div>
+          </template>
+        </InputLabel>
+      </section>
     </form>
   </div>
 </template>

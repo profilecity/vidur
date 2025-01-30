@@ -58,23 +58,13 @@ if (props.posting && props.posting.tagsCSV) {
             Published
           </div>
           <div class="text-xs font-medium rounded-lg text-center px-2.5 py-1 bg-sky-100 text-sky-700" v-else>Draft</div>
-
-          <Modal class-override="p-4" :full-screen="true">
-            <template #title-bar>
-              <div class="flex items-center space-x-2">
-                <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />
-                <span>New Posting</span>
-              </div>
-            </template>
+          <AdminPostingFormLauncher :posting :full-screen="true">
             <template #input="{ open }">
               <InputButton variant="outline" size="icon" @click.stop="open">
                 <Icon name="iconamoon:edit" class="w-5 h-5" />
               </InputButton>
             </template>
-            <template #content="{ close }">
-              <LazyAdminPostingForm :id="posting.id" @done="close" />
-            </template>
-          </Modal>
+          </AdminPostingFormLauncher>
         </div>
       </footer>
     </div>

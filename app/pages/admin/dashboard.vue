@@ -17,23 +17,14 @@ const { user: profile } = useUserSession();
       <div class="text-xl font-bold text-zinc-900 font-noto">👋🏽 Hello, {{ profile?.firstName }}</div>
       <div class="text-sm text-zinc-500">Track your hiring activities. You are almost there!</div>
       <div class="flex items-center mt-4">
-        <Modal class-override="p-4" :full-screen="true">
-          <template #title-bar>
-            <div class="flex items-center space-x-2">
-              <Icon class="w-5 h-5 shrink-0 fill-current mr-2" name="iconamoon:edit" />
-              <span>New Posting</span>
-            </div>
-          </template>
+        <AdminPostingFormLauncher>
           <template #input="{ open }">
             <InputButton variant="secondary" @click.stop="open">
               <span class="mr-2">Create Posting</span>
               <Icon name="ic:baseline-plus" class="w-4 h-4" />
             </InputButton>
           </template>
-          <template #content="{ close }">
-            <LazyAdminPostingForm @done="close" />
-          </template>
-        </Modal>
+        </AdminPostingFormLauncher>
       </div>
     </section>
     <div class="mt-4">
@@ -80,10 +71,14 @@ const { user: profile } = useUserSession();
               </li>
             </ul>
           </div>
-          <InputButton as="NuxtLink" to="/admin/postings/edit">
-            <Icon name="ic:baseline-plus" class="w-5 h-5" />
-            <span class="ml-1">Create First Posting</span>
-          </InputButton>
+          <AdminPostingFormLauncher>
+            <template #input="{ open }">
+              <InputButton @click="open">
+                <Icon name="ic:baseline-plus" class="w-5 h-5" />
+                <span class="ml-1">Create First Posting</span>
+              </InputButton>
+            </template>
+          </AdminPostingFormLauncher>
         </div>
       </div>
       <div class="grid grid-cols-12 gap-6 p-4">
