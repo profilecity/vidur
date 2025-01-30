@@ -4,6 +4,13 @@ const id = route.params.id as string;
 
 const { data: posting } = await usePublicPostingRepository({ id });
 
+if (!posting.value) {
+  throw createError({
+    statusCode: 404,
+    message: 'No such posting found. Maybe the posting has expired.',
+  });
+}
+
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
 const companyLogo = useRemoteAsset(careerSiteConfig.value.logo).url;
 
