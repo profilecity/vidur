@@ -1,3 +1,5 @@
+import type { salaryUnits } from '../consts/posting';
+
 export type PostalAddress = {
   streetAddress?: string;
   addressLocality?: string;
@@ -8,7 +10,6 @@ export type PostalAddress = {
 
 export type PostalAddressList = PostalAddress[];
 
-export const salaryUnits = ['Hour', 'Day', 'Week', 'Month', 'Year'] as const;
 export type Salary = {
   unitText: (typeof salaryUnits)[number];
   currency: string;

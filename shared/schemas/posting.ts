@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { employmentTypeIds } from '../employment-types';
-import { salaryUnits } from '../types/posting-types';
+import { currencyCodes } from '../consts/currencies';
+import { salaryUnits } from '../consts/posting';
 
 const employmentTypeEnum = z.enum(employmentTypeIds);
 
@@ -12,13 +13,11 @@ const jobLocationSchema = z.object({
   addressCountry: z.string(),
 });
 
-const currencies = Intl.supportedValuesOf('currency') as readonly string[];
-
 const baseSalarySchema = z.object({
   unitText: z.enum(salaryUnits),
   currency: z
     .string()
-    .refine((c) => currencies.includes(c), 'Invalid currency code. Must be a valid ISO 4217 three-letter code.'),
+    .refine((c) => currencyCodes.includes(c), 'Invalid currency code. Must be a valid ISO 4217 three-letter code.'),
   minValue: z.number(),
   maxValue: z.number(),
 });
