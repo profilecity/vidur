@@ -58,7 +58,7 @@
     "@types/pg": "^8.11.10",
     "changelogen": "^0.5.7",
     "husky": "^9.1.6",
-    "lint-staged": "^15.2.10",
+    "lint-staged": "^15.4.3",
     "prettier": "^3.3.3",
     "typescript": "^5.6.3",
     "vue-tsc": "^2.1.6"
