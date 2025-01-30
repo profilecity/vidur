@@ -39,7 +39,7 @@ const cancel = (closeModalFn: () => void) => {
     </template>
     <template #content="{ close }">
       <!-- Modal footer -->
-      <div class="flex flex-wrap justify-end space-x-2">
+      <div class="flex flex-wrap justify-end space-x-2 p-2">
         <InputButton variant="secondary" @click="cancel(close)">
           {{ cancelLabel }}
         </InputButton>

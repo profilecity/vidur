@@ -39,26 +39,33 @@ const close = () => {
         v-if="!fullScreen"
       />
       <DialogContent
-        class="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white focus:outline-none"
+        class="data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] bg-white focus:outline-none !p-0"
         :class="{
           '!h-screen w-full': fullScreen,
           'modal-small': !fullScreen,
           [classOverride || '']: !!classOverride,
         }"
       >
-        <DialogTitle class="font-bold text-zinc-900 font-noto">
+        <DialogTitle
+          class="font-bold text-zinc-900 font-noto border-b flex items-center justify-between"
+          :class="fullScreen ? 'p-4' : 'p-2'"
+        >
           <slot name="title-bar">
             {{ title }}
           </slot>
+          <slot name="action-bar">
+            <DialogClose as-child>
+              <InputButton variant="ghost" size="icon" @click.stop="close">
+                <div class="sr-only">Close</div>
+                <Icon class="w-5 h-5" name="mdi:close" />
+              </InputButton>
+            </DialogClose>
+          </slot>
         </DialogTitle>
-        <DialogDescription class="text-sm text-zinc-500" v-if="description">{{ description }}</DialogDescription>
+        <DialogDescription class="text-sm text-zinc-500" :class="fullScreen ? 'p-4' : 'p-2'" v-if="description">
+          {{ description }}
+        </DialogDescription>
         <slot name="content" :close="close" />
-        <DialogClose class="absolute top-[10px] right-[10px] inline-flex items-center justify-center">
-          <InputButton variant="ghost" size="icon" @click.stop="close">
-            <div class="sr-only">Close</div>
-            <Icon class="w-5 h-5" name="mdi:close" />
-          </InputButton>
-        </DialogClose>
       </DialogContent>
     </DialogPortal>
   </DialogRoot>
