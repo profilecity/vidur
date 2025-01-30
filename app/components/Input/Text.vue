@@ -16,7 +16,7 @@ const props = defineProps<{
 }>();
 
 const model = useVModel(props, 'modelValue');
-const localModel = ref<string>();
+const localModel = ref<string | null>(props.modelValue ? props.modelValue.toString() : null);
 
 watch(localModel, (v) => {
   if (!v) return;
