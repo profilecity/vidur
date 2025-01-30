@@ -5,6 +5,7 @@ export type InputReceivable = {
 export type SelectableOption = {
   id: string | number;
   title: string;
+  description?: string;
   logo?: string;
   logoClass?: string;
 };
