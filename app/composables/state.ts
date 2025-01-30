@@ -23,8 +23,8 @@ export function useSeoConfigObjectState() {
 export function useObjectState<T>(key: string, initFn?: () => T) {
   const data = useState<T>(key, initFn);
   const firstFetched = useState<boolean>(`${key}-first-fetch`, () => false);
-  const fetching = useState<boolean>(`${key}-fetching`);
-  const changing = useState<boolean>(`${key}-changing`);
+  const fetching = useState<boolean>(`${key}-fetching`, () => false);
+  const changing = useState<boolean>(`${key}-changing`, () => false);
 
   const setData = (d: T) => {
     firstFetched.value = true;
