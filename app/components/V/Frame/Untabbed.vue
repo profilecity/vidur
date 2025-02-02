@@ -8,14 +8,14 @@ defineProps<{
 <template>
   <main>
     <section class="sticky top-0 bg-white w-full p-4 border-b">
-      <div class="flex-col mb-2">
-        <span class="flex text-xl font-bold text-zinc-900 font-noto">
+      <VFrameHWithSubText>
+        <template #heading>
           {{ title }}
-        </span>
-        <span class="flex text-sm text-zinc-600">
+        </template>
+        <template #subtext v-if="description">
           {{ description }}
-        </span>
-      </div>
+        </template>
+      </VFrameHWithSubText>
       <slot name="action" />
     </section>
     <slot name="content" />

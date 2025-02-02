@@ -37,7 +37,7 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <FrameTabbed tab-group="settings">
+  <VFrameTabbed tab-group="settings">
     <template #action>
       <InputButton @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
     </template>
@@ -73,5 +73,5 @@ const onSubmit = handleSubmit(async (values) => {
         </div>
       </form>
     </template>
-  </FrameTabbed>
+  </VFrameTabbed>
 </template>

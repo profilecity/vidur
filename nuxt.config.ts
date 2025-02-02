@@ -39,6 +39,7 @@ export default defineNuxtConfig({
     'radix-vue/nuxt',
     'nuxt-auth-utils',
   ],
+  css: ['~/assets/utility-patterns.css'],
   googleFonts: {
     families: {
       'Noto+Sans': [400, 500, 600, 700],

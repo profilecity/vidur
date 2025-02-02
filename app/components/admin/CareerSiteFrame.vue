@@ -62,7 +62,7 @@ const logoUpdated = (id: string) => {
 </script>
 
 <template>
-  <FrameTabbed tab-group="settings">
+  <VFrameTabbed tab-group="settings">
     <template #action>
       <InputButton @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
     </template>
@@ -126,5 +126,5 @@ const logoUpdated = (id: string) => {
         </div>
       </form>
     </template>
-  </FrameTabbed>
+  </VFrameTabbed>
 </template>

@@ -177,9 +177,9 @@ watchEffect(() => {
 </script>
 
 <template>
-  <section>
+  <section class="focus-within:ring-1 ring-zinc-400 rounded-lg border">
     <ToolbarRoot
-      class="flex p-1 w-full max-w-screen !min-w-max rounded-t-lg bg-white border-t border-x"
+      class="flex p-1 w-full max-w-screen !min-w-max rounded-t-lg bg-white"
       aria-label="Formatting options"
       v-if="editor && !readOnly"
     >
@@ -298,7 +298,7 @@ watchEffect(() => {
       </ToolbarToggleGroup>
     </ToolbarRoot>
     <EditorContent
-      :class="{ 'border-b border-x rounded-b-lg bg-white p-1': !readOnly, [editorClass || '']: !!editorClass }"
+      :class="{ 'rounded-b-lg bg-white p-1': !readOnly, [editorClass || '']: !!editorClass }"
       :editor
       :disabled="readOnly"
     />

@@ -27,7 +27,11 @@ export default {
         noto: ['Noto Sans', 'sans-serif'],
         lato: ['Lato', 'cursive'],
       },
-
+      colors: {
+        primary: '#818CF8',
+        'primary-bg': '#EBECFF',
+        'primary-content': '#FFFFFF',
+      },
       fontSize: {
         xs: ['0.75rem', { lineHeight: '1.5' }],
         sm: ['0.875rem', { lineHeight: '1.5715' }],

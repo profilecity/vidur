@@ -14,8 +14,14 @@ const { user: profile } = useUserSession();
 <template>
   <div class="w-full max-w-9xl mx-auto">
     <section class="sticky top-0 bg-white p-4 border-b border-zinc-200">
-      <div class="text-xl font-bold text-zinc-900 font-noto">👋🏽 Hello, {{ profile?.firstName }}</div>
-      <div class="text-sm text-zinc-500">Track your hiring activities. You are almost there!</div>
+      <VFrameHWithSubText>
+        <template #heading>
+          <span class="flex items-center space-x-2">
+            <ElementsVidurSmall /><span>Welcome back, {{ profile ? profile.firstName : '' }}!</span>
+          </span>
+        </template>
+        <template #subtext>Track your hiring activities. You are almost there.</template>
+      </VFrameHWithSubText>
       <div class="flex items-center mt-4">
         <AdminPostingFormLauncher>
           <template #input="{ open }">
@@ -31,7 +37,7 @@ const { user: profile } = useUserSession();
       <div class="max-w-2xl mx-auto mt-12" v-if="!postings.length">
         <div class="text-center px-4">
           <ElementsCube />
-          <h2 class="text-2xl text-zinc-800 font-bold mb-2">Create a job posting in just a few clicks!</h2>
+          <VH1>Create a job posting in just a few clicks!</VH1>
           <div class="flex w-full justify-center">
             <ul class="p-4 text-center mx-auto">
               <!-- List item -->
@@ -44,7 +50,7 @@ const { user: profile } = useUserSession();
                   <div class="absolute left-0 rounded-full bg-zinc-800" aria-hidden="true">
                     <Icon name="mdi:number-1" class="w-5 h-5 fill-current text-white" />
                   </div>
-                  <h3 class="text-lg font-bold text-zinc-800 pl-9">Draft your first posting.</h3>
+                  <VSubtext class="pl-9">Draft your first posting.</VSubtext>
                 </div>
               </li>
               <!-- List item -->
@@ -57,7 +63,7 @@ const { user: profile } = useUserSession();
                   <div class="absolute left-0 rounded-full bg-zinc-800" aria-hidden="true">
                     <Icon name="mdi:number-2" class="w-5 h-5 fill-current text-white" />
                   </div>
-                  <h3 class="text-lg font-bold text-zinc-800 pl-9">Finalise and publish.</h3>
+                  <VSubtext class="pl-9">Finalise and publish.</VSubtext>
                 </div>
               </li>
               <!-- List item -->
@@ -66,7 +72,7 @@ const { user: profile } = useUserSession();
                   <div class="absolute left-0 rounded-full bg-zinc-800" aria-hidden="true">
                     <Icon name="mdi:number-3" class="w-5 h-5 fill-current text-white" />
                   </div>
-                  <h3 class="text-lg font-bold text-zinc-800 pl-9">Start vetting applicants!</h3>
+                  <VSubtext class="pl-9">Start vetting applicants!</VSubtext>
                 </div>
               </li>
             </ul>

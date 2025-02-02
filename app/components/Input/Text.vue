@@ -45,6 +45,6 @@ watch(localModel, (v) => {
 
 <style scoped>
 .input-css {
-  @apply w-full py-1.5 px-2.5 border border-zinc-200 rounded-lg text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-inset focus:ring-zinc-300 sm:text-sm sm:leading-6 outline-none;
+  @apply w-full py-1.5 px-2.5 border border-zinc-200 rounded-lg text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-zinc-600 focus:ring-offset-1 sm:text-sm sm:leading-6 outline-none;
 }
 </style>

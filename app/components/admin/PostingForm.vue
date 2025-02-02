@@ -82,7 +82,10 @@ if (isEditing) {
   validTill.value = (data.value.validTill as string | null) || undefined;
   isRemote.value = data.value.isRemote || false;
   employmentType.value = data.value.employmentType || employmentTypeIds[0];
-  baseSalary.value = data.value.baseSalary || {};
+  baseSalary.value = data.value.baseSalary || {
+    unitText: 'Hour',
+    currency: 'USD',
+  };
 
   // Initialise Extra Refs
   if (validTill.value) {
@@ -102,9 +105,13 @@ if (isEditing) {
     emits('done');
   }) as () => Promise<void>;
 } else {
+  isPublished.value = false;
   isRemote.value = false;
   employmentType.value = employmentTypeIds[0];
-  baseSalary.value = {};
+  baseSalary.value = {
+    unitText: 'Hour',
+    currency: 'USD',
+  };
 }
 
 const onSubmit = () => {
@@ -121,12 +128,6 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
   title: e.title,
   description: e.description,
 }));
-
-defineExpose({
-  delete: onDelete,
-  submit: onSubmit,
-  isEditing: isEditing,
-});
 </script>
 
 <template>
