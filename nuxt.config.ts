@@ -22,6 +22,9 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
+    imports: {
+      dirs: ['server/utils/**/*.ts'],
+    },
     scheduledTasks: cronSchedule,
   },
   routeRules: {
