@@ -234,12 +234,12 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
               <div class="flex w-full items-center space-x-2">
                 <VFormInput label="Unit">
                   <template #input>
-                    <PickerSalaryUnit v-model="baseSalary!.unitText" />
+                    <SelectSalaryUnit v-model="baseSalary!.unitText" />
                   </template>
                 </VFormInput>
                 <VFormInput label="Currency">
                   <template #input>
-                    <PickerCurrency v-model="baseSalary!.currency" />
+                    <SelectCurrency v-model="baseSalary!.currency" />
                   </template>
                 </VFormInput>
               </div>
