@@ -49,10 +49,10 @@ const onDelete = async () => {
 <template>
   <Modal class-override="h-full">
     <template #input="{ open }">
-      <InputButton :variant="'secondary'" @click="open">
+      <VInputButton :variant="'secondary'" @click="open">
         <Icon name="mdi:tags" class="w-5 h-5 mr-1" />
         <span>Manage Tags</span>
-      </InputButton>
+      </VInputButton>
     </template>
     <template #content>
       <div class="h-full overflow-y-scroll">
@@ -70,10 +70,10 @@ const onDelete = async () => {
               <span class="text-rose-600 text-xs">{{ errors['parent'] }}</span>
             </div>
             <div class="flex flex-col">
-              <InputText placeholder="Title" v-model="newTagTitle" />
+              <VInputText placeholder="Title" v-model="newTagTitle" />
               <span class="text-rose-600 text-xs">{{ errors['title'] }}</span>
             </div>
-            <InputButton @click.prevent="onSubmit">Create</InputButton>
+            <VInputButton @click.prevent="onSubmit">Create</VInputButton>
           </div>
         </div>
         <div class="mb-6" v-for="(_, i) in 5">
@@ -93,18 +93,18 @@ const onDelete = async () => {
               />
               <span>{{ tag.title }}</span>
             </div>
-            <InputButton
+            <VInputButton
               variant="ghost"
               size="icon-xs"
               v-if="activeDeleteId !== tag.id"
               @click.prevent="activeDeleteId = tag.id"
             >
               <Icon name="mdi:delete" class="text-red-500 hover:text-red-600" />
-            </InputButton>
-            <InputButton variant="destructive" size="sm" class="space-x-1" @click.prevent="onDelete" v-else>
+            </VInputButton>
+            <VInputButton variant="destructive" size="sm" class="space-x-1" @click.prevent="onDelete" v-else>
               <Icon name="mdi:delete" />
               <span>Delete?</span>
-            </InputButton>
+            </VInputButton>
           </div>
         </div>
         <AdminReviewTagPicker />

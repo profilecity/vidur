@@ -63,9 +63,9 @@ const filterFunction = (_: string[], searchTerm: string) => {
         <input type="text" @focus="open = true" class="input-css" />
       </ComboboxInput>
       <ComboboxTrigger as-child>
-        <InputButton variant="ghost" size="icon-xs" ref="comboboxTrigger">
+        <VInputButton variant="ghost" size="icon-xs" ref="comboboxTrigger">
           <Icon name="radix-icons:chevron-down" class="h-4 w-4" />
-        </InputButton>
+        </VInputButton>
       </ComboboxTrigger>
     </ComboboxAnchor>
 

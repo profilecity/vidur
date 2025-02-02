@@ -17,5 +17,5 @@ const options: SelectableOption[] = currencyDetails.map((c) => ({
 </script>
 
 <template>
-  <InputCombobox v-model="selectedValue" :options />
+  <VInputOption v-model="selectedValue" :options />
 </template>

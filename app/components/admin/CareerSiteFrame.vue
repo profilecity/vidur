@@ -64,7 +64,7 @@ const logoUpdated = (id: string) => {
 <template>
   <VFrameTabbed tab-group="settings">
     <template #action>
-      <InputButton @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
+      <VInputButton @click="onSubmit" :disabled="isSubmitting"> Save </VInputButton>
     </template>
     <template #content>
       <form class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4">
@@ -75,7 +75,7 @@ const logoUpdated = (id: string) => {
           <AdminUpdateOrgLogo @update="logoUpdated" />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
-          <InputText
+          <VInputText
             class="w-full md:w-2/3"
             placeholder="Organization Name"
             v-model="name"
@@ -83,7 +83,7 @@ const logoUpdated = (id: string) => {
             :error="errors['name']"
             label="Organization Name"
           />
-          <InputText
+          <VInputText
             class="w-full md:w-2/3"
             placeholder="Location"
             v-model="location"
@@ -92,7 +92,7 @@ const logoUpdated = (id: string) => {
             label="Location"
           />
         </div>
-        <InputText
+        <VInputText
           class="w-full mt-5"
           placeholder="Join us in building next generation space technology.."
           v-model="bio"
@@ -101,28 +101,28 @@ const logoUpdated = (id: string) => {
           label="Bio"
         />
         <div class="w-full mt-8">
-          <InputLabel
+          <VFormInput
             label="Featured Links"
             id="featued-links"
             :error="errors['links']"
             sublabel="Only first 3 links will be displayed in header."
           />
           <div v-for="(link, index) in links" :key="index" class="flex space-x-2 mb-2 w-full items-center">
-            <InputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
-            <InputText
+            <VInputText v-model="link.title" :id="`link-title-${index}`" placeholder="Mars Mission Docs" />
+            <VInputText
               v-model="link.href"
               :id="`link-url-${index}`"
               placeholder="https://big-space-tech.com/mission/mars"
               type-override="url"
             />
-            <InputButton variant="destructive" size="icon" @click="removeFeaturedLink(index)">
+            <VInputButton variant="destructive" size="icon" @click="removeFeaturedLink(index)">
               <Icon name="fluent:delete-28-regular" class="w-5 h-5" />
-            </InputButton>
+            </VInputButton>
           </div>
-          <InputButton variant="secondary" @click.prevent="links?.push({ title: '', href: '' })">
+          <VInputButton variant="secondary" @click.prevent="links?.push({ title: '', href: '' })">
             <Icon name="mdi:plus" class="w-5 h-5" />
             Add Link
-          </InputButton>
+          </VInputButton>
         </div>
       </form>
     </template>

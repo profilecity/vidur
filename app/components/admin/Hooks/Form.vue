@@ -68,14 +68,14 @@ defineExpose({
 
 <template>
   <form class="flex flex-col items-start space-y-2 mt-4" @submit="onSubmit">
-    <InputText
+    <VInputText
       class="w-full"
       label="Title"
       :error="errors.title"
       placeholder="My External ATS Provider"
       v-model="title"
     />
-    <InputText
+    <VInputText
       class="w-full"
       label="URL"
       :error="errors.url"
@@ -83,8 +83,8 @@ defineExpose({
       type-override="url"
       v-model="url"
     />
-    <InputButton :loading="changing" type="submit">
+    <VInputButton :loading="changing" type="submit">
       {{ isUpdating ? 'Save' : 'Create' }}
-    </InputButton>
+    </VInputButton>
   </form>
 </template>

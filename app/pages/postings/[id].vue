@@ -50,10 +50,10 @@ const apply = async () => {
         <!-- Content -->
         <div class="w-full">
           <div class="mb-6">
-            <InputButton as="NuxtLink" variant="outline" to="/">
+            <VInputButton as="NuxtLink" variant="outline" to="/">
               <Icon class="fill-current text-zinc-500 mr-2" name="mdi:arrow-left" />
               <span>Back To Jobs</span>
-            </InputButton>
+            </VInputButton>
           </div>
           <div class="text-sm text-zinc-500 italic mb-2">Posted {{ timeAgo(new Date(posting.updatedAt)) }}</div>
           <header class="mb-4">
@@ -83,10 +83,10 @@ const apply = async () => {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
+              <VInputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
                 Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </InputButton>
+              </VInputButton>
             </div>
           </div>
 
@@ -129,10 +129,10 @@ const apply = async () => {
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
+              <VInputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
                 Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </InputButton>
+              </VInputButton>
             </div>
           </div>
         </div>

@@ -55,10 +55,10 @@ const close = () => {
           </slot>
           <slot name="action-bar">
             <DialogClose as-child>
-              <InputButton variant="ghost" size="icon" @click.stop="close">
+              <VInputButton variant="ghost" size="icon" @click.stop="close">
                 <div class="sr-only">Close</div>
                 <Icon class="w-5 h-5" name="mdi:close" />
-              </InputButton>
+              </VInputButton>
             </DialogClose>
           </slot>
         </DialogTitle>

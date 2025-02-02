@@ -25,10 +25,10 @@ const { user: profile } = useUserSession();
       <div class="flex items-center mt-4">
         <AdminPostingFormLauncher>
           <template #input="{ open }">
-            <InputButton variant="secondary" @click.stop="open">
+            <VInputButton variant="secondary" @click.stop="open">
               <span class="mr-2">Create Posting</span>
               <Icon name="ic:baseline-plus" class="w-4 h-4" />
-            </InputButton>
+            </VInputButton>
           </template>
         </AdminPostingFormLauncher>
       </div>
@@ -79,10 +79,10 @@ const { user: profile } = useUserSession();
           </div>
           <AdminPostingFormLauncher>
             <template #input="{ open }">
-              <InputButton @click="open">
+              <VInputButton @click="open">
                 <Icon name="ic:baseline-plus" class="w-5 h-5" />
                 <span class="ml-1">Create First Posting</span>
-              </InputButton>
+              </VInputButton>
             </template>
           </AdminPostingFormLauncher>
         </div>

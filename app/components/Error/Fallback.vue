@@ -24,6 +24,6 @@ const heading = () => {
     <Icon name="fluent-color:dismiss-circle-16" class="w-32 h-32" />
     <span class="text-xl font-bold font-noto">{{ heading() }}</span>
     <span class="font-noto text-zinc-700" v-if="error.message">{{ error.message }}</span>
-    <InputButton variant="link" class="my-32" @click="emits('clear', '/')">Go Home</InputButton>
+    <VInputButton variant="link" class="my-32" @click="emits('clear', '/')">Go Home</VInputButton>
   </div>
 </template>

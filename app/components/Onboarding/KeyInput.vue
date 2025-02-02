@@ -37,20 +37,20 @@ const verify = async () => {
       <h4 class="text-md text-zinc-600 mt-2 mb-6">The only recruiting software you will ever need.</h4>
       <!-- Form -->
       <form class="justify-center mt-10">
-        <InputText
+        <VInputText
           id="input-key"
           label="To get started, enter the one-time setup code."
           placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
           v-model="key"
         />
-        <InputLabel
+        <VFormInput
           label="You can find the key in standard logs of the server."
           label-class="text-xs text-zinc-400"
           id="random"
         />
         <span class="text-sm font-bold text-rose-500">{{ error }}</span>
         <div class="flex justify-center mt-6">
-          <InputButton @click.prevent="verify" :loading="isVerifying" spinner-class="h-6">Verify</InputButton>
+          <VInputButton @click.prevent="verify" :loading="isVerifying" spinner-class="h-6">Verify</VInputButton>
         </div>
       </form>
     </div>

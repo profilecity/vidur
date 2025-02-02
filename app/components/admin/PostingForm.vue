@@ -141,20 +141,20 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
     <!-- Input Section -->
     <form @submit="onSubmit" class="w-full flex items-start space-x-6 h-full">
       <section class="flex flex-col w-2/3 space-y-3 px-4 pt-4 h-full">
-        <InputText
+        <VInputText
           placeholder="Senior Software Engineer"
           label="Title"
           :disabled="disableFields"
           :error="errors.title"
           v-model="title"
         />
-        <InputText
+        <VInputText
           placeholder="Remote, Full Time, San Fransisco"
           label="Tags (CSV)"
           :disabled="disableFields"
           v-model="tagsCSV"
         />
-        <InputLabel label="Job Description" :error="errors.contents">
+        <VFormInput label="Job Description" :error="errors.contents">
           <template #input>
             <Editor
               placeholder="We are looking for someone who can..."
@@ -163,7 +163,7 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
               :read-only="disableFields"
             />
           </template>
-        </InputLabel>
+        </VFormInput>
       </section>
       <section class="flex flex-col items-start justify-start space-y-3 w-1/3 px-4 pt-4 border-l-2 h-full">
         <div class="flex w-full justify-end space-x-3 px-4 pt-2">
@@ -174,12 +174,12 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
             v-if="isEditing"
           >
             <template #input="{ open }">
-              <InputButton class="w-22" variant="destructive" @click="open" :disabled="disableFields">
+              <VInputButton class="w-22" variant="destructive" @click="open" :disabled="disableFields">
                 <div class="flex items-center space-x-1 w-full">
                   <Icon name="material-symbols:delete-outline" class="h-4 w-4" />
                   <span>Delete</span>
                 </div>
-              </InputButton>
+              </VInputButton>
             </template>
           </AbstractConfirmationBox>
           <AbstractConfirmationBox
@@ -188,26 +188,26 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
             @confirm="onSubmit"
           >
             <template #input="{ open }">
-              <InputButton class="w-22" :disabled="disableFields" @click="open">
+              <VInputButton class="w-22" :disabled="disableFields" @click="open">
                 <div class="flex items-center space-x-1 w-full">
                   <Icon name="lets-icons:save" class="h-4 w-4" />
                   <span>Save</span>
                 </div>
-              </InputButton>
+              </VInputButton>
             </template>
           </AbstractConfirmationBox>
         </div>
-        <InputLabel label="Publish?">
+        <VFormInput label="Publish?">
           <template #input>
             <div class="border p-[7px] w-full rounded-lg bg-white">
-              <InputSwitch v-model="isPublished" :disabled="disableFields" />
+              <VInputSwitch v-model="isPublished" :disabled="disableFields" />
             </div>
           </template>
-        </InputLabel>
-        <InputLabel label="Expiry Date">
+        </VFormInput>
+        <VFormInput label="Expiry Date">
           <template #input>
             <div class="border p-0.5 w-full rounded-lg bg-white">
-              <InputDatePicker
+              <VInputDate
                 class="w-full"
                 label="Expiry Date"
                 v-model="validTillCalendarDate"
@@ -215,45 +215,45 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
               />
             </div>
           </template>
-        </InputLabel>
-        <InputLabel label="Is Remote?">
+        </VFormInput>
+        <VFormInput label="Is Remote?">
           <template #input>
             <div class="border p-[7px] w-full rounded-lg bg-white">
-              <InputSwitch v-model="isRemote" :disabled="disableFields" />
+              <VInputSwitch v-model="isRemote" :disabled="disableFields" />
             </div>
           </template>
-        </InputLabel>
-        <InputLabel label="Employment Type">
+        </VFormInput>
+        <VFormInput label="Employment Type">
           <template #input>
-            <InputCombobox class="bg-white rounded-lg" :options="employmentTypeOptions" v-model="employmentType" />
+            <VInputOption class="bg-white rounded-lg" :options="employmentTypeOptions" v-model="employmentType" />
           </template>
-        </InputLabel>
-        <InputLabel label="Salary Details">
+        </VFormInput>
+        <VFormInput label="Salary Details">
           <template #input>
             <div class="flex flex-col p-2 border rounded-lg space-y-2 bg-white">
               <div class="flex w-full items-center space-x-2">
-                <InputLabel label="Unit">
+                <VFormInput label="Unit">
                   <template #input>
                     <PickerSalaryUnit v-model="baseSalary!.unitText" />
                   </template>
-                </InputLabel>
-                <InputLabel label="Currency">
+                </VFormInput>
+                <VFormInput label="Currency">
                   <template #input>
                     <PickerCurrency v-model="baseSalary!.currency" />
                   </template>
-                </InputLabel>
+                </VFormInput>
               </div>
-              <InputLabel label="Range">
+              <VFormInput label="Range">
                 <template #input>
                   <div class="flex w-full items-center space-x-2">
-                    <InputText
+                    <VInputText
                       class="w-1/2"
                       type-override="number"
                       v-model="baseSalary!.minValue"
                       placeholder="Minimum"
                     />
                     <span class="text-xs text-zinc-600">to</span>
-                    <InputText
+                    <VInputText
                       class="w-1/2"
                       type-override="number"
                       v-model="baseSalary!.maxValue"
@@ -261,10 +261,10 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
                     />
                   </div>
                 </template>
-              </InputLabel>
+              </VFormInput>
             </div>
           </template>
-        </InputLabel>
+        </VFormInput>
       </section>
     </form>
   </div>

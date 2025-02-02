@@ -1,10 +1,10 @@
 <script setup lang="ts">
 withDefaults(
   defineProps<{
-    inputLabel?: string;
+    VFormInput?: string;
   }>(),
   {
-    inputLabel: 'Create Hook',
+    VFormInput: 'Create Hook',
   }
 );
 </script>
@@ -12,10 +12,10 @@ withDefaults(
 <template>
   <Modal title="Create New hook" description="Hooks allow you to send events to external systems securely.">
     <template #input="{ open }">
-      <InputButton @click="open">
-        <span>{{ inputLabel }}</span>
+      <VInputButton @click="open">
+        <span>{{ VFormInput }}</span>
         <Icon name="ic:baseline-plus" class="ml-1 w-5 h-5" />
-      </InputButton>
+      </VInputButton>
     </template>
     <template #content="{ close }">
       <AdminHooksForm @created="close" />

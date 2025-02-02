@@ -15,6 +15,6 @@ const emits = defineEmits<{
     <Icon name="fluent-color:beach-16" class="w-64 h-64" />
     <span class="text-xl font-bold font-noto">Job posting not found.</span>
     <span class="font-noto text-zinc-700">Provided URL is invalid, or posting has expired.</span>
-    <InputButton variant="link" class="my-32" @click="emits('clear', '/')">Explore active postings</InputButton>
+    <VInputButton variant="link" class="my-32" @click="emits('clear', '/')">Explore active postings</VInputButton>
   </div>
 </template>

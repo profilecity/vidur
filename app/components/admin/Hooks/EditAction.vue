@@ -8,9 +8,9 @@ defineProps<{
 <template>
   <Modal title="Update Hook" description="Changes take effect immediatly. Previous system will stop receiving events.">
     <template #input="{ open }">
-      <InputButton variant="outline" size="icon" @click="open">
+      <VInputButton variant="outline" size="icon" @click="open">
         <Icon name="iconamoon:edit" />
-      </InputButton>
+      </VInputButton>
     </template>
     <template #content="{ close }">
       <AdminHooksForm @updated="close" :hook="hook" />

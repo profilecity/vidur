@@ -32,9 +32,9 @@ const onRemove = () => {
         v-if="profile?.id != member.id"
       >
         <template #input="{ open }">
-          <InputButton variant="destructive" size="icon" @click="open">
+          <VInputButton variant="destructive" size="icon" @click="open">
             <Icon name="mdi:delete" />
-          </InputButton>
+          </VInputButton>
         </template>
       </AbstractConfirmationBox>
     </div>

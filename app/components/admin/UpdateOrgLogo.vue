@@ -22,7 +22,7 @@ const saveImage = async (croppedBlob: Blob, closeFn: () => void) => {
 <template>
   <Modal title="Update Organisation Logo">
     <template #input="{ open }">
-      <InputButton @click="open" variant="secondary" size="sm"> Edit </InputButton>
+      <VInputButton @click="open" variant="secondary" size="sm"> Edit </VInputButton>
     </template>
     <template #content="{ close }">
       <ImageCropperWrapper @on-crop="(blob: Blob) => saveImage(blob, close)" />

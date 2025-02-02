@@ -47,15 +47,15 @@ const submit = handleSubmit(async (validatedData) => {
 <template>
   <div class="flex flex-col space-y-2">
     <div class="flex flex-col justify-center">
-      <InputLabel class="text-center" label-class="text-xl" label="Personal Details" v-if="register" />
-      <InputLabel class="text-center" label-class="text-xl" label="Log back in" v-else />
-      <InputLabel
+      <VFormInput class="text-center" label-class="text-xl" label="Personal Details" v-if="register" />
+      <VFormInput class="text-center" label-class="text-xl" label="Log back in" v-else />
+      <VFormInput
         class="text-center"
         label-class="!text-zinc-500"
         label="Registering as super admin for this instance."
         v-if="register"
       />
-      <InputLabel
+      <VFormInput
         class="text-center"
         label-class="!text-zinc-500"
         label="Super admin already registered, log back in."
@@ -64,22 +64,22 @@ const submit = handleSubmit(async (validatedData) => {
     </div>
     <div class="flex space-x-2 w-full" v-if="register">
       <!-- @vue-expect-error -->
-      <InputText class="w-1/2" placeholder="First Name" v-model="firstName" :error="errors['firstName']" />
+      <VInputText class="w-1/2" placeholder="First Name" v-model="firstName" :error="errors['firstName']" />
       <!-- @vue-expect-error -->
-      <InputText class="w-1/2" placeholder="Last Name" v-model="lastName" :error="errors['lastName']" />
+      <VInputText class="w-1/2" placeholder="Last Name" v-model="lastName" :error="errors['lastName']" />
     </div>
-    <InputText class="w-full" placeholder="Email" v-model="email" :error="errors['email']" />
+    <VInputText class="w-full" placeholder="Email" v-model="email" :error="errors['email']" />
 
-    <InputText
+    <VInputText
       class="w-full"
       placeholder="Password"
       type-override="password"
       v-model="password"
       :error="errors['password']"
     />
-    <InputButton @click="submit">
+    <VInputButton @click="submit">
       {{ register ? 'Save' : 'Continue' }}
-    </InputButton>
-    <InputLabel :error="loginError" v-if="loginError" />
+    </VInputButton>
+    <VFormInput :error="loginError" v-if="loginError" />
   </div>
 </template>

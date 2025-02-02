@@ -32,26 +32,26 @@ const submit = handleSubmit(async (validatedData) => {
     <div class="flex w-full items-center justify-center h-screen border">
       <div class="flex flex-col space-y-2 w-1/3 border border-zinc-300 p-12 rounded-xl">
         <div class="flex justify-center">
-          <InputLabel class="text-center" label-class="text-xl !font-bold" label="Login">Login</InputLabel>
+          <VFormInput class="text-center" label-class="text-xl !font-bold" label="Login">Login</VFormInput>
           <div class="ml-5 mr-5">|</div>
           <img src="/vidur-small.svg" class="h-8" />
         </div>
-        <InputLabel
+        <VFormInput
           label-class="text-sm text-gray-500 text-center"
           label="The only recruiting software you will ever need"
           id="random"
         />
 
-        <InputText class="w-full" placeholder="Email" v-model="email" :error="errors['email']" />
+        <VInputText class="w-full" placeholder="Email" v-model="email" :error="errors['email']" />
 
-        <InputText
+        <VInputText
           class="w-full"
           placeholder="Password"
           type-override="password"
           v-model="password"
           :error="errors['password']"
         />
-        <InputButton @click="submit">Login</InputButton>
+        <VInputButton @click="submit">Login</VInputButton>
       </div>
     </div>
   </main>

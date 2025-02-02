@@ -50,9 +50,9 @@ const onDelete = () => {
               content="Hook will stop receiving further events immediatly. You cannot undo this action."
             >
               <template #input="{ open }">
-                <InputButton variant="destructive" size="icon" @click="open">
+                <VInputButton variant="destructive" size="icon" @click="open">
                   <Icon name="mdi:delete" />
-                </InputButton>
+                </VInputButton>
               </template>
             </AbstractConfirmationBox>
             <AdminHooksEditAction :hook="hook" />

@@ -41,10 +41,10 @@ watchDebounced(
 <template>
   <Modal title="Add Member">
     <template #input="{ open }">
-      <InputButton @click="open">
+      <VInputButton @click="open">
         <span class="mr-2">Add Member</span>
         <Icon name="ic:baseline-plus" class="w-5 h-5" />
-      </InputButton>
+      </VInputButton>
     </template>
     <template #content="{ close }">
       <form>
@@ -71,8 +71,8 @@ watchDebounced(
                 <span>{{ admin.email }}</span>
               </div>
             </div>
-            <InputButton size="sm" variant="outline" @click="submit(admin.id, close)" :loading="changing"
-              >Add</InputButton
+            <VInputButton size="sm" variant="outline" @click="submit(admin.id, close)" :loading="changing"
+              >Add</VInputButton
             >
           </div>
         </div>

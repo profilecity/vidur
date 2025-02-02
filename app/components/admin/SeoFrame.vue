@@ -39,12 +39,12 @@ const onSubmit = handleSubmit(async (values) => {
 <template>
   <VFrameTabbed tab-group="settings">
     <template #action>
-      <InputButton @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
+      <VInputButton @click="onSubmit" :disabled="isSubmitting"> Save </VInputButton>
     </template>
     <template #content>
       <form class="px-4 space-y-6 w-full md:w-2/3 items-center mt-4" @submit="onSubmit">
         <div class="md:flex gap-4 items-center mt-5">
-          <InputText
+          <VInputText
             class="w-full md:w-1/2"
             placeholder="Big Space Career Site"
             v-model="title"
@@ -52,7 +52,7 @@ const onSubmit = handleSubmit(async (values) => {
             :error="errors['title']"
             label="Website Title"
           />
-          <InputText
+          <VInputText
             class="w-full md:w-1/2"
             placeholder="Big Space Career Site Description"
             v-model="description"
@@ -62,7 +62,7 @@ const onSubmit = handleSubmit(async (values) => {
           />
         </div>
         <div class="md:flex gap-4 items-center mt-5">
-          <InputText
+          <VInputText
             class="w-full md:w-1/2"
             placeholder="big_space_tech"
             v-model="twitter"

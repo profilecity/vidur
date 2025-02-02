@@ -29,7 +29,7 @@ watch(localModel, (v) => {
 </script>
 
 <template>
-  <InputLabel :label-class :label :error :id :sublabel>
+  <VFormInput :label-class :label :error :id :sublabel>
     <template #input>
       <input
         class="input-css"
@@ -40,7 +40,7 @@ watch(localModel, (v) => {
         :id
       />
     </template>
-  </InputLabel>
+  </VFormInput>
 </template>
 
 <style scoped>

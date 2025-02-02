@@ -127,8 +127,8 @@ const onClear = () => {
       <div class="flex justify-between items-center text-sm text-zinc-500 mb-2 px-4">
         <span>{{ `${dateModel.month}/${dateModel.day}/${dateModel.year}` }}</span>
         <div class="flex space-x-1">
-          <InputButton variant="secondary" size="sm" @click.prevent="onClear" v-if="selectedDate">Clear</InputButton>
-          <InputButton size="sm" @click.prevent="onSelect">Select</InputButton>
+          <VInputButton variant="secondary" size="sm" @click.prevent="onClear" v-if="selectedDate">Clear</VInputButton>
+          <VInputButton size="sm" @click.prevent="onSelect">Select</VInputButton>
         </div>
       </div>
     </DatePickerContent>

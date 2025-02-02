@@ -23,7 +23,7 @@ const props = withDefaults(
 
 if (props.allowManualTrigger) {
   // TODO: implement allow manual trigger.
-  console.warn("<InputStep/>: allowManualTrigger is not implemented yet, and won't take effect.");
+  console.warn("<VInputStep/>: allowManualTrigger is not implemented yet, and won't take effect.");
 }
 </script>
 
