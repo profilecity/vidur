@@ -43,7 +43,7 @@ useSeoMeta({
     <SiteHeader />
     <h3 class="text-lg leading-snug text-zinc-600 font-bold mt-8 mb-2">
       Open Positions
-      <UiTag>{{ totalActivePostings }}</UiTag>
+      <VTag>{{ totalActivePostings }}</VTag>
     </h3>
     <div class="space-y-2" v-if="postings">
       <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />

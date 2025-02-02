@@ -57,7 +57,7 @@ watchEffect(() => {
           <span class="font-noto font-bold mr-2">
             {{ postingsById[posting] || '' }}
           </span>
-          <UiTag> {{ applications[posting]?.length }} Applicants </UiTag>
+          <VTag> {{ applications[posting]?.length }} Applicants </VTag>
         </div>
         <div class="text-sm">
           <AdminApplicationRow
