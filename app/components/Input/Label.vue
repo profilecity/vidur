@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col w-full">
+  <div class="flex flex-col w-full" v-if="label">
     <Label class="block text-sm font-medium mb-1 text-zinc-900 font-noto pl-0.5" :class="labelClass" :for="id">
       {{ label }}
       <br v-if="sublabel" />
@@ -20,4 +20,5 @@ defineProps<{
     </Label>
     <slot name="input" />
   </div>
+  <slot name="input" v-else />
 </template>
