@@ -56,7 +56,7 @@ watchDebounced(
           :disabled="changing"
         />
         <div
-          class="flex flex-col space-y-3 overflow-y-scroll no-scrollbar h-64 mt-3"
+          class="flex flex-col space-y-3 overflow-y-auto no-scrollbar h-64 mt-3"
           v-if="suggestedAdmins && suggestedAdmins.length > 0"
         >
           <div

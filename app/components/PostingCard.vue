@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="rounded-xl border px-5 py-4 bg-white border-zinc-200 w-full">
+  <div class="rounded-default border px-5 py-4 bg-white border-zinc-200 w-full">
     <NuxtLink class="flex justify-between items-center w-full" :to="'/postings/' + posting.id">
       <!-- Left side -->
       <div class="w-1/2">

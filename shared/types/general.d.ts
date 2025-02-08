@@ -24,3 +24,9 @@ export type Step = {
   description?: string;
   icon: string;
 };
+
+export type NavigationLink = {
+  icon?: string;
+  to: string;
+  label: string;
+};

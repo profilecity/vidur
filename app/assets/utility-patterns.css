@@ -20,42 +20,8 @@ input[type="search"]::-webkit-search-results-decoration {
     -webkit-appearance: none;
 }
 
-.form-input,
-.form-textarea,
-.form-multiselect,
-.form-select,
-.form-checkbox,
-.form-radio {
-    @apply bg-white border border-slate-200 focus:border-blue-500;
-}
-
-.form-input,
-.form-textarea,
-.form-multiselect,
-.form-select,
-.form-checkbox {
-    @apply rounded;
-}
-
-.form-input,
-.form-textarea,
-.form-multiselect,
-.form-select {
-    @apply text-sm px-3 py-2;
-}
-
-.form-input,
-.form-textarea {
-    @apply placeholder-slate-400;
-}
-
-.form-select {
-    @apply pr-10;
-}
-
-.form-checkbox,
-.form-radio {
-    @apply text-blue-500 border-2 rounded-sm;
+.form-input {
+    @apply shadow-sm bg-gray-50 border border-zinc-300 text-zinc-900 text-sm rounded-default focus-within:ring-1 focus-within:ring-primary focus-within:border-primary-bg block w-full p-1.5 outline-none;
 }
 
 /* Chrome, Safari and Opera */

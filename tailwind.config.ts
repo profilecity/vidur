@@ -26,9 +26,11 @@ export default {
       fontFamily: {
         noto: ['Noto Sans', 'sans-serif'],
         lato: ['Lato', 'cursive'],
+        nunito: ['Nunito', 'sans-serif'],
       },
       colors: {
         primary: '#818CF8',
+        'primary-dark': '#5969f7',
         'primary-bg': '#EBECFF',
         'primary-content': '#FFFFFF',
       },
@@ -89,10 +91,6 @@ export default {
       },
     },
   },
-  plugins: [
-    // eslint-disable-next-line global-require
-    require('@tailwindcss/forms'),
-  ],
 } satisfies InlineTWConfig;
 
 /**

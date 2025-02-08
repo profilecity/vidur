@@ -31,6 +31,7 @@ const props = withDefaults(
   {
     id: 'vidur-editor',
     readOnly: false,
+    editorClass: '',
   }
 );
 const emit = defineEmits<{
@@ -177,7 +178,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <section class="focus-within:ring-1 ring-zinc-400 rounded-lg border">
+  <section class="form-input !p-0">
     <ToolbarRoot
       class="flex p-1 w-full max-w-screen !min-w-max rounded-t-lg bg-white"
       aria-label="Formatting options"
@@ -298,7 +299,7 @@ watchEffect(() => {
       </ToolbarToggleGroup>
     </ToolbarRoot>
     <EditorContent
-      :class="{ 'rounded-b-lg bg-white p-1': !readOnly, [editorClass || '']: !!editorClass }"
+      :class="[{ 'rounded-b-lg p-1': !readOnly, '!border-none': readOnly }, editorClass, 'bg-white']"
       :editor
       :disabled="readOnly"
     />
@@ -307,6 +308,6 @@ watchEffect(() => {
 
 <style scoped>
 .toggle-ui {
-  @apply border border-transparent text-zinc-900 h-7 px-1 rounded inline-flex leading-none items-center justify-center bg-white ml-0.5 outline-none hover:border-zinc-200 first:ml-0 data-[state=on]:bg-zinc-200;
+  @apply border border-transparent text-zinc-900 h-7 px-1 rounded inline-flex leading-none items-center justify-center bg-white ml-0.5 outline-none hover:border-zinc-200 first:ml-0 data-[state=on]:bg-primary-bg;
 }
 </style>

@@ -4,6 +4,7 @@ import { cva } from 'class-variance-authority';
 const variants = cva(undefined, {
   variants: {
     size: {
+      xs: 'text-xs',
       sm: 'text-sm',
       md: 'text-md',
       lg: 'text-lg',

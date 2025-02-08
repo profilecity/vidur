@@ -158,7 +158,7 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
           <template #input>
             <Editor
               placeholder="We are looking for someone who can..."
-              editor-class="h-[480px] overflow-y-scroll"
+              editor-class="h-[480px] overflow-y-auto"
               v-model="contents"
               :read-only="disableFields"
             />

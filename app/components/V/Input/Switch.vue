@@ -15,11 +15,11 @@ const switchState = useVModel(props, 'modelValue');
   <SwitchRoot
     :id
     v-model:checked="switchState"
-    class="w-10 h-[22px] flex bg-zinc-900/50 shadow-sm rounded-full relative data-[state=checked]:bg-zinc-700"
+    class="w-10 h-[22px] flex bg-primary/50 shadow-sm rounded-full relative data-[state=checked]:bg-primary border"
     :disabled="disabled"
   >
     <SwitchThumb
-      class="block w-4 h-4 my-auto bg-white shadow-sm rounded-full transition-transform duration-100 translate-x-1 will-change-transform data-[state=checked]:translate-x-[21px]"
+      class="block w-4 h-4 my-auto bg-white shadow-sm rounded-full transition-transform duration-100 translate-x-[2px] will-change-transform data-[state=checked]:translate-x-[20px]"
     />
   </SwitchRoot>
 </template>

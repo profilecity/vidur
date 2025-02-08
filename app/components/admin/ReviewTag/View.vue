@@ -55,7 +55,7 @@ const onDelete = async () => {
       </VInputButton>
     </template>
     <template #content>
-      <div class="h-full overflow-y-scroll">
+      <div class="h-full overflow-y-auto">
         <div class="mb-6">
           <div class="flex items-center space-x-2 mb-2">
             <span class="font-noto font-bold">New Review Tag</span>

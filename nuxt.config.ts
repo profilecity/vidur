@@ -44,6 +44,7 @@ export default defineNuxtConfig({
     families: {
       'Noto+Sans': [400, 500, 600, 700],
       Lato: [400, 500, 600, 700],
+      Nunito: [400, 500, 600, 700],
     },
     useStylesheet: true,
   },

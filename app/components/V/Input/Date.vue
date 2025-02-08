@@ -63,11 +63,10 @@ const onClear = () => {
   <!-- @vue-expect-error -->
   <DatePickerRoot id="date-field" :is-date-disabled v-model:open="open" v-model:model-value="dateModel" :disabled>
     <DatePickerField class="flex items-center space-x-2 border border-transparent justify-start w-full">
-      <DatePickerTrigger
-        class="rounded-md text-lg focus:shadow-black flex items-center hover:bg-zinc-200 p-1 border"
-        @click="open = !open"
-      >
-        <Icon icon="radix-icons:calendar" class="w-5 h-5" />
+      <DatePickerTrigger as-child>
+        <VInputButton size="icon-sm" variant="secondary" @click.stop="open = !open">
+          <Icon icon="radix-icons:calendar" class="w-5 h-5" />
+        </VInputButton>
       </DatePickerTrigger>
       <div class="flex flex-col text-sm">
         <span v-if="selectedDate">

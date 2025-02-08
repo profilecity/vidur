@@ -32,7 +32,7 @@ watch(localModel, (v) => {
   <VFormInput :label-class :label :error :id :sublabel>
     <template #input>
       <input
-        class="input-css"
+        class="form-input"
         :type="typeOverride || 'text'"
         :class="inputClass"
         v-model="localModel"
@@ -43,8 +43,4 @@ watch(localModel, (v) => {
   </VFormInput>
 </template>
 
-<style scoped>
-.input-css {
-  @apply w-full py-1.5 px-2.5 border border-zinc-200 rounded-lg text-sm placeholder:text-zinc-400 focus:ring-1 focus:ring-zinc-600 focus:ring-offset-1 sm:text-sm sm:leading-6 outline-none;
-}
-</style>
+<style scoped></style>

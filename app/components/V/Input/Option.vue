@@ -70,7 +70,7 @@ const filterFunction = (_: string[], searchTerm: string) => {
     </ComboboxAnchor>
 
     <ComboboxContent
-      class="absolute z-10 w-full min-w-[160px] max-h-80 overflow-y-scroll bg-white overflow-hidden data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade border rounded-b-lg p-2"
+      class="absolute z-10 w-full min-w-[160px] max-h-80 overflow-y-auto bg-white overflow-hidden data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade border rounded-b-lg p-2"
     >
       <ComboboxViewport>
         <ComboboxEmpty class="text-sm text-zinc-500 text-center py-2" />
