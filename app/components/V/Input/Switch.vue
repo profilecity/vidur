@@ -15,7 +15,7 @@ const switchState = useVModel(props, 'modelValue');
   <SwitchRoot
     :id
     v-model:checked="switchState"
-    class="w-10 h-[22px] flex bg-primary/50 shadow-sm rounded-full relative data-[state=checked]:bg-primary border"
+    class="w-10 h-[22px] flex bg-zinc-400 shadow-sm rounded-full relative data-[state=checked]:bg-primary-dark border"
     :disabled="disabled"
   >
     <SwitchThumb
