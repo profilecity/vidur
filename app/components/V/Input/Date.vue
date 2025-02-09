@@ -115,7 +115,7 @@ const onClear = () => {
                   <DatePickerCellTrigger
                     :day="weekDate"
                     :month="month.value"
-                    class="relative flex items-center justify-center whitespace-nowrap rounded-lg border text-sm font-normal text-zinc-700 w-8 h-8 outline-none hover:border-zinc-300 data-[selected]:bg-zinc-800 data-[selected]:font-medium data-[disabled]:text-zinc-300 data-[selected]:text-white data-[unavailable]:pointer-events-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-green9 data-[selected]:before:bg-white"
+                    class="relative flex items-center justify-center whitespace-nowrap rounded-lg border text-sm font-normal text-zinc-700 w-8 h-8 outline-none hover:border-zinc-300 data-[selected]:bg-primary-dark data-[selected]:font-medium data-[disabled]:text-zinc-300 data-[selected]:text-white data-[unavailable]:pointer-events-none data-[unavailable]:text-black/30 data-[unavailable]:line-through before:absolute before:top-[5px] before:hidden before:rounded-full before:w-1 before:h-1 before:bg-white data-[today]:before:block data-[today]:before:bg-green9 data-[selected]:before:bg-white"
                   />
                 </DatePickerCell>
               </DatePickerGridRow>

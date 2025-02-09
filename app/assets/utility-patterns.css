@@ -24,6 +24,10 @@ input[type="search"]::-webkit-search-results-decoration {
     @apply shadow-sm bg-gray-50 border border-zinc-300 text-zinc-900 text-sm rounded-default focus-within:ring-1 focus-within:ring-primary focus-within:border-primary-bg block w-full p-1.5 outline-none;
 }
 
+.form-input-container {
+    @apply shadow-sm bg-gray-50 w-full p-1.5 outline-none;
+}
+
 /* Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
     display: none;

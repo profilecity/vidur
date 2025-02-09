@@ -55,22 +55,19 @@ const filterFunction = (_: string[], searchTerm: string) => {
 
 <template>
   <ComboboxRoot v-model:open="open" v-model="selectedTitle" class="relative" :filter-function="filterFunction">
-    <ComboboxAnchor
-      class="border-x border-t min-w-[160px] w-full inline-flex items-center justify-between rounded-t-lg leading-none px-2"
-      :class="{ '!border !rounded-lg': !open }"
-    >
+    <ComboboxAnchor>
       <ComboboxInput as-child>
-        <input type="text" @focus="open = true" class="input-css" />
+        <input type="text" @focus="open = true" class="form-input min-w-[160px]" />
       </ComboboxInput>
       <ComboboxTrigger as-child>
-        <VInputButton variant="ghost" size="icon-xs" ref="comboboxTrigger">
+        <VInputButton variant="ghost" size="icon-xs" ref="comboboxTrigger" class="absolute right-1 top-0 h-full">
           <Icon name="radix-icons:chevron-down" class="h-4 w-4" />
         </VInputButton>
       </ComboboxTrigger>
     </ComboboxAnchor>
 
     <ComboboxContent
-      class="absolute z-10 w-full min-w-[160px] max-h-80 overflow-y-auto bg-white overflow-hidden data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade border rounded-b-lg p-2"
+      class="absolute top-9 z-10 w-full min-w-[160px] max-h-80 overflow-y-auto bg-white overflow-hidden data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade border rounded-b-lg p-2"
     >
       <ComboboxViewport>
         <ComboboxEmpty class="text-sm text-zinc-500 text-center py-2" />

@@ -199,14 +199,14 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
         </div>
         <VFormInput label="Publish?">
           <template #input>
-            <div class="border p-[7px] w-full rounded-lg bg-white">
+            <div class="form-input">
               <VInputSwitch v-model="isPublished" :disabled="disableFields" />
             </div>
           </template>
         </VFormInput>
         <VFormInput label="Expiry Date">
           <template #input>
-            <div class="border p-0.5 w-full rounded-lg bg-white">
+            <div class="form-input">
               <VInputDate
                 class="w-full"
                 label="Expiry Date"
@@ -218,7 +218,7 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
         </VFormInput>
         <VFormInput label="Is Remote?">
           <template #input>
-            <div class="border p-[7px] w-full rounded-lg bg-white">
+            <div class="form-input">
               <VInputSwitch v-model="isRemote" :disabled="disableFields" />
             </div>
           </template>
@@ -230,7 +230,7 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
         </VFormInput>
         <VFormInput label="Salary Details">
           <template #input>
-            <div class="flex flex-col p-2 border rounded-lg space-y-2 bg-white">
+            <div class="flex flex-col p-2 border rounded-default space-y-2 bg-white">
               <div class="flex w-full items-center space-x-2">
                 <VFormInput label="Unit">
                   <template #input>
