@@ -26,10 +26,12 @@ const props = withDefaults(
     placeholder?: string;
     id?: string;
     readOnly?: boolean;
+    editorClass?: string;
   }>(),
   {
     id: 'vidur-editor',
     readOnly: false,
+    editorClass: '',
   }
 );
 const emit = defineEmits<{
@@ -45,6 +47,11 @@ onMounted(() => {
     content: editorContent.value,
     extensions: [
       StarterKit.configure({
+        paragraph: {
+          HTMLAttributes: {
+            class: 'text-sm',
+          },
+        },
         bold: {
           HTMLAttributes: {
             class: 'font-bold',
@@ -78,7 +85,7 @@ onMounted(() => {
             3: 'text-xl',
             4: 'text-lg',
             5: 'text-md',
-            6: 'text-base',
+            6: 'text-sm',
           };
           return [
             `h${level}`,
@@ -171,9 +178,9 @@ watchEffect(() => {
 </script>
 
 <template>
-  <section>
+  <section class="form-input !p-0">
     <ToolbarRoot
-      class="flex p-1 w-full max-w-screen !min-w-max rounded-t-lg bg-white border-t border-x"
+      class="flex p-1 w-full max-w-screen !min-w-max rounded-t-lg bg-white"
       aria-label="Formatting options"
       v-if="editor && !readOnly"
     >
@@ -292,7 +299,7 @@ watchEffect(() => {
       </ToolbarToggleGroup>
     </ToolbarRoot>
     <EditorContent
-      :class="readOnly ? '' : 'border-b border-x rounded-b-lg bg-white p-1'"
+      :class="[{ 'rounded-b-lg p-1': !readOnly, '!border-none': readOnly }, editorClass, 'bg-white']"
       :editor
       :disabled="readOnly"
     />
@@ -301,6 +308,6 @@ watchEffect(() => {
 
 <style scoped>
 .toggle-ui {
-  @apply border border-transparent text-zinc-900 h-7 px-1 rounded inline-flex leading-none items-center justify-center bg-white ml-0.5 outline-none hover:border-zinc-200 first:ml-0 data-[state=on]:bg-zinc-200;
+  @apply border border-transparent text-zinc-900 h-7 px-1 rounded inline-flex leading-none items-center justify-center bg-white ml-0.5 outline-none hover:border-zinc-200 first:ml-0 data-[state=on]:bg-primary-bg;
 }
 </style>

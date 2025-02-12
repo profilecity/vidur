@@ -31,4 +31,7 @@ export default defineEventHandler(async (event) => {
     'postings',
     postings.filter((p) => p.id !== deletedPostingId)
   );
+
+  const totalActivePostings = (await general_memoryStorage.getItem<number>('totalActivePostings'))!;
+  await general_memoryStorage.setItem<number>('totalActivePostings', totalActivePostings - 1);
 });

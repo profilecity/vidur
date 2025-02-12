@@ -1,28 +1,24 @@
-export function useAuth() {
-  const session = useSessionState();
-  const isSignedIn = computed(() => !!session.value?.profile);
-  const profile = computed(() => session.value?.profile);
-
-  return {
-    session,
-    profile,
-    isSignedIn,
-  };
-}
-
-export function useSafeRedirectToLogin() {
+export function useSafeRedirectToLogin(route: ReturnType<typeof useRoute>) {
   const nextURLCookie = useCookie('oauth_next_url');
 
   const redirectToLogin = (toPath: string | null = null) => {
     let nextURL = toPath;
     if (!toPath) {
-      const route = useRoute();
       nextURL = route.fullPath;
     }
     nextURLCookie.value = nextURL;
 
-    return navigateTo('/login', { external: true });
+    return navigateTo('/admin/login');
   };
 
-  return { redirectToLogin };
+  const redirectPostLogin = () => {
+    const nextURL = nextURLCookie.value;
+    nextURLCookie.value = undefined; // del cookie
+    if (nextURL) {
+      return navigateTo(nextURL);
+    }
+    return navigateTo('/admin/dashboard');
+  };
+
+  return { redirectToLogin, redirectPostLogin };
 }

@@ -22,6 +22,9 @@ export default defineNuxtConfig({
     experimental: {
       tasks: true,
     },
+    imports: {
+      dirs: ['server/utils/**/*.ts'],
+    },
     scheduledTasks: cronSchedule,
   },
   routeRules: {
@@ -34,11 +37,14 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
     'nuxt-cropper',
     'radix-vue/nuxt',
+    'nuxt-auth-utils',
   ],
+  css: ['~/assets/utility-patterns.css'],
   googleFonts: {
     families: {
       'Noto+Sans': [400, 500, 600, 700],
       Lato: [400, 500, 600, 700],
+      Nunito: [400, 500, 600, 700],
     },
     useStylesheet: true,
   },
@@ -60,7 +66,7 @@ export default defineNuxtConfig({
     storage: {
       engine: 'local',
       local: {
-        baseDir: '/var/lib/vidur/data',
+        baseDir: './.data',
       },
       s3: {
         accessKeyId: '',
@@ -72,14 +78,7 @@ export default defineNuxtConfig({
     },
     bypassAdmin: false, // THIS IS ONLY FOR DEMO INSTANCES / DEV MODE. NOT MEANT TO BE USED AS A FULL FEATURE.
     delayResponse: false, // IT WILL ONLY TAKE EFFECT IN DEV MODE, USEFUL TO DO REALISTIC TESTING.
-    services: {
-      profileCity: 'https://api.thenirvanalabs.com',
-      atlas: 'https://atlas.thenirvanalabs.com',
-    },
     remoteAssetBase: '/assets',
-    oauth: {
-      clientId: 'profilecity-connect',
-    },
     public: {
       origin: 'http://localhost:3001',
       github: 'https://github.com/profilecity/vidur',

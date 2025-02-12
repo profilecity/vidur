@@ -1,5 +1,21 @@
 import { sql } from 'drizzle-orm';
-import { boolean, integer, pgTable, text, timestamp, uuid, varchar, smallint, serial, date } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+  varchar,
+  smallint,
+  serial,
+  date,
+  char,
+  pgEnum,
+  json,
+} from 'drizzle-orm/pg-core';
+import { employmentTypeIds } from '../../shared/employment-types';
+import type { PostalAddressList, Salary } from '../../shared/types/posting-types';
 
 const defaultUuidPkField = () =>
   uuid('id')
@@ -8,33 +24,22 @@ const defaultUuidPkField = () =>
 
 const defaultSerialPkField = () => serial('id').primaryKey();
 
+export const employmentTypeEnum = pgEnum('employment_type', employmentTypeIds);
+
 //---------------**************----------------
 
-export const usersTable = pgTable('users', {
+export const adminsTable = pgTable('admins', {
   id: defaultUuidPkField(),
-  firstName: varchar('first_name', { length: 50 }),
+  firstName: varchar('first_name', { length: 50 }).notNull(),
   lastName: varchar('last_name', { length: 50 }),
   picture: text('picture'),
   email: varchar('email', { length: 255 }).unique().notNull(),
+  password: char('password', { length: 133 }).notNull(), // length of adonis scrypt output
+  isDeleted: boolean('is_admin').default(false).notNull(),
   permission: integer('permission').default(0).notNull(),
-  top5SkillsCSV: text('top_5_skills_csv'),
-
-  isAdmin: boolean('is_admin').default(false).notNull(),
 });
 
-export type User = typeof usersTable.$inferSelect;
-
-//---------------**************----------------
-
-export const userHandlesTable = pgTable('user_handles', {
-  userId: uuid('user_id').references(() => usersTable.id, {
-    onDelete: 'cascade',
-  }),
-  key: varchar('key', { length: 15 }).notNull(),
-  value: text('value').notNull(),
-});
-
-export type UserHandle = typeof userHandlesTable.$inferSelect;
+export type Admin = typeof adminsTable.$inferSelect;
 
 //---------------**************----------------
 
@@ -43,25 +48,42 @@ export const jobPostingsTable = pgTable('job_postings', {
   title: varchar('title', { length: 150 }).notNull(),
   contents: text('contents'),
   tagsCSV: text('tags_csv'),
-  owner: uuid('owner_id').references(() => usersTable.id, {
-    onDelete: 'set null',
-  }),
+
   isPublished: boolean('is_published').default(false).notNull(),
+  validTill: date('valid_till', { mode: 'date' }),
+  employmentType: employmentTypeEnum('employment_type').default(employmentTypeIds[0]).notNull(),
+  jobLocations: json('job_locations').$type<PostalAddressList>(),
+  isRemote: boolean('is_remote').default(false).notNull(),
+  baseSalary: json('base_salary').$type<Salary>(),
+
   totalApplicants: integer('total_applicants').default(0).notNull(),
   isExpired: boolean('is_expired').default(false).notNull(),
-  validTill: date('valid_till', { mode: 'date' }),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  owner: uuid('owner_id').references(() => adminsTable.id, {
+    onDelete: 'set null',
+  }),
 });
 
 export type JobPosting = typeof jobPostingsTable.$inferSelect;
 
 //---------------**************----------------
 
+export const candidatesTable = pgTable('candidate_pool', {
+  id: defaultUuidPkField(),
+  firstName: varchar('first_name', { length: 50 }).notNull(),
+  lastName: varchar('last_name', { length: 50 }),
+  email: varchar('email', { length: 255 }).unique().notNull(),
+});
+
+export type Candidate = typeof candidatesTable.$inferSelect;
+
+//---------------**************----------------
+
 export const postingApplicantsTable = pgTable('posting_applicants', {
   id: defaultUuidPkField(),
-  candidateId: uuid('owner_id')
-    .references(() => usersTable.id, {
+  candidateId: uuid('candidate_id')
+    .references(() => candidatesTable.id, {
       onDelete: 'cascade',
     })
     .notNull(),

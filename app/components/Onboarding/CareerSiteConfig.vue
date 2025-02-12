@@ -49,7 +49,7 @@ const onSubmit = handleSubmit(async (values) => {
     <div class="text-xl font-noto font-bold text-center">Configure Career Site</div>
     <div class="text-zinc-600 text-center text-sm">You can change this later</div>
     <div class="flex space-x-2 mt-6">
-      <InputText
+      <VInputText
         class="w-full md:w-1/2"
         placeholder="Organization Name"
         v-model="name"
@@ -57,7 +57,7 @@ const onSubmit = handleSubmit(async (values) => {
         :error="errors['name']"
         label="Organization Name"
       />
-      <InputText
+      <VInputText
         class="w-full md:w-1/2"
         placeholder="Location"
         v-model="location"
@@ -66,7 +66,7 @@ const onSubmit = handleSubmit(async (values) => {
         label="Location"
       />
     </div>
-    <InputText
+    <VInputText
       class="w-full mt-5"
       placeholder="Join us in building next generation space technology.."
       v-model="bio"
@@ -74,6 +74,6 @@ const onSubmit = handleSubmit(async (values) => {
       :error="errors['bio']"
       label="Bio"
     />
-    <InputButton class="mt-3" @click="onSubmit" :disabled="isSubmitting"> Save </InputButton>
+    <VInputButton class="mt-3" @click="onSubmit" :disabled="isSubmitting"> Save </VInputButton>
   </form>
 </template>

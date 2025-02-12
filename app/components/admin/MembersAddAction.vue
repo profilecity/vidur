@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { User } from '~~/server/db/schema';
+import type { Admin } from '~~/server/db/schema';
 import { watchDebounced } from '@vueuse/core';
 
 const { postData, changing } = await useMembersRepository();
 
-const suggestedUsers = ref<User[]>();
+const suggestedAdmins = ref<Admin[]>();
 
 const submit = async (id: string, closeFn: () => void) => {
   let success = false;
@@ -16,23 +16,23 @@ const submit = async (id: string, closeFn: () => void) => {
   }
 };
 
-const userSearchQuery = ref<string>('');
-const fetchingUserSuggestions = ref(false);
+const adminSearchQuery = ref<string>('');
+const fetchingAdminSuggestions = ref(false);
 
 watchDebounced(
-  userSearchQuery,
+  adminSearchQuery,
   async (q) => {
     try {
-      fetchingUserSuggestions.value = true;
-      suggestedUsers.value = await $fetch<User[]>('/api/user/lookup', {
+      fetchingAdminSuggestions.value = true;
+      suggestedAdmins.value = await $fetch<Admin[]>('/api/admin/lookup', {
         query: {
           q,
         },
       });
     } catch (error) {
-      console.error('error fetching user suggestions', error);
+      console.error('error fetching admin suggestions', error);
     } finally {
-      fetchingUserSuggestions.value = false;
+      fetchingAdminSuggestions.value = false;
     }
   },
   { debounce: 500, maxWait: 1000 }
@@ -41,10 +41,10 @@ watchDebounced(
 <template>
   <Modal title="Add Member">
     <template #input="{ open }">
-      <InputButton @click="open">
+      <VInputButton @click="open">
         <span class="mr-2">Add Member</span>
         <Icon name="ic:baseline-plus" class="w-5 h-5" />
-      </InputButton>
+      </VInputButton>
     </template>
     <template #content="{ close }">
       <form>
@@ -52,35 +52,39 @@ watchDebounced(
           type="text"
           class="input-custom"
           placeholder="Start searching to add members"
-          v-model="userSearchQuery"
+          v-model="adminSearchQuery"
           :disabled="changing"
         />
         <div
-          class="flex flex-col space-y-3 overflow-y-scroll no-scrollbar h-64 mt-3"
-          v-if="suggestedUsers && suggestedUsers.length > 0"
+          class="flex flex-col space-y-3 overflow-y-auto no-scrollbar h-64 mt-3"
+          v-if="suggestedAdmins && suggestedAdmins.length > 0"
         >
-          <div class="flex w-full justify-between p-2 border rounded-lg" v-for="user in suggestedUsers" :key="user.id">
+          <div
+            class="flex w-full justify-between p-2 border rounded-lg"
+            v-for="admin in suggestedAdmins"
+            :key="admin.id"
+          >
             <div class="flex space-x-1 items-center">
-              <img :src="user.picture" v-if="user.picture" class="w-10 h-10 rounded-full" />
+              <img :src="admin.picture" v-if="admin.picture" class="w-10 h-10 rounded-full" />
               <div class="flex flex-col text-sm">
-                <span class="font-bold">{{ user.firstName }} {{ user.lastName }}</span>
-                <span>{{ user.email }}</span>
+                <span class="font-bold">{{ admin.firstName }} {{ admin.lastName }}</span>
+                <span>{{ admin.email }}</span>
               </div>
             </div>
-            <InputButton size="sm" variant="outline" @click="submit(user.id, close)" :loading="changing"
-              >Add</InputButton
+            <VInputButton size="sm" variant="outline" @click="submit(admin.id, close)" :loading="changing"
+              >Add</VInputButton
             >
           </div>
         </div>
         <div class="h-64 flex w-full justify-center items-center" v-else>
-          <span class="text-center" v-if="userSearchQuery && !fetchingUserSuggestions">
-            <span class="font-bold">No User Found</span><br />
-            <span class="text-xs">User has to login atleast once to be added.</span>
+          <span class="text-center" v-if="adminSearchQuery && !fetchingAdminSuggestions">
+            <span class="font-bold">No Admin Found</span><br />
+            <span class="text-xs">Admin has to login atleast once to be added.</span>
           </span>
-          <span class="text-center" v-else-if="!userSearchQuery">
+          <span class="text-center" v-else-if="!adminSearchQuery">
             <span class="font-bold">Start typing to see suggestions.</span><br />
             <span class="text-xs">
-              Any user added will be able to see / create job postings and see / manage all the applicants.
+              Any admin added will be able to see / create job postings and see / manage all the applicants.
             </span>
           </span>
         </div>

@@ -1,3 +1,8 @@
+> [!IMPORTANT]
+> Vidur development is in the early stages. Track progress via [GitHub issues](https://github.com/profilecity/vidur/issues).<br><br>
+> Hosting Vidur is not recommended for now due to planned re-organization in Authentication and Profile services.<br>
+> Vidur is targeted to be made more standalone, with a more open licence.
+
 <p align="center">
   <a href="https://github.com/profilecity/vidur">
    <img src="./header.png" alt="Logo">
@@ -55,7 +60,7 @@ To get up and running with Vidur, follow these steps:
 2. **Clone the Repository**
 
 ```bash
-git clone https://github.com/your-repo/vidur.git
+git clone https://github.com/profilecity/vidur.git
 cd vidur
 ```
 

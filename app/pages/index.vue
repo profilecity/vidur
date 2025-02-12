@@ -43,20 +43,10 @@ useSeoMeta({
     <SiteHeader />
     <h3 class="text-lg leading-snug text-zinc-600 font-bold mt-8 mb-2">
       Open Positions
-      <UiTag>{{ totalActivePostings }}</UiTag>
+      <VTag>{{ totalActivePostings }}</VTag>
     </h3>
     <div class="space-y-2" v-if="postings">
       <PostingCard v-for="posting in postings" :key="posting.id" :posting="posting" />
     </div>
   </main>
-  <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
-    <div class="relative z-50">
-      <a :href="publicConfig.vidur">
-        <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
-          <p class="mr-2">Powered By</p>
-          <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
-        </div>
-      </a>
-    </div>
-  </div>
 </template>

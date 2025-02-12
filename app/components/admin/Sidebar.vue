@@ -38,7 +38,7 @@ const publicConfig = useRuntimeConfig().public;
         <div class="text-xs my-2 text-zinc-500">
           Get access to AI powered profiles and People's Search.
         </div>
-        <InputButton size="sm">Upgrade Now</InputButton>
+        <VInputButton size="sm">Upgrade Now</VInputButton>
       </div> -->
       <div class="flex justify-between mt-4">
         <div class="text-zinc-900 text-sm">{{ publicConfig.version }}</div>

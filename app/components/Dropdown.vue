@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * Legacy. Use new <InputDropdown/> instead
+ */
+
 import { onKeyStroke } from '@vueuse/core';
 
 const emit = defineEmits<{
@@ -60,7 +64,7 @@ if (props.closeOnEsc) {
         <div ref="dropdownRef">
           <div class="flex w-full justify-between text-slate-400 pb-2 px-3 items-center">
             <div class="text-xs uppercase">{{ title }}</div>
-            <InputButton variant="ghost" size="icon-xs" @click="close"><Icon name="ion:close" /></InputButton>
+            <VInputButton variant="ghost" size="icon-xs" @click="close"><Icon name="ion:close" /></VInputButton>
           </div>
           <slot name="content" :close="close" />
         </div>

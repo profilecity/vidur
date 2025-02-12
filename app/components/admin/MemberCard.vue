@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { User } from '~~/server/db/schema';
+import type { Admin } from '~~/server/db/schema';
 
 const props = defineProps<{
-  member: User;
+  member: Admin;
 }>();
 
 const { deleteData } = await useMembersRepository();
-const { profile } = useAuth();
+const { user: profile } = useUserSession();
 
 const onRemove = () => {
   deleteData({ id: props.member.id });
@@ -14,7 +14,7 @@ const onRemove = () => {
 </script>
 
 <template>
-  <div class="col-span-full md:col-span-2 xl:col-span-4 bg-white rounded-2xl border border-zinc-200">
+  <div class="col-span-full md:col-span-4 xl:col-span-4 bg-white rounded-2xl border border-zinc-200">
     <!-- Card content -->
     <div class="flex justify-between items-center w-full p-2">
       <div class="flex items-center space-x-2">
@@ -32,9 +32,9 @@ const onRemove = () => {
         v-if="profile?.id != member.id"
       >
         <template #input="{ open }">
-          <InputButton variant="destructive" size="icon" @click="open">
+          <VInputButton variant="destructive" size="icon" @click="open">
             <Icon name="mdi:delete" />
-          </InputButton>
+          </VInputButton>
         </template>
       </AbstractConfirmationBox>
     </div>

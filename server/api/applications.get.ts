@@ -1,5 +1,5 @@
-import { eq, inArray } from 'drizzle-orm';
-import { postingApplicantsTable, type User, type UserHandle, userHandlesTable, usersTable } from '../db/schema';
+import { inArray } from 'drizzle-orm';
+import { postingApplicantsTable, type Candidate, candidatesTable } from '../db/schema';
 import authenticateAdminRequest from '../utils/admin';
 import { applicationsLookupSchema } from '~~/shared/schemas/application';
 
@@ -48,24 +48,17 @@ export default defineEventHandler(async (event) => {
   const applicantRecords =
     applicantIds.length > 0
       ? await db
-          .select({ user: usersTable, handle: userHandlesTable })
-          .from(usersTable)
-          .leftJoin(userHandlesTable, eq(usersTable.id, userHandlesTable.userId))
-          .where(inArray(usersTable.id, applicantIds))
+          .select({ candidate: candidatesTable })
+          .from(candidatesTable)
+          .where(inArray(candidatesTable.id, applicantIds))
       : [];
 
-  const applicants: Record<string, { user: User; handles: UserHandle[] }> = {};
+  const applicants: Record<string, { candidate: Candidate }> = {};
 
   applicantRecords.forEach((a) => {
-    applicants[a.user.id] = {
-      user: a.user,
-      handles: [],
+    applicants[a.candidate.id] = {
+      candidate: a.candidate,
     };
-  });
-
-  applicantRecords.forEach((a) => {
-    if (!a.handle) return;
-    applicants[a.user.id]?.handles.push(a.handle);
   });
 
   // Final validation: all candidates should be present;

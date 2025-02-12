@@ -3,7 +3,7 @@ const { data } = await useMembersRepository();
 </script>
 
 <template>
-  <FrameTabbed tab-group="settings">
+  <VFrameTabbed tab-group="settings">
     <template #action>
       <AdminMembersAddAction />
     </template>
@@ -12,5 +12,5 @@ const { data } = await useMembersRepository();
         <AdminMemberCard v-for="member in data" :key="member.id" :member="member" />
       </section>
     </template>
-  </FrameTabbed>
+  </VFrameTabbed>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <FrameTabbed tab-group="integration">
+  <VFrameTabbed tab-group="integration">
     <template #content>
       <div class="p-4">
         <h2 class="text-lg text-zinc-800 font-bold font-noto">Launching Soon 🚀</h2>
@@ -8,5 +8,5 @@
         </h4>
       </div>
     </template>
-  </FrameTabbed>
+  </VFrameTabbed>
 </template>

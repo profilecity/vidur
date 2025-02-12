@@ -5,6 +5,7 @@ export type InputReceivable = {
 export type SelectableOption = {
   id: string | number;
   title: string;
+  description?: string;
   logo?: string;
   logoClass?: string;
 };
@@ -22,4 +23,10 @@ export type Step = {
   title?: string;
   description?: string;
   icon: string;
+};
+
+export type NavigationLink = {
+  icon?: string;
+  to: string;
+  label: string;
 };

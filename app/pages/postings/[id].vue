@@ -2,11 +2,14 @@
 const route = useRoute();
 const id = route.params.id as string;
 
-const { isSignedIn } = useAuth();
-const { redirectToLogin } = useSafeRedirectToLogin();
-
-const { data: applicationStatus, refresh: refreshApplicationStatus, status } = useApplicationStatus(id);
 const { data: posting } = await usePublicPostingRepository({ id });
+
+if (!posting.value) {
+  throw createError({
+    statusCode: 404,
+    message: 'No such posting found. Maybe the posting has expired.',
+  });
+}
 
 const { data: careerSiteConfig } = useCareerSiteConfigObjectState();
 const companyLogo = useRemoteAsset(careerSiteConfig.value.logo).url;
@@ -23,37 +26,20 @@ const tags = computed<string[]>(() => {
 });
 
 const isApplying = ref(false);
+const appliedSuccessfully = ref(false);
 const apply = async () => {
-  if (!route.query.fromOnboard) {
-    await navigateTo('https://connect.profilecity.xyz?callback=' + window.location.href, { external: true });
-    return;
-  }
   try {
     isApplying.value = true;
     await $fetch('/api/application', {
       method: 'POST',
       body: { postingId: id },
     });
-    refreshApplicationStatus();
   } catch (e) {
     console.error('Error occured while applying', e);
   } finally {
     isApplying.value = false;
   }
 };
-
-onMounted(async () => {
-  if (route.query.fromOnboard) {
-    if (!isSignedIn.value) {
-      await redirectToLogin(route.fullPath);
-    }
-    watch(status, (s) => {
-      if (s == 'success' && (!applicationStatus.value || !applicationStatus.value.userAlreadyApplied)) {
-        apply();
-      }
-    });
-  }
-});
 </script>
 
 <template>
@@ -64,12 +50,12 @@ onMounted(async () => {
         <!-- Content -->
         <div class="w-full">
           <div class="mb-6">
-            <InputButton as="NuxtLink" variant="outline" to="/">
+            <VInputButton as="NuxtLink" variant="outline" to="/">
               <Icon class="fill-current text-zinc-500 mr-2" name="mdi:arrow-left" />
               <span>Back To Jobs</span>
-            </InputButton>
+            </VInputButton>
           </div>
-          <div class="text-sm text-zinc-500 italic mb-2">Posted {{ formatDate(new Date(posting.updatedAt)) }}</div>
+          <div class="text-sm text-zinc-500 italic mb-2">Posted {{ timeAgo(new Date(posting.updatedAt)) }}</div>
           <header class="mb-4">
             <!-- Title -->
             <h1 class="text-2xl md:text-3xl text-zinc-800 font-bold">
@@ -93,17 +79,14 @@ onMounted(async () => {
               </div>
             </div>
             <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-2">
-              <div
-                class="flex w-full items-center justify-center text-green-500 space-x-2"
-                v-if="applicationStatus?.userAlreadyApplied"
-              >
+              <div class="flex w-full items-center justify-center text-green-500 space-x-2" v-if="appliedSuccessfully">
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
+              <VInputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
                 Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </InputButton>
+              </VInputButton>
             </div>
           </div>
 
@@ -120,7 +103,8 @@ onMounted(async () => {
             </div>
           </div>
           <hr class="my-6 border-t border-zinc-100" />
-          <Editor :read-only="true" v-model="posting.contents" />
+          <!-- <Editor :read-only="true" v-model="posting.contents" /> -->
+          <div v-html="posting.contents" class="prose" />
         </div>
 
         <!-- Sidebar -->
@@ -142,31 +126,18 @@ onMounted(async () => {
               </div>
             </div>
             <div class="space-y-2">
-              <div
-                class="flex w-full items-center justify-center text-green-500 space-x-2"
-                v-if="applicationStatus?.userAlreadyApplied"
-              >
+              <div class="flex w-full items-center justify-center text-green-500 space-x-2" v-if="appliedSuccessfully">
                 <Icon name="teenyicons:tick-circle-solid" class="w-4 h-4" />
                 <span>Applied</span>
               </div>
-              <InputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
+              <VInputButton class="w-full" @click="apply" :disabled="isApplying" v-else>
                 Apply Today
                 <Icon class="fill-current ml-1" name="mdi:arrow-right" />
-              </InputButton>
+              </VInputButton>
             </div>
           </div>
         </div>
       </div>
     </div>
   </main>
-  <div class="flex fixed bottom-5 right-5 lg:bottom-10 lg:right-10">
-    <div class="relative z-50">
-      <a href="https://www.vidurjobs.xyz">
-        <div class="flex items-center px-4 py-2 rounded-lg backdrop-blur-md text-sm border border-zinc-200 shadow-md">
-          <p class="mr-2">Powered By</p>
-          <img class="w-16" src="/vidur-logo.svg" alt="Avatar" />
-        </div>
-      </a>
-    </div>
-  </div>
 </template>

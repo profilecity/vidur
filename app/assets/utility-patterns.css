@@ -1,0 +1,41 @@
+/* Typography Utils */
+.h-text {
+    @apply font-bold font-noto text-zinc-900;
+}
+
+/* Frame Utils */
+.rounded-default {
+    @apply rounded;
+}
+
+.rounded-more {
+    @apply rounded-lg;
+}
+
+/* Forms */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+}
+
+.form-input {
+    @apply shadow-sm bg-gray-50 border border-zinc-300 text-zinc-900 text-sm rounded-default focus-within:ring-1 focus-within:ring-primary focus-within:border-primary-bg block w-full p-1.5 outline-none;
+}
+
+.form-input-container {
+    @apply shadow-sm bg-gray-50 w-full p-1.5 outline-none;
+}
+
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'admin',
-  middleware: 'admin-auth',
 });
 
 useHead({
@@ -43,7 +42,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <FrameUntabbed title="View Applications">
+  <VFrameUntabbed title="View Applications">
     <template #action>
       <AbstractDropdownMultiSelect
         class="mt-2"
@@ -58,7 +57,7 @@ watchEffect(() => {
           <span class="font-noto font-bold mr-2">
             {{ postingsById[posting] || '' }}
           </span>
-          <UiTag> {{ applications[posting]?.length }} Applicants </UiTag>
+          <VTag> {{ applications[posting]?.length }} Applicants </VTag>
         </div>
         <div class="text-sm">
           <AdminApplicationRow
@@ -80,11 +79,11 @@ watchEffect(() => {
             <path class="text-zinc-400" d="M11 12.294v11l8.486-4.714a1 1 0 00.514-.874V7.295l-9 4.999z" />
           </svg>
         </div>
-        <h2 class="text-2xl text-zinc-800 font-bold mb-2">Start by selecting postings.</h2>
-        <h3 class="text-md font-bold text-zinc-500 pl-9">
-          Select postings from dropdown to start seeing applicant profiles.
-        </h3>
+        <VFrameHWithSubText>
+          <template #heading>Start by selecting postings</template>
+          <template #subtext> Select postings from the dropdown above to view applications. </template>
+        </VFrameHWithSubText>
       </div>
     </template>
-  </FrameUntabbed>
+  </VFrameUntabbed>
 </template>

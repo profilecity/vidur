@@ -4,7 +4,7 @@ const showEmptyState = computed(() => hooks.value.length == 0);
 </script>
 
 <template>
-  <FrameTabbed tab-group="integration">
+  <VFrameTabbed tab-group="integration">
     <template #action>
       <div class="flex space-x-2">
         <AdminHooksNewAction />
@@ -18,5 +18,5 @@ const showEmptyState = computed(() => hooks.value.length == 0);
         </div>
       </div>
     </template>
-  </FrameTabbed>
+  </VFrameTabbed>
 </template>
