@@ -5,7 +5,6 @@ import {
   ComboboxEmpty,
   ComboboxInput,
   ComboboxItem,
-  ComboboxItemIndicator,
   ComboboxRoot,
   ComboboxTrigger,
   ComboboxViewport,
