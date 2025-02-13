@@ -18,17 +18,17 @@ const props = withDefaults(
     modelValue?: SelectableOption['id'];
     options: SelectableOption[];
     placeholder?: string;
+    side?: 'top' | 'right' | 'bottom' | 'left';
   }>(),
-  { placeholder: 'Select a value' }
+  { placeholder: 'Select a value', side: 'bottom' }
 );
 
-const selectedValue = useVModel(props, 'modelValue');
-const selectedTitle = ref<string>();
-
-const open = ref(false);
+const selectedOptionId = useVModel(props, 'modelValue');
 
 // Initialise title as per provided id.
-selectedTitle.value = props.options.find((o) => o.id === props.modelValue)?.title;
+const selectedTitle = ref<string | undefined>(props.options.find((o) => o.id === props.modelValue)?.title);
+
+const open = ref(false);
 
 watch(selectedTitle, (selectedTitle) => {
   if (!selectedTitle) return;
@@ -36,7 +36,7 @@ watch(selectedTitle, (selectedTitle) => {
   const selectedOption = props.options.find((o) => o.title === selectedTitle);
   if (!selectedOption) return;
 
-  selectedValue.value = selectedOption.id;
+  selectedOptionId.value = selectedOption.id;
 });
 
 const filterFunction = (_: string[], searchTerm: string) => {
@@ -67,23 +67,27 @@ const filterFunction = (_: string[], searchTerm: string) => {
     </ComboboxAnchor>
 
     <ComboboxContent
-      class="absolute top-9 z-10 w-full min-w-[160px] max-h-80 overflow-y-auto bg-white overflow-hidden data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade border rounded-b-lg p-2"
+      class="absolute top-10 z-10 w-full min-w-[160px] max-h-80 overflow-y-auto bg-white overflow-hidden border rounded-b-lg"
+      :class="{
+        'animate-slideDownAndFade': side === 'top',
+        'animate-slideUpAndFade': side === 'bottom',
+        'animate-slideLeftAndFade': side === 'right',
+        'animate-slideRightAndFade': side === 'left',
+      }"
+      :side
     >
       <ComboboxViewport>
         <ComboboxEmpty class="text-sm text-zinc-500 text-center py-2" />
         <!-- TODO: it's possible to have grouped strucutre, see docs. removed for now to KISS -->
-        <ComboboxItem v-for="option in options" :key="option.id" :value="option.title" as-child>
-          <div
-            class="text-sm rounded-lg flex items-center px-6 data-[disabled]:pointer-events-none cursor-pointer data-[highlighted]:outline-none data-[highlighted]:bg-zinc-200 mb-2"
-          >
-            <span class="flex flex-col">
-              <span class="font-bold">{{ option.title }}</span>
-              <span class="text-xs" v-if="option.description">{{ option.description }}</span>
-            </span>
-            <ComboboxItemIndicator class="absolute left-0 w-6 inline-flex items-center justify-center">
-              <Icon name="radix-icons:check" />
-            </ComboboxItemIndicator>
-          </div>
+        <ComboboxItem
+          class="text-left form-input hover:bg-primary-bg/60 my-1 mx-auto !w-[96%] data-[highlighted]:!bg-primary-bg/60"
+          :class="`${option.id === selectedOptionId ? '!bg-primary-bg' : ''}`"
+          v-for="option in options"
+          :key="option.id"
+          :value="option.title"
+        >
+          <span class="font-bold">{{ option.title }}</span>
+          <span class="text-xs ml-2" v-if="option.description">{{ option.description }}</span>
         </ComboboxItem>
       </ComboboxViewport>
     </ComboboxContent>
