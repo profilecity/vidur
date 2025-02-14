@@ -19,7 +19,11 @@ export async function useDatabase() {
           rejectUnauthorized: false, // TODO: fix this.
         },
   });
-  await client.connect();
+  try {
+    await client.connect();
+  } catch (error) {
+    throw new Error(`Failed to connect to the database: ${(error as Error).message}`);
+  }
 
   drizzleInstance = drizzle(client);
   return drizzleInstance;
