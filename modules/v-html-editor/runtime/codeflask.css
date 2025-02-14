@@ -1,0 +1,16 @@
+/**
+* In order to maintain isolation from project, styles from project are not specified here.
+* Styles are expected to be overridden by project. (can be found at app/assets/codeflask.css)
+*/
+
+.codeflask .codeflask__flatten {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.codeflask-editor {
+  position: relative;
+  width: 100%;
+  min-height: 250px;
+  height: 100%;
+}
