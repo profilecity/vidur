@@ -11,7 +11,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col w-full form-input-container" v-if="label">
+  <div class="flex flex-col w-full form-input-container rounded-default" v-if="label">
     <Label class="block text-sm font-medium mb-1 text-zinc-900 font-noto pl-0.5" :class="labelClass" :for="id">
       {{ label }}
       <span class="text-xs ml-1 text-rose-500" v-if="error">{{ error }}</span>
