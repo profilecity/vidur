@@ -15,7 +15,7 @@ const { container: outputContainer } = useHtmlPreview({ code });
 
 <template>
   <div class="flex w-full h-full border rounded-default" v-if="props.showPreview">
-    <VFormInput label="HTML">
+    <VFormInput label="HTML Code">
       <template #input>
         <div class="form-input !p-0" ref="inputContainer"></div>
       </template>

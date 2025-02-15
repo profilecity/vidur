@@ -12,6 +12,6 @@ const code = ref<string>(DEFAULT_HTML);
 
 <template>
   <div class="flex p-8">
-    <VEditorCode :code class="w-1/2" show-preview />
+    <VEditorHtml v-model:code="code" class="w-1/2" show-preview />
   </div>
 </template>
