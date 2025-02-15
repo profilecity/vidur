@@ -12,7 +12,6 @@ export default function useHtmlEditor({ code }: HTMLEditorOptions) {
   const container = ref<HTMLElement>();
 
   const registerCode = (input: string) => {
-    console.log('Code updates', input);
     code.value = input;
   };
 

@@ -1,3 +1,4 @@
+import { watchDebounced } from '@vueuse/core';
 import { DEFAULT_HTML } from '../consts';
 
 export interface HTMLPreviewOptions {
@@ -21,9 +22,13 @@ export default function useHtmlPreview({ code }: HTMLEditorOptions) {
     el.shadowRoot.innerHTML = code.value || DEFAULT_HTML;
     container.value.appendChild(el);
 
-    watch(code, (newCode) => {
-      el.shadowRoot!.innerHTML = newCode || DEFAULT_HTML;
-    });
+    watchDebounced(
+      code,
+      (newCode) => {
+        el.shadowRoot!.innerHTML = newCode || DEFAULT_HTML;
+      },
+      { debounce: 500, maxWait: 1000 }
+    );
   });
 
   return { container };
