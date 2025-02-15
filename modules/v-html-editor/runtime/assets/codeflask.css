@@ -11,6 +11,6 @@
 .codeflask-editor {
   position: relative;
   width: 100%;
-  min-height: 250px;
-  height: 100%;
+  height: 250px;
+  overflow-y: auto;
 }

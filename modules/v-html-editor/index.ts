@@ -1,4 +1,4 @@
-import { addImportsSources, createResolver, defineNuxtModule } from 'nuxt/kit';
+import { addImportsDir, addImportsSources, createResolver, defineNuxtModule } from 'nuxt/kit';
 
 export default defineNuxtModule({
   meta: {
@@ -7,11 +7,8 @@ export default defineNuxtModule({
   setup() {
     const resolver = createResolver(import.meta.url);
 
-    const composables = resolver.resolve('./runtime/composables.ts');
-    addImportsSources({
-      from: composables,
-      imports: ['useHtmlEditor'],
-    });
+    const composables = resolver.resolve('./runtime/composables');
+    addImportsDir(composables);
 
     const consts = resolver.resolve('./runtime/consts.ts');
     addImportsSources({

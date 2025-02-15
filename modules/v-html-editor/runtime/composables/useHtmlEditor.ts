@@ -1,19 +1,18 @@
 import type CodeFlask from 'codeflask';
 
 export interface HTMLEditorOptions {
-  initialCode: string;
+  code: Ref<string | undefined>;
 }
 
 /**
  * Manage state of HTMLEditor.
  */
-export function useHtmlEditor({ initialCode }: HTMLEditorOptions = { initialCode: '' }) {
+export default function useHtmlEditor({ code }: HTMLEditorOptions) {
   const flask = shallowRef<CodeFlask>();
   const container = ref<HTMLElement>();
 
-  const code = ref<string>(initialCode);
-
   const registerCode = (input: string) => {
+    console.log('Code updates', input);
     code.value = input;
   };
 
@@ -24,7 +23,7 @@ export function useHtmlEditor({ initialCode }: HTMLEditorOptions = { initialCode
       container.value.classList.add('codeflask-editor');
 
       // Imports (lazily imported once we are sure we need to mount codeflask)
-      await import('./codeflask.css');
+      await import('../assets/codeflask.css');
       const CodeFlask = (await import('codeflask')).default;
 
       flask.value = new CodeFlask(container.value, {
@@ -32,7 +31,11 @@ export function useHtmlEditor({ initialCode }: HTMLEditorOptions = { initialCode
         enableAutocorrect: false,
         lineNumbers: false,
       });
-      flask.value.updateCode(code.value);
+
+      if (code.value) {
+        flask.value.updateCode(code.value);
+      }
+
       flask.value.onUpdate(registerCode);
     })
   );
@@ -42,5 +45,5 @@ export function useHtmlEditor({ initialCode }: HTMLEditorOptions = { initialCode
     flask.value = undefined;
   });
 
-  return { container, flask, code };
+  return { container, flask };
 }
