@@ -5,6 +5,9 @@ import pg from 'pg';
 let client: pg.Client | null;
 let drizzleInstance: NodePgDatabase;
 
+const isRunningLocally = () =>
+  process.env.NUXT_DB_HOST?.includes('localhost') || process.env.NUXT_DB_HOST?.includes('127.0.0.1');
+
 export async function useDatabase() {
   try {
     const config = useRuntimeConfig();
@@ -14,10 +17,10 @@ export async function useDatabase() {
 
     client = new pg.Client({
       ...config.db,
-      ssl: IS_DEV
+      ssl: isRunningLocally()
         ? false
         : {
-            rejectUnauthorized: false, // TODO: fix this.
+            rejectUnauthorized: false,
           },
     });
 
