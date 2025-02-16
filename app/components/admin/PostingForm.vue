@@ -156,7 +156,7 @@ const employmentTypeOptions = employmentTypes.map<SelectableOption>((e) => ({
         />
         <VFormInput label="Job Description" :error="errors.contents">
           <template #input>
-            <Editor
+            <VEditorText
               placeholder="We are looking for someone who can..."
               editor-class="h-[480px] overflow-y-auto"
               v-model="contents"
