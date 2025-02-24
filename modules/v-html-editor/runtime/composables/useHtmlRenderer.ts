@@ -1,8 +1,9 @@
 import { defu } from 'defu';
 import { create as createHbInstance } from 'handlebars';
+import { getHandlebarsVariables } from '../utils/handlebars';
 
-export type VHtmlRuntimeVariableDefinition = string;
 export type VHtmlVariableGroup = Record<string | number | symbol, any>;
+export type VHtmlTemplate = string;
 export type VHtmlRendererConfig = {
   /**
    * Set of static variables that are available before-hand (while designing).
@@ -10,13 +11,6 @@ export type VHtmlRendererConfig = {
    * in the runtime.
    */
   staticVariables: any;
-
-  /**
-   * Set of variable definitions that are available during
-   * runtime. They will be filled during runtime and will be available in
-   * the runtime. Fake values can be used during design time.
-   */
-  runtimeVariableDefinitions: VHtmlRuntimeVariableDefinition[];
 
   /**
    * Set of known helpers that can be used in the template.
@@ -45,14 +39,8 @@ export function useHtmlRenderer(config: VHtmlRendererConfig) {
   });
 
   const staticVariables = config.staticVariables;
-  const runtimeVariableDefinitions = config.runtimeVariableDefinitions;
 
   const render = (template: string, runtimeVars: VHtmlVariableGroup) => {
-    const missingVars = runtimeVariableDefinitions.filter((key) => !runtimeVars[key]);
-    if (missingVars.length > 0) {
-      throw new Error(`Missing runtime variables: ${missingVars.join(', ')}`);
-    }
-
     const mergedVars = defu(runtimeVars, staticVariables);
     const compiledTemplate = hb.compile(template, {
       data: true,
@@ -66,5 +54,9 @@ export function useHtmlRenderer(config: VHtmlRendererConfig) {
     return compiledTemplate(mergedVars);
   };
 
-  return { render };
+  const extractVariables = (template: string) => {
+    return getHandlebarsVariables(template);
+  };
+
+  return { render, extractVariables };
 }
