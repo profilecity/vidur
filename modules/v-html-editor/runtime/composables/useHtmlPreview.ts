@@ -27,7 +27,7 @@ export default function useHtmlPreview({ code }: HTMLEditorOptions) {
       (newCode) => {
         el.shadowRoot!.innerHTML = newCode || DEFAULT_HTML;
       },
-      { debounce: 500, maxWait: 1000 }
+      { debounce: 1000 }
     );
   });
 
