@@ -1,11 +1,11 @@
 import { watchDebounced } from '@vueuse/core';
 import { DEFAULT_HTML } from '../consts';
 
-export interface HTMLPreviewOptions {
+export interface VHtmlPreviewOptions {
   code: Ref<string | undefined>;
 }
 
-export default function useHtmlPreview({ code }: HTMLEditorOptions) {
+export default function useHtmlPreview({ code }: VHtmlPreviewOptions) {
   const container = ref<HTMLElement>();
 
   onMounted(async () => {

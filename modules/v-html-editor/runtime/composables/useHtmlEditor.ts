@@ -1,13 +1,13 @@
 import type CodeFlask from 'codeflask';
 
-export interface HTMLEditorOptions {
+export interface VHtmlEditorOptions {
   code: Ref<string | undefined>;
 }
 
 /**
  * Manage state of HTMLEditor.
  */
-export default function useHtmlEditor({ code }: HTMLEditorOptions) {
+export default function useHtmlEditor({ code }: VHtmlEditorOptions) {
   const flask = shallowRef<CodeFlask>();
   const container = ref<HTMLElement>();
 
