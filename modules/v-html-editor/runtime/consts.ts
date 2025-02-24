@@ -5,16 +5,6 @@ export const DEFAULT_HTML = `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
-  <p>Hello, world!</p>
+  
 </body>
 </html>`;
