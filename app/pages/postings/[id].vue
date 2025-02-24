@@ -103,7 +103,7 @@ const apply = async () => {
             </div>
           </div>
           <hr class="my-6 border-t border-zinc-100" />
-          <!-- <Editor :read-only="true" v-model="posting.contents" /> -->
+          <!-- <VEditorText :read-only="true" v-model="posting.contents" /> -->
           <div v-html="posting.contents" class="prose" />
         </div>
 

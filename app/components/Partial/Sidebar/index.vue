@@ -44,7 +44,7 @@ const linkGroups = [
       },
       {
         icon: 'dashicons:email',
-        to: '/admin/settings',
+        to: '/admin/email-templates',
         label: 'Email Templates',
       },
     ],
