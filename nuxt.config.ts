@@ -1,4 +1,4 @@
-import pkgJson from './package.json';
+import pkgJson from './package.json' with { type: 'json' };
 
 const composeVersion = () => {
   if (!pkgJson || !pkgJson.version) {
