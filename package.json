@@ -38,6 +38,7 @@
     "@vee-validate/zod": "^4.13.1",
     "@vueuse/core": "^11.1.0",
     "class-variance-authority": "^0.7.0",
+    "date-fns": "^4.1.0",
     "drizzle-kit": "^0.30.4",
     "drizzle-orm": "^0.39.3",
     "jsonwebtoken": "^9.0.2",

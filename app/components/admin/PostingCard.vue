@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { JobPosting } from '~~/server/db/schema';
+import { differenceInDays } from 'date-fns';
 
 const props = defineProps<{
   posting: JobPosting;
@@ -11,6 +12,16 @@ const tags = ref<string[]>([]);
 if (props.posting && props.posting.tagsCSV) {
   tags.value = props.posting.tagsCSV.split(',').map((t) => t.trim());
 }
+
+const expiryMessage = computed(() => {
+  if (!props.posting.validTill) return '';
+  const expiryDate = new Date(props.posting.validTill);
+  const daysLeft = differenceInDays(expiryDate, new Date());
+  if (daysLeft === 0) return 'Expires today';
+  if (daysLeft === 1) return 'Expires tomorrow';
+  if (daysLeft > 1) return `Expires in ${daysLeft} days`;
+  return '';
+});
 </script>
 
 <template>
@@ -56,15 +67,16 @@ if (props.posting && props.posting.tagsCSV) {
         </div>
       </div>
       <footer class="mt-5">
+        <VSubtext size="xs" class="mt-10">Created {{ timeAgo(new Date(posting.createdAt)) }}</VSubtext>
         <div class="flex justify-between items-center">
           <div
-            class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-red-100 text-red-700"
+            class="text-xs font-medium rounded-default text-center mt-2 px-2.5 py-1 bg-red-100 text-red-700"
             v-if="posting.isExpired"
           >
             Expired
           </div>
           <div
-            class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-green-100 text-green-700"
+            class="text-xs font-medium rounded-default text-center mt-2 px-2.5 py-1 bg-green-100 text-green-700"
             v-else-if="posting.isPublished"
           >
             Published
@@ -72,7 +84,9 @@ if (props.posting && props.posting.tagsCSV) {
           <div class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-sky-100 text-sky-700" v-else>
             Draft
           </div>
-          <VSubtext size="xs">Created {{ timeAgo(new Date(posting.createdAt)) }}</VSubtext>
+          <div v-if="expiryMessage" class="text-xs text-red-600 mt-2">
+            {{ expiryMessage }}
+          </div>
         </div>
       </footer>
     </div>
