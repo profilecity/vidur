@@ -10,6 +10,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "chore:reset-pass": "bash ./bin/reset-pass.sh",
     "migration:generate": "drizzle-kit generate",
     "migration:apply": "drizzle-kit migrate",
     "drizzle:update": "drizzle-kit up",

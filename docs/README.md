@@ -105,6 +105,17 @@ This command starts both the `db` and `app` services using the `dev` profile, ru
 
 You can also pull the latest Docker image from [here](https://hub.docker.com/r/profilecity/vidur/tags).
 
+### Resetting Admin Password
+
+It you forget admin password while development, you can reset it by following these steps.
+
+1. Start vidur project. Make sure it's running on port `3000`.
+2. Now, open second terminal and run following command:
+
+```sh
+yarn chore:reset-pass -- <email> <new password>
+```
+
 ## Contributing
 
 We welcome contributions from the community! Check out our [contribution guide](./CONTRIBUTING.md) to get involved and help us make Vidur even better.
