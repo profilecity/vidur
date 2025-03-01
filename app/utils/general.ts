@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { differenceInDays, startOfDay } from 'date-fns';
 
 export const generalColors = [
   'red',
@@ -85,6 +86,16 @@ export function getHash(input: string) {
   }
 
   return hash;
+}
+
+export function expiresIn(date: Date): string {
+  const expiryDate = startOfDay(date);
+  const today = startOfDay(new Date());
+  const daysLeft = differenceInDays(expiryDate, today);
+  if (daysLeft === 0) return 'Expires today';
+  if (daysLeft === 1) return 'Expires tomorrow';
+  if (daysLeft <= 2) return `Expires in ${daysLeft} days`;
+  return '';
 }
 
 export function cn(...inputs: ClassValue[]) {

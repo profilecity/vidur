@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { JobPosting } from '~~/server/db/schema';
-import { differenceInDays } from 'date-fns';
 
 const props = defineProps<{
   posting: JobPosting;
@@ -13,15 +12,7 @@ if (props.posting && props.posting.tagsCSV) {
   tags.value = props.posting.tagsCSV.split(',').map((t) => t.trim());
 }
 
-const expiryMessage = computed(() => {
-  if (!props.posting.validTill) return '';
-  const expiryDate = new Date(props.posting.validTill);
-  const daysLeft = differenceInDays(expiryDate, new Date());
-  if (daysLeft === 0) return 'Expires today';
-  if (daysLeft === 1) return 'Expires tomorrow';
-  if (daysLeft > 1) return `Expires in ${daysLeft} days`;
-  return '';
-});
+const expiryMessage = props.posting.validTill ? expiresIn(new Date(props.posting.validTill)) : null;
 </script>
 
 <template>
