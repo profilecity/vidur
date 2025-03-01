@@ -75,7 +75,7 @@ const step3Completed = async (savedOrgName: string) => {
           <div v-else-if="!errorSettingUpCareerSite">
             <Icon name="line-md:circle-twotone-to-confirm-circle-twotone-transition" class="w-32 h-32" />
             <h1 class="text-2xl font-noto text-zinc-800 font-bold mb-8">Nice to have you, {{ orgName }}. 🙌</h1>
-            <VInputButton as="a" href="/admin">Go to admin console</VInputButton>
+            <VInputButton as="NuxtLink" to="/admin">Go to admin console</VInputButton>
           </div>
           <div class="text-2xl text-red-600 font-noto" v-else>
             Something went wrong!<br />There was an error setting up the career site.
