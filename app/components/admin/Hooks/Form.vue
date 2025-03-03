@@ -67,7 +67,7 @@ defineExpose({
 </script>
 
 <template>
-  <form class="flex flex-col items-start space-y-2 mt-4" @submit="onSubmit">
+  <form class="flex flex-col items-start space-y-3 mt-4" @submit="onSubmit">
     <VInputText
       class="w-full"
       label="Title"
@@ -83,8 +83,10 @@ defineExpose({
       type-override="url"
       v-model="url"
     />
-    <VInputButton :loading="changing" type="submit">
-      {{ isUpdating ? 'Save' : 'Create' }}
-    </VInputButton>
+    <div class="w-full flex justify-center">
+      <VInputButton class="mb-1" :loading="changing" type="submit">
+        {{ isUpdating ? 'Save' : 'Create' }}
+      </VInputButton>
+    </div>
   </form>
 </template>
