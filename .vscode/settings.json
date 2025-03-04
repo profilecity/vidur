@@ -1,6 +1,8 @@
 {
   "css.customData": [".vscode/tailwind.json"],
   "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
