@@ -67,7 +67,7 @@ defineExpose({
 </script>
 
 <template>
-  <form class="flex flex-col items-start space-y-2 mt-4" @submit="onSubmit">
+  <form class="flex flex-col items-start space-y-1 p-2" @submit="onSubmit">
     <VInputText
       class="w-full"
       label="Title"
