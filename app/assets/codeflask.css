@@ -1,0 +1,24 @@
+/**
+* Styles from tailwind and styles specific to Vidur are placed here.
+* Parent styles can be found at modules/v-html-editor/runtime/codeflask.css which are isolated and independent of Vidur.
+*/
+
+.codeflask .codeflask__flatten {
+  @apply text-sm !rounded;
+}
+.codeflask .codeflask__lines {
+  @apply !bg-primary-bg z-10;
+}
+.codeflask .token.tag {
+  @apply !text-primary-dark !font-bold;
+}
+.codeflask .token.attr-name {
+  @apply !text-primary;
+}
+.codeflask .token.attr-value {
+  @apply !text-zinc-800;
+}
+
+.codeflask-editor {
+  @apply !rounded;
+}
