@@ -71,18 +71,18 @@ const displayExpiryMessage = computed(() => !!expiryMessage.value);
       <footer class="mt-5">
         <div class="flex justify-between items-center">
           <div
-            class="text-xs font-medium rounded-default text-center mt-2 px-2.5 py-1 bg-red-100 text-red-700"
+            class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-red-100 text-red-700"
             v-if="posting.isExpired"
           >
             Expired
           </div>
           <div
-            class="text-xs font-medium rounded-default text-center mt-2 px-2.5 py-1 bg-green-100 text-green-700"
+            class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-green-100 text-green-700"
             v-else-if="posting.isPublished"
           >
             Published
           </div>
-          <div class="text-xs font-medium rounded-default text-center mt-2 px-2.5 py-1 bg-sky-100 text-sky-700" v-else>
+          <div class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-sky-100 text-sky-700" v-else>
             Draft
           </div>
           <VSubtext size="xs" class="mt-2" color="error" v-if="displayExpiryMessage">{{ expiryMessage }}</VSubtext>
