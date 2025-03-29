@@ -20,6 +20,7 @@ const variants = cva(undefined, {
       primary: 'text-primary',
       muted: 'text-zinc-500',
       disabled: 'text-zinc-400',
+      error: 'text-rose-600',
     },
   },
   defaultVariants: {
