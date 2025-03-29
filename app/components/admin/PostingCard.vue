@@ -11,6 +11,19 @@ const tags = ref<string[]>([]);
 if (props.posting && props.posting.tagsCSV) {
   tags.value = props.posting.tagsCSV.split(',').map((t) => t.trim());
 }
+
+const expiryMessage = computed(() => {
+  if (!props.posting.isExpired && props.posting.validTill) {
+    const expiryDate = new Date(props.posting.validTill);
+    const expiresInDays = daysFromNow(expiryDate);
+    if (expiresInDays === 0) {
+      return 'Expires today';
+    } else if (expiresInDays > 0 && expiresInDays <= 7) {
+      return `Expires in ${expiresInDays} days`;
+    }
+  }
+});
+const displayExpiryMessage = computed(() => !!expiryMessage.value);
 </script>
 
 <template>
@@ -72,7 +85,8 @@ if (props.posting && props.posting.tagsCSV) {
           <div class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-sky-100 text-sky-700" v-else>
             Draft
           </div>
-          <VSubtext size="xs">Created {{ timeAgo(new Date(posting.createdAt)) }}</VSubtext>
+          <VSubtext size="xs" class="mt-2" color="error" v-if="displayExpiryMessage">{{ expiryMessage }}</VSubtext>
+          <VSubtext size="xs" class="mt-2" v-else>created {{ timeAgo(new Date(posting.createdAt)) }}</VSubtext>
         </div>
       </footer>
     </div>
