@@ -12,7 +12,18 @@ if (props.posting && props.posting.tagsCSV) {
   tags.value = props.posting.tagsCSV.split(',').map((t) => t.trim());
 }
 
-const expiryMessage = props.posting.validTill ? expiresIn(new Date(props.posting.validTill)) : null;
+const expiryMessage = computed(() => {
+  if (!props.posting.isExpired && props.posting.validTill) {
+    const expiryDate = new Date(props.posting.validTill);
+    const expiresInDays = daysFromNow(expiryDate);
+    if (expiresInDays === 0) {
+      return 'Expires today';
+    } else if (expiresInDays > 0 && expiresInDays <= 7) {
+      return `Expires in ${expiresInDays} days`;
+    }
+  }
+});
+const displayExpiryMessage = computed(() => !!expiryMessage.value);
 </script>
 
 <template>
@@ -58,7 +69,6 @@ const expiryMessage = props.posting.validTill ? expiresIn(new Date(props.posting
         </div>
       </div>
       <footer class="mt-5">
-        <VSubtext size="xs" class="mt-10">Created {{ timeAgo(new Date(posting.createdAt)) }}</VSubtext>
         <div class="flex justify-between items-center">
           <div
             class="text-xs font-medium rounded-default text-center mt-2 px-2.5 py-1 bg-red-100 text-red-700"
@@ -72,12 +82,11 @@ const expiryMessage = props.posting.validTill ? expiresIn(new Date(props.posting
           >
             Published
           </div>
-          <div class="text-xs font-medium rounded-default text-center px-2.5 py-1 bg-sky-100 text-sky-700" v-else>
+          <div class="text-xs font-medium rounded-default text-center mt-2 px-2.5 py-1 bg-sky-100 text-sky-700" v-else>
             Draft
           </div>
-          <div v-if="expiryMessage" class="text-xs text-red-600 mt-2">
-            {{ expiryMessage }}
-          </div>
+          <VSubtext size="xs" class="mt-2" color="error" v-if="displayExpiryMessage">{{ expiryMessage }}</VSubtext>
+          <VSubtext size="xs" class="mt-2" v-else>created {{ timeAgo(new Date(posting.createdAt)) }}</VSubtext>
         </div>
       </footer>
     </div>
