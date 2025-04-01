@@ -10,7 +10,7 @@ export default defineEventHandler(async (_) => {
     }));
 
   if (IS_DEV) {
-    console.log('[PUBLIC] postings page found', postings.length, 'postings.');
+    logger.info('[PUBLIC] postings page found', postings.length, 'postings.');
   }
 
   return postings;

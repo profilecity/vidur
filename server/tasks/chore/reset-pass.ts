@@ -20,10 +20,10 @@ export default defineTask({
         })
         .where(eq(adminsTable.email, email));
 
-      console.log(`chore:reset-pass success. ${new Date().toISOString()}`);
+      logger.info(`chore:reset-pass success. ${new Date().toISOString()}`);
       return { result: true };
     } catch (error) {
-      console.error(`chore:reset-pass failed. ${new Date().toISOString()}`, error);
+      logger.error(`chore:reset-pass failed. ${new Date().toISOString()}`, error);
       return { result: false };
     }
   },

@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
   };
 
   if (IS_DEV) {
-    console.log('creating posting', jobPostingRequest);
+    logger.start('creating posting', jobPostingRequest);
   }
 
   const database = await useDatabase();

@@ -3,7 +3,7 @@ import { settings_memoryStorage } from '~~/server/utils/storage';
 
 export default defineEventHandler(async () => {
   if (IS_DEV) {
-    console.log('fetching public settings');
+    logger.info('fetching public settings');
   }
 
   const settings = {

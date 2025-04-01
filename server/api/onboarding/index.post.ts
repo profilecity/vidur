@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
   if (inputKey === actualKey) {
     const db = await useDatabase();
     await db.transaction(async (tx) => {
-      console.log('deleting firstSetupAccessKey');
+      logger.warn('deleting firstSetupAccessKey');
       await tx.delete(metaDataTable).where(eq(metaDataTable.key, 'firstSetupAccessKey'));
       general_memoryStorage.removeItem('firstSetupAccessKey');
     });

@@ -8,7 +8,7 @@ export type SeedPayload = { startKey: string };
 export type SeedFn = (ctx: SeedContext, payload: SeedPayload) => Promise<void> | void;
 
 export async function seedDatabase(payload: SeedPayload) {
-  console.log('Seeding Database');
+  logger.info('Seeding Database');
 
   const db = await useDatabase();
 
@@ -17,7 +17,7 @@ export async function seedDatabase(payload: SeedPayload) {
   const currentSeedVersion = dbResponse.length > 0 ? parseInt(dbResponse[dbResponse.length - 1]?.value || '0') : 0;
   const seedingForFirstTime = !(dbResponse.length > 0);
 
-  console.log('Current Seed Version', currentSeedVersion, 'Total Seed Versions', seeds.length);
+  logger.info('Current Seed Version', currentSeedVersion, 'Total Seed Versions', seeds.length);
 
   let success = true;
 
@@ -27,12 +27,12 @@ export async function seedDatabase(payload: SeedPayload) {
     for (let index = currentSeedVersion; index < seeds.length; index++) {
       const seedFn = seeds[index];
       if (!seedFn) throw new Error('Invalid SeedCTX at index ' + (index + 1));
-      console.log('Applying SeedCTX', index + 1);
+      logger.info('Applying SeedCTX', index + 1);
       try {
         await seedFn(seedCtx, payload);
       } catch (e) {
-        console.error('Error applying seed', index, e);
-        console.log('Rolling back...');
+        logger.error('Error applying seed', index, e);
+        logger.info('Rolling back...');
         tx.rollback();
         success = false;
         break;

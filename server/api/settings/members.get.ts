@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const members = await db.select().from(adminsTable);
 
   if (IS_DEV) {
-    console.log(members.length, 'members found');
+    logger.info(members.length, 'members found');
   }
 
   return members;

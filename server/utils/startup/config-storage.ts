@@ -26,7 +26,7 @@ export async function configureStorage() {
       if (!config.local) {
         throw new Error('Selected blob storage service local. No config provided.');
       }
-      console.log('Mounting files on', config.local.baseDir);
+      logger.info('Mounting files on', config.local.baseDir);
       driver = fsLite({
         base: config.local.baseDir,
       });
@@ -35,7 +35,7 @@ export async function configureStorage() {
       throw new Error('No storage engine specified. Storage functions will not work.');
   }
 
-  console.log(`Mounting ${config.engine} driver.`);
+  logger.info(`Mounting ${config.engine} driver.`);
 
   storage.mount(BLOB_STORAGE_KEY, driver);
 }

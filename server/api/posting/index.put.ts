@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   const q = await readValidatedBody(event, updateJobPostingSchema.parse);
 
   if (IS_DEV) {
-    console.log('updating posting id', q.id);
+    logger.info('updating posting id', q.id);
   }
 
   const isPostingAlreadyExpired = (

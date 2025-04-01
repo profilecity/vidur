@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
   const asset = await blobStorage.getItemRaw(key);
 
   if (IS_DEV) {
-    console.log('grabbing asset', key);
+    logger.info('grabbing asset', key);
   }
 
   return asset;

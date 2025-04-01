@@ -3,7 +3,7 @@ import { jobPostingsTable, reviewTagsTable, metaDataTable } from '~~/server/db/s
 import type { CareerSiteConfig, SEOConfig } from '~~/shared/schemas/setting';
 
 export async function seedCache() {
-  console.log('Seeding Cache');
+  logger.info('Seeding Cache');
   const { remoteAssetBase } = useRuntimeConfig();
 
   const db = await useDatabase();

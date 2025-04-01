@@ -10,5 +10,5 @@ export async function expireJobPostings(db: NodePgDatabase) {
     .where(and(lte(jobPostingsTable.validTill, today), eq(jobPostingsTable.isExpired, false)))
     .returning({ id: jobPostingsTable.id });
 
-  console.log(`[${today}]: Marked ${affectedIds.length} postings as expired.`);
+  logger.info(`[${today}]: Marked ${affectedIds.length} postings as expired.`);
 }

@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 
   if (query.postingIds.length == 0) {
     if (IS_DEV) {
-      console.log('applications lookup', 'no posting ids found in query');
+      logger.info('applications lookup', 'no posting ids found in query');
     }
     return {
       applications: [],
@@ -64,7 +64,7 @@ export default defineEventHandler(async (event) => {
   // Final validation: all candidates should be present;
   applicationRecords.forEach((a) => {
     if (!applicants[a.candidateId]) {
-      console.error('candidate id', a.candidateId, 'is missing from database response');
+      logger.error('candidate id', a.candidateId, 'is missing from database response');
       throw createError({
         statusCode: 500,
       });

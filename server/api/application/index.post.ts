@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, applicationCreateSchema.parse);
 
   if (IS_DEV) {
-    console.log('user', session.user.id, 'applying to', body.postingId);
+    logger.info('user', session.user.id, 'applying to', body.postingId);
   }
 
   const database = await useDatabase();

@@ -19,7 +19,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (IS_DEV) {
-    console.log('Deleting Review Tag', query);
+    logger.warn('Deleting Review Tag', query);
   }
 
   const db = await useDatabase();

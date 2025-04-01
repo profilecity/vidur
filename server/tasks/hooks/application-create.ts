@@ -12,7 +12,7 @@ export default defineTask<boolean>({
     const bearerToken = payload.bearerToken as string;
 
     if (!bearerToken) {
-      console.error('hooks:application-create', 'bearer token missing from payload. aborting as failure...');
+      logger.error('hooks:application-create', 'bearer token missing from payload. aborting as failure...');
       return { result: false };
     }
 
@@ -22,7 +22,7 @@ export default defineTask<boolean>({
 
     if (hooks.length == 0) {
       if (IS_DEV) {
-        console.log('hooks:application-create', 'no-hooks-found. aborting as success...');
+        logger.info('hooks:application-create', 'no-hooks-found. aborting as success...');
       }
       return { result: true };
     }
@@ -38,7 +38,7 @@ export default defineTask<boolean>({
       .where(eq(adminsTable.id, applicantId));
 
     if (!(Array.isArray(applicantResult) && applicantResult.length == 1)) {
-      console.error('hooks:application-create', 'no applicant found. applicant id', applicantId);
+      logger.error('hooks:application-create', 'no applicant found. applicant id', applicantId);
       return { result: false };
     }
 
@@ -53,7 +53,7 @@ export default defineTask<boolean>({
       .where(eq(jobPostingsTable.id, postingId));
 
     if (!(Array.isArray(applicantResult) && applicantResult.length == 1)) {
-      console.error('hooks:application-create', 'no posting found. posting id', postingId);
+      logger.error('hooks:application-create', 'no posting found. posting id', postingId);
       return { result: false };
     }
 
@@ -68,7 +68,7 @@ export default defineTask<boolean>({
       // TODO: respect preferences. to be implemented later.
 
       if (IS_DEV) {
-        console.log(
+        logger.info(
           'calling hooks:application-create hook',
           hook.url,
           'applicantId',
@@ -89,7 +89,7 @@ export default defineTask<boolean>({
           applicant,
         },
       }).catch((e) => {
-        console.error(
+        logger.error(
           'failed calling hooks:application-create hook',
           hook.url,
           'applicantId',

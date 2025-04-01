@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
   }
 
   if (IS_DEV) {
-    console.log('[PUBLIC] postings page found', postings.length, 'postings with id', query.id);
+    logger.info('[PUBLIC] postings page found', postings.length, 'postings with id', query.id);
   }
 
   return postings[0];
