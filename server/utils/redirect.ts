@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3';
+import logger from './logger';
 
 export function sendRedirectToNextPage(event: H3Event) {
   const nextLocationCookie = getCookie(event, 'oauth_next_url');
@@ -10,5 +11,6 @@ export function sendRedirectToNextPage(event: H3Event) {
 }
 
 export function sendRedirectToLoginPage(event: H3Event) {
+  logger.info('Redirection to login');
   return sendRedirect(event, '/login');
 }

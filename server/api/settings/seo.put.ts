@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
   if (IS_DEV) {
-    console.log('updating seoConfig');
+    logger.info('updating seoConfig');
   }
 
   const settingsUpdateRequest = await readValidatedBody(event, seoConfigSchema.parse);

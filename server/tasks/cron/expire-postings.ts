@@ -9,7 +9,7 @@ export default defineTask({
       await expireJobPostings(db);
       return { result: true };
     } catch (error) {
-      console.error(`[CRON] expire-postings failed. ${new Date().toISOString()}`, error);
+      logger.error(`[CRON] expire-postings failed. ${new Date().toISOString()}`, error);
       return { result: false };
     }
   },

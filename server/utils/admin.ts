@@ -7,7 +7,7 @@ export default async function authenticateAdminRequest(event: H3Event) {
   const bypassAdmin = useRuntimeConfig().bypassAdmin;
 
   if (bypassAdmin) {
-    console.log('Bypassing Admin Check.');
+    logger.info('Bypassing Admin Check.');
     return session;
   }
 

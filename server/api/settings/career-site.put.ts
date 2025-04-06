@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   await authenticateAdminRequest(event);
 
   if (IS_DEV) {
-    console.log('updating careerSiteConfig');
+    logger.info('updating careerSiteConfig');
   }
 
   const settingsUpdateRequest = await readValidatedBody(event, careerSiteConfigSchema.parse);

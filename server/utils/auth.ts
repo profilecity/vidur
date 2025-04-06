@@ -18,7 +18,7 @@ export default async function authenticateRequest(event: H3Event): Promise<{ use
   const session = await getUserSession(event);
 
   if (IS_DEV) {
-    console.log('Authenticating Admin', session.user!.id);
+    logger.info('Authenticating Admin', session.user!.id);
   }
 
   if (session && session.user) {

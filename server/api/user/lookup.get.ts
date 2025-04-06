@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const { q } = getQuery(event) as { q: string };
 
   if (IS_DEV) {
-    console.log('lookup user query', q);
+    logger.info('lookup user query', q);
   }
 
   if (!q) {
@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
     );
 
   if (IS_DEV) {
-    console.log(users.length, 'users found from lookup');
+    logger.info(users.length, 'users found from lookup');
   }
 
   return users;

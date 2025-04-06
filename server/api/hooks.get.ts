@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
   const hooks = await db.select().from(hooksTable).orderBy(desc(hooksTable.createdAt));
 
   if (IS_DEV) {
-    console.log('Found', hooks.length, 'Hooks');
+    logger.info('Found', hooks.length, 'Hooks');
   }
 
   return hooks;

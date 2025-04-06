@@ -11,7 +11,10 @@ const isRunningLocally = () =>
 export async function useDatabase() {
   try {
     const config = useRuntimeConfig();
-    if (client && drizzleInstance) return drizzleInstance;
+    if (client && drizzleInstance) {
+      logger.info('Reusing existing database connection.');
+      return drizzleInstance;
+    }
 
     if (!config.db.host) throw new Error('Missing db.host in runtime config');
 
@@ -23,13 +26,14 @@ export async function useDatabase() {
             rejectUnauthorized: false,
           },
     });
-
+    logger.start('Connecting to PostgreSQL');
     await client.connect();
+    logger.success('Connected to PostgreSQL');
 
     drizzleInstance = drizzle(client);
     return drizzleInstance;
   } catch (error) {
-    console.error('Error setting up database', error);
+    logger.error('Error setting up database', error);
     process.exit(1);
   }
 }
