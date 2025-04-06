@@ -23,7 +23,7 @@ services:
       - .env
     environment:
       PORT: ${PORT:-3001}
-      NUXT_DB_HOST: db
+      NUXT_DB_HOST: ${NUXT_DB_HOST:-db}
       NUXT_DB_PORT: 5432
       NUXT_DB_USER: ${NUXT_DB_USER:-postgres}
       NUXT_DB_PASSWORD: ${NUXT_DB_PASSWORD:-postgrespw}
