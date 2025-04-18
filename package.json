@@ -43,7 +43,7 @@
     "drizzle-orm": "^0.39.3",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
-    "nuxt": "^3.15.3",
+    "nuxt": "^3.16.2",
     "nuxt-auth-utils": "^0.5.7",
     "nuxt-cropper": "^0.0.4",
     "nuxt-icon": "^0.6.10",
