@@ -48,7 +48,7 @@ export async function seedCache() {
   await Promise.all([
     settings_memoryStorage.setItem('careerSiteConfig', settings.careerSite),
     settings_memoryStorage.setItem('seoConfig', settings.seo),
-    general_memoryStorage.setItem('firstSetupAccessKey', firstSetupAccessKey),
+    firstSetupAccessKey !== null && general_memoryStorage.setItem('firstSetupAccessKey', firstSetupAccessKey),
     general_memoryStorage.setItem('remoteAssetBase', remoteAssetBase),
     general_memoryStorage.setItem('postings', jobPostings),
     general_memoryStorage.setItem('reviewTags', reviewTags),
