@@ -1868,10 +1868,10 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-hard-break/-/extension-hard-break-2.11.5.tgz#cf9610846cb7ab0f3a8d8dc37fd1fcee6a39d72f"
   integrity sha512-q9doeN+Yg9F5QNTG8pZGYfNye3tmntOwch683v0CCVCI4ldKaLZ0jG3NbBTq+mosHYdgOH2rNbIORlRRsQ+iYQ==
 
-"@tiptap/extension-heading@^2.11.5", "@tiptap/extension-heading@^2.9.1":
-  version "2.11.5"
-  resolved "https://registry.yarnpkg.com/@tiptap/extension-heading/-/extension-heading-2.11.5.tgz#e9a54e4cbb5c9c7fc95a24cc894a16751ecd185f"
-  integrity sha512-x/MV53psJ9baRcZ4k4WjnCUBMt8zCX7mPlKVT+9C/o+DEs/j/qxPLs95nHeQv70chZpSwCQCt93xMmuF0kPoAg==
+"@tiptap/extension-heading@^2.11.5", "@tiptap/extension-heading@^2.22.3":
+  version "2.22.3"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-heading/-/extension-heading-2.22.3.tgz#e08bd45f9b9350d2316ad2b05065087939738d6c"
+  integrity sha512-+MexJD+kXtNwMDbNTFa7jCFipx1DqAdT+n9GgInqebAN9bK+CWjC+SskzZNRqeMrQ0Er7QTsi6YC09M+74sevA==
 
 "@tiptap/extension-history@^2.11.5":
   version "2.11.5"
