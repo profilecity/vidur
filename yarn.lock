@@ -5564,6 +5564,14 @@ nuxt-icon@^0.6.10:
     "@nuxt/devtools-kit" "^1.1.1"
     "@nuxt/kit" "^3.11.1"
 
+nuxt-jsonld@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/nuxt-jsonld/-/nuxt-jsonld-2.2.1.tgz#a44139b1858859edf351f5eda3ae96d1de7242ac"
+  integrity sha512-V5y8NXr+rICH+JyQl/AThYzDXMpKM/IND0NKy6k/79Q2yU9UP1AmgbNHDesjMXbMHLyPxwMVqUP2q9WpL3/zMw==
+  dependencies:
+    pathe "^1.1.2"
+    schema-dts "^1.1.2"
+
 nuxt@^3.15.3:
   version "3.15.3"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-3.15.3.tgz#d8b5a286f61bc4936294c013d3589398caaf4323"
@@ -6896,6 +6904,11 @@ sax@>=0.6.0:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.4.1.tgz#44cc8988377f126304d3b3fc1010c733b929ef0f"
   integrity sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==
+
+schema-dts@^1.1.2:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/schema-dts/-/schema-dts-1.1.5.tgz#9237725d305bac3469f02b292a035107595dc324"
+  integrity sha512-RJr9EaCmsLzBX2NDiO5Z3ux2BVosNZN5jo0gWgsyKvxKIUL5R3swNvoorulAeL9kLB0iTSX7V6aokhla2m7xbg==
 
 scule@^1.3.0:
   version "1.3.0"

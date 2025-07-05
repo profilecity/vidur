@@ -38,6 +38,7 @@ export default defineNuxtConfig({
     'nuxt-cropper',
     'radix-vue/nuxt',
     'nuxt-auth-utils',
+    'nuxt-jsonld',
   ],
   css: ['~/assets/utility-patterns.css'],
   googleFonts: {
