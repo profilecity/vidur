@@ -42,7 +42,7 @@ const apply = async () => {
 };
 
 // Google Jobs JSON-LD injection
-useJobPostingJsonld(posting, careerSiteConfig);
+useJobPostingJsonld(posting);
 </script>
 
 <template>
