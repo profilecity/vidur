@@ -47,6 +47,7 @@
     "nuxt-auth-utils": "^0.5.7",
     "nuxt-cropper": "^0.0.4",
     "nuxt-icon": "^0.6.10",
+    "nuxt-jsonld": "^2.2.1",
     "pg": "^8.13.3",
     "radix-vue": "^1.9.5",
     "tailwind-merge": "^2.6.0",
