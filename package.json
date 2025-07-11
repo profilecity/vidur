@@ -44,7 +44,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.2.0",
     "nuxt": "^3.15.3",
-    "nuxt-auth-utils": "^0.5.7",
+    "nuxt-auth-utils": "^0.5.20",
     "nuxt-cropper": "^0.0.4",
     "nuxt-icon": "^0.6.10",
     "nuxt-jsonld": "^2.2.1",
