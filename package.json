@@ -31,7 +31,7 @@
     "@tiptap/extension-heading": "^2.23.1",
     "@tiptap/extension-text-align": "^2.9.0",
     "@tiptap/pm": "^2.9.0",
-    "@tiptap/starter-kit": "^2.11.5",
+    "@tiptap/starter-kit": "^2.26.1",
     "@tiptap/vue-3": "^2.11.2",
     "@types/quill": "^2.0.14",
     "@vee-validate/nuxt": "^4.13.1",
