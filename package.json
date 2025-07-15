@@ -30,7 +30,7 @@
     "@tiptap/core": "^2.9.1",
     "@tiptap/extension-heading": "^2.23.1",
     "@tiptap/extension-text-align": "^2.9.0",
-    "@tiptap/pm": "^2.9.0",
+    "@tiptap/pm": "^2.26.1",
     "@tiptap/starter-kit": "^2.11.5",
     "@tiptap/vue-3": "^2.11.2",
     "@types/quill": "^2.0.14",
